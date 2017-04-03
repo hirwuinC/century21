@@ -21,7 +21,9 @@ class Agente extends Migration
             $table->string('telefono');
             $table->string('celular');
             $table->integer('id_ref');
-            //TODO: falta imagen forenkey 
+            $table->foreign('id_ref');
+            $table->foreign('user_id')->references('id')->on('users');
+            //TODO: falta imagen forenkey
         });
     }
 
