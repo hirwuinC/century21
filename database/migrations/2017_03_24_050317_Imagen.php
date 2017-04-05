@@ -14,12 +14,10 @@ class Imagen extends Migration
     public function up()
     {
         //
-        Schema::create('imagen', function (Blueprint $table) {
+        Schema::create('imagenes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('src');
-
-            //TODO: falta id propiedad 1 a 1 nulleable
-        });                
+        });
     }
 
     /**

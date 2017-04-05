@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class Urbanizacion extends Migration
+class RolePermiso extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,11 @@ class Urbanizacion extends Migration
      */
     public function up()
     {
-        //
-        Schema::create('urbanizacion', function (Blueprint $table) {
-            $table->increments('id');
-            $table->string('nombre');
-            $table->integer('ref_urbanizacion');
-            //TODO: falta id estado 
-        });        
+      Schema::create('role_permiso', function (Blueprint $table) {
+          $table->increments('id');
+          $table->integer('permiso_id');
+          $table->integer('role_id');
+      });
     }
 
     /**
@@ -30,6 +28,5 @@ class Urbanizacion extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('urbanizacion');
     }
 }

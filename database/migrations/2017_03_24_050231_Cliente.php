@@ -14,14 +14,14 @@ class Cliente extends Migration
     public function up()
     {
         //
-        Schema::create('cliente', function (Blueprint $table) {
+        Schema::create('clientes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('fullName');
             $table->string('cedula');
             $table->string('pasaporte');
             $table->string('direccion');
             $table->integer('ref_prop');
-            //TODO: falta id propiedad 1 a 1 nulleable
+            $table->integer('propiedad_id');
         });
     }
 

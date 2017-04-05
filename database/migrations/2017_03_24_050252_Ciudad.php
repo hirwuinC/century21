@@ -14,13 +14,13 @@ class Ciudad extends Migration
     public function up()
     {
         //
-        Schema::create('ciudad', function (Blueprint $table) {
+        Schema::create('ciudades', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-            $table->string('ref_ciudad');
-            
+            $table->string('ref_id');
+
             //TODO: falta id estado
-        });                
+        });
     }
 
     /**

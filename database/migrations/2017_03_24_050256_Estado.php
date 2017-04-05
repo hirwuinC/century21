@@ -14,14 +14,14 @@ class Estado extends Migration
     public function up()
     {
         //
-        Schema::create('estado', function (Blueprint $table) {
+        Schema::create('estados', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
 
             $table->string('cedula');
             $table->string('pasaporte');
             $table->string('direccion');
-            $table->integer('ref_estado');
+            $table->integer('ref_id');
             //TODO: falta id propiedad 1 a 1 nulleable
         });
     }

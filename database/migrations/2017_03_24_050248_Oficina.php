@@ -14,14 +14,12 @@ class Oficina extends Migration
     public function up()
     {
         //
-        Schema::create('oficina', function (Blueprint $table) {
+        Schema::create('oficinas', function (Blueprint $table) {
             $table->increments('id');
             $table->string('nombre');
-
             $table->string('email');
-            $table->integer('ref_ofic');
-            //TODO: falta id propiedad 1 a 1 nulleable
-        });                
+            $table->integer('ref_id');
+        });
     }
 
     /**

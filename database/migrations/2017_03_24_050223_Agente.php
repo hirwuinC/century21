@@ -14,16 +14,14 @@ class Agente extends Migration
     public function up()
     {
         //
-        Schema::create('agente', function (Blueprint $table) {
+        Schema::create('agentes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('fullName');
             $table->string('email');
             $table->string('telefono');
             $table->string('celular');
-            $table->integer('id_ref');
-            $table->foreign('id_ref');
-            $table->foreign('user_id')->references('id')->on('users');
-            //TODO: falta imagen forenkey
+            $table->integer('ref_id');
+            $table->integer('imagen_id');
         });
     }
 
