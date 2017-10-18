@@ -1,0 +1,715 @@
+/* GENERALS STYLES */
+/*----- GO RESET -------*/
+li {
+  list-style: none;
+}
+
+a, a:hover, a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+/*----- END RESET -------*/
+/*----- GO GENERALS -------*/
+hr {
+  border-color: #717a81;
+}
+
+.noPadding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.displayNone {
+  display: none;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.textLeft {
+  text-align: left;
+}
+
+.textRight {
+  text-align: right;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+section {
+  margin: 30px 0;
+}
+
+.titleSection {
+  text-transform: uppercase;
+  font-family: 'latobold';
+  font-size: 1.2em;
+  color: #111111;
+  padding-bottom: 10px;
+  border-bottom: #717a81 1px solid;
+  margin: 0 0 25px 0;
+}
+
+.btnYellow {
+  margin: 20px 0;
+  border: none;
+  padding: 10px 0;
+  background: #f0b310;
+  font-family: 'latobold';
+  color: #474747;
+  text-transform: uppercase;
+  font-size: 1.12em;
+  width: 100%;
+}
+
+.btnGray {
+  margin: 20px 0;
+  border: none;
+  padding: 10px 0;
+  background: #333333;
+  font-family: 'latobold';
+  color: #f6f6f6;
+  text-transform: uppercase;
+  font-size: 1.12em;
+  width: 100%;
+}
+
+.modal-content {
+  border-radius: 0;
+  background: #f6f6f6;
+}
+.modal-content .modal-header h4 {
+  font-family: 'latobold';
+  color: #111111;
+  font-size: 1.8em;
+  text-transform: uppercase;
+}
+.modal-content .form label {
+  text-transform: uppercase;
+  font-size: 1.12em;
+  font-family: 'latobold';
+  font-weight: normal;
+}
+.modal-content .form input {
+  border-radius: 0;
+  background: transparent;
+  border: #111111 1px solid;
+  box-shadow: none;
+  height: 40px;
+  font-family: 'latolight';
+  color: #333333;
+  font-size: 1.12em;
+}
+.modal-content .form select {
+  border-radius: 0;
+  background: transparent;
+  background-image: url("../images/arrow-down.png");
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  border: #111111 1px solid;
+  box-shadow: none;
+  height: 40px;
+  font-family: 'latolight';
+  color: #333333;
+  font-size: 1.12em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.modal-content .form textarea {
+  border-radius: 0;
+  background: transparent;
+  border: #111111 1px solid;
+  box-shadow: none;
+  height: 100%;
+  min-height: 150px;
+  font-family: 'latolight';
+  color: #333333;
+  font-size: 1.12em;
+  resize: none;
+}
+.modal-content .modal-footer {
+  text-align: center;
+}
+
+/*----- END GENERALS -------*/
+/*----- GO HEADER -----*/
+header {
+  min-height: 105px;
+  background: rgba(255, 255, 255, 0.6);
+  position: absolute;
+  width: 100%;
+  z-index: 1001;
+  top: 0;
+}
+header .logoHeader {
+  padding-top: 10px;
+}
+header .infoContact {
+  padding: 10px 0 0 0;
+}
+header .infoContact p {
+  font-size: 1em;
+  font-family: 'latolight';
+  margin: 0 0 5px 0;
+}
+header .infoContact p.accesslogin {
+  font-size: 1.5em;
+  vertical-align: middle;
+}
+header .infoContact p span {
+  margin-right: 5px;
+}
+header .infoContact p a {
+  color: #333333;
+}
+header .infoContact p a:hover {
+  color: #737373;
+}
+header .infoContact ul {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+header .infoContact ul li {
+  display: inline;
+  margin-right: 10px;
+}
+header .infoContact ul li a {
+  color: #f0b310;
+  font-size: 0.8em;
+  display: inline-flex;
+  width: 22px;
+  height: 22px;
+  border: #f0b310 2px solid;
+  border-radius: 50%;
+  justify-content: center;
+  flex-flow: column;
+  text-align: center;
+  vertical-align: middle;
+}
+header .infoContact ul li a:hover {
+  color: #f8d988;
+  border: #f8d988 2px solid;
+}
+header #nav {
+  border-top: #717a81 1px solid;
+}
+header #nav ul {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+header #nav ul li {
+  display: inline-block;
+}
+header #nav ul li a {
+  text-transform: uppercase;
+  color: #333333;
+  font-family: 'latoregular';
+  font-size: 1.1em;
+  display: block;
+  padding: 20px 30px;
+}
+header #nav ul li a:hover, header #nav ul li a.active {
+  border-bottom: #333333 3px solid;
+}
+
+/*----- END HEADER -----*/
+/*----- GO FOOTER -----*/
+footer #footer {
+  min-height: 105px;
+  background: #333333;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+footer #footer .titleSectionFooter {
+  font-size: 1em;
+  color: #f6f6f6;
+  text-transform: uppercase;
+  font-family: 'latobold';
+  padding-bottom: 10px;
+  border-bottom: #717a81 1px solid;
+}
+footer #footer .contactFooter {
+  color: #ffffff;
+}
+footer #footer .contactFooter p {
+  font-size: 1em;
+  font-family: 'latolight';
+}
+footer #footer .contactFooter p span {
+  margin-right: 5px;
+}
+footer #footer .contactFooter p a {
+  color: #f0b310;
+}
+footer #footer .contactFooter p a:hover {
+  color: #f8d988;
+}
+footer #footer .socialFooter ul {
+  padding: 0;
+  margin: 20px 0 0 0;
+}
+footer #footer .socialFooter ul li {
+  display: inline;
+  margin-right: 10px;
+}
+footer #footer .socialFooter ul li a {
+  color: #f0b310;
+  font-size: 1em;
+  font-size: 1em;
+  display: inline-flex;
+  width: 25px;
+  height: 25px;
+  border: #f0b310 2px solid;
+  border-radius: 50%;
+  justify-content: center;
+  flex-flow: column;
+  text-align: center;
+  vertical-align: sub;
+}
+footer #footer .socialFooter ul li a:hover {
+  color: #f8d988;
+  border: #f8d988 2px solid;
+}
+footer .copyright {
+  height: 40px;
+  background: #111111;
+}
+footer .copyright p {
+  margin: 10px 0;
+  padding: 0;
+  color: #eeeeee;
+  font-size: 1em;
+  font-family: 'latolight';
+}
+footer .copyright ul {
+  margin: 0;
+  padding: 0;
+  float: right;
+}
+footer .copyright ul li {
+  display: inline-block;
+  margin-left: 20px;
+  font-size: 1em;
+  font-family: 'latolight';
+  text-transform: uppercase;
+  padding: 10px 0;
+}
+footer .copyright ul li a {
+  color: #eeeeee;
+}
+
+/*----- END FOOTER -----*/
+/*----- FORM FILTER -----*/
+.filterForm {
+  background: #2b2b2b;
+  padding: 20px 15px;
+}
+.filterForm h3 {
+  text-transform: uppercase;
+  font-size: 1.25em;
+  color: #f0b310;
+  font-family: 'latobold';
+  text-align: center;
+  padding-bottom: 15px;
+}
+.filterForm label {
+  text-transform: uppercase;
+  font-size: 0.9em;
+  font-family: 'latoregular';
+  font-weight: normal;
+  color: #ffffff;
+}
+.filterForm .rangePrice input {
+  border-radius: 0;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  border: #111111 1px solid;
+  box-shadow: none;
+  height: 40px;
+  font-family: 'latolight';
+  color: #333333;
+  font-size: 1.12em;
+}
+.filterForm .select2-selection--multiple {
+  border-radius: 0 !important;
+  background-color: rgba(255, 255, 255, 0.8) !important;
+  background-image: url("../images/arrow-down.png");
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  border: #111111 1px solid;
+  box-shadow: none;
+  height: 100%;
+  min-height: 40px;
+  font-family: 'latolight';
+  color: #333333;
+  font-size: 1.12em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  padding-right: 30px;
+}
+.filterForm .select2-selection--multiple .select2-selection__choice {
+  background: #ffffff !important;
+  border-radius: 0 !important;
+  border: #717a81 1px solid !important;
+  font-size: 0.9em !important;
+  margin-top: 3px !important;
+  padding: 4px 10px !important;
+  font-family: 'latobold' !important;
+}
+.filterForm .select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+.filterForm .select2-selection--multiple .select2-selection__choice .select2-selection__choice__remove:hover {
+  color: #ffffff !important;
+}
+.filterForm .select2-selection--multiple .select2-selection__choice span {
+  background: #2b2b2b !important;
+  border-radius: 50% !important;
+  padding: 0 6px;
+  margin-right: 8px !important;
+  vertical-align: text-top;
+}
+
+.select2-results {
+  background: rgba(255, 255, 255, 0.8) !important;
+}
+.select2-results .select2-results__option--highlighted[aria-selected] {
+  background: #f0b310 !important;
+}
+
+/*----- FORM CONTACT ADVISER -----*/
+.contactAdviser {
+  margin-bottom: 25px;
+  border: #333333 1px solid;
+  padding: 20px;
+}
+.contactAdviser h3 {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.25em;
+  color: #262626;
+  font-family: 'latobold';
+  margin-bottom: 50px;
+}
+.contactAdviser label {
+  text-transform: uppercase;
+  font-size: 1.12em;
+  font-family: 'latobold';
+  font-weight: normal;
+}
+.contactAdviser input {
+  border-radius: 0;
+  background: #e1e1e1;
+  border: none;
+  box-shadow: none;
+  height: 40px;
+  font-family: 'latolight';
+  color: #262626;
+  font-size: 1.12em;
+}
+.contactAdviser input:focus {
+  border: none;
+  box-shadow: none;
+}
+.contactAdviser textarea {
+  border-radius: 0;
+  background: #e1e1e1;
+  border: none;
+  box-shadow: none;
+  height: 100%;
+  min-height: 150px;
+  font-family: 'latolight';
+  color: #262626;
+  font-size: 1.12em;
+  resize: none;
+}
+.contactAdviser textarea:focus {
+  border: none;
+  box-shadow: none;
+}
+
+/*----- DETAIL PROPERTIES -----*/
+.infoDetailProperties h2 {
+  font-size: 2em;
+  margin-bottom: 5px;
+  font-family: 'latobold';
+  color: #242424;
+}
+.infoDetailProperties h3 {
+  font-size: 2em;
+  margin: 5px 0 20px 0;
+  font-family: 'latoregular';
+}
+.infoDetailProperties p {
+  font-size: 1em;
+  font-family: 'latolight';
+}
+.infoDetailProperties .descriptionProperties p {
+  font-size: 1em;
+  font-family: 'latolight';
+  color: #242424;
+  line-height: 2em;
+  margin-bottom: 25px;
+}
+
+/*----- GO SLIDER -----*/
+#slider .carousel-control {
+  background: none;
+  height: 50px;
+  width: 50px;
+  display: block;
+  top: 40%;
+  font-size: 50px;
+}
+#slider .carousel-control.left {
+  left: 15px;
+}
+#slider .carousel-control.right {
+  right: 15px;
+}
+#slider .carousel-indicators li {
+  background: rgba(255, 255, 255, 0.6);
+  width: 30px;
+  height: 4px;
+  border: none;
+  border-radius: 0;
+}
+#slider .carousel-indicators .active {
+  background: #ffffff;
+  margin: 1px;
+}
+#slider .carousel-inner {
+  height: 100%;
+  max-height: 500px;
+}
+#slider .carousel-inner .active {
+  width: 100%;
+}
+#slider .carousel-inner img {
+  width: 100%;
+  height: auto;
+}
+
+/*----- END SLIDER -----*/
+/*----- GO SECTION SHORTCUTS -----*/
+.joinTeam {
+  overflow: hidden;
+  position: relative;
+}
+.joinTeam img {
+  width: 100%;
+  height: auto;
+}
+.joinTeam .caption a {
+  height: 60px;
+  background-color: rgba(0, 0, 0, 0.8);
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+  color: #eeeeee;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+}
+.joinTeam .caption a p {
+  font-family: 'latobold';
+  font-size: 1.5em;
+  margin: 0;
+}
+
+.publishHere {
+  overflow: hidden;
+  position: relative;
+}
+.publishHere img {
+  width: 100%;
+  height: auto;
+}
+.publishHere .caption {
+  display: flex;
+  justify-content: center;
+}
+.publishHere .caption a {
+  height: 94%;
+  background-color: rgba(255, 255, 255, 0.8);
+  position: absolute;
+  width: 80%;
+  display: flex;
+  top: 3%;
+  flex-flow: column;
+  justify-content: center;
+  border-radius: 50%;
+  text-align: center;
+}
+.publishHere .caption a p {
+  font-family: 'latoregular';
+  font-size: 1.8em;
+  margin: 0 auto;
+  text-transform: uppercase;
+  color: #424242;
+  width: 150px;
+  line-height: 1.3em;
+}
+.publishHere .caption a p span {
+  font-family: 'latobold';
+}
+.publishHere .caption a h2 {
+  font-family: 'latobold';
+  font-size: 3.5em;
+  color: #f0b310;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px #3c3c3c;
+  margin: 8px 0;
+}
+.publishHere .caption a i {
+  font-size: 5em;
+  color: #f0b310;
+  text-shadow: 1px 1px 2px #3c3c3c;
+  line-height: 0.5em;
+}
+
+/*----- END SECTION SHORTCUTS -----*/
+/*----- GO SECTION FEATURED PROJECTS -----*/
+.thumbProject {
+  overflow: hidden;
+  position: relative;
+}
+.thumbProject img {
+  height: auto;
+  width: 100%;
+}
+.thumbProject .caption {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  padding: 15px;
+  color: #ffffff;
+}
+.thumbProject .caption h4 {
+  font-family: 'latobold';
+  font-size: 1.3em;
+  margin: 0 0 5px 0;
+}
+.thumbProject .caption h5 {
+  font-family: 'latolight';
+  font-size: 1.3em;
+  margin: 0 0 5px 0;
+}
+.thumbProject .caption a {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: transparent;
+  border: #ffffff 1px solid;
+  box-shadow: none;
+  padding: 10px;
+  font-size: 1em;
+  font-family: 'latoregular';
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+/*----- END SECTION FEATURED PROJECTS -----*/
+/*----- GO SECTION FEATURED PROPERTIES -----*/
+.thumbProperty {
+  margin-bottom: 25px;
+}
+.thumbProperty .contentTop {
+  overflow: hidden;
+  position: relative;
+}
+.thumbProperty .contentTop img {
+  width: 100%;
+  height: auto;
+}
+.thumbProperty .contentTop .caption {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  padding: 15px;
+}
+.thumbProperty .contentTop .caption .businessType {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px 15px;
+  width: 35%;
+}
+.thumbProperty .contentTop .caption .businessType p {
+  margin: 0;
+  padding: 0;
+  font-family: 'latobold';
+  font-size: 1em;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.thumbProperty .contentTop .caption .priceProject {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px 15px;
+  background: #f0b310;
+}
+.thumbProperty .contentTop .caption .priceProject p {
+  margin: 0;
+  font-family: 'latobold';
+  font-size: 1.2em;
+}
+.thumbProperty .contentTop .caption .priceProject p span {
+  font-family: 'latoblack';
+}
+.thumbProperty .contentInfo {
+  background: #eeeeee;
+}
+.thumbProperty .contentInfo .infoProperty {
+  padding: 10px 15px;
+}
+.thumbProperty .contentInfo .infoProperty h4 {
+  font-family: 'latobold';
+  font-size: 1.3em;
+  margin: 0 0 5px 0;
+}
+.thumbProperty .contentInfo .infoProperty p {
+  font-family: 'latolight';
+  font-size: 1em;
+  margin: 5px 0 0 0;
+}
+.thumbProperty .contentInfo .infoProperty p span {
+  margin-right: 5px;
+}
+.thumbProperty .contentInfo .characteristicsProperty {
+  padding: 10px 15px;
+  border-top: #111111 1px solid;
+}
+.thumbProperty .contentInfo .characteristicsProperty ul {
+  margin: 0;
+  padding: 0;
+}
+.thumbProperty .contentInfo .characteristicsProperty ul li {
+  display: inline-block;
+  font-size: 1em;
+  font-family: 'latobold';
+  width: 24%;
+  text-align: center;
+}
+.thumbProperty .contentInfo .characteristicsProperty ul li i {
+  margin-right: 5px;
+}
+
+/*----- END SECTION FEATURED PROPERTIES -----*/

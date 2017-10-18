@@ -1,0 +1,33 @@
+version: "2"
+
+services:
+  php:
+    image: 'eboraas/laravel'
+    links:
+      - postgres:postgres
+    volumes: 
+      - ./:/var/www/laravel
+    ports:
+      - 8080:80
+
+  postgres:
+    image: 'postgres'
+    restart: 'always'
+    environment:
+      POSTGRES_DB: century
+      POSTGRES_PASSWORD: 1234
+
+  apache:
+    image: 'ctala/apache2_php7_awsebs'
+    links:
+      - php:php
+    volumes: 
+      - ./:/var/www/laravel
+
+  # apache:
+  #   image: 'eboraas/laravel'
+  #   links:
+  #     - php: php
+  #   volumenes:
+  #     - ./:/var/www/html/
+
