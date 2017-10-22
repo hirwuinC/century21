@@ -2,6 +2,7 @@
 
 @section('content')
     <!-- SHORTCUTS -->
+    @include('common/carrucel')
     <section id="shortcuts">
     <div class="container">
         <div class="row">
