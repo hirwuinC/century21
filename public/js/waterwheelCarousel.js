@@ -660,7 +660,7 @@
     
     // misc
     linkHandling:               2,                 // 1 to disable all (used for facebox), 2 to disable all but center (to link images out)
-    autoPlay:                   2000,                 // indicate the speed in milliseconds to wait before autorotating. 0 to turn off. Can be negative
+    autoPlay:                   4000,                 // indicate the speed in milliseconds to wait before autorotating. 0 to turn off. Can be negative
     orientation:                'horizontal',      // indicate if the carousel should be 'horizontal' or 'vertical'
     activeClassName:            'carousel-center', // the name of the class given to the current item in the center
     keyboardNav:                false,             // set to true to move the carousel with the arrow keys

@@ -4,8 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+const INMUEBLE_EXAMPLE = ["direccion" => "Avenida Eugenio Mendoza, La Castellana" , "precio"=> "100.000.000"];
+const PROYECTO_EXAMPLE = [];
+
 class WebController extends Controller
 {
+
     /**
      * Create a new controller instance.
      *
@@ -13,6 +17,7 @@ class WebController extends Controller
      */
     public function __construct()
     {
+        
         //$this->middleware('auth');
     }
 
@@ -25,7 +30,7 @@ class WebController extends Controller
     {
         return view('home');
     }
-
+    
     /**
      * Show the application dashboard.
      *
@@ -35,4 +40,49 @@ class WebController extends Controller
     {
         return view('buscador');
     }
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function detalle_inmueble()
+    {
+        return view('detalle_inmueble');
+    }
+    
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function detalle_proyecto()
+    {
+        return view('detalle_proyecto');
+    }
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function contacto()
+    {
+        return view('contacto');
+    }        
+
+
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function nuestra_historia()
+    {
+        return view('nuestra_historia');
+    }    
+
 }

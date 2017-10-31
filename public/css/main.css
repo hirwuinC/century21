@@ -13,6 +13,7 @@ a, a:hover, a:focus {
 /*----- GO GENERALS -------*/
 hr {
   border-color: #717a81;
+  margin-bottom: 30px;
 }
 
 .noPadding {
@@ -44,10 +45,6 @@ hr {
   text-align: center;
 }
 
-section {
-  margin: 30px 0;
-}
-
 .titleSection {
   text-transform: uppercase;
   font-family: 'latobold';
@@ -56,6 +53,10 @@ section {
   padding-bottom: 10px;
   border-bottom: #717a81 1px solid;
   margin: 0 0 25px 0;
+}
+
+#slider {
+  margin-bottom: 30px;
 }
 
 .btnYellow {
@@ -91,6 +92,10 @@ section {
   color: #111111;
   font-size: 1.8em;
   text-transform: uppercase;
+}
+.modal-content .modal-header img {
+  width: 150%;
+  height: auto;
 }
 .modal-content .form label {
   text-transform: uppercase;
@@ -138,6 +143,28 @@ section {
 }
 .modal-content .modal-footer {
   text-align: center;
+}
+
+.ubicationProperties p {
+  font-family: 'latolight';
+  font-size: 1.12em;
+  color: #262626;
+  margin-bottom: 30px;
+}
+.ubicationProperties p span {
+  font-family: 'latobold';
+}
+
+.ourHistory p {
+  font-family: 'latolight';
+  font-size: 1.12em;
+  color: #262626;
+  margin-bottom: 30px;
+  line-height: 1.8em;
+}
+
+.googleMap {
+  margin-bottom: 60px;
 }
 
 /*----- END GENERALS -------*/
@@ -231,6 +258,9 @@ footer #footer {
   display: flex;
   flex-flow: column;
   justify-content: center;
+}
+footer #footer .logoFooter {
+  padding-top: 10px;
 }
 footer #footer .titleSectionFooter {
   font-size: 1em;
@@ -441,6 +471,47 @@ footer .copyright ul li a {
   box-shadow: none;
 }
 
+/*----- FORM CONTACT -----*/
+.contactForm {
+  margin: 30px 0;
+}
+.contactForm label {
+  text-transform: uppercase;
+  font-size: 1.12em;
+  font-family: 'latobold';
+  font-weight: normal;
+}
+.contactForm input {
+  border-radius: 0;
+  background: #e1e1e1;
+  border: none;
+  box-shadow: none;
+  height: 40px;
+  font-family: 'latolight';
+  color: #262626;
+  font-size: 1.12em;
+}
+.contactForm input:focus {
+  border: none;
+  box-shadow: none;
+}
+.contactForm textarea {
+  border-radius: 0;
+  background: #e1e1e1;
+  border: none;
+  box-shadow: none;
+  height: 100%;
+  min-height: 150px;
+  font-family: 'latolight';
+  color: #262626;
+  font-size: 1.12em;
+  resize: none;
+}
+.contactForm textarea:focus {
+  border: none;
+  box-shadow: none;
+}
+
 /*----- DETAIL PROPERTIES -----*/
 .infoDetailProperties h2 {
   font-size: 2em;
@@ -457,12 +528,32 @@ footer .copyright ul li a {
   font-size: 1em;
   font-family: 'latolight';
 }
+.infoDetailProperties .descriptionProperties {
+  margin-bottom: 45px;
+}
 .infoDetailProperties .descriptionProperties p {
   font-size: 1em;
   font-family: 'latolight';
   color: #242424;
   line-height: 2em;
   margin-bottom: 25px;
+}
+.infoDetailProperties .descriptionProperties .characteristicsProperties ul {
+  padding: 0;
+  margin: 0 0 30px 0;
+}
+.infoDetailProperties .descriptionProperties .characteristicsProperties ul li {
+  display: inline-block;
+  text-align: center;
+  margin-right: 40px;
+}
+.infoDetailProperties .descriptionProperties .characteristicsProperties ul li p {
+  padding: 10px 15px;
+  background: #f0b310;
+  display: block;
+  margin: 0;
+  font-family: 'latobold';
+  font-size: 1.2em;
 }
 
 /*----- GO SLIDER -----*/
@@ -504,10 +595,17 @@ footer .copyright ul li a {
 }
 
 /*----- END SLIDER -----*/
+/*----- GO CARRUSEL FILTER -----*/
+#carruselFilter {
+  margin: 0 0 30px 0;
+}
+
+/*----- END CARRUSEL FILTER -----*/
 /*----- GO SECTION SHORTCUTS -----*/
 .joinTeam {
   overflow: hidden;
   position: relative;
+  margin-bottom: 25px;
 }
 .joinTeam img {
   width: 100%;
@@ -534,6 +632,7 @@ footer .copyright ul li a {
 .publishHere {
   overflow: hidden;
   position: relative;
+  margin-bottom: 25px;
 }
 .publishHere img {
   width: 100%;
@@ -587,6 +686,7 @@ footer .copyright ul li a {
 .thumbProject {
   overflow: hidden;
   position: relative;
+  margin-bottom: 25px;
 }
 .thumbProject img {
   height: auto;
@@ -680,10 +780,11 @@ footer .copyright ul li a {
 .thumbProperty .contentInfo .infoProperty {
   padding: 10px 15px;
 }
-.thumbProperty .contentInfo .infoProperty h4 {
+.thumbProperty .contentInfo .infoProperty h4 a {
   font-family: 'latobold';
   font-size: 1.3em;
   margin: 0 0 5px 0;
+  color: #111111;
 }
 .thumbProperty .contentInfo .infoProperty p {
   font-family: 'latolight';
@@ -712,4 +813,9 @@ footer .copyright ul li a {
   margin-right: 5px;
 }
 
+.carousel-center {
+  border: 5px #f0b310 solid;
+  background-color: #f0b310;
+  border-radius: 15px;
+}
 /*----- END SECTION FEATURED PROPERTIES -----*/

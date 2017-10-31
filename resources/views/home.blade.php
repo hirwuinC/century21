@@ -42,22 +42,21 @@
             </div>
         </div>
         <div class="row">
-
-        @for( $i = 0; $i< 9 ; $i++)
-            @component('partials/inmueble')
-                @slot('type') 
-                    @if($i % 2) Venta @else Alquiler @endif
-                @endslot
-                @slot('precio') 100.000.000 @endslot
-                @slot('titulo') Residencias Mohecastel @endslot
-                @slot('direccion')  Avenida Eugenio Mendoza, La Castellana @endslot
-                @slot('metros')  120 @endslot
-                @slot('baños')  1 @endslot
-                @slot('cuartos')  2 @endslot
-                @slot('estacionamientos') 2 @endslot
-                @slot('img') img-demo.jpg @endslot
-            @endcomponent
-        @endfor
+            @for( $i = 0; $i < 9; $i++)
+                <div class="col-sm-4">
+                    @component('partials/inmueble')
+                        @slot('type') Alquiler @endslot
+                        @slot('precio') 100.000.000 @endslot
+                        @slot('titulo') Residencias Mohecastel @endslot
+                        @slot('direccion')  Avenida Eugenio Mendoza, La Castellana @endslot
+                        @slot('metros')  120 @endslot
+                        @slot('baños')  1 @endslot
+                        @slot('cuartos')  2 @endslot
+                        @slot('estacionamientos') 2 @endslot
+                        @slot('img') img-demo.jpg @endslot
+                    @endcomponent
+                </div>
+            @endfor
         </div>
     </div>
     </section>

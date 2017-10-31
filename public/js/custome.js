@@ -16,6 +16,7 @@ $(document).ready(function () {
             $('#callback-output').prepend('movedFromCenter: ' + $item.attr('id') + '<br/>');
         },
         clickedCenter: function ($item) {
+            window.location.href = baseUrl+'/buscador?type="alquiler"&propiedad="'+$item[0].dataset.type+'"';
             $('#callback-output').prepend('clickedCenter: ' + $item.attr('id') + '<br/>');
         }
     });
@@ -37,15 +38,3 @@ $(document).ready(function () {
     });
 });
 
-//------SELECT2 -----------------------------------------------------------------------------
-
-$(document).ready(function() {
-    $('.js-example-basic-multiple').select2({
-        placeholder: 'Seleccionar',
-    });
-});
-
-//------RANGE PRICE --------------------------------------------------------------------------
-
-// With JQuery
-$("#ex2").slider({});

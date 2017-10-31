@@ -7,7 +7,7 @@
                 <h5>{{$zone}}</h5>
             </div>
             <div class="viewProject">
-                <a href="/prueba" >Ver proyecto</a>
+                <a href="{{ route('detalle_proyecto', 1) }}" >Ver proyecto</a>
             </div>
         </div>
     </div>

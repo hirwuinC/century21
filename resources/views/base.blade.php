@@ -12,16 +12,16 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- Favicon -->
-		<link rel="icon" type="image/png" href="images/favicon.png" />
+		<link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}" />
 
 		<!-- CSS -->
-		<link href="css/bootstrap.css" rel="stylesheet" type="text/css">
-		<link href="css/animations.css" rel="stylesheet" type="text/css">
-		<link href="css/font-face.css" rel="stylesheet" type="text/css">
-		<link href="css/responsive.css" rel="stylesheet" type="text/css">
+		<link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css">
+		<link href="{{ asset('css/animations.css') }}" rel="stylesheet" type="text/css">
+		<link href="{{ asset('css/font-face.css') }}" rel="stylesheet" type="text/css">
+		<link href="{{ asset('css/responsive.css') }}" rel="stylesheet" type="text/css">
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
-		<link href="css/custome.css" rel="stylesheet" type="text/css">
-		<link href="css/main.css" rel="stylesheet" type="text/css">
+		<link href="{{ asset('css/custome.css') }}" rel="stylesheet" type="text/css">
+		<link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css">
 		
 
 	</head>
@@ -33,7 +33,7 @@
 					<div class="col-xs-12">
 						<div class="row">
 							<div class="col-xs-12 col-sm-2 logoHeader">
-								<img src="images/logo-header.png" alt="">
+								<img src="{{ asset('images/logo-header.png') }}" alt="">
 							</div>
 							<div class="col-xs-12 col-sm-10">
 								<div class="row">
@@ -59,22 +59,22 @@
 									</div>
 									<div class="col-sm-12" id="nav">
 										<div class="navbar-header">
-												<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
-													<span class="sr-only">Toggle navigation</span>
-													<span class="icon-bar"></span>
-													<span class="icon-bar"></span>
-													<span class="icon-bar"></span>
-												</button>
-											</div>
+											<button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#nav-collapse" aria-expanded="false">
+												<span class="sr-only">Toggle navigation</span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+												<span class="icon-bar"></span>
+											</button>
+										</div>
 										<div class="navbar-collapse collapse" id="nav-collapse" aria-expanded="false">
-												<ul>
-													<li><a href="" class="active">inicio</a></li>
-													<li><a href="">nuestra historia</a></li>
-													<li><a href="">proyectos</a></li>
-													<li><a href="">blog</a></li>
-													<li><a href="">contacto</a></li>
-												</ul>
-											</div>
+											<ul>
+												<li><a href="{{route('home')}}" class="active">inicio</a></li>
+												<li><a href="{{route('nuestra_historia')}}">nuestra historia</a></li>
+												<li><a href="">proyectos</a></li>
+												<li><a href="">blog</a></li>
+												<li><a href="{{route('contacto')}}">contacto</a></li>
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -97,13 +97,13 @@
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
-							<img src="images/slide1.jpg" alt="...">
+							<img src="{{ asset('images/slide1.jpg') }}" alt="...">
 						</div>
 						<div class="item">
-							<img src="images/slide1.jpg" alt="...">
+							<img src="{{ asset('images/slide1.jpg') }}" alt="...">
 						</div>
 						<div class="item">
-							<img src="images/slide1.jpg" alt="...">
+							<img src="{{ asset('images/slide1.jpg') }}" alt="...">
 						</div>
 					</div>
 
@@ -120,7 +120,6 @@
 
 		<!-- GO GENERAL WRAPPER -->
 		<div class="wrapper">
-			@yield('common/carrucel')
             @yield('content')
 		</div>
 		<!-- END GENERAL WRAPPER -->
@@ -130,7 +129,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-4 logoFooter">
-							<img src="images/logo-footer.png" alt="">
+							<img src="{{ asset('images/logo-footer.png') }}" alt="">
 						</div>
 						<div class="col-xs-4 contactFooter">
 							<h6 class="titleSectionFooter">Contáctanos</h6>
@@ -171,12 +170,17 @@
 
 		<!--JAVASCRIPTS / JQUERY-->
 		
-		<script type="text/javascript" src='js/jquery-3.1.1.min.js'></script>
-		<script type="text/javascript" src="js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/waterwheelCarousel.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/search.js') }}"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
 
-		<script type="text/javascript" src="js/waterwheelCarousel.js"></script>
-		<script type="text/javascript" src="js/custome.js"></script>
-		<script type="text/javascript" src="js/select2.js"></script>
 
+		<script type="text/javascript">
+			var baseUrl = "{{ route('home') }}"
+		</script>
+		<script type="text/javascript" src="{{ asset('js/custome.js') }}"></script>
+		@yield('js')
 	</body>
 </html>

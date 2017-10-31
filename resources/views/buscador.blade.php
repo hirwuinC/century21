@@ -21,180 +21,24 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-6">
-                        <div class="thumbProperty">
-                            <div class="contentTop">
-                                <img src="images/img-demo.jpg" alt="">
-                                <div class="caption">
-                                    <div class="businessType">
-                                        <p>Alquiler</p>
-                                    </div>
-                                    <div class="priceProject">
-                                        <p><span>Bsf.:</span> 100.000.000</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="contentInfo">
-                                <div class="infoProperty">
-                                    <h4>Residencias Mohecastel</h4>
-                                    <p><span><i class="fa fa-map-marker" aria-hidden="true"></i></span> Avenida Eugenio Mendoza, La Castellana</p>
-                                </div>
-                                <div class="characteristicsProperty">
-                                    <ul>
-                                        <li><i class="fa fa-object-group" aria-hidden="true"></i> 120Mts</li>
-                                        <li><i class="fa fa-bed" aria-hidden="true"></i> 3</li>
-                                        <li><i class="fa fa-bath" aria-hidden="true"></i> 2</li>
-                                        <li><i class="fa fa-car" aria-hidden="true"></i> 1</li>
-                                    </ul>
-                                </div>
-                            </div>
+
+                    @for( $i = 0; $i< 10 ; $i++)
+                        <div class="col-sm-6">
+                            @component('partials/inmueble')
+                                @slot('type') 
+                                    @if($i % 2) Venta @else Alquiler @endif
+                                @endslot
+                                @slot('precio') 100.000.000 @endslot
+                                @slot('titulo') Residencias Mohecastel @endslot
+                                @slot('direccion')  Avenida Eugenio Mendoza, La Castellana @endslot
+                                @slot('metros')  120 @endslot
+                                @slot('baños')  1 @endslot
+                                @slot('cuartos')  2 @endslot
+                                @slot('estacionamientos') 2 @endslot
+                                @slot('img') img-demo.jpg @endslot
+                            @endcomponent
                         </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="thumbProperty">
-                            <div class="contentTop">
-                                <img src="images/img-demo.jpg" alt="">
-                                <div class="caption">
-                                    <div class="businessType">
-                                        <p>Alquiler</p>
-                                    </div>
-                                    <div class="priceProject">
-                                        <p><span>Bsf.:</span> 100.000.000</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="contentInfo">
-                                <div class="infoProperty">
-                                    <h4>Residencias Mohecastel</h4>
-                                    <p><span><i class="fa fa-map-marker" aria-hidden="true"></i></span> Avenida Eugenio Mendoza, La Castellana</p>
-                                </div>
-                                <div class="characteristicsProperty">
-                                    <ul>
-                                        <li><i class="fa fa-object-group" aria-hidden="true"></i> 120Mts</li>
-                                        <li><i class="fa fa-bed" aria-hidden="true"></i> 3</li>
-                                        <li><i class="fa fa-bath" aria-hidden="true"></i> 2</li>
-                                        <li><i class="fa fa-car" aria-hidden="true"></i> 1</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="thumbProperty">
-                            <div class="contentTop">
-                                <img src="images/img-demo.jpg" alt="">
-                                <div class="caption">
-                                    <div class="businessType">
-                                        <p>Alquiler</p>
-                                    </div>
-                                    <div class="priceProject">
-                                        <p><span>Bsf.:</span> 100.000.000</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="contentInfo">
-                                <div class="infoProperty">
-                                    <h4>Residencias Mohecastel</h4>
-                                    <p><span><i class="fa fa-map-marker" aria-hidden="true"></i></span> Avenida Eugenio Mendoza, La Castellana</p>
-                                </div>
-                                <div class="characteristicsProperty">
-                                    <ul>
-                                        <li><i class="fa fa-object-group" aria-hidden="true"></i> 120Mts</li>
-                                        <li><i class="fa fa-bed" aria-hidden="true"></i> 3</li>
-                                        <li><i class="fa fa-bath" aria-hidden="true"></i> 2</li>
-                                        <li><i class="fa fa-car" aria-hidden="true"></i> 1</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="thumbProperty">
-                            <div class="contentTop">
-                                <img src="images/img-demo.jpg" alt="">
-                                <div class="caption">
-                                    <div class="businessType">
-                                        <p>Alquiler</p>
-                                    </div>
-                                    <div class="priceProject">
-                                        <p><span>Bsf.:</span> 100.000.000</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="contentInfo">
-                                <div class="infoProperty">
-                                    <h4>Residencias Mohecastel</h4>
-                                    <p><span><i class="fa fa-map-marker" aria-hidden="true"></i></span> Avenida Eugenio Mendoza, La Castellana</p>
-                                </div>
-                                <div class="characteristicsProperty">
-                                    <ul>
-                                        <li><i class="fa fa-object-group" aria-hidden="true"></i> 120Mts</li>
-                                        <li><i class="fa fa-bed" aria-hidden="true"></i> 3</li>
-                                        <li><i class="fa fa-bath" aria-hidden="true"></i> 2</li>
-                                        <li><i class="fa fa-car" aria-hidden="true"></i> 1</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="thumbProperty">
-                            <div class="contentTop">
-                                <img src="images/img-demo.jpg" alt="">
-                                <div class="caption">
-                                    <div class="businessType">
-                                        <p>Alquiler</p>
-                                    </div>
-                                    <div class="priceProject">
-                                        <p><span>Bsf.:</span> 100.000.000</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="contentInfo">
-                                <div class="infoProperty">
-                                    <h4>Residencias Mohecastel</h4>
-                                    <p><span><i class="fa fa-map-marker" aria-hidden="true"></i></span> Avenida Eugenio Mendoza, La Castellana</p>
-                                </div>
-                                <div class="characteristicsProperty">
-                                    <ul>
-                                        <li><i class="fa fa-object-group" aria-hidden="true"></i> 120Mts</li>
-                                        <li><i class="fa fa-bed" aria-hidden="true"></i> 3</li>
-                                        <li><i class="fa fa-bath" aria-hidden="true"></i> 2</li>
-                                        <li><i class="fa fa-car" aria-hidden="true"></i> 1</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="thumbProperty">
-                            <div class="contentTop">
-                                <img src="images/img-demo.jpg" alt="">
-                                <div class="caption">
-                                    <div class="businessType">
-                                        <p>Alquiler</p>
-                                    </div>
-                                    <div class="priceProject">
-                                        <p><span>Bsf.:</span> 100.000.000</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="contentInfo">
-                                <div class="infoProperty">
-                                    <h4>Residencias Mohecastel</h4>
-                                    <p><span><i class="fa fa-map-marker" aria-hidden="true"></i></span> Avenida Eugenio Mendoza, La Castellana</p>
-                                </div>
-                                <div class="characteristicsProperty">
-                                    <ul>
-                                        <li><i class="fa fa-object-group" aria-hidden="true"></i> 120Mts</li>
-                                        <li><i class="fa fa-bed" aria-hidden="true"></i> 3</li>
-                                        <li><i class="fa fa-bath" aria-hidden="true"></i> 2</li>
-                                        <li><i class="fa fa-car" aria-hidden="true"></i> 1</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endfor
                 </div>
             </section>
         </div>
@@ -203,4 +47,22 @@
 </div>
 
 
+@endsection
+
+@section('js')
+    <script >
+        $(document).ready(function () {
+            $('.select-2').select2({
+                placeholder: 'Seleccionar',
+            });
+
+            var url = new URL(window.location.href);
+            var p1 = JSON.parse(url.searchParams.get("type")).split(',');
+            console.log(p1);
+            $('select[name=tipo]').val(p1).trigger("change");
+
+            var p2 = JSON.parse(url.searchParams.get("propiedad")).split(',');
+            $('select[name=propiedad]').val(p2).trigger("change");
+        });
+    </script>
 @endsection
