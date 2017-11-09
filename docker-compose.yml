@@ -4,19 +4,25 @@ services:
   php:
     image: 'eboraas/laravel'
     links:
-      - postgres:postgres
+      - mysql:mysql
     volumes: 
       - ./:/var/www/laravel
     ports:
       - 8080:80
       - 8000:8000
 
-  postgres:
-    image: 'postgres'
+  mysql:
+    image: 'mysql/mysql-server:latest'
     restart: 'always'
     environment:
-      POSTGRES_DB: century
-      POSTGRES_PASSWORD: 1234
+      MYSQL_DATABASE: centurydb
+      MYSQL_USER: century
+      MYSQL_PASSWORD: 1234
+      MYSQL_ROOT_PASSWORD: 1234
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - 3306:3306
 
   apache:
     image: 'ctala/apache2_php7_awsebs'

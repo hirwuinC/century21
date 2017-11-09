@@ -191,6 +191,7 @@ header .infoContact p {
 header .infoContact p.accesslogin {
   font-size: 1.5em;
   vertical-align: middle;
+  float: right;
 }
 header .infoContact p span {
   margin-right: 5px;
@@ -255,9 +256,6 @@ header #nav ul li a:hover, header #nav ul li a.active {
 footer #footer {
   min-height: 105px;
   background: #333333;
-  display: flex;
-  flex-flow: column;
-  justify-content: center;
 }
 footer #footer .logoFooter {
   padding-top: 10px;
@@ -345,6 +343,7 @@ footer .copyright ul li a {
 .filterForm {
   background: #2b2b2b;
   padding: 20px 15px;
+  margin-bottom: 25px;
 }
 .filterForm h3 {
   text-transform: uppercase;
@@ -813,9 +812,4 @@ footer .copyright ul li a {
   margin-right: 5px;
 }
 
-.carousel-center {
-  border: 5px #f0b310 solid;
-  background-color: #f0b310;
-  border-radius: 15px;
-}
 /*----- END SECTION FEATURED PROPERTIES -----*/

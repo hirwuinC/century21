@@ -40,6 +40,16 @@ class WebController extends Controller
     {
         return view('buscador');
     }
+    
+    /**
+     * Show the application dashboard.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function lista_proyectos()
+    {
+        return view('lista_proyectos');
+    }
 
 
     /**
