@@ -1,0 +1,702 @@
+/* GENERALS STYLES */
+/*----- GO RESET -------*/
+li {
+  list-style: none;
+}
+
+a, a:hover, a:focus {
+  text-decoration: none;
+  outline: none;
+}
+
+/*----- END RESET -------*/
+/*----- GO HEADER -----*/
+header {
+  height: 130px;
+  background: #000000;
+  border-bottom: #f1b311 7px solid;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  position: fixed;
+  top: 0;
+  z-index: 9999999;
+}
+
+/*----- END HEADER -----*/
+/*----- GO GENERALS -------*/
+body {
+  background: #333333;
+}
+body.login {
+  background: #f6f6f6 !important;
+}
+
+section {
+  margin: 30px 0;
+}
+
+hr {
+  border-color: #717a81;
+  margin-bottom: 30px;
+}
+
+.noPadding {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
+.displayNone {
+  display: none;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
+}
+
+.textLeft {
+  text-align: left;
+}
+
+.textRight {
+  text-align: right;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.titleSection {
+  text-transform: uppercase;
+  font-family: 'latobold';
+  font-size: 1.2em;
+  color: #111111;
+  padding-bottom: 10px;
+  border-bottom: #717a81 1px solid;
+  margin: 25px 0;
+}
+
+.alert {
+  padding: 15px;
+  background: #000;
+  margin-bottom: 0;
+  border-radius: 0;
+}
+.alertSearch {
+  background: #cccccc;
+}
+
+.btnGeneral, .btnYellow, .btnGray, .btnAcction {
+  margin: 20px 0;
+  border: none;
+  text-transform: uppercase;
+  border-radius: 5px;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+}
+
+.btnYellow {
+  background: #f1b311;
+  font-family: 'latoregular';
+  color: #333333;
+  font-size: 1.5em;
+  height: 60px;
+}
+
+.btnGray {
+  background: #333333;
+  font-family: 'latobold';
+  color: #f6f6f6;
+  font-size: 1.12em;
+}
+
+.btnAcction {
+  background: #333333;
+  font-family: 'latoregular';
+  color: #f6f6f6;
+  font-size: 0.9em;
+}
+
+.modal-dialog {
+  top: 150px;
+}
+.modal-dialog .modal-content {
+  border-radius: 0;
+  background: #f6f6f6;
+}
+.modal-dialog .modal-content .modal-header h4 {
+  font-family: 'latobold';
+  color: #111111;
+  font-size: 1.8em;
+  text-transform: uppercase;
+}
+.modal-dialog .modal-content .modal-header img {
+  width: 150%;
+  height: auto;
+}
+.modal-dialog .modal-content .form label {
+  text-transform: uppercase;
+  font-size: 1.12em;
+  font-family: 'latobold';
+  font-weight: normal;
+}
+.modal-dialog .modal-content .form input {
+  border-radius: 0;
+  background: transparent;
+  border: #111111 1px solid;
+  box-shadow: none;
+  height: 40px;
+  font-family: 'latolight';
+  color: #333333;
+  font-size: 1.12em;
+}
+.modal-dialog .modal-content .form select {
+  border-radius: 0;
+  background: transparent;
+  background-image: url("../images/arrow-down.png");
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  border: #111111 1px solid;
+  box-shadow: none;
+  height: 40px;
+  font-family: 'latolight';
+  color: #333333;
+  font-size: 1.12em;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.modal-dialog .modal-content .form textarea {
+  border-radius: 0;
+  background: transparent;
+  border: #111111 1px solid;
+  box-shadow: none;
+  height: 100%;
+  min-height: 150px;
+  font-family: 'latolight';
+  color: #333333;
+  font-size: 1.12em;
+  resize: none;
+}
+.modal-dialog .modal-content .modal-footer {
+  text-align: center;
+}
+
+.inputs {
+  border: none;
+  border-radius: 5px;
+  box-shadow: none;
+  width: 100%;
+  font-family: 'latolight';
+}
+.inputsLight, #login input {
+  background: #cccccc;
+  color: #333333;
+}
+.inputsDark, .alertSearch input {
+  background: #333333;
+  color: #cccccc;
+}
+
+.ubicationProperties p {
+  font-family: 'latolight';
+  font-size: 1.12em;
+  color: #262626;
+  margin-bottom: 30px;
+}
+.ubicationProperties p span {
+  font-family: 'latobold';
+}
+
+.googleMap {
+  margin-bottom: 60px;
+}
+
+/*----- END GENERALS -------*/
+/*----- FORM CONTACT ADVISER -----*/
+.contactAdviser {
+  margin-bottom: 25px;
+  border: #333333 1px solid;
+  padding: 20px;
+}
+.contactAdviser h3 {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 1.25em;
+  color: #262626;
+  font-family: 'latobold';
+  margin-bottom: 50px;
+}
+.contactAdviser label {
+  text-transform: uppercase;
+  font-size: 1.12em;
+  font-family: 'latobold';
+  font-weight: normal;
+}
+.contactAdviser input {
+  border-radius: 0;
+  background: #e1e1e1;
+  border: none;
+  box-shadow: none;
+  height: 40px;
+  font-family: 'latolight';
+  color: #262626;
+  font-size: 1.12em;
+}
+.contactAdviser input:focus {
+  border: none;
+  box-shadow: none;
+}
+.contactAdviser textarea {
+  border-radius: 0;
+  background: #e1e1e1;
+  border: none;
+  box-shadow: none;
+  height: 100%;
+  min-height: 150px;
+  font-family: 'latolight';
+  color: #262626;
+  font-size: 1.12em;
+  resize: none;
+}
+.contactAdviser textarea:focus {
+  border: none;
+  box-shadow: none;
+}
+
+/*----- FORM CONTACT -----*/
+.contactForm {
+  margin: 30px 0;
+}
+.contactForm label {
+  text-transform: uppercase;
+  font-size: 1.12em;
+  font-family: 'latobold';
+  font-weight: normal;
+}
+.contactForm input {
+  border-radius: 0;
+  background: #e1e1e1;
+  border: none;
+  box-shadow: none;
+  height: 40px;
+  font-family: 'latolight';
+  color: #262626;
+  font-size: 1.12em;
+}
+.contactForm input:focus {
+  border: none;
+  box-shadow: none;
+}
+.contactForm textarea {
+  border-radius: 0;
+  background: #e1e1e1;
+  border: none;
+  box-shadow: none;
+  height: 100%;
+  min-height: 150px;
+  font-family: 'latolight';
+  color: #262626;
+  font-size: 1.12em;
+  resize: none;
+}
+.contactForm textarea:focus {
+  border: none;
+  box-shadow: none;
+}
+
+/*----- LOGIN -----*/
+#login {
+  text-align: center;
+  height: 100%;
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  min-height: 560px;
+  margin-top: 65px;
+}
+#login h3 {
+  font-size: 1.87em;
+  color: #333333;
+  text-transform: uppercase;
+  color: #333333;
+  margin: 20px 0;
+  font-family: 'latoregular';
+}
+#login input {
+  height: 60px;
+  font-size: 1.87em;
+  position: relative;
+  padding: 10px 25px 10px 50px;
+  margin-top: 30px;
+}
+#login .iconInput {
+  position: absolute;
+  z-index: 999;
+  left: 25px;
+  height: 50px;
+  width: 25px;
+  text-align: center;
+}
+#login .iconInput i {
+  font-size: 1.87em;
+  color: #333333;
+  margin-top: 15px;
+}
+
+/*----- SEARCH -----*/
+.alertSearch input {
+  height: 40px;
+  position: relative;
+  padding: 10px 25px 10px 50px;
+}
+.alertSearch .iconInput {
+  position: absolute;
+  z-index: 999;
+  left: 25px;
+  height: 50px;
+  width: 25px;
+  text-align: center;
+}
+.alertSearch .iconInput i {
+  font-size: 1.5em;
+  color: #717a81;
+  margin-top: 9px;
+}
+.alertSearch select {
+  border: none;
+  height: 30px;
+  color: #333333;
+  font-family: 'latoregular';
+  font-size: 1.2em;
+  box-shadow: none;
+  background: URL("../images/arrow-down.png") no-repeat !important;
+  background-position: 80% 60% !important;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  cursor: pointer;
+  text-align: center;
+}
+.alertSearch select option {
+  background-color: #cccccc;
+  height: 40px;
+  top: 50px;
+  border: none !important;
+  padding: 12px 0;
+}
+.alertSearch select:focus {
+  border: none;
+  box-shadow: none;
+}
+
+/*----- AVATAR -----*/
+.avatarForm {
+  margin: 40px 0;
+  height: calc(81vh - 75px);
+}
+.avatarForm input {
+  height: 60px;
+  margin-bottom: 30px;
+}
+.avatarForm button {
+  height: 60px;
+}
+
+/*----- GO SECTION FEATURED PROJECTS -----*/
+.thumbProject {
+  overflow: hidden;
+  position: relative;
+  margin-bottom: 25px;
+}
+.thumbProject img {
+  height: auto;
+  width: 100%;
+}
+.thumbProject .caption {
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+  position: absolute;
+  top: 0;
+  padding: 15px;
+  color: #ffffff;
+}
+.thumbProject .caption h4 {
+  font-family: 'latobold';
+  font-size: 1.3em;
+  margin: 0 0 5px 0;
+}
+.thumbProject .caption h5 {
+  font-family: 'latolight';
+  font-size: 1.3em;
+  margin: 0 0 5px 0;
+}
+.thumbProject .caption a {
+  position: absolute;
+  bottom: 15px;
+  right: 15px;
+  background: transparent;
+  border: #ffffff 1px solid;
+  box-shadow: none;
+  padding: 10px;
+  font-size: 1em;
+  font-family: 'latoregular';
+  color: #ffffff;
+  text-transform: uppercase;
+}
+
+/*----- END SECTION FEATURED PROJECTS -----*/
+/*----- GO SECTION FEATURED PROPERTIES -----*/
+.thumbProperty {
+  margin-bottom: 25px;
+}
+.thumbProperty .contentTop {
+  overflow: hidden;
+  position: relative;
+}
+.thumbProperty .contentTop img {
+  width: 100%;
+  height: auto;
+}
+.thumbProperty .contentTop .editProperty {
+  display: none;
+}
+.thumbProperty .contentTop:hover .editProperty {
+  display: block;
+  position: absolute;
+  top: 35%;
+  left: 43%;
+  text-align: center;
+}
+.thumbProperty .contentTop:hover .editProperty a {
+  display: block;
+  height: 60px;
+  width: 60px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  color: #333333;
+  font-size: 2em;
+  padding: 8px 0;
+}
+.thumbProperty .contentTop .caption {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  padding: 15px;
+}
+.thumbProperty .contentTop .caption .businessType {
+  background: rgba(0, 0, 0, 0.8);
+  padding: 10px 15px;
+  width: 35%;
+}
+.thumbProperty .contentTop .caption .businessType p {
+  margin: 0;
+  padding: 0;
+  font-family: 'latobold';
+  font-size: 1em;
+  text-align: center;
+  color: #ffffff;
+  text-transform: uppercase;
+}
+.thumbProperty .contentTop .caption .priceProject {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 10px 15px;
+  background: #f1b311;
+}
+.thumbProperty .contentTop .caption .priceProject p {
+  margin: 0;
+  font-family: 'latobold';
+  font-size: 1.2em;
+}
+.thumbProperty .contentTop .caption .priceProject p span {
+  font-family: 'latoblack';
+}
+.thumbProperty .contentInfo {
+  background: #eeeeee;
+}
+.thumbProperty .contentInfo .infoProperty {
+  padding: 10px 15px;
+}
+.thumbProperty .contentInfo .infoProperty h4 a {
+  font-family: 'latobold';
+  font-size: 1.3em;
+  margin: 0 0 5px 0;
+  color: #111111;
+}
+.thumbProperty .contentInfo .infoProperty p {
+  font-family: 'latolight';
+  font-size: 1em;
+  margin: 5px 0 0 0;
+}
+.thumbProperty .contentInfo .infoProperty p span {
+  margin-right: 5px;
+}
+.thumbProperty .contentInfo .characteristicsProperty {
+  padding: 10px 15px;
+  border-top: #111111 1px solid;
+}
+.thumbProperty .contentInfo .characteristicsProperty ul {
+  margin: 0;
+  padding: 0;
+}
+.thumbProperty .contentInfo .characteristicsProperty ul li {
+  display: inline-block;
+  font-size: 1em;
+  font-family: 'latobold';
+  width: 24%;
+  text-align: center;
+}
+.thumbProperty .contentInfo .characteristicsProperty ul li i {
+  margin-right: 5px;
+}
+
+/*----- END SECTION FEATURED PROPERTIES -----*/
+/*----- AVATAR -----*/
+.containertAvatar {
+  height: 233px;
+  width: 233px;
+  overflow: hidden;
+}
+.containertAvatar .editAvatar {
+  display: none;
+}
+.containertAvatar:hover .editAvatar {
+  display: block;
+  position: absolute;
+  top: 33%;
+  left: 33%;
+}
+.containertAvatar:hover .editAvatar a {
+  display: block;
+  height: 60px;
+  width: 60px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+  color: #333333;
+  font-size: 2em;
+  padding: 10px 0;
+  text-align: center;
+}
+
+/* make sidebar nav vertical */
+.affix-content .container {
+  margin-top: 0;
+}
+
+.affix-content {
+  padding-right: 30px;
+  padding-left: 30px;
+  background-color: white;
+  overflow: auto;
+  margin-top: 130px;
+}
+
+.affix-title {
+  border-bottom: 1px solid #ecf0f1;
+  padding-bottom: 10px;
+}
+
+.navbar-nav {
+  margin: 0;
+}
+
+.navbar-collapse {
+  padding: 0;
+}
+
+.affix-sidebar {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.affix-row, .affix-container, .affix-content {
+  height: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+.navbar-default {
+  background: #333333;
+}
+
+.sidebar-nav {
+  position: fixed;
+  top: 130px;
+  width: 90%;
+}
+.sidebar-nav .contentAvatar {
+  display: flex;
+  flex-flow: column;
+  justify-content: center;
+  padding: 10px 0;
+}
+.sidebar-nav .contentAvatar span {
+  display: block;
+  height: 60px;
+  width: 60px;
+  background: #ffffff;
+  border-radius: 50%;
+  float: left;
+  border: #f1b311 3px solid;
+  margin: 0 20px;
+}
+.sidebar-nav .contentAvatar p {
+  margin-top: 20px;
+}
+.sidebar-nav .navbar {
+  border-radius: 0;
+  margin-bottom: 0;
+  border: 0;
+}
+.sidebar-nav .navbar .navbar-collapse {
+  padding: 0;
+  max-height: none;
+}
+.sidebar-nav .navbar ul {
+  float: none;
+  display: block;
+}
+.sidebar-nav .navbar ul li {
+  float: none;
+  display: block;
+  border-bottom: #cccccc 1px solid;
+  font-family: 'latoregular';
+  font-size: 1.1em;
+  text-transform: uppercase;
+  color: #cccccc;
+}
+.sidebar-nav .navbar ul li.active a {
+  background: #f1b311;
+  color: #333333;
+}
+.sidebar-nav .navbar ul li a {
+  padding: 15px;
+  color: #cccccc;
+}
+.sidebar-nav .navbar ul li a:hover, .sidebar-nav .navbar ul li a:focus {
+  background: #f1b311;
+  color: #333333;
+}
+.sidebar-nav .navbar ul li a .caret {
+  margin-top: 8px;
+  position: absolute;
+  left: 340px;
+}
+.sidebar-nav .nav-list li {
+  font-size: 0.9em !important;
+}
+.sidebar-nav .nav-list li a:hover {
+  background: #cccccc !important;
+  color: #333333 !important;
+}
