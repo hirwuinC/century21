@@ -7,7 +7,7 @@
                 <div class="columnsHeader">
                     <div class="row">
                         <div class="col-xs-2">
-                            <img src="images/logo-header.png" alt="">
+                            <img src="{{asset('images/logo-header.png')}}" alt="">
                         </div>
                         <div class="col-xs-9">
                             <h4 class="modal-title textCenter" id="modalpublishHereLabel">publica con nosotros</h4>

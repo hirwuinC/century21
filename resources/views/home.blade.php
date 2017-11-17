@@ -8,7 +8,7 @@
         <div class="row">
             <div class="col-sm-8">
                 <div class="joinTeam">
-                    <img src="images/demo-unete.jpg" alt="">
+                    <img src="{{asset('images/demo-unete.jpg')}}" alt="">
                     <div class="caption">
                         <a href="" data-toggle="modal" data-target="#modaljoinTeam"><p>UNETE A NUESTRO EQUIPO DE ASESORES</p></a>
                     </div>
@@ -17,7 +17,7 @@
             </div>
             <div class="col-sm-4">
                 <div class="publishHere">
-                    <img src="images/demo-public.jpg" alt="">
+                    <img src="{{asset('images/demo-public.jpg')}}" alt="">
                     <div class="caption">
                         <a href="" data-toggle="modal" data-target="#modalpublishHere">
                             <p><span>publica tu </span>propiedad</p>

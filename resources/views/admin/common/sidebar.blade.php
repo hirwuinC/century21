@@ -11,15 +11,15 @@
                     </div>
                 </li>
                 <li class="active"><a href="">Inicio</a></li>
-                <li><a href="">Perfil</a></li>
+                <li><a href="{{ route('perfil') }}">Perfil</a></li>
                 <li>
                     <a href="#" data-toggle="collapse" data-target="#toggleDemo" data-parent="#sidenav01" class="collapsed">
                         Inmuebles <span class="caret"></span>
                     </a>
                     <div class="collapse" id="toggleDemo" style="height: 0px;">
                         <ul class="nav nav-list">
-                            <li><a href="#">lista de inmuebles</a></li>
-                            <li><a href="#">Crear inmuebles</a></li>
+                            <li><a href="{{ route('admin_lista_inmuebles') }}">lista de inmuebles</a></li>
+                            <li><a href="{{ route('crear-inmueble-1') }}">Crear inmuebles</a></li>
                         </ul>
                     </div>
                 </li>
@@ -36,7 +36,7 @@
                 </li>
                 <li><a href="#"></span>estadisticas</a></li>
                 <li><a href="#">clientes</a> </li>
-                <li><a href="">Agentes</a></li>
+                <li><a href="{{ route('crear-agente') }}">Agentes</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

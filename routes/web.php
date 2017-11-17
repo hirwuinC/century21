@@ -10,7 +10,7 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+// calle canada 239, metro salvador
 //Auth::routes();
 Auth::routes();
 
@@ -27,3 +27,10 @@ Route::get('/proyecto/{id}', ['as' => 'detalle_proyecto', 'uses' => 'WebControll
 Route::get('/admin', ['as' => 'dashboard', 'uses' => 'Admin\AdminController@Dasboard']);
 Route::get('/admin/login', ['as' => 'login', 'uses' => 'Admin\AdminController@Login']);
 Route::get('/admin/inmuebles', ['as' => 'admin_lista_inmuebles', 'uses' => 'Admin\AdminController@ListaInmuebles']);
+Route::get('/admin/inmueble/{id}', ['as' => 'admin_detalle_inmueble', 'uses' => 'Admin\AdminController@DetalleInmueble']);
+Route::get('/admin/crear-inmueble-1', ['as' => 'crear-inmueble-1', 'uses' => 'Admin\AdminController@CrearInmueble1']);
+Route::get('/admin/crear-inmueble-2', ['as' => 'crear-inmueble-2', 'uses' => 'Admin\AdminController@CrearInmueble2']);
+
+Route::get('/admin/perfil', ['as' => 'perfil', 'uses' => 'Admin\AdminController@Perfil']);
+Route::get('/admin/agente', ['as' => 'crear-agente', 'uses' => 'Admin\AdminController@Agente']);
+

@@ -81,18 +81,57 @@ hr {
   border-bottom: #717a81 1px solid;
   margin: 25px 0;
 }
+.titleSection span {
+  text-transform: initial;
+  font-family: 'latoregular';
+}
 
 .alert {
   padding: 15px;
-  background: #000;
   margin-bottom: 0;
   border-radius: 0;
 }
 .alertSearch {
   background: #cccccc;
 }
+.alertGreen {
+  background: #00a651;
+  height: 60px;
+  color: #ffffff;
+  font-family: 'latolight';
+  border-radius: 5px;
+}
+.alertGreen h5 {
+  font-size: 1.3em;
+  text-align: center;
+  margin: 3px 0;
+}
+.alertGreen h5 span {
+  font-family: 'latobold';
+}
+.alertGrayLight {
+  background: #cccccc;
+  height: 60px;
+  color: #333333;
+  font-family: 'latolight';
+  border-radius: 5px;
+}
 
-.btnGeneral, .btnYellow, .btnGray, .btnAcction {
+/*CIRCLES*/
+.circle, .circleYellow, .circleGreen {
+  height: 30px;
+  width: 30px;
+  border-radius: 50%;
+  display: block;
+}
+.circleYellow {
+  background-color: #f1b311;
+}
+.circleGreen {
+  background-color: #00a651;
+}
+
+.btnGeneral, .btnYellow, .btnGray, .btnGrayHight, .btnGraySmall, .btnAcction, .btnInactive {
   margin: 20px 0;
   border: none;
   text-transform: uppercase;
@@ -110,11 +149,21 @@ hr {
   height: 60px;
 }
 
-.btnGray {
+.btnGray, .btnGrayHight, .btnGraySmall {
   background: #333333;
-  font-family: 'latobold';
+  font-family: 'latoregular';
   color: #f6f6f6;
   font-size: 1.12em;
+}
+.btnGrayHight {
+  font-size: 1.5em;
+}
+.btnGraySmall {
+  font-size: 1em;
+  width: 90px;
+  height: 30px;
+  padding: 5px 0;
+  vertical-align: text-bottom;
 }
 
 .btnAcction {
@@ -122,6 +171,13 @@ hr {
   font-family: 'latoregular';
   color: #f6f6f6;
   font-size: 0.9em;
+}
+
+.btnInactive {
+  background: #717a81 !important;
+  font-family: 'latoregular';
+  color: #f6f6f6 !important;
+  cursor: no-drop !important;
 }
 
 .modal-dialog {
@@ -189,6 +245,22 @@ hr {
   text-align: center;
 }
 
+.ubicationProperties p {
+  font-family: 'latolight';
+  font-size: 1.12em;
+  color: #262626;
+  margin-bottom: 30px;
+}
+.ubicationProperties p span {
+  font-family: 'latobold';
+}
+
+.googleMap {
+  margin-bottom: 60px;
+}
+
+/*----- END GENERALS -------*/
+/*----- GENERALS FORM -----*/
 .inputs {
   border: none;
   border-radius: 5px;
@@ -205,111 +277,142 @@ hr {
   color: #cccccc;
 }
 
-.ubicationProperties p {
+select {
+  border: none;
+  border-radius: 5px;
+  box-shadow: none;
+  width: 100%;
   font-family: 'latolight';
+  background-color: #cccccc;
+  background-image: url("../images/arrow-down.png");
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  color: #333333;
+  height: 60px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding: 6px 25px 6px 12px;
+}
+select option {
+  height: 30px;
+  padding: 7px 5px;
+}
+
+textarea {
+  height: 100%;
+  min-height: 150px;
   font-size: 1.12em;
-  color: #262626;
+  resize: none;
+  padding: 15px;
   margin-bottom: 30px;
 }
-.ubicationProperties p span {
-  font-family: 'latobold';
-}
-
-.googleMap {
-  margin-bottom: 60px;
-}
-
-/*----- END GENERALS -------*/
-/*----- FORM CONTACT ADVISER -----*/
-.contactAdviser {
-  margin-bottom: 25px;
-  border: #333333 1px solid;
-  padding: 20px;
-}
-.contactAdviser h3 {
-  text-transform: uppercase;
-  text-align: center;
-  font-size: 1.25em;
-  color: #262626;
-  font-family: 'latobold';
-  margin-bottom: 50px;
-}
-.contactAdviser label {
-  text-transform: uppercase;
-  font-size: 1.12em;
-  font-family: 'latobold';
-  font-weight: normal;
-}
-.contactAdviser input {
-  border-radius: 0;
-  background: #e1e1e1;
-  border: none;
-  box-shadow: none;
-  height: 40px;
-  font-family: 'latolight';
-  color: #262626;
-  font-size: 1.12em;
-}
-.contactAdviser input:focus {
-  border: none;
-  box-shadow: none;
-}
-.contactAdviser textarea {
-  border-radius: 0;
-  background: #e1e1e1;
-  border: none;
-  box-shadow: none;
-  height: 100%;
-  min-height: 150px;
-  font-family: 'latolight';
-  color: #262626;
-  font-size: 1.12em;
-  resize: none;
-}
-.contactAdviser textarea:focus {
+textarea:focus {
   border: none;
   box-shadow: none;
 }
 
-/*----- FORM CONTACT -----*/
-.contactForm {
-  margin: 30px 0;
+/*----- INPUT RADIO -----*/
+.styled-input-single {
+  position: relative;
+  padding: 20px 0 20px 40px;
+  text-align: left;
 }
-.contactForm label {
-  text-transform: uppercase;
-  font-size: 1.12em;
+.styled-input-single label {
+  cursor: pointer;
+}
+.styled-input-single label:before, .styled-input-single label:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  border-radius: 50%;
+}
+.styled-input-single label:before {
+  left: 0;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0;
+  background: #f7f7f7;
+  box-shadow: 0 0 1px grey;
+}
+.styled-input-single label:after {
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0;
+  opacity: 0;
+  background: #f1b311;
+  transform: translate3d(-40px, 0, 0) scale(0.5);
+  transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+}
+.styled-input-single input[type="radio"] {
+  position: absolute;
+  top: 0;
+  left: -9999px;
+  visibility: hidden;
+}
+.styled-input-single input[type="radio"]:checked + label:after {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+.styled-input-single {
+  position: relative;
+  padding: 15px 0 15px 40px;
+  text-align: left;
+}
+.styled-input-single label {
+  cursor: pointer;
+  font-size: 1.2em;
+  color: #333333;
+  font-family: 'latolight';
+}
+.styled-input-single label:before, .styled-input-single label:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+}
+.styled-input-single label:before {
+  left: 0;
+  width: 30px;
+  height: 30px;
+  margin: -15px 0 0;
+  background: #f7f7f7;
+  box-shadow: 0 0 1px grey;
+}
+.styled-input-single label:after {
+  left: 5px;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0;
+  opacity: 0;
+  background: #f1b311;
+  transform: translate3d(-40px, 0, 0) scale(0.5);
+  transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
+}
+.styled-input-single input[type="checkbox"] {
+  position: absolute;
+  top: 0;
+  left: -9999px;
+  visibility: hidden;
+}
+.styled-input-single input[type="checkbox"]:checked + label:after {
+  transform: translate3d(0, 0, 0);
+  opacity: 1;
+}
+
+.viewRadio {
+  padding: 0;
+  margin: 0;
+}
+.viewRadio li {
+  display: inline-block;
+  margin-right: 10px;
+}
+.viewRadio h6 {
   font-family: 'latobold';
-  font-weight: normal;
-}
-.contactForm input {
-  border-radius: 0;
-  background: #e1e1e1;
-  border: none;
-  box-shadow: none;
-  height: 40px;
-  font-family: 'latolight';
-  color: #262626;
-  font-size: 1.12em;
-}
-.contactForm input:focus {
-  border: none;
-  box-shadow: none;
-}
-.contactForm textarea {
-  border-radius: 0;
-  background: #e1e1e1;
-  border: none;
-  box-shadow: none;
-  height: 100%;
-  min-height: 150px;
-  font-family: 'latolight';
-  color: #262626;
-  font-size: 1.12em;
-  resize: none;
-}
-.contactForm textarea:focus {
-  border: none;
-  box-shadow: none;
+  font-size: 1.3em;
 }
 
 /*----- LOGIN -----*/
@@ -407,6 +510,17 @@ hr {
   margin-bottom: 30px;
 }
 .avatarForm button {
+  height: 60px;
+}
+
+.agenteForm {
+  margin: 40px 0;
+}
+.agenteForm input {
+  height: 60px;
+  margin-bottom: 30px;
+}
+.agenteForm button {
   height: 60px;
 }
 
@@ -589,6 +703,48 @@ hr {
   text-align: center;
 }
 
+/*DETAIL PROPERTY*/
+.contentDetail p {
+  font-size: 1em;
+  line-height: 20px;
+  margin-top: 10px;
+  color: #333333;
+  font-family: 'latolight';
+}
+.contentDetail p span {
+  font-family: 'latobold';
+}
+.contentDetail button {
+  margin: 60px 0;
+}
+.contentDetail .reports button {
+  margin: 0 !important;
+}
+.contentDetail .reports .listReports {
+  margin-top: 30px;
+}
+.contentDetail .reports .listReports .alert {
+  margin-bottom: 20px;
+}
+.contentDetail .reports .listReports h5 {
+  font-family: 'latobold';
+  font-size: 1.2em;
+  margin: 5px 0;
+  color: #333333;
+}
+.contentDetail .reports .listReports ul {
+  float: right;
+}
+.contentDetail .reports .listReports ul li {
+  display: inline-block;
+  margin-left: 15px;
+}
+.contentDetail .reports .listReports ul li a i {
+  font-size: 2em;
+  color: #333333;
+  vertical-align: super;
+}
+
 /* make sidebar nav vertical */
 .affix-content .container {
   margin-top: 0;
@@ -600,6 +756,7 @@ hr {
   background-color: white;
   overflow: auto;
   margin-top: 130px;
+  min-height: 500px;
 }
 
 .affix-title {

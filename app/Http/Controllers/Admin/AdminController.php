@@ -8,44 +8,49 @@ use Illuminate\Http\Request;
 class AdminController extends Controller
 {
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         
         //$this->middleware('auth');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function Login()
     {
         return view('/admin/login');
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function Dasboard()
     {
-        return view('/admin/dashboard');
+        return redirect(route('admin_lista_inmuebles'));
     }
 
-    /**
-     * Show the application dashboard.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function ListaInmuebles()
     {
         return view('/admin/lista_inmuebles');
+    }
+
+    public function CrearInmueble1()
+    {
+        return view('/admin/crear_inmueble_1');
+    }
+
+    public function CrearInmueble2()
+    {
+        return view('/admin/crear_inmueble_2');
+    }
+
+    public function CrearAgente()
+    {
+        return view('/admin/crear_agente');
+    }
+
+    public function Perfil()
+    {
+        return view('/admin/perfil');
+    }
+
+    public function DetalleInmueble()
+    {
+        return view('/admin/detalle_inmueble');
     }
 }

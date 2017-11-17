@@ -32,7 +32,7 @@
 					<div class="col-xs-12">
 						<div class="row">
 							<div class="col-xs-12 col-sm-2 logoHeader">
-								<img src="images/logo-header.png" alt="">
+								<img src="{{ asset('images/logo-header.png')}}" alt="">
 							</div>
 							<div class="col-xs-12 col-sm-10">
 								<div class="infoContact">
@@ -95,13 +95,13 @@
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
-							<img src="images/slide1.jpg" alt="...">
+							<img src="{{ asset('images/slide1.jpg')}}" alt="...">
 						</div>
 						<div class="item">
-							<img src="images/slide1.jpg" alt="...">
+							<img src="{{ asset('images/slide1.jpg')}}" alt="...">
 						</div>
 						<div class="item">
-							<img src="images/slide1.jpg" alt="...">
+							<img src="{{ asset('images/slide1.jpg')}}" alt="...">
 						</div>
 					</div>
 
@@ -127,7 +127,7 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-12 col-sm-4 logoFooter">
-								<img src="images/logo-footer.png" alt="">
+								<img src="{{ asset('images/logo-footer.png')}}" alt="">
 							</div>
 						<div class="col-xs-12 col-sm-4 contactFooter">
 								<h6 class="titleSectionFooter">Contáctanos</h6>
