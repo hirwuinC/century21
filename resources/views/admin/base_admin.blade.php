@@ -58,7 +58,9 @@
     var base_url = "{{ route('admin_lista_inmuebles') }}"
 </script>
 
-<script type="text/javascript" src="{{ asset('js/custome.js')}}"></script>
+@yield('js')
+
+
 
 </body>
 </html>

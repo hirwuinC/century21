@@ -29,14 +29,14 @@
                     </a>
                     <div class="collapse" id="toggleDemo2" style="height: 0px;">
                         <ul class="nav nav-list">
-                            <li><a href="#">Lista de proyectos</a></li>
-                            <li><a href="#">Crear Proyecto</a></li>
+                            <li><a href="{{ route('admin_lista_inmuebles') }}">Lista de proyectos</a></li>
+                            <li><a href="{{route('crear-inmueble-1')}}">Crear Proyecto</a></li>
                         </ul>
                     </div>
                 </li>
                 <li><a href="#"></span>estadisticas</a></li>
                 <li><a href="#">clientes</a> </li>
-                <li><a href="{{ route('crear-agente') }}">Agentes</a></li>
+                <li><a href="{{ route('lista-agente') }}">Agentes</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

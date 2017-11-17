@@ -21,7 +21,7 @@ class AdminController extends Controller
 
     public function Dasboard()
     {
-        return redirect(route('admin_lista_inmuebles'));
+        return redirect(route('login'));
     }
 
     public function ListaInmuebles()
@@ -53,4 +53,11 @@ class AdminController extends Controller
     {
         return view('/admin/detalle_inmueble');
     }
+
+    public function ListarAgente()
+    {
+        return view('/admin/lista_agentes');
+    }
+
+
 }

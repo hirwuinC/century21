@@ -69,7 +69,7 @@
                 </div>
                 <div class="col-xs-3">
                     <div class="buttons">
-                        <button type="button" class="btnYellow">NUEVO</button>
+                        <button type="button" class="btnYellow noMargin" data-toggle="modal" data-target="#modalReport">NUEVO</button>
                     </div>
                 </div>
             </div>
@@ -105,13 +105,6 @@
                 </div>
             </div>
         </div>
-
-        <div class="row">
-            <div class="buttons">
-                <div class="col-xs-offset-9 col-xs-3">
-                    <button type="button" class="btnYellow">guardar</button>
-                </div>
-            </div>
-        </div>
     </div>
+    @include('admin/modals/reporte_modal')
 @endsection

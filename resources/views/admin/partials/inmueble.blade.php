@@ -30,7 +30,7 @@
                             </button>
                         </div>
                         <div class="col-xs-6">
-                            <button type="button" class="btnAcction" data-toggle="modal" data-target="#detailInmueble">
+                            <button type="button" id="detalleAction" class="btnAcction" data-toggle="modal" data-target="#detailInmueble">
                                 Detalle
                             </button>
                         </div>

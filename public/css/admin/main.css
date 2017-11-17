@@ -48,6 +48,11 @@ hr {
   padding-right: 0 !important;
 }
 
+.noMargin {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
+
 .displayNone {
   display: none;
 }
@@ -70,6 +75,19 @@ hr {
 
 .textCenter {
   text-align: center;
+}
+
+.marginBottom20 {
+  margin-bottom: 20px !important;
+}
+
+.marginForm {
+  margin-right: 20px;
+  margin-left: 20px;
+}
+
+.redError {
+  color: #e40303 !important;
 }
 
 .titleSection {
@@ -111,7 +129,7 @@ hr {
 }
 .alertGrayLight {
   background: #cccccc;
-  height: 60px;
+  min-height: 60px;
   color: #333333;
   font-family: 'latolight';
   border-radius: 5px;
@@ -123,6 +141,7 @@ hr {
   width: 30px;
   border-radius: 50%;
   display: block;
+  vertical-align: middle;
 }
 .circleYellow {
   background-color: #f1b311;
@@ -160,10 +179,8 @@ hr {
 }
 .btnGraySmall {
   font-size: 1em;
-  width: 90px;
   height: 30px;
-  padding: 5px 0;
-  vertical-align: text-bottom;
+  padding: 5px 15px;
 }
 
 .btnAcction {
@@ -182,6 +199,8 @@ hr {
 
 .modal-dialog {
   top: 150px;
+  width: 70%;
+  z-index: 999999;
 }
 .modal-dialog .modal-content {
   border-radius: 0;
@@ -203,15 +222,14 @@ hr {
   font-family: 'latobold';
   font-weight: normal;
 }
+.modal-dialog .modal-content .form .styled-input-single input[type="radio"] {
+  position: absolute;
+}
 .modal-dialog .modal-content .form input {
-  border-radius: 0;
-  background: transparent;
-  border: #111111 1px solid;
-  box-shadow: none;
-  height: 40px;
-  font-family: 'latolight';
-  color: #333333;
-  font-size: 1.12em;
+  height: 60px;
+  font-size: 1.87em;
+  position: relative;
+  padding: 10px 25px 10px 50px;
 }
 .modal-dialog .modal-content .form select {
   border-radius: 0;
@@ -230,19 +248,99 @@ hr {
   appearance: none;
 }
 .modal-dialog .modal-content .form textarea {
-  border-radius: 0;
-  background: transparent;
-  border: #111111 1px solid;
   box-shadow: none;
   height: 100%;
-  min-height: 150px;
+  min-height: 80px;
   font-family: 'latolight';
   color: #333333;
   font-size: 1.12em;
   resize: none;
 }
-.modal-dialog .modal-content .modal-footer {
+.modal-dialog .modal-content .form .modal-body-top {
+  padding-bottom: 30px;
+  border-bottom: #333333 1px solid;
+}
+.modal-dialog .modal-content .form .modal-body-bottom {
+  padding: 30px 0;
+}
+.modal-dialog .modal-content .form .modal-body-bottom label {
+  text-transform: initial !important;
+  font-size: 1em !important;
+  margin-top: 20px;
+}
+.modal-dialog .modal-content .form .modal-body-bottom h2 {
+  text-transform: uppercase;
+  font-size: 1.3em;
+  padding: 26px 0;
+  font-family: 'latobold';
+}
+
+.modal-dialog .nav-tabs li {
+  text-transform: uppercase;
+  font-size: 1.2em;
+  font-family: 'latobold';
+}
+.modal-dialog .nav-tabs li a {
+  background-color: #cccccc;
+  border: 0;
+  color: #333333;
+}
+.modal-dialog .nav-tabs li.active a {
+  background-color: #f1b311;
+  border: 0;
+  color: #333333;
+}
+.modal-dialog .newNegotation {
+  padding: 30px 0;
+}
+.modal-dialog .newNegotation input {
+  box-shadow: none;
+  height: 50px;
+  font-size: 1.5em;
+  position: relative;
+  padding: 10px 25px 10px 50px;
+}
+.modal-dialog .newNegotation select {
+  border: none;
+  border-radius: 5px;
+  box-shadow: none;
+  width: 100%;
+  font-family: 'latolight';
+  background-color: #cccccc;
+  background-image: url("../images/arrow-down.png");
+  background-repeat: no-repeat;
+  background-position: 95% 50%;
+  color: #333333;
+  height: 50px;
+  appearance: none;
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  cursor: pointer;
+  padding: 6px 25px 6px 12px;
+}
+.modal-dialog .newNegotation select option {
+  height: 30px;
+  padding: 7px 5px;
+}
+.modal-dialog .panel-group {
+  padding: 30px 0;
+}
+.modal-dialog .panel-group .panel-heading {
+  border-radius: 0;
+  background-color: #333333;
+  color: #cccccc;
+  height: 50px;
+  padding: 15px;
+}
+.modal-dialog .panel-group .panel-body {
   text-align: center;
+}
+.modal-dialog .panel-group .panel-body .alertGrayLight {
+  background: #cccccc;
+  min-height: 40px;
+  color: #333333;
+  font-family: 'latoregular';
+  border-radius: 5px;
 }
 
 .ubicationProperties p {
@@ -268,7 +366,7 @@ hr {
   width: 100%;
   font-family: 'latolight';
 }
-.inputsLight, #login input {
+.inputsLight, .modal-dialog .modal-content .form input, .modal-dialog .modal-content .form textarea, .modal-dialog .newNegotation input, #login input, .contentAgents input {
   background: #cccccc;
   color: #333333;
 }
@@ -449,6 +547,27 @@ textarea:focus {
   text-align: center;
 }
 #login .iconInput i {
+  font-size: 1.87em;
+  color: #333333;
+  margin-top: 15px;
+}
+
+.contentAgents input {
+  height: 60px;
+  font-size: 1.87em;
+  position: relative;
+  padding: 10px 25px 10px 50px;
+  margin-top: 30px;
+}
+.contentAgents .iconInput {
+  position: absolute;
+  z-index: 999;
+  left: 25px;
+  height: 50px;
+  width: 25px;
+  text-align: center;
+}
+.contentAgents .iconInput i {
   font-size: 1.87em;
   color: #333333;
   margin-top: 15px;
@@ -704,45 +823,113 @@ textarea:focus {
 }
 
 /*DETAIL PROPERTY*/
-.contentDetail p {
+.contentDetail p, .contentAgents p {
   font-size: 1em;
   line-height: 20px;
   margin-top: 10px;
   color: #333333;
   font-family: 'latolight';
 }
-.contentDetail p span {
+.contentDetail p span, .contentAgents p span {
   font-family: 'latobold';
 }
-.contentDetail button {
+.contentDetail button, .contentAgents button {
   margin: 60px 0;
 }
-.contentDetail .reports button {
-  margin: 0 !important;
+.contentDetail .reports button, .contentDetail .agents button, .contentAgents .reports button, .contentAgents .agents button {
+  margin: 5px 0;
+  vertical-align: middle;
 }
-.contentDetail .reports .listReports {
+.contentDetail .reports .listReports, .contentDetail .reports .listAgents, .contentDetail .agents .listReports, .contentDetail .agents .listAgents, .contentAgents .reports .listReports, .contentAgents .reports .listAgents, .contentAgents .agents .listReports, .contentAgents .agents .listAgents {
   margin-top: 30px;
 }
-.contentDetail .reports .listReports .alert {
+.contentDetail .reports .listReports .alert, .contentDetail .reports .listAgents .alert, .contentDetail .agents .listReports .alert, .contentDetail .agents .listAgents .alert, .contentAgents .reports .listReports .alert, .contentAgents .reports .listAgents .alert, .contentAgents .agents .listReports .alert, .contentAgents .agents .listAgents .alert {
   margin-bottom: 20px;
 }
-.contentDetail .reports .listReports h5 {
+.contentDetail .reports .listReports h5, .contentDetail .reports .listAgents h5, .contentDetail .agents .listReports h5, .contentDetail .agents .listAgents h5, .contentAgents .reports .listReports h5, .contentAgents .reports .listAgents h5, .contentAgents .agents .listReports h5, .contentAgents .agents .listAgents h5 {
+  font-family: 'latobold';
+  font-size: 1.2em;
+  color: #333333;
+}
+.contentDetail .reports .listReports ul, .contentDetail .reports .listAgents ul, .contentDetail .agents .listReports ul, .contentDetail .agents .listAgents ul, .contentAgents .reports .listReports ul, .contentAgents .reports .listAgents ul, .contentAgents .agents .listReports ul, .contentAgents .agents .listAgents ul {
+  float: right;
+  margin: 0;
+}
+.contentDetail .reports .listReports ul li, .contentDetail .reports .listAgents ul li, .contentDetail .agents .listReports ul li, .contentDetail .agents .listAgents ul li, .contentAgents .reports .listReports ul li, .contentAgents .reports .listAgents ul li, .contentAgents .agents .listReports ul li, .contentAgents .agents .listAgents ul li {
+  display: inline-block;
+  margin-left: 15px;
+}
+.contentDetail .reports .listReports ul li a i, .contentDetail .reports .listAgents ul li a i, .contentDetail .agents .listReports ul li a i, .contentDetail .agents .listAgents ul li a i, .contentAgents .reports .listReports ul li a i, .contentAgents .reports .listAgents ul li a i, .contentAgents .agents .listReports ul li a i, .contentAgents .agents .listAgents ul li a i {
+  font-size: 2em;
+  color: #333333;
+  vertical-align: middle;
+}
+
+/*LIST AGENTS*/
+.contentAgents p {
+  font-size: 1em;
+  line-height: 20px;
+  margin-top: 10px;
+  color: #333333;
+  font-family: 'latolight';
+}
+.contentAgents p span {
+  font-family: 'latobold';
+}
+.contentAgents button {
+  margin: 60px 0;
+}
+.contentAgents .reports button {
+  margin: 0 !important;
+  vertical-align: text-bottom;
+}
+.contentAgents .reports .listReports {
+  margin-top: 30px;
+}
+.contentAgents .reports .listReports .alert {
+  margin-bottom: 20px;
+}
+.contentAgents .reports .listReports h5 {
   font-family: 'latobold';
   font-size: 1.2em;
   margin: 5px 0;
   color: #333333;
 }
-.contentDetail .reports .listReports ul {
+.contentAgents .reports .listReports ul {
   float: right;
+  margin: 0;
 }
-.contentDetail .reports .listReports ul li {
+.contentAgents .reports .listReports ul li {
   display: inline-block;
   margin-left: 15px;
 }
-.contentDetail .reports .listReports ul li a i {
+.contentAgents .reports .listReports ul li a i {
   font-size: 2em;
   color: #333333;
   vertical-align: super;
+}
+
+.paginator {
+  margin: 60px 0;
+  text-align: center;
+}
+.paginator .pagination li {
+  font-family: 'latobold';
+}
+.paginator .pagination li.active a {
+  background-color: #f1b311;
+  border-color: #f1b311;
+  color: #333333;
+}
+.paginator .pagination li a {
+  border-radius: 50%;
+  margin: 0 5px;
+  color: #f1b311;
+}
+.paginator .pagination li a:hover, .paginator .pagination li a:focus {
+  color: #333333;
+  background-color: #f1b311;
+  border-color: #f1b311;
 }
 
 /* make sidebar nav vertical */

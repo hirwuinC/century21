@@ -19,3 +19,12 @@
     </section>
     @include('admin/modals/cambio_estatus')
 @endsection
+
+@section('js')
+    <script>
+        var redirectUrlDetalleInmueble = "{{route('admin_detalle_inmueble',1)}}";
+        $('#detalleAction').on('click', function(){
+            window.location.href = redirectUrlDetalleInmueble
+        })
+    </script>
+@endSection
