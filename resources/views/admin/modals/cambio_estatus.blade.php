@@ -9,7 +9,7 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs marginForm" role="tablist">
                     <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">NUEVA NEGOCIACIÓN</a></li>
-                    <li role="presentation"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">NEGOCIACIÓN EN CURSO</a></li>
+                    <li role="presentation" style="display:none;"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">NEGOCIACIÓN EN CURSO</a></li>
                     <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">HISTORIAL DE NEGOCIACIONES</a></li>
                 </ul>
 

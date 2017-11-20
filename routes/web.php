@@ -24,7 +24,7 @@ Route::get('/inmueble/{id}', ['as' => 'detalle_inmueble', 'uses' => 'WebControll
 Route::get('/proyecto/{id}', ['as' => 'detalle_proyecto', 'uses' => 'WebController@detalle_proyecto']);
 
 // Admin
-Route::get('/admin', ['as' => 'dashboard', 'uses' => 'Admin\AdminController@Dasboard']);
+Route::get('/admin', ['as' => 'dashboard', 'uses' => 'Admin\AdminController@ListaInmuebles']);
 Route::get('/admin/login', ['as' => 'login', 'uses' => 'Admin\AdminController@Login']);
 Route::get('/admin/inmuebles', ['as' => 'admin_lista_inmuebles', 'uses' => 'Admin\AdminController@ListaInmuebles']);
 Route::get('/admin/inmueble/{id}', ['as' => 'admin_detalle_inmueble', 'uses' => 'Admin\AdminController@DetalleInmueble']);

@@ -4,10 +4,14 @@
     <h2 class="titleSection">inmuebles - <span>Agergar o quitar imágenes</span></h2>
     <section>
         <div class="row">
-            @for( $i = 0; $i < 8 ; $i++)
+            @for( $i = 0; $i < 3 ; $i++)
                 @component('admin/partials/uploadImagen')
                 @endComponent
             @endfor
+            @for( $i = 0; $i < 5 ; $i++)
+                @component('admin/partials/uploadImagen2')
+                @endComponent
+            @endfor                       
         </div>
         <div class="row">
             <div class="buttons">

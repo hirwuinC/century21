@@ -69,7 +69,13 @@
 		<script type="text/javascript" src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
         <script>
-            var base_url = "{{ route('admin_lista_inmuebles') }}"
+			$(document).ready(function () {
+				// var base_url = "{{ route('admin_lista_inmuebles') }}"
+				$('#submitLogin').on('click', function(){
+					console.log('click', base_url)
+					window.location.href = "/inmuebles"
+				});
+			});			
         </script>
         <script type="text/javascript" src="{{ asset('js/admin/login.js') }}"></script>
         
