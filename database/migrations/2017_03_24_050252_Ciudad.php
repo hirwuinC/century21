@@ -31,6 +31,6 @@ class Ciudad extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('ciudad');
+        Schema::dropIfExists('ciudades');
     }
 }

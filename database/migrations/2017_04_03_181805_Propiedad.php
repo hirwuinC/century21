@@ -39,6 +39,6 @@ class Propiedad extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('propiedades');
     }
 }

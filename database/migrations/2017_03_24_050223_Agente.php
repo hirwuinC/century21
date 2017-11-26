@@ -15,9 +15,9 @@ class Agente extends Migration
     {
         //
         Schema::create('agentes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             $table->string('fullName');
-            $table->string('email');
+            $table->string('cedula')->unique();
             $table->string('telefono');
             $table->string('celular');
             $table->integer('ref_id');
@@ -33,6 +33,6 @@ class Agente extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('agente');
+        Schema::dropIfExists('agentes');
     }
 }

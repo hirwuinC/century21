@@ -34,6 +34,6 @@ class Estado extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('estado');
+        Schema::dropIfExists('estados');
     }
 }

@@ -14,7 +14,7 @@ class Rol extends Migration
     public function up()
     {
       Schema::create('roles', function (Blueprint $table) {
-          $table->increments('id');
+          $table->increments('id')->unsigned();
           $table->string('nombre');
       });
     }
@@ -26,6 +26,6 @@ class Rol extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('roles');
     }
 }

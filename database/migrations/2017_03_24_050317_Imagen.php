@@ -15,7 +15,7 @@ class Imagen extends Migration
     {
         //
         Schema::create('imagenes', function (Blueprint $table) {
-            $table->increments('id');
+            $table->increments('id')->unsigned();
             $table->string('src');
         });
     }
@@ -28,6 +28,6 @@ class Imagen extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('imgen');
+        Schema::dropIfExists('imagenes');
     }
 }

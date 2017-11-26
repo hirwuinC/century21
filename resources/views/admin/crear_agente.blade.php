@@ -17,23 +17,23 @@
         <div class="col-xs-9">
             <div class="row">
                 <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Email">
+                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Nombre">
                 </div>
                 <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Email">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Email">
-                </div>
-                <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Email">
+                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Apellido">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Email">
+                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Cédula de Identidad">
+                </div>
+                <div class="col-xs-6">
+                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Telefóno">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Telefóno">
                 </div>
                 <div class="col-xs-6">
                     <div class="styled-input-single">
@@ -46,26 +46,34 @@
         <div class="col-xs-12">
             <div class="row">
                 <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Email">
+                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Usuario">
                 </div>
                 <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Email">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Email">
-                </div>
-                <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Email">
+                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Correo">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Email">
+                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Contraseña">
                 </div>
                 <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Email">
+                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Repetir Contraseña">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Fecha de Ingreso">
+                </div>
+                <div class="col-xs-6">
+                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Rif">
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-xs-6">
+                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Dirección">
+                </div>
+                <div class="col-xs-6">
+                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Fecha de Nacimiento">
                 </div>
             </div>
             <div class="row">

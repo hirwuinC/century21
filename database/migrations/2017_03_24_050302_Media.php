@@ -29,6 +29,6 @@ class Media extends Migration
     public function down()
     {
         //
-        Schema::dropIfExists('medi');
+        Schema::dropIfExists('medias');
     }
 }
