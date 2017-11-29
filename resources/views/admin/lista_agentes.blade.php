@@ -16,10 +16,16 @@
     <div class="agents">
         <div class="row">
             <div class="col-xs-12 listAgents">
-                @for( $i = 0; $i < 5 ; $i++)
+                @foreach($asesores as $asesor)
                     @component('admin/partials/agente')
+                        @slot('fullname')
+                            {{ ucwords(strtolower($asesor->fullName))}}
+                        @endslot
+                        @slot('asesor_id')
+                            {{$asesor->id}}
+                        @endslot
                     @endComponent
-                @endFor
+                @endforeach
             </div>
         </div>
     </div>
@@ -28,11 +34,3 @@
     @endComponent
 @endSection
 
-@section('js')
-    <script>
-        var redirectUrl = "{{route('crear-agente')}}";
-        $('.redirectAction').on('click', function(){
-            window.location.href = redirectUrl
-        })
-    </script>
-@endSection

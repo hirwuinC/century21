@@ -32,6 +32,8 @@ Route::get('/admin/crear-inmueble-1', ['as' => 'crear-inmueble-1', 'uses' => 'Ad
 Route::get('/admin/crear-inmueble-2', ['as' => 'crear-inmueble-2', 'uses' => 'Admin\AdminController@CrearInmueble2']);
 
 Route::get('/admin/perfil', ['as' => 'perfil', 'uses' => 'Admin\AdminController@Perfil']);
-Route::get('/admin/crear-agente', ['as' => 'crear-agente', 'uses' => 'Admin\AdminController@CrearAgente']);
-Route::get('/admin/agente', ['as' => 'lista-agente', 'uses' => 'Admin\AdminController@ListarAgente']);
+
+//Asesores
+Route::get('/admin/crear-usuario/{id}', ['as' => 'crear-agente', 'uses' => 'Admin\AsesorController@CrearUsuarioAsesor']);
+Route::get('/admin/agente', ['as' => 'lista-agente', 'uses' => 'Admin\AsesorController@ListarAsesores']);
 

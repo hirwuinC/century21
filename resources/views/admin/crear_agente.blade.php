@@ -17,23 +17,23 @@
         <div class="col-xs-9">
             <div class="row">
                 <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Nombre">
+                    <input type="text" value="{{ $fullname[0] }}" disabled="disabled" class="inputs inputsLight form-control" id="" placeholder="Nombre">
                 </div>
                 <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Apellido">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Cédula de Identidad">
-                </div>
-                <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Telefóno">
+                    <input type="text" value="{{ $fullname[1]}}" class="inputs inputsLight form-control" disabled="disabled" id="" placeholder="Apellido">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Telefóno">
+                    <input type="text" value="{{ $asesor->cedula }}" class="inputs inputsLight form-control" disabled="disabled" id="" placeholder="Cédula de Identidad">
+                </div>
+                <div class="col-xs-6">
+                    <input type="text" value="{{$asesor->telefono}}" class="inputs inputsLight form-control" disabled="disabled" id="" placeholder="Telefóno">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <input type="text" disabled="disabled" value="{{$asesor->celular}}" class="inputs inputsLight form-control" id="" placeholder="Celular">
                 </div>
                 <div class="col-xs-6">
                     <div class="styled-input-single">
