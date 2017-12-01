@@ -6,7 +6,7 @@
         <div class="col-xs-5"><h5>{{ $fullname }}</h5></div>
         <div class="col-xs-6">
             <ul>
-                <li><button type="button" class="btnGraySmall redirectAction"><a href="{{ route('crear-agente',['id'=>$asesor_id]) }}">Crear Usuario</a></button></li>
+                <li><a href="{{ route('crear-agente',['id'=>$asesor_id]) }}"><button type="button" class="btnGraySmall redirectAction">Crear Usuario</button></a></li>
                 <li><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
                 <li><a href=""><i class="fa fa-times redError" aria-hidden="true"></i></a></li>
             </ul>

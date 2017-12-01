@@ -18,4 +18,10 @@ class AsesorController extends Controller
     	$fullname=explode(" ", $asesor->fullName);
     	return view('admin.crear_agente',compact('asesor','fullname'));
     }
+   	public function nuevo(){
+    	$var =\Request::get('data');
+    	//parent::Prueba();
+    	return $var;
+    }
+    
 }

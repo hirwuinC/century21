@@ -36,7 +36,7 @@
                 </li>
                 <li><a href="#"></span>estadisticas</a></li>
                 <li><a href="#">clientes</a> </li>
-                <li><a href="{{ route('lista-agente') }}">Agentes</a></li>
+                <li><a href="{{ route('lista-agente') }}">Asesores</a></li>
             </ul>
         </div><!--/.nav-collapse -->
     </div>

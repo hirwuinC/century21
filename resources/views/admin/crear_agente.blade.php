@@ -1,7 +1,7 @@
 @extends('admin/base_admin')
 
 @section('content')
-<h2 class="titleSection">EDITAR AGENTE</h2>
+<h2 class="titleSection">EDITAR ASESOR</h2>
 <form action="" class="agenteForm">
     <div class="row">
         <div class="col-xs-3">

@@ -1,0 +1,28 @@
+/*-SEARCH INPUT-*/
+.register-list{
+	font-size: 14px;
+    padding: 0 !important;
+    margin: 0 !important;
+    border-radius: 3px;
+    width: 100%;
+    max-height: 200px;
+    overflow-y: visible;
+    overflow-x: hidden;
+    z-index: 1000;
+    background-color: rgba(0,0,0,0.61);
+  	position: relative;
+  	display: none;
+  	
+}
+.register-list li{
+	padding:10px;
+	left: 15px;
+}
+.register-list li:hover {
+	background-color: rgb(252, 175, 55);
+}
+.register-list2{
+	top: 0px;
+	position: relative;
+	z-index:800;
+}

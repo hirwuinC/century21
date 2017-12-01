@@ -17,7 +17,8 @@
     <link href="{{ asset('css/admin/bootstrap.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/font-face.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/admin/main.css') }}" rel="stylesheet" type="text/css">
-    <link href="css/custome.css" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/admin/custome.css') }}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('css/custome.css') }}"" rel="stylesheet" type="text/css">
 
 </head>
 <body>

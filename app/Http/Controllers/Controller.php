@@ -11,4 +11,8 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
+    public function Prueba(){
+    	echo "Este es un metodo heredado";
+    }
+
 }
