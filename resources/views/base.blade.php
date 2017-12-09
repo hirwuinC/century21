@@ -175,6 +175,7 @@
 			var baseUrl = "{{ route('home') }}"
 		</script>
 		<script type="text/javascript" src="{{ asset('js/custome.js') }}"></script>
+
 		@yield('js')
 	</body>
 </html>

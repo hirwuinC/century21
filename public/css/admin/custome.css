@@ -11,12 +11,13 @@
     z-index: 1000;
     background-color: rgba(0,0,0,0.61);
   	position: relative;
-  	display: none;
+  	visibility:hidden;
   	
 }
 .register-list li{
 	padding:10px;
 	left: 15px;
+  color: #fff;
 }
 .register-list li:hover {
 	background-color: rgb(252, 175, 55);

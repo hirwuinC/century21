@@ -9,10 +9,12 @@
                 <div class="iconInput">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </div>
-                    <input type="search" class="inputs form-control" id="exampleInputSearch" placeholder="Buscar Asesor"> 
-                    <ul class="register-list">
-                        <li><a href="">Registro</a></li>
-                    </ul>
+                <input type="search" class="inputs form-control" id="exampleInputSearch" placeholder="Nombre del Asesor"> 
+                <ul class="register-list">
+                    
+                </ul>
+                
+                
             </div>
         </div>
     </div>
@@ -38,15 +40,6 @@
 @endSection
 
 @section('js')
-    <script>
-        $(document).ready(function(){
-            $('.inputs').on('keyup',function(){
-                var argumento =$('.inputs').val();
-                $.get("/admin/prueba",{data:argumento},function (resultado){
-                    alert(resultado);
-                });
-            });    
-        });
-    </script>
+    <script type="text/javascript" src="{{ asset('js/admin/search.js') }}""></script>
 @endSection
 
