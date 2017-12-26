@@ -9,12 +9,13 @@
                 <div class="iconInput">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </div>
-                <input type="search" class="inputs form-control" id="exampleInputSearch" placeholder="Nombre del Asesor"> 
+                <input type="search" class="inputs form-control" id="exampleInputSearch" placeholder="Nombre del Asesor">
+                <input type="hidden" id="valor">
                 <ul class="register-list">
-                    
+
                 </ul>
-                
-                
+
+
             </div>
         </div>
     </div>
@@ -36,10 +37,12 @@
     </div>
 </div>
     @component('admin/common/paginador')
+      @slot('paginador')
+        {{ $asesores->links() }}
+      @endslot
     @endComponent
 @endSection
 
 @section('js')
     <script type="text/javascript" src="{{ asset('js/admin/search.js') }}""></script>
 @endSection
-

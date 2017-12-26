@@ -4,7 +4,7 @@ $(document).ready(function(){
         var argumento =$('.inputs').val();
         if (argumento !="") {
             $.get("/admin/buscarasesor",{data:argumento},function (resultado){
-                if (resultado !="") { 
+                if (resultado !="") {
                     //alert(resultado);
                     $.each(resultado,function(index,contenido){
                         $('.register-list').html('<li>'+contenido.fullName+'</li>');
@@ -21,35 +21,17 @@ $(document).ready(function(){
             $('.register-list').css("visibility","hidden");
         }
     }); */
-    
+
     var options = {
 
         url:function(){
             var textSearch = $('#exampleInputSearch').val();
             return "/admin/buscarasesor?data="+textSearch;
         },
-        getValue: 'fullName',/*function(element) {
-            
-            var textSearch = $('#exampleInputSearch').val();
-            var patt = new RegExp(textSearch);
-            if (patt.test(element.fullName)) {
-                return element.fullName;
-            }
-            else if(patt.test(element.cedula)){
-                return element.cedula;
-            }
-            else{
-                return element.ref_id;
-            }
-            console.log(patt.test(element.fullName));
-            console.log(patt.test(element.cedula));
-            console.log(patt.test(element.ref_id));
-            console.log(textSearch);
-            
-
-            //if (element.fullName ) {}
-            return 'fullName';
-        },*/
+        getValue: function (element) {
+          $('#valor').val(element.id);
+	        return element.fullName;
+        },
         template:{
             type:"description",
             fields:{
@@ -58,14 +40,15 @@ $(document).ready(function(){
 
             }
         },
-        list: { 
+        list: {
             match: { enabled: false },
             onChooseEvent: function() {
-                swal("Hello world!");
+              var valor = $('#valor').val();
+              window.location="/admin/agente?data="+valor;
             },
 
         },
     }
     $("#exampleInputSearch").easyAutocomplete(options);
-    
+
 });
