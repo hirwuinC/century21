@@ -2,22 +2,42 @@
 
 namespace App\Http\Controllers\Admin;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Crypt;
+use App\Models\Agente;
+use App\Models\User;
+use App\Models\Role;
 
+class AdminController extends Controller{
 
-class AdminController extends Controller
-{
+  public function __construct(){
 
-    public function __construct()
-    {
-        
         //$this->middleware('auth');
-    }
+  }
 
-    public function Login()
-    {
-        return view('/admin/login');
+  public function Login(){
+      return view('/admin/login');
+  }
+
+  public function ingresar(){
+    $usuario = Request::get('usuario');
+    $pass = Request::get('password');
+    $consulta = User::where('name',$usuario)->first();
+    $respuesta=0;
+    if(count($consulta)!=0){
+      $password=Crypt::decryptString($consulta->password);
+      if ($pass == $password) {
+        $respuesta = 1;
+      }
     }
+    return $respuesta;
+  }
+
+
+
+
+
 
     public function Dasboard()
     {

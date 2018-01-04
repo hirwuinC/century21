@@ -810,10 +810,11 @@ textarea:focus {
   top: 33%;
   left: 33%;
 }
-.containertAvatar:hover .editAvatar a {
+ .file-upload, .containertAvatar:hover .editAvatar a {
   display: block;
   height: 60px;
   width: 60px;
+  border:rgba(255,255,255,0.6);
   background: rgba(255, 255, 255, 0.6);
   border-radius: 50%;
   color: #333333;

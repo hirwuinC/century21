@@ -42,18 +42,19 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-xs-6 col-xs-offset-3">
-							<form action="">
+							<form id="login-form" method="post">
+								{{ csrf_field() }}
 								<div class="form-group">
 									<div class="iconInput">
 										<i class="fa fa-user-circle-o" aria-hidden="true"></i>
 									</div>
-									<input type="email" class="inputs form-control" id="exampleInputEmail1" placeholder="Email">
+									<input type="text" class="inputs form-control" name="usuario" id="usuario" placeholder="Email">
 								</div>
 								<div class="form-group">
 									<div class="iconInput">
 										<i class="fa fa-lock" aria-hidden="true"></i>
 									</div>
-									<input type="password" class="inputs form-control" id="exampleInputEmail1" placeholder="Password">
+									<input type="password" class="inputs form-control" name="password" placeholder="Password">
 								</div>
 								<button type="submit" id="submitLogin" class="btnYellow">Submit</button>
 							</form>
@@ -65,19 +66,12 @@
 		<!-- END GENERAL WRAPPER -->
 
 		<!--JAVASCRIPTS / JQUERY-->
-		
+
 		<script type="text/javascript" src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
 		<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
-        <script>
-			$(document).ready(function () {
-				// var base_url = "{{ route('admin_lista_inmuebles') }}"
-				$('#submitLogin').on('click', function(){
-					console.log('click', base_url)
-					window.location.href = "/inmuebles"
-				});
-			});			
-        </script>
-        <script type="text/javascript" src="{{ asset('js/admin/login.js') }}"></script>
-        
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/admin/login.js') }}"></script>
+
 	</body>
 </html>

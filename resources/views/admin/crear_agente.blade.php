@@ -2,16 +2,16 @@
 
 @section('content')
 <h2 class="titleSection">EDITAR ASESOR</h2>
-<form action="{{ route('buscar_user') }}" class="agenteForm" id="asesorCreate" method="post">
+<form action="{{ route('buscar_user') }}" enctype="multipart/form-data" class="agenteForm" id="asesorCreate" method="post">
      {{ csrf_field() }}
     <div class="row">
-        <div class="col-xs-3">
+        <div class="col-xs-3 containers">
             <div class="containertAvatar">
-                <img src="{{ asset('images/img-avatar.jpg')}}" alt="">
+                <img class="image" src="{{ asset('images/img-avatar.jpg')}}" alt="">
                 <div class="editAvatar">
-                    <a href="">
-                        <i class="fa fa-camera" aria-hidden="true"></i>
-                    </a>
+                  <button class="file-upload">
+                    <input type="file" name="image" accept="image/png, .jpeg, .jpg, image/gif" class="file-input"><i class="fa fa-camera" aria-hidden="true"></i>
+                  </button>
                 </div>
             </div>
         </div>
@@ -19,23 +19,23 @@
             <div class="row">
                 <div class="col-xs-6">
                     <input type="hidden" name="argument" value="{{ $asesor->id}}">
-                    <input type="text" value="{{ $fullname[0] }}" disabled="disabled" class="inputs inputsLight form-control" id="" placeholder="Nombre">
+                    <input type="text" value="{{ $fullname[0] }}" disabled="disabled" class="inputs inputsLight form-control"  placeholder="Nombre">
                 </div>
                 <div class="col-xs-6">
-                    <input type="text" value="{{ $fullname[1] }}" class="inputs inputsLight form-control" disabled="disabled" id="" placeholder="Apellido">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                    <input type="text" value="{{ $asesor->cedula }}" class="inputs inputsLight form-control" disabled="disabled" id="" placeholder="Cédula de Identidad">
-                </div>
-                <div class="col-xs-6">
-                    <input type="text" value="{{$asesor->telefono}}" class="inputs inputsLight form-control" disabled="disabled" id="" placeholder="Telefóno">
+                    <input type="text" value="{{ $fullname[1] }}" class="inputs inputsLight form-control" disabled="disabled"  placeholder="Apellido">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6">
-                    <input type="text" disabled="disabled" value="{{$asesor->celular}}" class="inputs inputsLight form-control" id="" placeholder="Celular">
+                    <input type="text" value="{{ $asesor->cedula }}" class="inputs inputsLight form-control" disabled="disabled"  placeholder="Cédula de Identidad">
+                </div>
+                <div class="col-xs-6">
+                    <input type="text" value="{{$asesor->telefono}}" class="inputs inputsLight form-control" disabled="disabled"  placeholder="Telefóno">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6">
+                    <input type="text" disabled="disabled" value="{{$asesor->celular}}" class="inputs inputsLight form-control"  placeholder="Celular">
                 </div>
                 <div class="col-xs-6">
                     <div class="styled-input-single">
@@ -64,7 +64,7 @@
                         <input type="password" class="inputs inputsLight form-control" id="pass" name="pass" value="{{ $password }}" placeholder="Contraseña">
                     </div>
                     <div class="col-xs-6">
-                        <input type="password" class="inputs inputsLight form-control" id="repeatPass" value="{{ $password }}"placeholder="Repetir Contraseña">
+                        <input type="password" class="inputs inputsLight form-control" id="repeatPass" name="repeatPass" value="{{ $password }}"placeholder="Repetir Contraseña">
                     </div>
                 </div>
                 <div class="row">
@@ -83,14 +83,14 @@
                         <input type="text" class="inputs inputsLight form-control" id="addressUser" name="addressUser" value="{{$usuario->address_user}}" placeholder="Dirección">
                     </div>
                     <div class="col-xs-6">
-                        <input type="text" class="inputs inputsLight form-control" id="rifUser" name="rifUser" value="{{ $usuario->rif_user }}" placeholder="Rif">
+                        <input type="text" class="inputs inputsLight form-control" id="rifUser" name="rifUser" value="{{ $usuario->rif_user }}" placeholder="Rif (V123456789)">
                     </div>
                 </div>
                  <div class="row">
                     <div class="col-xs-12">
 
                         <select class="inputs inputsLight form-control" id="rolUser" name="rolUser" >
-                            <option>Seleccione un perfil</option>
+                            <option value="">Seleccione un perfil</option>
                             @foreach($roles as $rol)
                               @if($rol->id == $usuario->rol_id)
                                 <option value="{{$usuario->rol_id}}"selected>{{$rol->nombre}}</option>
@@ -114,10 +114,10 @@
                 </div>
                 <div class="row">
                     <div class="col-xs-6">
-                        <input type="text" class="inputs inputsLight form-control" id="pass" name="pass" placeholder="Contraseña">
+                        <input type="password" class="inputs inputsLight form-control" id="pass" name="pass" placeholder="Contraseña">
                     </div>
                     <div class="col-xs-6">
-                        <input type="text" class="inputs inputsLight form-control" id="repeatPass" placeholder="Repetir Contraseña">
+                        <input type="password" class="inputs inputsLight form-control" id="repeatPass" name="repeatPass" placeholder="Repetir Contraseña">
                     </div>
                 </div>
                 <div class="row">
@@ -136,14 +136,14 @@
                         <input type="text" class="inputs inputsLight form-control" id="addressUser" name="addressUser" placeholder="Dirección">
                     </div>
                     <div class="col-xs-6">
-                        <input type="text" class="inputs inputsLight form-control" id="rifUser" name="rifUser" placeholder="Rif">
+                        <input type="text" class="inputs inputsLight form-control" id="rifUser" name="rifUser" placeholder="Rif (V123456789)">
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
                         <select class="inputs inputsLight form-control" id="rolUser" name="rolUser">
-                            <option>Seleccione un perfil</option>
+                            <option value="">Seleccione un perfil</option>
                             @foreach($roles as $rol)
                               <option value="{{$rol->id}}">{{$rol->nombre}}</option>
                             @endforeach
