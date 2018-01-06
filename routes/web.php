@@ -24,7 +24,7 @@ Route::get('/proyecto/{id}', ['as' => 'detalle_proyecto', 'uses' => 'WebControll
 
                                         //ADMIN
 // LOGIN
-Route::get('/admin/login', ['as' => 'login', 'uses' => 'Admin\AdminController@Login']);
+Route::any('/admin/login', ['as' => 'login', 'uses' => 'Admin\AdminController@Login']);
 Route::any('/admin/ingresar', ['as' => 'login-ingresar', 'uses' => 'Admin\AdminController@ingresar']);
 
 

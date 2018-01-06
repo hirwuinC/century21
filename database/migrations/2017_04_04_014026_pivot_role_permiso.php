@@ -13,7 +13,7 @@ class PivotRolePermiso extends Migration
      */
     public function up()
     {
-      Schema::create('permiso_role', function (Blueprint $table) {
+      Schema::create('permisoRole', function (Blueprint $table) {
           $table->increments('id');
           $table->integer('permiso_id');
           $table->integer('role_id');
@@ -27,6 +27,6 @@ class PivotRolePermiso extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('permiso_role');
+        Schema::dropIfExists('permisoRole');
     }
 }
