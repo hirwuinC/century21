@@ -10,33 +10,24 @@
                         </div>
                     </div>
                 </li>
-                <li class="active"><a href="">Inicio</a></li>
-                <li><a href="{{ route('perfil') }}">Perfil</a></li>
+
+                @foreach($permisos as $permiso)
                 <li>
-                    <a href="#" data-toggle="collapse" data-target="#toggleDemo" data-parent="#sidenav01" class="collapsed">
-                        Inmuebles <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="toggleDemo" style="height: 0px;">
+                  <a href="{{$permiso->url}}" data-toggle="{{$permiso->id_input}}" data-target="{{$permiso->target}}" data-parent="#sidenav01" class="{{$permiso->class_input}}">
+                      {{$permiso->nombre}} <span class="caret"></span>
+                  </a>
+                  <div class="{{$permiso->id_input}}" id="{{$permiso->padre}}" style="height: 0px;">
                         <ul class="nav nav-list">
-                            <li><a href="{{ route('admin_lista_inmuebles') }}">lista de inmuebles</a></li>
-                            <li><a href="{{ route('crear-inmueble-1') }}">Crear inmuebles</a></li>
+                          @foreach($submodulos as $submodulo)
+                            @if($permiso->id == $submodulo->padre)
+                              <li><a href="{{ $submodulo->url }}">{{$submodulo->nombre}}</a></li>
+                            @endif
+                          @endforeach
                         </ul>
-                    </div>
+                  </div>
                 </li>
-                <li>
-                    <a href="#" data-toggle="collapse" data-target="#toggleDemo2" data-parent="#sidenav01" class="collapsed">
-                        proyectos <span class="caret"></span>
-                    </a>
-                    <div class="collapse" id="toggleDemo2" style="height: 0px;">
-                        <ul class="nav nav-list">
-                            <li><a href="{{ route('admin_lista_inmuebles') }}">Lista de proyectos</a></li>
-                            <li><a href="{{route('crear-inmueble-1')}}">Crear Proyecto</a></li>
-                        </ul>
-                    </div>
-                </li>
-                <li><a href="#"></span>estadisticas</a></li>
-                <li><a href="#">clientes</a> </li>
-                <li><a href="{{ route('lista-agente') }}">Asesores</a></li>
+                @endforeach
+
             </ul>
         </div><!--/.nav-collapse -->
     </div>

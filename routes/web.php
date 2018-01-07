@@ -34,7 +34,7 @@ Route::get('/admin/inmueble/{id}', ['as' => 'admin_detalle_inmueble', 'uses' => 
 Route::get('/admin/crear-inmueble-1', ['as' => 'crear-inmueble-1', 'uses' => 'Admin\AdminController@CrearInmueble1']);
 Route::get('/admin/crear-inmueble-2', ['as' => 'crear-inmueble-2', 'uses' => 'Admin\AdminController@CrearInmueble2']);
 
-Route::get('/admin/perfil', ['as' => 'perfil', 'uses' => 'Admin\AdminController@Perfil']);
+
 
 //Asesores
 Route::get('/admin/crear-usuario/{id}', ['as' => 'crear-agente', 'uses' => 'Admin\AsesorController@CrearUsuarioAsesor']);
@@ -42,3 +42,7 @@ Route::get('/admin/agente', ['as' => 'lista-agente', 'uses' => 'Admin\AsesorCont
 Route::get('/admin/buscarasesor',['as'=>'prueba','uses'=>'Admin\AsesorController@searchAsesor'] );
 Route::any('/admin/buscaruser',['as'=>'buscar_user','uses'=>'Admin\AsesorController@guardarEditarUsuario']);
 Route::get('/admin/prueba',['as'=>'pruebaAsesor','uses'=>'Admin\AsesorController@pruebaAsesor'] );
+
+//Perfil
+Route::get('/admin/perfil', ['as' => 'perfil', 'uses' => 'Admin\PerfilController@Perfil']);
+Route::any('/admin/actualizarPerfil', ['as' => 'updatePerfil', 'uses' => 'Admin\PerfilController@actualizarPerfil']);

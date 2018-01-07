@@ -8,7 +8,6 @@
 		<title>Century 21 Venezuela</title>
 		<meta name="description" content="century21">
 		<meta name="author" content="rjps.designer@gmail.com">
-
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- Favicon -->

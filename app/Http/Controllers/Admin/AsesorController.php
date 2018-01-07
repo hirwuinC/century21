@@ -19,7 +19,7 @@ class AsesorController extends Controller
       else{
         $asesores= Agente::paginate(20);
       }
-    return view('admin.lista_agentes',compact('asesores'));
+    return view('admin.lista_agentes',$this->cargarSidebar(),compact('asesores'));
     }
 
     public function CrearUsuarioAsesor($id){
@@ -30,7 +30,7 @@ class AsesorController extends Controller
     	$asesor=Agente::where('id',$id)->first();
     	$fullname=explode(" ", $asesor->fullName);
       $roles=Role::all();
-      return view('admin.crear_agente',compact('asesor','fullname','usuario','roles','password'));
+      return view('admin.crear_agente',$this->cargarSidebar(),compact('asesor','fullname','usuario','roles','password'));
 
     }
 

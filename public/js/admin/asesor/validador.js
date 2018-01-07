@@ -105,7 +105,6 @@ $(document).ready(function(){
 	});
 	$('.file-input').change(function(){
     var curElement = $(this).parent().parent().parent().find('.image');
-    console.log(curElement);
     var reader = new FileReader();
 
     reader.onload = function (e) {

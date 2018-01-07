@@ -6,6 +6,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Session;
+use App\Http\Controllers\Controller;
 use App\Models\Agente;
 use App\Models\User;
 use App\Models\Role;
@@ -29,20 +30,20 @@ class AdminController extends Controller{
                                           ->select('permisos.*')
                                           ->where('permisoRole.role_id',$consulta->rol_id)
                                           ->get();
+        $submodulos=DB::table('submoduloRole')->join('submodulos', 'submoduloRole.submodulo_id', '=', 'submodulos.id')
+                                          ->select('submodulos.*')
+                                          ->where('submoduloRole.role_id',$consulta->rol_id)
+                                          ->get();
+        Session::put('asesor',$consulta);
         Session::put('usuario',$usuario);
         Session::put('pass',$pass);
         Session::put('permisos',$permisos);
+        Session::put('submodulos',$submodulos);
         $respuesta = [1,$consulta->name];
       }
     }
     return $respuesta;
   }
-
-
-
-
-
-
     public function Dasboard()
     {
         return redirect(route('login'));
@@ -50,38 +51,32 @@ class AdminController extends Controller{
 
     public function ListaInmuebles()
     {
-        $permisos=Session::get('permisos');
-        return view('/admin/lista_inmuebles',compact('permisos'));
+        return view('/admin/lista_inmuebles',$this->cargarSidebar());
     }
 
     public function CrearInmueble1()
     {
-        return view('/admin/crear_inmueble_1');
+        return view('/admin/crear_inmueble_1',$this->cargarSidebar());
     }
 
     public function CrearInmueble2()
     {
-        return view('/admin/crear_inmueble_2');
+        return view('/admin/crear_inmueble_2',$this->cargarSidebar());
     }
 
     public function CrearAgente()
     {
-        return view('/admin/crear_agente');
+        return view('/admin/crear_agente',$this->cargarSidebar());
     }
-
-    public function Perfil()
-    {
-        return view('/admin/perfil');
-    }
-
+    
     public function DetalleInmueble()
     {
-        return view('/admin/detalle_inmueble');
+        return view('/admin/detalle_inmueble',$this->cargarSidebar());
     }
 
     public function ListarAgente()
     {
-        return view('/admin/lista_agentes');
+        return view('/admin/lista_agentes',$this->cargarSidebar());
     }
 
 
