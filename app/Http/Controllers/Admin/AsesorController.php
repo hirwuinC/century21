@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Agente;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Imagen;
 use Illuminate\Support\Facades\Crypt;
 
 class AsesorController extends Controller
@@ -28,9 +29,10 @@ class AsesorController extends Controller
           $password=Crypt::decryptString($usuario->password);
       }
     	$asesor=Agente::where('id',$id)->first();
+      $avatar=Imagen::where('id',$asesor->imagen_id)->first();
     	$fullname=explode(" ", $asesor->fullName);
       $roles=Role::all();
-      return view('admin.crear_agente',$this->cargarSidebar(),compact('asesor','fullname','usuario','roles','password'));
+      return view('admin.crear_agente',$this->cargarSidebar(),compact('asesor','fullname','usuario','roles','password','avatar'));
 
     }
 
@@ -55,6 +57,12 @@ class AsesorController extends Controller
       $respuesta = 0;
       if(count($userExist)!=0){
         if (count($cNombre)==0 && count($cEmail)==0  && count($cRif)==0) {
+          if($file) {
+            $extension = strtolower($file->getClientOriginalExtension());
+            $fileRename = uniqid().'.'.$extension;
+            $path = "asesores";
+            $file->move($path,$fileRename);
+          }
           User::where('agente_id',$asesorId)->update(['name' => $usuario,
                                                       'email' => $email,
                                                       'password'=> $password,
@@ -96,6 +104,12 @@ class AsesorController extends Controller
 
       }
       elseif(count($cNombre)==0 && count($cEmail)==0  && count($cRif)==0){
+        if($file) {
+          $extension = strtolower($file->getClientOriginalExtension());
+          $fileRename = uniqid().'.'.$extension;
+          $path = "asesores";
+          $file->move($path,$fileRename);
+        }
         $objuser->name = $usuario;
         $objuser->email = $email;
         $objuser->password = $password;

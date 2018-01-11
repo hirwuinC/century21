@@ -112,4 +112,16 @@ $(document).ready(function(){
     };
     reader.readAsDataURL(this.files[0]);
 	});
+	$('body').on('click','#buttonReset',function(){
+		$('#checkbox-example-two').attr('checked',false);
+		$('#user').val('');
+		$('#emailUser').val('');
+		$('#pass').val('');
+		$('#repeatPass').val('');
+		$('#dataEntry').val('');
+		$('#dateBirth').val('');
+		$('#addressUser').val('');
+		$('#rifUser').val('');
+		$("#rolUser option[value='']").attr('selected',true);
+	});
 });

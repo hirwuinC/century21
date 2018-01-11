@@ -48,7 +48,7 @@ $(document).ready(function(){
           processData: false
       })
       .done(function(res){
-        if (res==1) {
+				if (res==1) {
           swal(
             'Listo!!',
             'Tu usuario ha sido actualizado, los cambios seran aplicados una vez inicies sesión nuevamente',
@@ -66,5 +66,12 @@ $(document).ready(function(){
         curElement.attr('src', e.target.result);
     };
     reader.readAsDataURL(this.files[0]);
+	});
+
+	$('body').on('click','#buttonReset',function(){
+		$('#pass').val('');
+		$('#repeatPass').val('');
+		$('#dateBirth').val('');
+		$('#addressUser').val('');
 	});
 });

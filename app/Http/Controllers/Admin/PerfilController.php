@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Agente;
 use App\Models\User;
 use App\Models\Role;
+use App\Models\Imagen;
+
 use Illuminate\Support\Facades\DB;
 
 class PerfilController extends Controller{
@@ -18,10 +20,11 @@ class PerfilController extends Controller{
     $password=Session::get('pass');
     $usuario=Session::get('asesor');
     $asesor=Agente::where('id',$usuario->agente_id)->first();
+    $avatar=Imagen::where('id',$asesor->imagen_id)->first();
     $fullname=explode(" ", $asesor->fullName);
     $roles=Role::all();
     $respuesta=0;
-    return view('/admin/perfil',$this->cargarSidebar(),compact('password','asesor','fullname','roles'));
+    return view('/admin/perfil',$this->cargarSidebar(),compact('password','asesor','fullname','roles','avatar'));
   }
 
   public function actualizarPerfil(){
@@ -30,13 +33,18 @@ class PerfilController extends Controller{
     $address = Request::get('addressUser');
     $fechaNac = Request::get('dateBirth');
     $asesorId= Request::get('argumento');
+
+    if($file) {
+      $extension = strtolower($file->getClientOriginalExtension());
+      $fileRename = uniqid().'.'.$extension;
+      $path = "asesores";
+      $file->move($path,$fileRename);
+    }
     User::where('agente_id',$asesorId)->update([
                                                 'password'=> $password,
                                                 'address_user'=> $address,
                                                 'date_birth' => $fechaNac,
                                               ]);
-    $nombre=$file->getClientOriginalName();
-    \Storage::disk('local')->put($nombre,  \File::get($file));
     $respuesta=1;
     return $respuesta;
   }

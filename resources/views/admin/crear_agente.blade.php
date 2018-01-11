@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-xs-3 containers">
             <div class="containertAvatar">
-                <img class="image" src="{{ asset('images/img-avatar.jpg')}}" alt="">
+                <img class="image" src="{{ asset($avatar->src)}}" alt="">
                 <div class="editAvatar">
                   <button class="file-upload">
                     <input type="file" name="image" accept="image/png, .jpeg, .jpg, image/gif" class="file-input"><i class="fa fa-camera" aria-hidden="true"></i>
@@ -155,7 +155,7 @@
                 <div class="row">
                     <div class="buttons">
                         <div class="col-xs-3 col-xs-offset-6">
-                            <button type="button" class="btnGrayHight">LIMPIAR</button>
+                            <button type="button" id='buttonReset' class="btnGrayHight">LIMPIAR</button>
                         </div>
                         <div class="col-xs-3">
                             <button type="submit" id="buttonCreate" class="btnYellow">ENVIAR</button>
