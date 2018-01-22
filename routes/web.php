@@ -28,11 +28,9 @@ Route::any('/admin/login', ['as' => 'login', 'uses' => 'Admin\AdminController@Lo
 Route::any('/admin/ingresar', ['as' => 'login-ingresar', 'uses' => 'Admin\AdminController@ingresar']);
 
 
-Route::get('/admin', ['as' => 'dashboard', 'uses' => 'Admin\AdminController@ListaInmuebles']);
-Route::get('/admin/inmuebles', ['as' => 'admin_lista_inmuebles', 'uses' => 'Admin\AdminController@ListaInmuebles']);
-Route::get('/admin/inmueble/{id}', ['as' => 'admin_detalle_inmueble', 'uses' => 'Admin\AdminController@DetalleInmueble']);
-Route::get('/admin/crear-inmueble-1', ['as' => 'crear-inmueble-1', 'uses' => 'Admin\AdminController@CrearInmueble1']);
-Route::get('/admin/crear-inmueble-2', ['as' => 'crear-inmueble-2', 'uses' => 'Admin\AdminController@CrearInmueble2']);
+
+
+
 
 
 
@@ -46,3 +44,12 @@ Route::get('/admin/prueba',['as'=>'pruebaAsesor','uses'=>'Admin\AsesorController
 //Perfil
 Route::get('/admin/perfil', ['as' => 'perfil', 'uses' => 'Admin\PerfilController@Perfil']);
 Route::any('/admin/actualizarPerfil', ['as' => 'updatePerfil', 'uses' => 'Admin\PerfilController@actualizarPerfil']);
+
+//inmuebles
+Route::get('/admin', ['as' => 'dashboard', 'uses' => 'Admin\PropiedadController@ListaInmuebles']);
+Route::get('/admin/inmuebles', ['as' => 'admin_lista_inmuebles', 'uses' => 'Admin\PropiedadController@ListaInmuebles']);
+Route::get('/admin/inmueble/{id}', ['as' => 'admin_detalle_inmueble', 'uses' => 'Admin\PropiedadController@DetalleInmueble']);
+Route::get('/admin/crear-inmueble-1', ['as' => 'crear-inmueble-1', 'uses' => 'Admin\PropiedadController@CrearInmueble1']);
+Route::get('/admin/crear-inmueble-2', ['as' => 'crear-inmueble-2', 'uses' => 'Admin\PropiedadController@CrearInmueble2']);
+Route::any('/admin/listarCiudades', ['as' => 'listarCiudades', 'uses' => 'Admin\PropiedadController@listarCiudades']);
+Route::any('/admin/cargarPropiedad', ['as' => 'cargarPropiedad', 'uses' => 'Admin\PropiedadController@cargarPropiedad']);

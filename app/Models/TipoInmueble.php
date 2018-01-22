@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Ciudad extends Model
+class TipoInmueble extends Model
 {
-    protected $table='ciudades';
+    protected $table='tipoInmueble';
     public $timestamps = false;
 }

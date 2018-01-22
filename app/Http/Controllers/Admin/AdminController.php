@@ -49,29 +49,9 @@ class AdminController extends Controller{
         return redirect(route('login'));
     }
 
-    public function ListaInmuebles()
-    {
-        return view('/admin/lista_inmuebles',$this->cargarSidebar());
-    }
-
-    public function CrearInmueble1()
-    {
-        return view('/admin/crear_inmueble_1',$this->cargarSidebar());
-    }
-
-    public function CrearInmueble2()
-    {
-        return view('/admin/crear_inmueble_2',$this->cargarSidebar());
-    }
-
     public function CrearAgente()
     {
         return view('/admin/crear_agente',$this->cargarSidebar());
-    }
-    
-    public function DetalleInmueble()
-    {
-        return view('/admin/detalle_inmueble',$this->cargarSidebar());
     }
 
     public function ListarAgente()

@@ -149,7 +149,26 @@ hr {
 .circleGreen {
   background-color: #00a651;
 }
-
+.addPicCont{
+  padding-left:50px;
+  padding-top: 45px;
+}
+.addPic {
+  padding-top: 7px;
+  padding-left: 13px;
+  height: 40px;
+  width: 40px;
+  border-radius: 50%;
+  display: block;
+  font-size: 20px;
+  cursor: pointer;
+  color: #333333;
+  background-color: #8b8b8b;
+}
+.addPic:hover {
+  color: #8b8b8b;
+  background-color: #ededee;
+}
 .btnGeneral, .btnYellow, .btnGray, .btnGrayHight, .btnGraySmall, .btnAcction, .btnInactive {
   margin: 20px 0;
   border: none;

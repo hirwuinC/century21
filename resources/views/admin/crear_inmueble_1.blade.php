@@ -3,104 +3,312 @@
 @section('content')
 
 <h2 class="titleSection">información básica</h2>
-<form action="" class="agenteForm">
+<form enctype="multipart/form-data" name="propietyCreate" id="propietyCreate" class="agenteForm">
+  {{csrf_field()}}
+@if(count($datos)==0)
+    <input type="hidden" id="positionPropiety" name="positionPropiety" value=''>
     <div class="row">
         <div class="col-xs-12">
             <div class="row">
                 <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Nombre del inmueble">
+                    <input type="text" class="inputs inputsLight form-control" name="namePropiety" id="namePropiety" value="" placeholder="Nombre del inmueble">
                 </div>
                 <div class="col-xs-6">
-                    <select class="" name="">
-                        <option value="">Tipo de inmueble</option>
-                        <option value="TW">1</option>
-                        <option value="TH">2</option>
-                        <option value="FO">3</option>
+                    <select class="" name="typePropiety" id="typePropiety">
+                        <option value="" selected >Tipo de inmueble</option>
+                        @foreach ($tiposIn as $tipo)
+
+                            <option value="{{ $tipo->id }}">{{ $tipo->nombre}}</option>
+
+                        @endforeach
                     </select>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Dirección del inmueble">
+                  <select id="estatePropiety" name="estatePropiety">
+                      <option value="" selected >Estado</option>
+                      @foreach($estados as $estado)
+                      <option value="{{$estado->id}}">{{$estado->nombre}}</option>
+                      @endforeach
+                  </select>
                 </div>
                 <div class="col-xs-6">
-                    <select class="" name="">
-                        <option value="">Tipo de negociación</option>
-                        <option value="TW">Venta</option>
-                        <option value="TH">Alquiler</option>
+                    <select id="cityPropiety" name="cityPropiety">
+                        <option value="">Ciudad</option>
+                        <option class="opcion" value""> - </option>
                     </select>
                 </div>
             </div>
-            <div class="row">
+            <div class="row" style="padding-top:30px">
                 <div class="col-xs-12">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Dirección del inmueble (Mapa)">
+                    <input type="text" class="inputs inputsLight form-control" name="addressPropiety" id="addressPropiety" placeholder="Dirección del inmueble (Incluir ubicacion en el mapa)">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <div class="googleMap">
-                        <iframe style="width: 100%" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6660.605222999498!2d-70.60553820000001!3d-33.415354099999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2scl!4v1508169047050" height="450" frameborder="0" allowfullscreen=""></iframe>
+                    <div id="map" class="googleMap">
                     </div>
                 </div>
             </div>
             <div class="row">
-                <div class="col-xs-4">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Precio">
+                <div class="col-xs-6">
+                    <input type="number" class="inputs inputsLight form-control" name="pricePropiety" id="pricePropiety" placeholder="Precio">
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                     <ul class="viewRadio">
                         <li><h6>Visible</h6></li>
                         <li>
                             <div class="styled-input-single">
-                                <input type="radio" name="fieldset-1" id="radio-example-one" />
+                                <input type="radio" name="visiblePrice" value="1" id="radio-example-one" checked="checked"/>
                                 <label for="radio-example-one">Si</label>
                             </div>
                         </li>
                         <li>
                             <div class="styled-input-single">
-                                <input type="radio" name="fieldset-1" id="radio-example-two" />
+                                <input type="radio" name="visiblePrice" value="0" id="radio-example-two" />
                                 <label for="radio-example-two">No</label>
                             </div>
                         </li>
                     </ul>
                 </div>
-                <div class="col-xs-4">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Mtr2">
-                </div>
+            </div>
+            <div class="row">
+              <div class="col-xs-6">
+                  <input type="number" class="inputs inputsLight form-control" name="constructionPropiety" id="constructionPropiety" placeholder="Construcción (Mtr2)">
+              </div>
+              <div class="col-xs-6">
+                  <input type="number" class="inputs inputsLight form-control" name="areaPropiety" id="areaPropiety" placeholder="Terreno (Mtr2)">
+              </div>
             </div>
             <div class="row">
                 <div class="col-xs-4">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Habitaciones">
+                    <input type="number" class="inputs inputsLight form-control" id="roomPropiety"name="roomPropiety" placeholder="Habitaciones">
                 </div>
                 <div class="col-xs-4">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Baños">
+                    <input type="number" class="inputs inputsLight form-control" id="batroomPropiety" name="batroomPropiety" placeholder="Baños">
                 </div>
                 <div class="col-xs-4">
-                    <input type="text" class="inputs inputsLight form-control" id="" placeholder="Estacionamiento">
+                    <input type="number" class="inputs inputsLight form-control" id="parkingPropiety" name="parkingPropiety" placeholder="Estacionamiento (Cantidad de Puestos)">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <textarea class="inputs inputsLight" placeholder="Descripción del inmueble"></textarea>
+                    <textarea class="inputs inputsLight" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble"></textarea>
                 </div>
             </div>
             <div class="row">
-            <div class="buttons">
-                <div class="col-xs-3 right">
-                    <button id="redirectButtomAction" type="button" class="btnYellow">Siguiente</button>
+                <div class="col-xs-6">
+                  <select name="asesorPropiety" id="asesorPropiety">
+                      <option value="" selected >Asesor</option>
+                      @foreach($asesores as $asesor)
+                      <option value="{{$asesor->id}}">{{$asesor->fullName}}</option>
+                      @endforeach
+                  </select>
+                </div>
+                <div class="col-xs-6">
+                  <select name="typeBussisness" id="typeBussisness">
+                      <option value="" selected >Tipo de Negociación</option>
+                      <option value="alquiler">Alquiler</option>
+                      <option value="venta">Venta</option>
+                  </select>
                 </div>
             </div>
+@else
+<input type="hidden" id="positionPropiety" name="positionPropiety" value='{{$datos["posicionMapa"]}}'>
+<div class="row">
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-6">
+                <input type="text" class="inputs inputsLight form-control" name="namePropiety" id="namePropiety" value='{{$datos["nombre"]}}' placeholder="Nombre del inmueble">
+            </div>
+            <div class="col-xs-6">
+                <select class="" name="typePropiety" id="typePropiety">
+                    <option value="" >Tipo de inmueble</option>
+                    @foreach ($tiposIn as $tipo)
+                      @if($tipo->id == $datos["tipoPropiedad"])
+                        <option value='{{$datos["tipoPropiedad"]}}' selected>{{ $tipo->nombre}}</option>
+                      @else
+                        <option value='{{ $tipo->id }}'>{{ $tipo->nombre }}</option>
+                      @endif
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+              <select id="estatePropiety" name="estatePropiety">
+                  <option value="" >Estado</option>
+                  @foreach($estados as $estado)
+                    @if($estado->id == $datos["estado"])
+                      <option value='{{$datos["estado"]}}' selected>{{$estado->nombre}}</option>
+                    @else
+                      <option value='{{ $estado->id }}'>{{$estado->nombre}}</option>
+                    @endif
+                  @endforeach
+              </select>
+            </div>
+            <div class="col-xs-6">
+                <select id="cityPropiety" name="cityPropiety">
+                    <option value="">Ciudad</option>
+                    @foreach($consulta as $ciudad)
+                      @if($ciudad->id == $datos["ciudad"])
+                        <option class="opcion" value='{{$datos["ciudad"]}}' selected> {{$ciudad->nombre}} </option>
+                      @else
+                        <option class="opcion" value='{{$ciudad->id}}'> {{$ciudad->nombre}} </option>
+                      @endif
+                    @endforeach
+                </select>
+            </div>
+        </div>
+        <div class="row" style="padding-top:30px">
+            <div class="col-xs-12">
+                <input type="text" class="inputs inputsLight form-control" value='{{$datos["direccion"]}}' name="addressPropiety" id="addressPropiety" placeholder="Dirección del inmueble (Incluir ubicacion en el mapa)">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <div id="map" class="googleMap">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+                <input type="number" class="inputs inputsLight form-control" value='{{$datos["precio"]}}' name="pricePropiety" id="pricePropiety" placeholder="Precio">
+            </div>
+            <div class="col-xs-6">
+                <ul class="viewRadio">
+                    <li><h6>Visible</h6></li>
+                    @if($datos["visible"]==1)
+                      <li>
+                          <div class="styled-input-single">
+                              <input type="radio" name="visiblePrice" value="1" id="radio-example-one" checked="checked"/>
+                              <label for="radio-example-one">Si</label>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="styled-input-single">
+                              <input type="radio" name="visiblePrice" value="0" id="radio-example-two" />
+                              <label for="radio-example-two">No</label>
+                          </div>
+                      </li>
+                    @else
+                      <li>
+                          <div class="styled-input-single">
+                              <input type="radio" name="visiblePrice" value="1" id="radio-example-one" />
+                              <label for="radio-example-one">Si</label>
+                          </div>
+                      </li>
+                      <li>
+                          <div class="styled-input-single">
+                              <input type="radio" name="visiblePrice" value="0" id="radio-example-two" checked="checked"/>
+                              <label for="radio-example-two">No</label>
+                          </div>
+                      </li>
+                    @endif
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+          <div class="col-xs-6">
+              <input type="number" class="inputs inputsLight form-control" value='{{$datos["construccion"]}}' name="constructionPropiety" id="constructionPropiety" placeholder="Construcción (Mtr2)">
+          </div>
+          <div class="col-xs-6">
+              <input type="number" class="inputs inputsLight form-control" value='{{$datos["terreno"]}}' name="areaPropiety" id="areaPropiety" placeholder="Terreno (Mtr2)">
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <input type="number" class="inputs inputsLight form-control" value='{{$datos["habitacion"]}}' id="roomPropiety"name="roomPropiety" placeholder="Habitaciones">
+            </div>
+            <div class="col-xs-4">
+                <input type="number" class="inputs inputsLight form-control" value='{{$datos["bano"]}}' id="batroomPropiety" name="batroomPropiety" placeholder="Baños">
+            </div>
+            <div class="col-xs-4">
+                <input type="number" class="inputs inputsLight form-control" value='{{$datos["estacionamiento"]}}' id="parkingPropiety" name="parkingPropiety" placeholder="Estacionamiento (Cantidad de Puestos)">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12">
+                <textarea class="inputs inputsLight" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble">{{$datos["descripcion"]}}</textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-6">
+              <select name="asesorPropiety" id="asesorPropiety">
+                  <option value="">Asesor</option>
+                  @foreach($asesores as $asesor)
+                    @if($asesor->id==$datos["asesor"])
+                      <option value='{{$datos["asesor"]}}' selected>{{$asesor->fullName}}</option>
+                    @else
+                      <option value='{{$asesor->id}}'>{{$asesor->fullName}}</option>
+                    @endif
+                  @endforeach
+              </select>
+            </div>
+            <div class="col-xs-6">
+              <select name="typeBussisness" id="typeBussisness">
+                  <option value="">Tipo de Negociación</option>
+                  @if($datos["tipoNegocio"]=="alquiler")
+                    <option value="alquiler" selected>Alquiler</option>
+                    <option value="venta">Venta</option>
+                  @else
+                    <option value="alquiler">Alquiler</option>
+                    <option value="venta" selected>Venta</option>
+                  @endif
+              </select>
+            </div>
+        </div>
+@endif
+            <div class="row">
+              <div class="buttons">
+                  <div class="col-xs-3 right">
+                      <button id="redirectButtomAction" type="submit" class="btnYellow">Siguiente</button>
+                  </div>
+              </div>
+            </div>
+
         </div>
     </div>
 </form>
 @endsection
 
 @section('js')
-    <script>
-        var redirectButtomUrl = "{{ route('crear-inmueble-2')}}";
-        $('#redirectButtomAction').on('click',function(){
-            console.log('click');
-            window.location.href = redirectButtomUrl;
-        })
-    </script>
+<script>
+//////////////////////////////////////// Funcionalidad del mapa ////////////////////////////////////////////////////
+  function initMap() {
+    var oficina = {lat: 10.4745107, lng: -66.8626197};
+    var propiedad = $('#positionPropiety').val();
+    var ubicacion = oficina;
+    if (propiedad!="") {
+      var p=JSON.parse(propiedad);
+      console.log(p[0]);
+      var ubicacion=p[0];
+    }
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: ubicacion
+    });
+    var marker = new google.maps.Marker({
+      position: ubicacion,
+      map: map,
+      draggable: true,
+      title: 'Ubica el inmueble'
+    });
+    google.maps.event.addListener(marker, 'dragend', function(){
+      capturarMarcador(marker);
+    });
+
+  }
+  function capturarMarcador(marker) {
+    var markerLatLng = marker.getPosition();
+    var position=JSON.stringify([{lat:markerLatLng.lat(),lng:markerLatLng.lng()}]);
+    $('#positionPropiety').val(position);
+  }
+</script>
+<script type="text/javascript" src="{{ asset('js/admin/propiedades/nuevoinmueble.js') }}"></script>
+    <script async defer
+   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG6RQhkoAPuKs-2VSCbNisZ0NQt5Qf3Co&callback=initMap">
+   </script>
+
 @endSection

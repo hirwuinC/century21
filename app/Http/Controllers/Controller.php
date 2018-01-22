@@ -8,7 +8,9 @@ use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Agente;
 use App\Models\User;
+use App\Models\Ciudad;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Request;
 
 class Controller extends BaseController{
 
@@ -19,6 +21,11 @@ class Controller extends BaseController{
     $permisos=Session::get('permisos');
     $submodulos=Session::get('submodulos');
     return compact('permisos','submodulos','userall');
+  }
+
+  public function cargarCiudades($estado){
+    $ciudades=Ciudad::where('estado_id',$estado)->get();
+    return compact('ciudades');
   }
 
 }

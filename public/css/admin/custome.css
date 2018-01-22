@@ -2,7 +2,7 @@
 .easy-autocomplete-container{
 	z-index: 999;
 }
-input.file-input {
+input.file-input{
   position: absolute;
   top: 0;
   right: 0;
@@ -13,4 +13,10 @@ input.file-input {
   opacity: 0;
   filter: alpha(opacity=0);
   height:100%;
+	width:100%;
+}
+input:
+#map{
+	width: 100%;
+	height: 450px;
 }

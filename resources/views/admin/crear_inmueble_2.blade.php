@@ -1,17 +1,18 @@
 @extends('admin/base_admin')
 
 @section('content')
-    <h2 class="titleSection">inmuebles - <span>Agergar o quitar imágenes</span></h2>
+    <h2 class="titleSection">inmuebles - <span>Agregar o quitar imágenes</span></h2>
     <section>
-        <div class="row">
-            @for( $i = 0; $i < 3 ; $i++)
-                @component('admin/partials/uploadImagen')
-                @endComponent
-            @endfor
-            @for( $i = 0; $i < 5 ; $i++)
-                @component('admin/partials/uploadImagen2')
-                @endComponent
-            @endfor                       
+        <div class="row nueva">
+          @component('admin/partials/uploadImagen2')
+          @endComponent
+          <div class="col-sm-3">
+            <div class="addPicCont">
+                <a class="addPic" id="addPic" href="#">
+                    <i class="fa fa-plus" aria-hidden="true"></i>
+                </a>
+            </div>
+          </div>
         </div>
         <div class="row">
             <div class="buttons">
@@ -27,6 +28,7 @@
 @endsection
 
 @section('js')
+<script type="text/javascript" src="{{ asset('js/admin/propiedades/nuevoinmueble.js') }}"></script>
 <script>
     var redirectButtomUrl1 = "{{ route('crear-inmueble-1') }}";
     var redirectButtomUrl2 = "{{ route('admin_lista_inmuebles') }}";
@@ -35,6 +37,6 @@
     })
     $('#redirectButtomAction2').on('click',function(){
         window.location.href = redirectButtomUrl2;
-    })    
+    })
 </script>
 @endSection
