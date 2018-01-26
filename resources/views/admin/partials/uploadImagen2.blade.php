@@ -1,5 +1,5 @@
 
-<div class="col-sm-3 thumbPropiety" id="img">
+<div class="col-sm-3 thumbPropiety">
     <div class="thumbProperty">
         <div class="contentTop">
             <img class="imgInmueble" src="{{ asset('images/img-demo-images.jpg')}}" alt="">
@@ -10,7 +10,7 @@
                     <div class="col-xs-12">
                         <div class="col-xs-6">
                             <button type="button" class="btnAcction btnCargar">
-                                <input type="file" name="image[]" accept="image/png, .jpeg, .jpg, image/gif" class="file-input">Cargar
+                                <input type="file" id="carga" name="image[]" multiple accept="image/png, .jpeg, .jpg, image/gif" class="file-input">Cargar
                             </button>
                         </div>
                         <div class="col-xs-6">

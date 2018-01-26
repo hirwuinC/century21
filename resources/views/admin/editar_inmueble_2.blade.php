@@ -30,9 +30,9 @@
 @endsection
 
 @section('js')
-<script type="text/javascript" src="{{ asset('js/admin/propiedades/nuevoinmueble.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/admin/propiedades/editarinmueble.js') }}"></script>
 <script>
-    var redirectButtomUrl1 = "{{ route('crear-inmueble-1') }}";
+    var redirectButtomUrl1 = "{{ route('editar-inmueble-1',1) }}";
     $('#redirectButtomAction1').on('click',function(){
         window.location.href = redirectButtomUrl1;
     })

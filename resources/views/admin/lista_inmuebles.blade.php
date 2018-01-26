@@ -5,16 +5,42 @@
     @include('admin/common/search_bar')
     <section>
         <div class="row">
-            @for( $i = 0; $i < 12 ; $i++)
+            @foreach($inmuebles as $inmueble)
                 @component('admin/partials/inmueble')
-                    @slot('type') alquiler @endslot
-                    @slot('price') 100.000.000 @endslot
-                    @slot('residencia') Residencias Mohecastel @endslot
-                    @slot('code') 831312 @endslot
+                    @slot('type') {{$inmueble->tipoNegocio}} @endslot
+                    @slot('price')
+                      @if($inmueble->visible==1)
+                        <span>Bsf.:</span>{{$inmueble->precio}}
+                      @else
+                        Consultar Precio
+                      @endif
+                    @endslot
+                    @slot('residencia'){{$inmueble->urbanizacion}} @endslot
+                    @slot('code')
+                      @if($inmueble->id_mls==0)
+                        <span>No Aplica</span>
+                      @else
+                        {{$inmueble->id_mls}}
+                      @endif
+                    @endslot
                     @slot('img') img-demo.jpg @endslot
-                    @slot('url') # @endslot
+                    @slot('editar')
+                      @if($usuario->rol_id==1)
+                        <a href="/admin/editar-inmueble1/{{$inmueble->id}}">
+                            <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                      @endif
+                    @endslot
+                    @slot('cambioEstatus')
+                      @if($usuario->rol_id==1)
+                        <button type="button" class="btnAcction" data-toggle="modal" data-target="#cambioStatus">
+                            Cambiar Estatus
+                        </button>
+                      @endif
+                    @endslot
+                    @slot('id'){{$inmueble->id}}@endslot
                 @endcomponent
-            @endfor
+            @endforeach
         </div>
     </section>
     @include('admin/modals/cambio_estatus')
@@ -22,9 +48,10 @@
 
 @section('js')
     <script>
-        var redirectUrlDetalleInmueble = "{{route('admin_detalle_inmueble',1)}}";
-        $('#detalleAction').on('click', function(){
-            window.location.href = redirectUrlDetalleInmueble
+        $('.detalleAction').on('click', function(){
+          var parametro=$(this).parent().find('.id');
+          var redirectUrlDetalleInmueble = "/admin/inmueble/"+parametro.val();
+            window.location.href = redirectUrlDetalleInmueble;
         })
     </script>
 @endSection

@@ -18,7 +18,7 @@ $(document).ready(function() {
   });
 //////////////////////////////////////// Validador del formulario///////////////////////////////////////////////
 
-$("#propietyCreate").validate({
+$("#propietyEdit").validate({
     onfocusout: true,
     rules: {
       namePropiety: {
@@ -117,8 +117,8 @@ $("#propietyCreate").validate({
     }
   },
   submitHandler: function(form) {
-    var form= new FormData(document.getElementById("propietyCreate"));
-    url="/admin/cargarPropiedad";
+    var form= new FormData(document.getElementById("propietyEdit"));
+    url="/admin/actualizarInmueble";
     $.ajax({
       url: url,
       type: "post",
@@ -132,13 +132,13 @@ $("#propietyCreate").validate({
       if (respuesta) {
         console.log(respuesta)
         swal({
-          title:'Buen trabajo!!',
-          text:"Los datos fueron guardados temporalmente, ahora debe cargar las fotos del inmueble",
+          title:'Edición Exitosa!!',
+          text:"Los datos fueron actualizados",
           icon:'success',
           timer: 2000,
           button:false,
         });
-        setTimeout(function(){location.href = "/admin/crear-inmueble-2";},2300); // 3000ms = 3
+        setTimeout(function(){location.href = "/admin/editar-inmueble2/"+respuesta[1];},2300); // 3000ms = 3
       }
       else {
         swal(

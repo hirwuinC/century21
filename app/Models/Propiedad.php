@@ -6,7 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Propiedad extends Model
 {
-    //
+    protected $table='propiedades';
+    
     public function agente(){
       return $this->belongsTo('App\Models\Agente');
     }
