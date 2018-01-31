@@ -7,13 +7,13 @@
                 <p>{{$type}}</p>
             </div>
             <div class="priceProject">
-                <p><span>Bsf.:</span> {{$precio}}</p>
+                {{$precio}}
             </div>
         </div>
     </div>
     <div class="contentInfo">
         <div class="infoProperty">
-            <h4><a href="{{ route('detalle_inmueble',1) }}">{{$titulo}}</a></h4>
+            {{$titulo}}
             <p><span><i class="fa fa-map-marker" aria-hidden="true"></i></span>{{$direccion}}</p>
         </div>
         <div class="characteristicsProperty">

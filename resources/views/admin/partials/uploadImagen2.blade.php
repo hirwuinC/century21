@@ -10,7 +10,7 @@
                     <div class="col-xs-12">
                         <div class="col-xs-6">
                             <button type="button" class="btnAcction btnCargar">
-                                <input type="file" id="carga" name="image[]" multiple accept="image/png, .jpeg, .jpg, image/gif" class="file-input">Cargar
+                                <input type="file" name="image[]" accept="image/png, .jpeg, .jpg, image/gif" class="file-input">Cargar
                             </button>
                         </div>
                         <div class="col-xs-6">

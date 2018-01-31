@@ -9,28 +9,35 @@
             <section class="detailProperties">
                 @include('common/galeria')
                 <div class="infoDetailProperties">
-                    <h2>RESIDENCIAS MOHECASTEL</h2>
-                    <h3>Avenida Eugenio Mendoza, La Castellana</h3>
-                    <p>Propiedad ID: 20055, Casa.</p>
+                    <input type="hidden" id="positionPropiety"value="{{$inmueble->posicionMapa}}">
+                    <h2>{{$inmueble->urbanizacion}}</h2>
+                    <h3>{{$inmueble->direccion}}</h3>
+                    <p>Propiedad ID: {{$inmueble->id}}</p>
                     <hr>
                     <div class="descriptionProperties">
                         <div class="characteristicsProperties">
                             <ul>
-                                <li><p>Consultar Precio</li>
-                                <li><i class="fa fa-object-group" aria-hidden="true"></i> 120Mts</li>
-                                <li><i class="fa fa-bed" aria-hidden="true"></i> 3</li>
-                                <li><i class="fa fa-bath" aria-hidden="true"></i> 2</li>
-                                <li><i class="fa fa-car" aria-hidden="true"></i> 1</li>
+                                @if($inmueble->visible==0)
+                                  <li><p>Consultar Precio</li>
+                                @else
+                                  <li><p>Bs. {{$inmueble->precio}}</li>
+                                @endif
+                                <li><i class="fa fa-object-group" aria-hidden="true"></i> {{$inmueble->metros_construccion}}</li>
+                                <li><i class="fa fa-bed" aria-hidden="true"></i> {{$inmueble->habitaciones}}</li>
+                                <li><i class="fa fa-bath" aria-hidden="true"></i> {{$inmueble->banos}}</li>
+                                <li><i class="fa fa-car" aria-hidden="true"></i> {{$inmueble->estacionamientos}}</li>
                             </ul>
                         </div>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla placerat augue tellus. Sed sollicitudin aliquet massa sed efficitur. Cras semper orci neque, nec laoreet dui mollis eu. Quisque ante nibh, interdum ac ligula eget, scelerisque interdum augue. Phasellus ultricies tincidunt nunc, nec dignissim diam hendrerit at. Donec pellentesque dictum lacus, non placerat urna consectetur nec. Phasellus tempus nunc ac convallis laoreet.</p>
-                        <p>Fusce interdum, nisi nec venenatis mollis, nibh diam fringilla magna, condimentum ornare velit metus eu dui. Nulla ut nunc diam. Nunc id blandit nibh. Mauris eu tempor metus. Integer sed vehicula dolor. Sed lobortis metus ut risus sollicitudin ultricies. Aliquam lobortis nec eros in posuere. Suspendisse consequat lectus risus, in iaculis ex sodales ultrices. Donec est justo, vehicula id efficitur at, facilisis quis justo. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nunc tristique, erat vehicula feugiat tempor, lacus nibh tincidunt eros, id auctor purus nulla non lectus. Donec id nunc non massa sagittis tristique. Quisque dapibus semper maximus. Vivamus viverra ex libero, sed volutpat mauris laoreet ac. Donec eu lorem lobortis, porttitor velit eget, congue dui. Suspendisse potenti.</p>
+                        <p>{{$inmueble->comentario}}</p>
                     </div>
                 </div>
                 <div class="ubicationProperties">
                     <h1 class="titleSection">Ubicación</h1>
-                    <div class="googleMap">
-                        <iframe style="width: 100%" src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d6660.605222999498!2d-70.60553820000001!3d-33.415354099999995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1ses!2scl!4v1508169047050" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div id="map" class="googleMap">
+                            </div>
+                        </div>
                     </div>
                 </div>
             </section>
@@ -75,7 +82,7 @@
                     @for( $i = 0; $i< 3 ; $i++)
                         <div class="col-sm-12">
                             @component('partials/inmueble')
-                                @slot('type') 
+                                @slot('type')
                                     @if($i % 2) Venta @else Alquiler @endif
                                 @endslot
                                 @slot('precio') 100.000.000 @endslot
@@ -98,3 +105,32 @@
 
 
 @endsection
+@section('js')
+<script>
+//////////////////////////////////////// Funcionalidad del mapa ////////////////////////////////////////////////////
+  function initMap() {
+    var oficina = {lat: 10.4745107, lng: -66.8626197};
+    var propiedad = $('#positionPropiety').val();
+    var ubicacion = oficina;
+    if (propiedad!="") {
+      var p=JSON.parse(propiedad);
+      console.log(p[0]);
+      var ubicacion=p[0];
+    }
+    var map = new google.maps.Map(document.getElementById('map'), {
+      zoom: 15,
+      center: ubicacion
+    });
+    var marker = new google.maps.Marker({
+      position: ubicacion,
+      map: map
+
+    });
+  }
+</script>
+<script type="text/javascript" src="{{ asset('js/admin/propiedades/detalleinmueble.js') }}"></script>
+<script async defer
+  src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG6RQhkoAPuKs-2VSCbNisZ0NQt5Qf3Co&callback=initMap">
+</script>
+
+@endSection

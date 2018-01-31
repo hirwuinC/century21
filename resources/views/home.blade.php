@@ -42,21 +42,32 @@
             </div>
         </div>
         <div class="row">
-            @for( $i = 0; $i < 9; $i++)
+            @foreach($inmuebles as $inmueble)
                 <div class="col-sm-4">
                     @component('partials/inmueble')
-                        @slot('type') Alquiler @endslot
-                        @slot('precio') 100.000.000 @endslot
-                        @slot('titulo') Residencias Mohecastel @endslot
-                        @slot('direccion')  Avenida Eugenio Mendoza, La Castellana @endslot
-                        @slot('metros')  120 @endslot
-                        @slot('baños')  1 @endslot
-                        @slot('cuartos')  2 @endslot
-                        @slot('estacionamientos') 2 @endslot
+                        @slot('type'){{$inmueble->tipoNegocio}} @endslot
+                        @slot('precio')
+                          @if($inmueble->visible==1)
+                            <p><span>Bsf.:</span>{{$inmueble->precio}}<p>
+                          @else
+                            <p>Consultar Precio<p>
+                          @endif
+                        @endslot
+                        @slot('titulo')
+                          <h4><a href="{{ route('detalle_inmueble',$inmueble->id) }}">{{$inmueble->urbanizacion}}</a></h4>
+                        @endslot
+                        @slot('direccion'){{$inmueble->direccion}}@endslot
+                        @slot('metros'){{$inmueble->metros_construccion}}@endslot
+                        @slot('baños') {{$inmueble->banos}} @endslot
+                        @slot('cuartos') {{$inmueble->habitaciones}}@endslot
+                        @slot('estacionamientos') {{$inmueble->estacionamientos}} @endslot
                         @slot('img') img-demo.jpg @endslot
                     @endcomponent
                 </div>
-            @endfor
+            @endforeach
+        </div>
+        <div class="row">
+          <center>{{$inmuebles->links()}}</center>
         </div>
     </div>
     </section>

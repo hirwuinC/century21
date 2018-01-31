@@ -3,10 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
-const INMUEBLE_EXAMPLE = ["direccion" => "Avenida Eugenio Mendoza, La Castellana" , "precio"=> "100.000.000"];
-const PROYECTO_EXAMPLE = [];
-
+use App\Models\Propiedad;
+use Illuminate\Support\Facades\DB;
 class WebController extends Controller
 {
 
@@ -17,7 +15,7 @@ class WebController extends Controller
      */
     public function __construct()
     {
-        
+
         //$this->middleware('auth');
     }
 
@@ -28,9 +26,10 @@ class WebController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $inmuebles=Propiedad::paginate(30);
+        return view('home',compact('inmuebles'));
     }
-    
+
     /**
      * Show the application dashboard.
      *
@@ -40,7 +39,7 @@ class WebController extends Controller
     {
         return view('buscador');
     }
-    
+
     /**
      * Show the application dashboard.
      *
@@ -57,12 +56,20 @@ class WebController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function detalle_inmueble()
+    public function detalle_inmueble($id)
     {
-        return view('detalle_inmueble');
+      $contVisita = Propiedad::find($id);
+      $contVisita->visitas =$contVisita->visitas+1;
+      $contVisita->save();
+      $inmueble=DB::table('propiedades')->join('tipoInmueble','propiedades.tipo_inmueble','=','tipoInmueble.id')
+                                         ->join('agentes','propiedades.agente_id','=','agentes.id')
+                                         ->join('estados','propiedades.estado_id','=','estados.id')
+                                         ->join('ciudades','propiedades.ciudad_id','=','ciudades.id')
+                                         ->select('propiedades.*','agentes.fullname','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoInmueble.*')
+                                         ->where('propiedades.id',$id)
+                                         ->first();
+      return view('detalle_inmueble',compact('inmueble'));
     }
-    
-
 
     /**
      * Show the application dashboard.
@@ -71,7 +78,8 @@ class WebController extends Controller
      */
     public function detalle_proyecto()
     {
-        return view('detalle_proyecto');
+
+      return view('detalle_proyecto');
     }
 
     /**
@@ -82,7 +90,7 @@ class WebController extends Controller
     public function contacto()
     {
         return view('contacto');
-    }        
+    }
 
 
     /**
@@ -93,6 +101,6 @@ class WebController extends Controller
     public function nuestra_historia()
     {
         return view('nuestra_historia');
-    }    
+    }
 
 }

@@ -42,6 +42,9 @@
                 @endcomponent
             @endforeach
         </div>
+        <div class="row">
+          {{ $inmuebles->links() }}
+        </div>
     </section>
     @include('admin/modals/cambio_estatus')
 @endsection

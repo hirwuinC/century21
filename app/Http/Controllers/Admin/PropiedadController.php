@@ -18,23 +18,45 @@ class PropiedadController extends Controller{
   public function ListaInmuebles(){
       $usuario=Session::get('asesor');
       if ($usuario->rol_id==1) {
-        $inmuebles=Propiedad::all();
+        $inmuebles=Propiedad::paginate(30);
       }
       else {
-        $inmuebles=Propiedad::where('agente_id',$usuario->agente_id)->get();
+        $inmuebles=Propiedad::where('agente_id',$usuario->agente_id)->paginate(30);
       }
       return view('/admin/lista_inmuebles',$this->cargarSidebar(),compact('inmuebles','usuario'));
   }
 
   public function CrearInmueble1(){
     $datos=[];
+    $inmuebleIncompleto=Propiedad::where('cargado',0)->first();
+    if (count($inmuebleIncompleto)!=0) {
+      $data=[
+              "nombre"            =>  $inmuebleIncompleto->urbanizacion,
+              "tipoNegocio"       =>  $inmuebleIncompleto->tipoNegocio,
+              "posicionMapa"      =>  $inmuebleIncompleto->posicionMapa,
+              "estado"            =>  $inmuebleIncompleto->estado_id,
+              "ciudad"            =>  $inmuebleIncompleto->ciudad_id,
+              "direccion"         =>  $inmuebleIncompleto->direccion,
+              "precio"            =>  $inmuebleIncompleto->precio,
+              "visible"           =>  $inmuebleIncompleto->visible,
+              "construccion"      =>  $inmuebleIncompleto->metros_construccion,
+              "terreno"           =>  $inmuebleIncompleto->metros_terreno,
+              "habitacion"        =>  $inmuebleIncompleto->habitaciones,
+              "bano"              =>  $inmuebleIncompleto->banos,
+              "estacionamiento"   =>  $inmuebleIncompleto->estacionamientos,
+              "descripcion"       =>  $inmuebleIncompleto->comentario,
+              "asesor"            =>  $inmuebleIncompleto->agente_id,
+              "tipoPropiedad"     =>  $inmuebleIncompleto->tipo_inmueble
+            ];
+      Session::put('data',$data);
+    }
+
     $tiposIn=TipoInmueble::all();
     $estados=Estado::all();
     $asesores=Agente::all();
     $datos=Session::get('data');
     $consulta=Ciudad::where('estado_id',$datos["estado"])->get();
     return view('/admin/crear_inmueble_1',$this->cargarSidebar(),compact('tiposIn','estados','asesores','datos','consulta'));
-    //return $datos;
   }
   public function listarCiudades(){
     $estado=Request::get('estado');
@@ -43,27 +65,25 @@ class PropiedadController extends Controller{
 
 
   public function cargarPropiedad(){
-    $data=[
-            "nombre"            =>  Request::get('namePropiety'),
-            "tipoNegocio"       =>  Request::get('typeBussisness'),
-            "posicionMapa"      =>  Request::get('positionPropiety'),
-            "estado"            =>  Request::get('estatePropiety'),
-            "ciudad"            =>  Request::get('cityPropiety'),
-            "direccion"         =>  Request::get('addressPropiety'),
-            "precio"            =>  Request::get('pricePropiety'),
-            "visible"           =>  Request::get('visiblePrice'),
-            "construccion"      =>  Request::get('constructionPropiety'),
-            "terreno"           =>  Request::get('areaPropiety'),
-            "habitacion"        =>  Request::get('roomPropiety'),
-            "bano"              =>  Request::get('batroomPropiety'),
-            "estacionamiento"   =>  Request::get('parkingPropiety'),
-            "descripcion"       =>  Request::get('descriptionPropiety'),
-            "asesor"            =>  Request::get('asesorPropiety'),
-            "tipoPropiedad"     =>  Request::get('typePropiety')
-          ];
-    Session::put('data',$data);
-    $datos=Session::get('data');
-    return compact('datos');
+    $propiedad= new Propiedad;
+    $propiedad->tipo_inmueble=        Request::get('typePropiety');
+    $propiedad->tipoNegocio=          Request::get('typeBussisness');
+    $propiedad->urbanizacion=         Request::get('namePropiety');
+    $propiedad->precio=               Request::get('pricePropiety');
+    $propiedad->visible=              Request::get('visiblePrice');
+    $propiedad->habitaciones=         Request::get('roomPropiety');
+    $propiedad->banos=                Request::get('batroomPropiety');
+    $propiedad->estacionamientos=     Request::get('parkingPropiety');
+    $propiedad->metros_construccion=  Request::get('constructionPropiety');
+    $propiedad->metros_terreno=       Request::get('areaPropiety');
+    $propiedad->comentario=           Request::get('descriptionPropiety');
+    $propiedad->agente_id=            Request::get('asesorPropiety');
+    $propiedad->estado_id=            Request::get('estatePropiety');
+    $propiedad->ciudad_id=            Request::get('cityPropiety');
+    $propiedad->direccion=            Request::get('addressPropiety');
+    $propiedad->posicionMapa=         Request::get('positionPropiety');
+    $propiedad->save();
+    return compact('propiedad');
   }
 
   public function CrearInmueble2(){
@@ -73,7 +93,6 @@ class PropiedadController extends Controller{
   public function guardarInmueble(){
     $datos=Session::get('data');
     $propiedad= new Propiedad;
-    $propiedad->id_mls=0;
     $propiedad->tipo_inmueble=$datos['tipoPropiedad'];
     $propiedad->tipoNegocio=$datos['tipoNegocio'];
     $propiedad->urbanizacion=$datos['nombre'];
@@ -121,8 +140,7 @@ class PropiedadController extends Controller{
                                        ->select('propiedades.*','agentes.fullname','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoInmueble.*')
                                        ->where('propiedades.id',$id)
                                        ->get();
-      //return dd((object)$data);
-      return view('/admin/detalle_inmueble',$this->cargarSidebar(),compact('inmuebles','usuario','negociacion'));
+    return view('/admin/detalle_inmueble',$this->cargarSidebar(),compact('inmuebles','usuario','negociacion'));
   }
 
   public function mostrarEditarInmueble1($id){
@@ -161,9 +179,7 @@ class PropiedadController extends Controller{
     return view('/admin/editar_inmueble_2',$this->cargarSidebar());
   }
   public function prueba(){
-        $opcion=3;
-        $segundoselect=["1"=>["valor"=>"1","descripcion"=>"opcion 1"],"2"=>["valor"=>"2","descripcion"=>"opcion 2"],"3"=>["valor"=>"3","descripcion"=>"opcion 3"]];
-        $consulta=$segundoselect[$opcion];
+        $consulta=uniqid();
         return $consulta;
   }
 }

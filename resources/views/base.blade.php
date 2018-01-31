@@ -22,7 +22,7 @@
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
 		<link href="{{ asset('css/custome.css') }}" rel="stylesheet" type="text/css">
 		<link href="{{ asset('css/main.css') }}" rel="stylesheet" type="text/css">
-		
+
 
 	</head>
 	<body>
@@ -51,7 +51,7 @@
 											<p><span><i class="fa fa-phone" aria-hidden="true"></i></span> 0424 2977598 / 0212 8723956</p>
 										</div>
 										<div class="col-xs-12 col-sm-2">
-											<p class="accesslogin"><a href=""><i class="fa fa-user-circle-o" aria-hidden="true"></i></a></p>
+											<p class="accesslogin"><a href="{{route('login')}}"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a></p>
 										</div>
 									</div>
 								</div>
@@ -165,7 +165,7 @@
 			</div>
 		</footer>
 		<!--JAVASCRIPTS / JQUERY-->
-		
+
 		<script type="text/javascript" src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('js/waterwheelCarousel.js') }}"></script>
