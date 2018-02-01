@@ -117,43 +117,80 @@ $("#propietyCreate").validate({
     }
   },
   submitHandler: function(form) {
-    var form= new FormData(document.getElementById("propietyCreate"));
-    url="/admin/cargarPropiedad";
-    $.ajax({
-      url: url,
-      type: "post",
-      dataType: "json",
-      data: form,
-      cache: false,
-      contentType: false,
-      processData: false
+    swal({
+      title: "Notificación Importante!!!",
+      text: "El inmueble sera mostrado hasta que se le asocie al menos una fotografía en el próximo paso",
+      icon: "warning",
+      buttons: ['Seguir Aqui',true],
+      dangerMode:false
     })
-    .done(function(respuesta){
-      if (respuesta) {
-        console.log(respuesta)
-        swal({
-          title:'Buen trabajo!!',
-          text:"Los datos fueron guardados temporalmente, ahora debe cargar las fotos del inmueble",
-          icon:'success',
-          timer: 2000,
-          button:false,
+    .then((willDelete) => {
+      if (willDelete) {
+        var form= new FormData(document.getElementById("propietyCreate"));
+        url="/admin/cargarPropiedad";
+        $.ajax({
+          url: url,
+          type: "post",
+          dataType: "json",
+          data: form,
+          cache: false,
+          contentType: false,
+          processData: false
+        })
+        .done(function(respuesta){
+          if (respuesta) {
+            swal({
+              title:'Buen trabajo!!',
+              text:"Datos guardados con exito",
+              icon:'success',
+              timer: 2000,
+              button:false,
+            });
+            setTimeout(function(){location.href = "/admin/crear-inmueble-2";},2300); // 3000ms = 3
+          }
+          else {
+            swal(
+              'Algo Sucedio',
+              'Intente guardar el inmueble nuevamente',
+              'error'
+            );
+          }
         });
-        setTimeout(function(){location.href = "/admin/crear-inmueble-2";},2300); // 3000ms = 3
       }
-      else {
-        swal(
-          'Algo Sucedio',
-          'Intente guardar el inmueble nuevamente',
-          'error'
-        );
-      }
+
     });
   }
 });
 ///////////////////////////////////////////// CARGA DE IMAGENES PARA EL INMUEBLE //////////////////////////////
+  let contador = 1;
   $('body').on('click','#addPic',function(e){
-      e.preventDefault();
-      $("<div class='col-sm-3 thumbPropiety'><div class='thumbProperty'><div class='contentTop'><img class='imgInmueble' src='http://localhost:8000/images/img-demo-images.jpg' alt=''></div><div class='contentInfo'><div class='buttonsAction'><div class='row'><div class='col-xs-12'><div class='col-xs-6'><button type='button' class='btnAcction btnCargar'><input type='file' name='image[]' accept='image/png, .jpeg, .jpg, image/gif' class='file-input'>Cargar</button></div><div class='col-xs-6'><button type='button' class='btnAcction btnBorrar'>Borrar</button></div></div></div></div></div></div></div>").prependTo('.nueva');
+    var dominio=window.location.host;
+      contador++;
+      e.preventDefault()
+      $(`<div class='col-sm-3 thumbPropiety'>
+          <div class='thumbProperty'>
+            <div class='contentTop'>
+              <img class='imgInmueble' src='http://${dominio}/images/img-demo-images.jpg' alt=''>
+            </div>
+            <div class='contentInfo'>
+              <div class='buttonsAction'>
+                <div class='row'>
+                  <div class='col-xs-12'>
+                    <div class='col-xs-6' >
+                      <button type='button' class='btnAcction btnCargar'>
+                        <input type='file' id="imagen-${contador}" name='image[]' accept='image/png, .jpeg, .jpg, image/gif' class='file-input'>Cargar
+                        <input type="hidden" class="register" value="${contador}" id="index-${contador}">
+                      </button>
+                    </div>
+                    <div class='col-xs-6'>
+                      <button type='button' class='btnAcction btnBorrar'>Borrar</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>`).prependTo('.nueva');
       var cont= $('.thumbPropiety').length;
       if (cont>7) {
         $('.addPicCont').css('display','none');
@@ -167,7 +204,6 @@ $("#propietyCreate").validate({
         title:'Imposible realizar esa acción',
         text:"Debe cargar al menos una foto al inmueble",
         icon:'warning',
-        //timer: 2000,
         button:true
       });
     }
@@ -180,13 +216,48 @@ $("#propietyCreate").validate({
     }
   });
   $('body').on('change','.file-input',function(){
-      var curElement = $(this).parent().parent().parent().parent().parent().parent().parent().find('.imgInmueble');
-      var reader = new FileReader();
+    var tamano=this.files[0].size/1024;
+    if (tamano<=1024) {
+      var form= new FormData();
+      var file= this.files[0];
+      var posicion= $(this).parent().find('.register');
+      var id=posicion.attr('id');
+      var valor=posicion.val();
+      form.append('file',file);
+      form.append('register',id);
+      form.append('valor',valor);
+      url="/admin/guardarImagen";
+      $.ajax({
+        url: url,
+        type: "post",
+        dataType: "json",
+        data: form,
+        cache: false,
+        contentType: false,
+        processData: false
+      })
+      .done(function(respuesta){
+        var ubicacion=respuesta[0];
+        var id=respuesta[1];
+        console.log(respuesta);
+        $("#"+ubicacion+"").val(id);
+      });
+        var curElement = $(this).parent().parent().parent().parent().parent().parent().parent().find('.imgInmueble');
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            curElement.attr('src', e.target.result);
+        };
+        reader.readAsDataURL(this.files[0]);
+    }
+    else {
+      swal({
+        title:'Error al cargar Imagen!!!',
+        text:"La imagen es demasiado pesada, debe pesar menos de 1mb",
+        icon:'error',
+        button:true,
+      });
+    }
 
-      reader.onload = function (e) {
-          curElement.attr('src', e.target.result);
-      };
-      reader.readAsDataURL(this.files[0]);
   });
   $('body').on('submit','#picPropiety',function(e){
     e.preventDefault();

@@ -7,6 +7,7 @@
   {{csrf_field()}}
 @if(count($datos)==0)
     <input type="hidden" id="positionPropiety" name="positionPropiety" value=''>
+    <input type="hidden" name="register" value=''>
     <div class="row">
         <div class="col-xs-12">
             <div class="row">
@@ -115,19 +116,20 @@
                 </div>
             </div>
 @else
-<input type="hidden" id="positionPropiety" name="positionPropiety" value='{{$datos["posicionMapa"]}}'>
+<input type="hidden" id="positionPropiety" name="positionPropiety" value='{{$datos->posicionMapa}}'>
+<input type="hidden" name="register" value='{{$datos->id}}'>
 <div class="row">
     <div class="col-xs-12">
         <div class="row">
             <div class="col-xs-6">
-                <input type="text" class="inputs inputsLight form-control" name="namePropiety" id="namePropiety" value='{{$datos["nombre"]}}' placeholder="Nombre del inmueble">
+                <input type="text" class="inputs inputsLight form-control" name="namePropiety" id="namePropiety" value='{{$datos->urbanizacion}}' placeholder="Nombre del inmueble">
             </div>
             <div class="col-xs-6">
                 <select class="" name="typePropiety" id="typePropiety">
                     <option value="" >Tipo de inmueble</option>
                     @foreach ($tiposIn as $tipo)
-                      @if($tipo->id == $datos["tipoPropiedad"])
-                        <option value='{{$datos["tipoPropiedad"]}}' selected>{{ $tipo->nombre}}</option>
+                      @if($tipo->id == $datos->tipo_inmueble)
+                        <option value='{{$datos->tipo_inmueble}}' selected>{{ $tipo->nombre}}</option>
                       @else
                         <option value='{{ $tipo->id }}'>{{ $tipo->nombre }}</option>
                       @endif
@@ -140,8 +142,8 @@
               <select id="estatePropiety" name="estatePropiety">
                   <option value="" >Estado</option>
                   @foreach($estados as $estado)
-                    @if($estado->id == $datos["estado"])
-                      <option value='{{$datos["estado"]}}' selected>{{$estado->nombre}}</option>
+                    @if($estado->id == $datos->estado_id)
+                      <option value='{{$datos->estado_id}}' selected>{{$estado->nombre}}</option>
                     @else
                       <option value='{{ $estado->id }}'>{{$estado->nombre}}</option>
                     @endif
@@ -152,8 +154,8 @@
                 <select id="cityPropiety" name="cityPropiety">
                     <option value="">Ciudad</option>
                     @foreach($consulta as $ciudad)
-                      @if($ciudad->id == $datos["ciudad"])
-                        <option class="opcion" value='{{$datos["ciudad"]}}' selected> {{$ciudad->nombre}} </option>
+                      @if($ciudad->id ==  $datos->ciudad_id)
+                        <option class="opcion" value='{{$datos->ciudad_id}}' selected> {{$ciudad->nombre}} </option>
                       @else
                         <option class="opcion" value='{{$ciudad->id}}'> {{$ciudad->nombre}} </option>
                       @endif
@@ -163,7 +165,7 @@
         </div>
         <div class="row" style="padding-top:30px">
             <div class="col-xs-12">
-                <input type="text" class="inputs inputsLight form-control" value='{{$datos["direccion"]}}' name="addressPropiety" id="addressPropiety" placeholder="Dirección del inmueble (Incluir ubicacion en el mapa)">
+                <input type="text" class="inputs inputsLight form-control" value='{{$datos->direccion}}' name="addressPropiety" id="addressPropiety" placeholder="Dirección del inmueble (Incluir ubicacion en el mapa)">
             </div>
         </div>
         <div class="row">
@@ -174,12 +176,12 @@
         </div>
         <div class="row">
             <div class="col-xs-6">
-                <input type="number" class="inputs inputsLight form-control" value='{{$datos["precio"]}}' name="pricePropiety" id="pricePropiety" placeholder="Precio">
+                <input type="number" class="inputs inputsLight form-control" value='{{$datos->precio}}' name="pricePropiety" id="pricePropiety" placeholder="Precio">
             </div>
             <div class="col-xs-6">
                 <ul class="viewRadio">
                     <li><h6>Visible</h6></li>
-                    @if($datos["visible"]==1)
+                    @if($datos->visible==1)
                       <li>
                           <div class="styled-input-single">
                               <input type="radio" name="visiblePrice" value="1" id="radio-example-one" checked="checked"/>
@@ -211,26 +213,26 @@
         </div>
         <div class="row">
           <div class="col-xs-6">
-              <input type="number" class="inputs inputsLight form-control" value='{{$datos["construccion"]}}' name="constructionPropiety" id="constructionPropiety" placeholder="Construcción (Mtr2)">
+              <input type="number" class="inputs inputsLight form-control" value='{{$datos->metros_construccion}}' name="constructionPropiety" id="constructionPropiety" placeholder="Construcción (Mtr2)">
           </div>
           <div class="col-xs-6">
-              <input type="number" class="inputs inputsLight form-control" value='{{$datos["terreno"]}}' name="areaPropiety" id="areaPropiety" placeholder="Terreno (Mtr2)">
+              <input type="number" class="inputs inputsLight form-control" value='{{$datos->metros_terreno}}' name="areaPropiety" id="areaPropiety" placeholder="Terreno (Mtr2)">
           </div>
         </div>
         <div class="row">
             <div class="col-xs-4">
-                <input type="number" class="inputs inputsLight form-control" value='{{$datos["habitacion"]}}' id="roomPropiety"name="roomPropiety" placeholder="Habitaciones">
+                <input type="number" class="inputs inputsLight form-control" value='{{$datos->habitaciones}}' id="roomPropiety"name="roomPropiety" placeholder="Habitaciones">
             </div>
             <div class="col-xs-4">
-                <input type="number" class="inputs inputsLight form-control" value='{{$datos["bano"]}}' id="batroomPropiety" name="batroomPropiety" placeholder="Baños">
+                <input type="number" class="inputs inputsLight form-control" value='{{$datos->banos}}' id="batroomPropiety" name="batroomPropiety" placeholder="Baños">
             </div>
             <div class="col-xs-4">
-                <input type="number" class="inputs inputsLight form-control" value='{{$datos["estacionamiento"]}}' id="parkingPropiety" name="parkingPropiety" placeholder="Estacionamiento (Cantidad de Puestos)">
+                <input type="number" class="inputs inputsLight form-control" value='{{$datos->estacionamientos}}' id="parkingPropiety" name="parkingPropiety" placeholder="Estacionamiento (Cantidad de Puestos)">
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <textarea class="inputs inputsLight" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble">{{$datos["descripcion"]}}</textarea>
+                <textarea class="inputs inputsLight" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble">{{$datos->comentario}}</textarea>
             </div>
         </div>
         <div class="row">
@@ -238,8 +240,8 @@
               <select name="asesorPropiety" id="asesorPropiety">
                   <option value="">Asesor</option>
                   @foreach($asesores as $asesor)
-                    @if($asesor->id==$datos["asesor"])
-                      <option value='{{$datos["asesor"]}}' selected>{{$asesor->fullName}}</option>
+                    @if($asesor->id==$datos->agente_id)
+                      <option value='{{$datos->agente_id}}' selected>{{$asesor->fullName}}</option>
                     @else
                       <option value='{{$asesor->id}}'>{{$asesor->fullName}}</option>
                     @endif
@@ -249,7 +251,7 @@
             <div class="col-xs-6">
               <select name="typeBussisness" id="typeBussisness">
                   <option value="">Tipo de Negociación</option>
-                  @if($datos["tipoNegocio"]=="alquiler")
+                  @if($datos->tipoNegocio=="alquiler")
                     <option value="alquiler" selected>Alquiler</option>
                     <option value="venta">Venta</option>
                   @else

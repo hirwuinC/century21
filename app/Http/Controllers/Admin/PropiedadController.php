@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use App\Models\Estado;
 use App\Models\Ciudad;
@@ -12,6 +13,7 @@ use App\Models\TipoInmueble;
 use App\Models\Agente;
 use App\Models\Propiedad;
 use App\Models\Negociacion;
+use App\Models\Media;
 
 class PropiedadController extends Controller{
 
@@ -28,34 +30,14 @@ class PropiedadController extends Controller{
 
   public function CrearInmueble1(){
     $datos=[];
-    $inmuebleIncompleto=Propiedad::where('cargado',0)->first();
-    if (count($inmuebleIncompleto)!=0) {
-      $data=[
-              "nombre"            =>  $inmuebleIncompleto->urbanizacion,
-              "tipoNegocio"       =>  $inmuebleIncompleto->tipoNegocio,
-              "posicionMapa"      =>  $inmuebleIncompleto->posicionMapa,
-              "estado"            =>  $inmuebleIncompleto->estado_id,
-              "ciudad"            =>  $inmuebleIncompleto->ciudad_id,
-              "direccion"         =>  $inmuebleIncompleto->direccion,
-              "precio"            =>  $inmuebleIncompleto->precio,
-              "visible"           =>  $inmuebleIncompleto->visible,
-              "construccion"      =>  $inmuebleIncompleto->metros_construccion,
-              "terreno"           =>  $inmuebleIncompleto->metros_terreno,
-              "habitacion"        =>  $inmuebleIncompleto->habitaciones,
-              "bano"              =>  $inmuebleIncompleto->banos,
-              "estacionamiento"   =>  $inmuebleIncompleto->estacionamientos,
-              "descripcion"       =>  $inmuebleIncompleto->comentario,
-              "asesor"            =>  $inmuebleIncompleto->agente_id,
-              "tipoPropiedad"     =>  $inmuebleIncompleto->tipo_inmueble
-            ];
-      Session::put('data',$data);
+    $consulta=[];
+    $datos=Propiedad::where('cargado',0)->first();
+    if (count($datos)!=0) {
+      $consulta=Ciudad::where('estado_id',$datos->estado_id)->get();
     }
-
     $tiposIn=TipoInmueble::all();
     $estados=Estado::all();
     $asesores=Agente::all();
-    $datos=Session::get('data');
-    $consulta=Ciudad::where('estado_id',$datos["estado"])->get();
     return view('/admin/crear_inmueble_1',$this->cargarSidebar(),compact('tiposIn','estados','asesores','datos','consulta'));
   }
   public function listarCiudades(){
@@ -65,25 +47,78 @@ class PropiedadController extends Controller{
 
 
   public function cargarPropiedad(){
-    $propiedad= new Propiedad;
-    $propiedad->tipo_inmueble=        Request::get('typePropiety');
-    $propiedad->tipoNegocio=          Request::get('typeBussisness');
-    $propiedad->urbanizacion=         Request::get('namePropiety');
-    $propiedad->precio=               Request::get('pricePropiety');
-    $propiedad->visible=              Request::get('visiblePrice');
-    $propiedad->habitaciones=         Request::get('roomPropiety');
-    $propiedad->banos=                Request::get('batroomPropiety');
-    $propiedad->estacionamientos=     Request::get('parkingPropiety');
-    $propiedad->metros_construccion=  Request::get('constructionPropiety');
-    $propiedad->metros_terreno=       Request::get('areaPropiety');
-    $propiedad->comentario=           Request::get('descriptionPropiety');
-    $propiedad->agente_id=            Request::get('asesorPropiety');
-    $propiedad->estado_id=            Request::get('estatePropiety');
-    $propiedad->ciudad_id=            Request::get('cityPropiety');
-    $propiedad->direccion=            Request::get('addressPropiety');
-    $propiedad->posicionMapa=         Request::get('positionPropiety');
-    $propiedad->save();
-    return compact('propiedad');
+    $inmuebleIncompleto=Request::get('register');
+    if (empty($inmuebleIncompleto)==false) {
+      $id=Request::get('register');
+      Propiedad::where('id',$inmuebleIncompleto)->update([
+                  "tipo_inmueble"       =>  Request::get('typePropiety'),
+                  "tipoNegocio"         =>  Request::get('typeBussisness'),
+                  "urbanizacion"        =>  Request::get('namePropiety'),
+                  "precio"              =>  Request::get('pricePropiety'),
+                  "visible"             =>  Request::get('visiblePrice'),
+                  "habitaciones"        =>  Request::get('roomPropiety'),
+                  "banos"               =>  Request::get('batroomPropiety'),
+                  "estacionamientos"    =>  Request::get('parkingPropiety'),
+                  "metros_construccion" =>  Request::get('constructionPropiety'),
+                  "metros_terreno"      =>  Request::get('areaPropiety'),
+                  "comentario"          =>  Request::get('descriptionPropiety'),
+                  "agente_id"           =>  Request::get('asesorPropiety'),
+                  "estado_id"           =>  Request::get('estatePropiety'),
+                  "ciudad_id"           =>  Request::get('cityPropiety'),
+                  "direccion"           =>  Request::get('addressPropiety'),
+                  "posicionMapa"        =>  Request::get('positionPropiety')
+                ]);
+    }
+    else {
+      $id=DB::table('propiedades')->insertGetId([
+                  "tipo_inmueble"       =>  Request::get('typePropiety'),
+                  "tipoNegocio"         =>  Request::get('typeBussisness'),
+                  "urbanizacion"        =>  Request::get('namePropiety'),
+                  "precio"              =>  Request::get('pricePropiety'),
+                  "visible"             =>  Request::get('visiblePrice'),
+                  "habitaciones"        =>  Request::get('roomPropiety'),
+                  "banos"               =>  Request::get('batroomPropiety'),
+                  "estacionamientos"    =>  Request::get('parkingPropiety'),
+                  "metros_construccion" =>  Request::get('constructionPropiety'),
+                  "metros_terreno"      =>  Request::get('areaPropiety'),
+                  "comentario"          =>  Request::get('descriptionPropiety'),
+                  "agente_id"           =>  Request::get('asesorPropiety'),
+                  "estado_id"           =>  Request::get('estatePropiety'),
+                  "ciudad_id"           =>  Request::get('cityPropiety'),
+                  "direccion"           =>  Request::get('addressPropiety'),
+                  "posicionMapa"        =>  Request::get('positionPropiety')
+      ]);
+    }
+    Session::put('inmueble',$id);
+    return compact('id');
+  }
+
+  public function guardarImagen(){
+    $archivo= Request::file('file');
+    $ubicacion=Request::get('register');
+    $idImagen=Request::get('valor');
+    $inmueble=Session::get('inmueble');
+    $extension = strtolower($archivo->getClientOriginalExtension());
+    $renombre = uniqid().'.'.$extension;
+    $path ="images/inmuebles";
+    $consulta=Media::where('id',$idImagen)->first();
+    if (count($consulta)!=0) {
+      Media::where('id',$idImagen)->update([
+        "nombre"        =>  $renombre,
+        "propiedad_id"  =>  $inmueble
+      ]);
+      File::delete(public_path('images/inmuebles/'.$consulta->nombre.''));
+      $archivo->move($path,$renombre);
+    }
+    else{
+      $idImagen=DB::table('medias')->insertGetId([
+                  "nombre"        =>  $renombre,
+                  "propiedad_id"  =>  $inmueble
+      ]);
+      $archivo->move($path,$renombre);
+    }
+    $datos=[$ubicacion,$idImagen];
+    return $datos;
   }
 
   public function CrearInmueble2(){
@@ -91,26 +126,6 @@ class PropiedadController extends Controller{
   }
 
   public function guardarInmueble(){
-    $datos=Session::get('data');
-    $propiedad= new Propiedad;
-    $propiedad->tipo_inmueble=$datos['tipoPropiedad'];
-    $propiedad->tipoNegocio=$datos['tipoNegocio'];
-    $propiedad->urbanizacion=$datos['nombre'];
-    $propiedad->precio=$datos['precio'];
-    $propiedad->visible=$datos['visible'];
-    $propiedad->habitaciones=$datos['habitacion'];
-    $propiedad->banos=$datos['bano'];
-    $propiedad->estacionamientos=$datos['estacionamiento'];
-    $propiedad->metros_construccion=$datos['construccion'];
-    $propiedad->metros_terreno=$datos['terreno'];
-    $propiedad->comentario=$datos['descripcion'];
-    $propiedad->agente_id=$datos['asesor'];
-    $propiedad->estado_id=$datos['estado'];
-    $propiedad->ciudad_id=$datos['ciudad'];
-    $propiedad->direccion=$datos['direccion'];
-    $propiedad->posicionMapa=$datos['posicionMapa'];
-    $propiedad->save();
-    Session::forget('data');
     $respuesta=1;
     return $respuesta;
   }
