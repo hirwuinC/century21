@@ -162,7 +162,15 @@ $("#propietyCreate").validate({
   }
 });
 ///////////////////////////////////////////// CARGA DE IMAGENES PARA EL INMUEBLE //////////////////////////////
+  var cont= $('.thumbPropiety').length;
+  if (cont>7) {
+    $('.addPicCont').css('display','none');
+  }
+  var inicio= $('#last').val();
   let contador = 1;
+  if (inicio!='') {
+    contador=inicio;
+  }
   $('body').on('click','#addPic',function(e){
     var dominio=window.location.host;
       contador++;
@@ -187,6 +195,16 @@ $("#propietyCreate").validate({
                     </div>
                   </div>
                 </div>
+                <div class='row'>
+                  <div class='col-xs-12'>
+                    <div class='col-xs-6 col-xs-offset-4' >
+                      <div class="styled-input-single">
+                          <input type="radio" name="fotovisible" value="${contador}" id="radio-example-${contador}"/>
+                          <label for="radio-example-${contador}"></label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -208,6 +226,24 @@ $("#propietyCreate").validate({
       });
     }
     else {
+      var input= $(this).parent().parent().find('.register');
+      var registro=input.val();
+      console.log(registro)
+      var form= new FormData();
+      form.append('registro',registro);
+      url="/admin/borrarImagen";
+      $.ajax({
+        url: url,
+        type: "post",
+        dataType: "json",
+        data: form,
+        cache: false,
+        contentType: false,
+        processData: false
+      })
+      .done(function(respuesta){
+        console.log(respuesta);
+      });
       $(this).parent().parent().parent().parent().parent().parent().parent().remove();
     }
     var contThumb= $('.thumbPropiety').length;
@@ -261,36 +297,51 @@ $("#propietyCreate").validate({
   });
   $('body').on('submit','#picPropiety',function(e){
     e.preventDefault();
-    var form= new FormData(document.getElementById("picPropiety"));
-    url="/admin/guardarInmueble";
-    $.ajax({
-      url: url,
-      type: "post",
-      dataType: "json",
-      data: form,
-      cache: false,
-      contentType: false,
-      processData: false
-    })
-    .done(function(respuesta){
-      if (respuesta==1) {
-        swal({
-          title:'Buen trabajo!!',
-          text:"El inmueble fue guardado con exito",
-          icon:'success',
-          timer: 2000,
-          button:false,
-        });
-        setTimeout(function(){location.href = "/admin/crear-inmueble-1";},2300); // 3000ms = 3
-      }
-      else {
-        swal(
-          'Algo Sucedio',
-          'Intente guardar el inmueble nuevamente',
-          'error'
-        );
-      }
-    });
+    var marcador=$('input[name=fotovisible]:checked');
+    if (marcador.length>0) {
+      var imgSelected=marcador.val();
+      var form= new FormData();
+      form.append('imgSelected',imgSelected);
+      url="/admin/guardarInmueble";
+      $.ajax({
+        url: url,
+        type: "post",
+        dataType: "json",
+        data: form,
+        cache: false,
+        contentType: false,
+        processData: false
+      })
+      .done(function(respuesta){
+        if (respuesta==1) {
+          swal({
+            title:'Buen trabajo!!',
+            text:"El inmueble fue guardado con exito",
+            icon:'success',
+            timer: 2000,
+            button:false,
+          });
+          setTimeout(function(){location.href = "/admin/crear-inmueble-1";},2300); // 3000ms = 3
+        }
+        else {
+          swal({
+            title:'Imposible realizar esa acción',
+            text:"Debe cargar al menos una foto al inmueble",
+            icon:'error',
+            button:true
+          });
+        }
+      });
+    }
+    else {
+      swal({
+        title:'Imposible realizar esa acción',
+        text:"Debe seleccionar una foto como portada del inmueble",
+        icon:'error',
+        button:true
+      });
+    }
+
 
   });
 });

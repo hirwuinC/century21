@@ -61,7 +61,7 @@
                         @slot('baños') {{$inmueble->banos}} @endslot
                         @slot('cuartos') {{$inmueble->habitaciones}}@endslot
                         @slot('estacionamientos') {{$inmueble->estacionamientos}} @endslot
-                        @slot('img') img-demo.jpg @endslot
+                        @slot('img')/inmuebles/{{$inmueble->nombre_imagen}} @endslot
                     @endcomponent
                 </div>
             @endforeach

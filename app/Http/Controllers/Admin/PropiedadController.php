@@ -26,6 +26,7 @@ class PropiedadController extends Controller{
         $inmuebles=Propiedad::where('agente_id',$usuario->agente_id)->paginate(30);
       }
       return view('/admin/lista_inmuebles',$this->cargarSidebar(),compact('inmuebles','usuario'));
+      //return $imagenes;
   }
 
   public function CrearInmueble1(){
@@ -121,12 +122,46 @@ class PropiedadController extends Controller{
     return $datos;
   }
 
+  public function borrarImagen(){
+    $respuesta=0;
+    $inmueble=Session::get('inmueble');
+    $imagen= Request::get('registro');
+    $consulta=Media::where('id',$imagen)->where('propiedad_id',$inmueble)->first();
+    if (count($consulta)!=0) {
+      File::delete(public_path('images/inmuebles/'.$consulta->nombre.''));
+      Media::destroy($imagen);
+      $respuesta=1;
+    }
+
+    return $respuesta;
+  }
+
   public function CrearInmueble2(){
-      return view('/admin/crear_inmueble_2',$this->cargarSidebar());
+    $inmueble=Session::get('inmueble');
+    $imagenes=Media::where('propiedad_id',$inmueble)->get();
+    $ultimo=Media::where('propiedad_id',$inmueble)->orderBy('id', 'desc')->first();
+    return view('/admin/crear_inmueble_2',$this->cargarSidebar(),compact('imagenes','ultimo'));
   }
 
   public function guardarInmueble(){
-    $respuesta=1;
+    /*$respuesta=0;
+    $inmueble=Session::get('inmueble');
+    $seleccionado=Request::get('imgSelected');
+    $marcado=Media::where('id',$seleccionado)->first();
+    $ultimo=Media::where('propiedad_id',$inmueble)->first();
+    if ($marcado->vista!=1) {
+      $img=Media::find($seleccionado);
+      $img->vista=1;
+      $img->save();
+      $cambio=
+    }
+    if (count($ultimo)!=0) {
+      Propiedad::where('id',$inmueble)->update([
+        'cargado'=>1
+      ]);
+      Session::forget('inmueble');
+      $respuesta=1;
+    }*/
     return $respuesta;
   }
 

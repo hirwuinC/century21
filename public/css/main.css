@@ -732,10 +732,11 @@ footer .copyright ul li a {
 .thumbProperty .contentTop {
   overflow: hidden;
   position: relative;
+  height: 230px;
 }
 .thumbProperty .contentTop img {
   width: 100%;
-  height: auto;
+  height: 100%;
 }
 .thumbProperty .contentTop .caption {
   position: absolute;

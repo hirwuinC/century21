@@ -4,9 +4,27 @@
     <h2 class="titleSection">inmuebles - <span>Agregar o quitar imágenes</span></h2>
     <section>
       <form class="" id="picPropiety" action="" enctype= multipart/form-data method="post">
+        <input type="hidden" id="last" value="{{$ultimo['id']}}">
         <div class="row nueva">
-          @component('admin/partials/uploadImagen2')
-          @endComponent
+          @foreach($imagenes as $imagen)
+            @component('admin/partials/uploadImagen2')
+              @slot('img')
+                /inmuebles/{{$imagen->nombre}}
+              @endslot
+              @slot('contador')
+              {{$imagen->id}}
+              @endslot
+              @slot('marcador')
+                @if($imagen->vista==1)
+                  <input type="radio" name="fotovisible" value="{{$imagen->id}}" id="radio-example-{{$imagen->id}}" checked="checked"/>
+                  <label for="radio-example-{{$imagen->id}}"></label>
+                @else
+                  <input type="radio" name="fotovisible" value="{{$imagen->id}}" id="radio-example-{{$imagen->id}}"/>
+                  <label for="radio-example-{{$imagen->id}}"></label>
+                @endif
+              @endslot
+            @endComponent
+          @endforeach
           <div class="col-sm-3">
             <div class="addPicCont">
                 <a class="addPic" id="addPic" href="#">
@@ -21,7 +39,7 @@
                     <button id="redirectButtomAction1" type="button" class="btnGrayHight">ATRAS</button>
                 </div>
                 <div class="col-xs-3">
-                    <button type="submit" id="savePropiety" type="submit" class="btnYellow">siguiente</button>
+                    <button type="submit" id="savePropiety" type="submit" class="btnYellow">Guardar</button>
                 </div>
             </div>
         </div>

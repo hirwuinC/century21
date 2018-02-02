@@ -26,8 +26,13 @@ class WebController extends Controller
      */
     public function index()
     {
-        $inmuebles=Propiedad::paginate(30);
+        //$inmuebles=Propiedad::paginate(30);
+        $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
+                                           ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*')
+                                           ->where('medias.vista',1)
+                                           ->paginate(30);
         return view('home',compact('inmuebles'));
+        //return $inmuebles;
     }
 
     /**
