@@ -151,46 +151,147 @@ $("#propietyEdit").validate({
   }
 });
 ///////////////////////////////////////////// CARGA DE IMAGENES PARA EL INMUEBLE //////////////////////////////
-  $('body').on('click','#addPic',function(e){
-      e.preventDefault();
-      $("<div class='col-sm-3 thumbPropiety'><div class='thumbProperty'><div class='contentTop'><img class='imgInmueble' src='http://localhost:8000/images/img-demo-images.jpg' alt=''></div><div class='contentInfo'><div class='buttonsAction'><div class='row'><div class='col-xs-12'><div class='col-xs-6'><button type='button' class='btnAcction btnCargar'><input type='file' name='image[]' accept='image/png, .jpeg, .jpg, image/gif' class='file-input'>Cargar</button></div><div class='col-xs-6'><button type='button' class='btnAcction btnBorrar'>Borrar</button></div></div></div></div></div></div></div>").prependTo('.nueva');
-      var cont= $('.thumbPropiety').length;
-      if (cont>7) {
-        $('.addPicCont').css('display','none');
-      }
-  });
-  $('body').on('click','.btnBorrar',function(e){
-    e.preventDefault();
-    var contBtn= $('.btnBorrar').length;
-    if (contBtn==1) {
-      swal({
-        title:'Imposible realizar esa acción',
-        text:"Debe cargar al menos una foto al inmueble",
-        icon:'warning',
-        //timer: 2000,
-        button:true
-      });
+var cont= $('.thumbPropiety').length;
+if (cont>7) {
+  $('.addPicCont').css('display','none');
+}
+var inicio= $('#last').val();
+let contador = 1;
+if (inicio!='') {
+  contador=inicio;
+}
+$('body').on('click','#addPic',function(e){
+  var dominio=window.location.host;
+    contador++;
+    e.preventDefault()
+    $(`<div class='col-sm-3 thumbPropiety'>
+        <div class='thumbProperty'>
+          <div class='contentTop'>
+            <img class='imgInmueble' src='http://${dominio}/images/img-demo-images.jpg' alt=''>
+          </div>
+          <div class='contentInfo'>
+            <div class='buttonsAction'>
+              <div class='row'>
+                <div class='col-xs-12'>
+                  <div class='col-xs-6' >
+                    <button type='button' class='btnAcction btnCargar'>
+                      <input type='file' id="imagen-${contador}" name='image[]' accept='image/png, .jpeg, .jpg, image/gif' class='file-input'>Cargar
+                      <input type="hidden" class="register" value="${contador}" id="index-${contador}">
+                    </button>
+                  </div>
+                  <div class='col-xs-6'>
+                    <button type='button' class='btnAcction btnBorrar'>Borrar</button>
+                  </div>
+                </div>
+              </div>
+              <div class='row'>
+                <div class='col-xs-12'>
+                  <div class='col-xs-6 col-xs-offset-4' >
+                    <div class="styled-input-single">
+                        <input type="radio" name="fotovisible" value="${contador}" id="radio-example-${contador}"/>
+                        <label for="radio-example-${contador}"></label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>`).prependTo('.nueva');
+    var cont= $('.thumbPropiety').length;
+    if (cont>7) {
+      $('.addPicCont').css('display','none');
     }
-    else {
-      $(this).parent().parent().parent().parent().parent().parent().parent().remove();
-    }
-    var contThumb= $('.thumbPropiety').length;
-    if (contThumb<8) {
-      $('.addPicCont').css('display','block');
-    }
-  });
-  $('body').on('change','.file-input',function(){
+});
+$('body').on('click','.btnBorrar',function(e){
+  e.preventDefault();
+  var contBtn= $('.btnBorrar').length;
+  if (contBtn==1) {
+    swal({
+      title:'Imposible realizar esa acción',
+      text:"Debe cargar al menos una foto al inmueble",
+      icon:'warning',
+      button:true
+    });
+  }
+  else {
+    var input= $(this).parent().parent().find('.register');
+    var registro=input.val();
+    console.log(registro)
+    var form= new FormData();
+    form.append('registro',registro);
+    url="/admin/borrarImagen";
+    $.ajax({
+      url: url,
+      type: "post",
+      dataType: "json",
+      data: form,
+      cache: false,
+      contentType: false,
+      processData: false
+    })
+    .done(function(respuesta){
+      console.log(respuesta);
+    });
+    $(this).parent().parent().parent().parent().parent().parent().parent().remove();
+  }
+  var contThumb= $('.thumbPropiety').length;
+  if (contThumb<8) {
+    $('.addPicCont').css('display','block');
+  }
+});
+$('body').on('change','.file-input',function(){
+  var tamano=this.files[0].size/1024;
+  if (tamano<=1024) {
+    var form= new FormData();
+    var file= this.files[0];
+    var posicion= $(this).parent().find('.register');
+    var id=posicion.attr('id');
+    var valor=posicion.val();
+    form.append('file',file);
+    form.append('register',id);
+    form.append('valor',valor);
+    url="/admin/guardarImagen";
+    $.ajax({
+      url: url,
+      type: "post",
+      dataType: "json",
+      data: form,
+      cache: false,
+      contentType: false,
+      processData: false
+    })
+    .done(function(respuesta){
+      var ubicacion=respuesta[0];
+      var id=respuesta[1];
+      console.log(respuesta);
+      $("#"+ubicacion+"").val(id);
+      $("#radio-example-"+valor).val(id);
+    });
       var curElement = $(this).parent().parent().parent().parent().parent().parent().parent().find('.imgInmueble');
       var reader = new FileReader();
-
       reader.onload = function (e) {
           curElement.attr('src', e.target.result);
       };
       reader.readAsDataURL(this.files[0]);
-  });
-  $('body').on('submit','#picPropiety',function(e){
-    e.preventDefault();
-    var form= new FormData(document.getElementById("picPropiety"));
+  }
+  else {
+    swal({
+      title:'Error al cargar Imagen!!!',
+      text:"La imagen es demasiado pesada, debe pesar menos de 1mb",
+      icon:'error',
+      button:true,
+    });
+  }
+
+});
+$('body').on('submit','#picPropiety',function(e){
+  e.preventDefault();
+  var marcador=$('input[name=fotovisible]:checked');
+  if (marcador.length==1) {
+    var imgSelected=marcador.val();
+    var form= new FormData();
+    form.append('imgSelected',imgSelected);
     url="/admin/guardarInmueble";
     $.ajax({
       url: url,
@@ -202,6 +303,7 @@ $("#propietyEdit").validate({
       processData: false
     })
     .done(function(respuesta){
+      console.log(respuesta)
       if (respuesta==1) {
         swal({
           title:'Buen trabajo!!',
@@ -212,14 +314,33 @@ $("#propietyEdit").validate({
         });
         setTimeout(function(){location.href = "/admin/crear-inmueble-1";},2300); // 3000ms = 3
       }
+      else if(respuesta==2){
+        swal({
+          title:'Imposible realizar esa acción',
+          text:"El elemento que seleccione debe tener foto cargada",
+          icon:'error',
+          button:true
+        });
+      }
       else {
-        swal(
-          'Algo Sucedio',
-          'Intente guardar el inmueble nuevamente',
-          'error'
-        );
+        swal({
+          title:'Imposible realizar esa acción',
+          text:"Debe cargar al menos una foto para el inmueble",
+          icon:'error',
+          button:true
+        });
       }
     });
+  }
+  else {
+    swal({
+      title:'Imposible realizar esa acción',
+      text:"Debe seleccionar una foto como portada del inmueble",
+      icon:'error',
+      button:true
+    });
+  }
 
-  });
+
+});
 });

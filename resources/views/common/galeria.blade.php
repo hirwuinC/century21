@@ -4,12 +4,17 @@
             <div id="carousel-custom" class="carousel slide" data-ride="carousel">
                 <!-- Wrapper for slides -->
                 <div class="carousel-inner" role="listbox">
-                    <div class="item active">
-                        <img src="http://placehold.it/1400x600&text=slide1" alt="..." class="img-responsive">
-                    </div>
-                    <div class="item">
-                        <img src="http://placehold.it/1400x600&text=slide2" alt="..." class="img-responsive">
-                    </div>
+                  @foreach($imagenes as $imagen)
+                    @if($imagen->vista==1)
+                      <div class="item active inmueble">
+                          <img src="{{ asset('images/inmuebles/'.$imagen->nombre.'')}}" alt="..." class="img-responsive">
+                      </div>
+                    @else
+                      <div class="item inmueble">
+                          <img src="{{ asset('images/inmuebles/'.$imagen->nombre.'')}}" alt="..." class="img-responsive">
+                      </div>
+                    @endif
+                  @endforeach
                 </div>
                 <!-- Controls
                 <a class="left carousel-control" href="#carousel-custom" role="button" data-slide="prev">
@@ -22,12 +27,18 @@
                 </a>-->
                 <!-- Indicators -->
                 <ol class="carousel-indicators visible-sm-block hidden-xs-block visible-md-block visible-lg-block">
-                    <li data-target="#carousel-custom" data-slide-to="0" class="active">
-                        <img src="http://placehold.it/100x50&text=slide1" alt="..." class="img-responsive">
-                    </li>
-                    <li data-target="#carousel-custom" data-slide-to="1">
-                        <img src="http://placehold.it/100x50&text=slide2" alt="..." class="img-responsive">
-                    </li>
+                  <input type="hidden" value="{{$contador=0}}">
+                  @foreach($imagenes as $imagen)
+                    @if($imagen->vista==1)
+                      <li data-target="#carousel-custom" data-slide-to="{{$contador++}}" class="active">
+                          <img src="{{ asset('images/inmuebles/'.$imagen->nombre.'')}}" alt="..." class="img-responsive">
+                      </li>
+                    @else
+                      <li data-target="#carousel-custom" data-slide-to="{{$contador++}}">
+                          <img src="{{ asset('images/inmuebles/'.$imagen->nombre.'')}}" alt="..." class="img-responsive">
+                      </li>
+                    @endif
+                  @endforeach
                 </ol>
             </div>
 

@@ -22,7 +22,7 @@
                                 @else
                                   <li><p>Bs. {{$inmueble->precio}}</li>
                                 @endif
-                                <li><i class="fa fa-object-group" aria-hidden="true"></i> {{$inmueble->metros_construccion}}</li>
+                                <li><i class="fa fa-object-group" aria-hidden="true"></i> {{$inmueble->metros_construccion}} <span>Mts</span></li>
                                 <li><i class="fa fa-bed" aria-hidden="true"></i> {{$inmueble->habitaciones}}</li>
                                 <li><i class="fa fa-bath" aria-hidden="true"></i> {{$inmueble->banos}}</li>
                                 <li><i class="fa fa-car" aria-hidden="true"></i> {{$inmueble->estacionamientos}}</li>
@@ -79,23 +79,29 @@
             <!-- FEATURED PROPERTIES -->
             <section id="featuredProperties">
                 <div class="row">
-                    @for( $i = 0; $i< 3 ; $i++)
+                    @foreach($destacados as $destacado)
                         <div class="col-sm-12">
-                            @component('partials/inmueble')
-                                @slot('type')
-                                    @if($i % 2) Venta @else Alquiler @endif
-                                @endslot
-                                @slot('precio') 100.000.000 @endslot
-                                @slot('titulo') Residencias Mohecastel @endslot
-                                @slot('direccion')  Avenida Eugenio Mendoza, La Castellana @endslot
-                                @slot('metros')  120 @endslot
-                                @slot('baños')  1 @endslot
-                                @slot('cuartos')  2 @endslot
-                                @slot('estacionamientos') 2 @endslot
-                                @slot('img') img-demo.jpg @endslot
-                            @endcomponent
+                          @component('partials/inmueble')
+                              @slot('type'){{$destacado->tipoNegocio}} @endslot
+                              @slot('precio')
+                                @if($destacado->visible==1)
+                                  <p><span>Bsf.:</span>{{$destacado->precio}}<p>
+                                @else
+                                  <p>Consultar Precio<p>
+                                @endif
+                              @endslot
+                              @slot('titulo')
+                                <h4><a href="{{ route('detalle_inmueble',$destacado->id) }}">{{$destacado->urbanizacion}}</a></h4>
+                              @endslot
+                              @slot('direccion'){{$destacado->direccion}}@endslot
+                              @slot('metros'){{$destacado->metros_construccion}}@endslot
+                              @slot('baños') {{$destacado->banos}} @endslot
+                              @slot('cuartos') {{$destacado->habitaciones}}@endslot
+                              @slot('estacionamientos') {{$destacado->estacionamientos}} @endslot
+                              @slot('img')/inmuebles/{{$destacado->nombre_imagen}} @endslot
+                          @endcomponent
                         </div>
-                    @endfor
+                    @endforeach
                 </div>
             </section>
         </div>

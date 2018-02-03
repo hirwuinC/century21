@@ -277,6 +277,7 @@ $("#propietyCreate").validate({
         var id=respuesta[1];
         console.log(respuesta);
         $("#"+ubicacion+"").val(id);
+        $("#radio-example-"+valor).val(id);
       });
         var curElement = $(this).parent().parent().parent().parent().parent().parent().parent().find('.imgInmueble');
         var reader = new FileReader();
@@ -298,7 +299,7 @@ $("#propietyCreate").validate({
   $('body').on('submit','#picPropiety',function(e){
     e.preventDefault();
     var marcador=$('input[name=fotovisible]:checked');
-    if (marcador.length>0) {
+    if (marcador.length==1) {
       var imgSelected=marcador.val();
       var form= new FormData();
       form.append('imgSelected',imgSelected);
@@ -313,6 +314,7 @@ $("#propietyCreate").validate({
         processData: false
       })
       .done(function(respuesta){
+        console.log(respuesta)
         if (respuesta==1) {
           swal({
             title:'Buen trabajo!!',
@@ -323,10 +325,18 @@ $("#propietyCreate").validate({
           });
           setTimeout(function(){location.href = "/admin/crear-inmueble-1";},2300); // 3000ms = 3
         }
+        else if(respuesta==2){
+          swal({
+            title:'Imposible realizar esa acción',
+            text:"El elemento que seleccione debe tener foto cargada",
+            icon:'error',
+            button:true
+          });
+        }
         else {
           swal({
             title:'Imposible realizar esa acción',
-            text:"Debe cargar al menos una foto al inmueble",
+            text:"Debe cargar al menos una foto para el inmueble",
             icon:'error',
             button:true
           });

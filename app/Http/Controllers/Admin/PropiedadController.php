@@ -20,10 +20,17 @@ class PropiedadController extends Controller{
   public function ListaInmuebles(){
       $usuario=Session::get('asesor');
       if ($usuario->rol_id==1) {
-        $inmuebles=Propiedad::paginate(30);
+        $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
+                                           ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*')
+                                           ->where('medias.vista',1)
+                                           ->paginate(30);
       }
       else {
-        $inmuebles=Propiedad::where('agente_id',$usuario->agente_id)->paginate(30);
+        $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
+                                           ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*')
+                                           ->where('medias.vista',1)
+                                           ->where('propiedades.agente_id',$usuario->agente_id)
+                                           ->paginate(30);
       }
       return view('/admin/lista_inmuebles',$this->cargarSidebar(),compact('inmuebles','usuario'));
       //return $imagenes;
@@ -144,24 +151,56 @@ class PropiedadController extends Controller{
   }
 
   public function guardarInmueble(){
-    /*$respuesta=0;
+    $respuesta=0;
     $inmueble=Session::get('inmueble');
     $seleccionado=Request::get('imgSelected');
-    $marcado=Media::where('id',$seleccionado)->first();
+    $marcado=Media::where('propiedad_id',$inmueble)->where('vista',1)->first();
     $ultimo=Media::where('propiedad_id',$inmueble)->first();
-    if ($marcado->vista!=1) {
-      $img=Media::find($seleccionado);
-      $img->vista=1;
-      $img->save();
-      $cambio=
-    }
+
     if (count($ultimo)!=0) {
-      Propiedad::where('id',$inmueble)->update([
-        'cargado'=>1
-      ]);
-      Session::forget('inmueble');
-      $respuesta=1;
-    }*/
+      if (count($marcado)!=0) {
+        if ($marcado->id!=$seleccionado) {
+          $img=Media::find($marcado->id);
+          $img->vista=0;
+          $img->save();
+          $imgNew=Media::find($seleccionado);
+          $imgNew->vista=1;
+          $imgNew->save();
+          Propiedad::where('id',$inmueble)->update([
+            'cargado'=>1
+          ]);
+          Session::forget('inmueble');
+          $respuesta=1;
+        }
+        else{
+          $imgNew=Media::find($seleccionado);
+          $imgNew->vista=1;
+          $imgNew->save();
+          Propiedad::where('id',$inmueble)->update([
+            'cargado'=>1
+          ]);
+          Session::forget('inmueble');
+          $respuesta=1;
+        }
+      }
+      else {
+        $consulta=Media::where('id',$seleccionado)->first();
+        if (count($consulta)!=0) {
+          $imgNew=Media::find($seleccionado);
+          $imgNew->vista=1;
+          $imgNew->save();
+          Propiedad::where('id',$inmueble)->update([
+            'cargado'=>1
+          ]);
+          Session::forget('inmueble');
+          $respuesta=1;
+        }
+        else{
+          $respuesta=2;//El elemento marcado no tiene imagen asociada
+        }
+
+      }
+    }
     return $respuesta;
   }
 
@@ -223,10 +262,14 @@ class PropiedadController extends Controller{
               "tipo_inmueble"           =>  Request::get('typePropiety')
     ]);
     $respuesta=[1,$id];
+    Session::put('inmuebleEdit',$id);
     return $respuesta;
   }
   public function mostrarEditarInmueble2(){
-    return view('/admin/editar_inmueble_2',$this->cargarSidebar());
+    $inmueble=Session::get('inmuebleEdit');
+    $imagenes=Media::where('propiedad_id',$inmueble)->get();
+    $ultimo=Media::where('propiedad_id',$inmueble)->orderBy('id', 'desc')->first();
+    return view('/admin/editar_inmueble_2',$this->cargarSidebar(),compact('inmueble','imagenes','ultimo'));
   }
   public function prueba(){
         $consulta=uniqid();

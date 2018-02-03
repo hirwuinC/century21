@@ -23,7 +23,7 @@
                         {{$inmueble->id_mls}}
                       @endif
                     @endslot
-                    @slot('img') img-demo.jpg @endslot
+                    @slot('img') /inmuebles/{{$inmueble->nombre_imagen}} @endslot
                     @slot('editar')
                       @if($usuario->rol_id==1)
                         <a href="/admin/editar-inmueble1/{{$inmueble->id}}">

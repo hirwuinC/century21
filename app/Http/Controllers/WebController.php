@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Propiedad;
+use App\Models\Media;
 use Illuminate\Support\Facades\DB;
 class WebController extends Controller
 {
@@ -26,13 +27,13 @@ class WebController extends Controller
      */
     public function index()
     {
-        //$inmuebles=Propiedad::paginate(30);
+
         $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
                                            ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*')
                                            ->where('medias.vista',1)
                                            ->paginate(30);
         return view('home',compact('inmuebles'));
-        //return $inmuebles;
+
     }
 
     /**
@@ -73,7 +74,15 @@ class WebController extends Controller
                                          ->select('propiedades.*','agentes.fullname','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoInmueble.*')
                                          ->where('propiedades.id',$id)
                                          ->first();
-      return view('detalle_inmueble',compact('inmueble'));
+      $imagenes=Media::where('propiedad_id',$id)->get();
+      $destacados=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
+                                     ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*')
+                                     ->where('medias.vista',1)
+                                     ->inRandomOrder()
+                                     ->get()
+                                     ->take(3);
+      //return $destacados;
+      return view('detalle_inmueble',compact('inmueble','imagenes','destacados'));
     }
 
     /**
