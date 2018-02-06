@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$("#asesorCreate").validate({
-			onfocusout: true,
+			onfocusout: false,
 			rules: {
 				user: {
 					required:true,

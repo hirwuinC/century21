@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$("#perfilEdit").validate({
-			onfocusout: true,
+			onfocusout: false,
 			rules: {
 				pass:{
 					required:true,

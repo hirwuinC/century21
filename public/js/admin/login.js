@@ -1,6 +1,6 @@
 $(document).ready(function(){
 	$("#login-form").validate({
-			onfocusout: true,
+			onfocusout: false,
 			rules: {
 				usuario: {
 					required:true

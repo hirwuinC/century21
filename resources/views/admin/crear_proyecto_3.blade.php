@@ -9,7 +9,7 @@
           @foreach($imagenes as $imagen)
             @component('admin/partials/uploadImagen2')
               @slot('img')
-                /inmuebles/{{$imagen->nombre}}
+                /proyectos/{{$imagen->nombre}}
               @endslot
               @slot('contador')
               {{$imagen->id}}
@@ -39,7 +39,7 @@
                     <button id="redirectButtomAction1" type="button" class="btnGrayHight">ATRAS</button>
                 </div>
                 <div class="col-xs-3">
-                    <button type="submit" id="savePropiety" type="submit" class="btnYellow">Actualizar</button>
+                    <button type="submit" id="savePropiety" type="submit" class="btnYellow">Guardar</button>
                 </div>
             </div>
         </div>
@@ -48,9 +48,9 @@
 @endsection
 
 @section('js')
-<script type="text/javascript" src="{{ asset('js/admin/propiedades/editarinmueble.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/admin/proyectos/nuevoproyecto.js') }}"></script>
 <script>
-    var redirectButtomUrl1 = "{{ route('editar-inmueble-1',  Session::get('inmuebleEdit')) }}";
+    var redirectButtomUrl1 = "{{ route('crear-proyecto-2') }}";
     $('#redirectButtomAction1').on('click',function(){
         window.location.href = redirectButtomUrl1;
     })

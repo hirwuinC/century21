@@ -55,3 +55,16 @@ Route::post('/admin/actualizarInmueble', ['as' => 'actualizar-inmueble', 'uses' 
 Route::get('/admin/editar-inmueble2/{id}', ['as' => 'editar-inmueble-2', 'uses' => 'Admin\PropiedadController@mostrarEditarInmueble2']);
 Route::any('/admin/guardarImagen', ['as' => 'guardarImagen', 'uses' => 'Admin\PropiedadController@guardarImagen']);
 Route::any('/admin/borrarImagen', ['as' => 'borrarImagen', 'uses' => 'Admin\PropiedadController@borrarImagen']);
+
+//Proyectos
+Route::get('/admin/proyectos', ['as' => 'admin_lista_proyectos', 'uses' => 'Admin\ProyectoController@ListaProyectos']);
+Route::get('/admin/crear-proyectos-1', ['as' => 'crear-proyecto-1', 'uses' => 'Admin\ProyectoController@CrearProyecto1']);
+Route::get('/admin/crear-proyectos-2', ['as' => 'crear-proyecto-2', 'uses' => 'Admin\ProyectoController@CrearProyecto2']);
+Route::get('/admin/crear-proyectos-3', ['as' => 'crear-proyecto-3', 'uses' => 'Admin\ProyectoController@CrearProyecto3']);
+Route::any('/admin/cargarProyecto1', ['as' => 'cargarProyecto1', 'uses' => 'Admin\ProyectoController@cargarProyecto1']);
+Route::any('/admin/cargarInmuebleProyectos', ['as' => 'cargarInmuebleProyectos', 'uses' => 'Admin\ProyectoController@cargarInmuebleProyectos']);
+Route::any('/admin/borrarInmuebleProyectos', ['as' => 'borrarInmuebleProyectos', 'uses' => 'Admin\ProyectoController@borrarInmuebleProyectos']);
+Route::any('/admin/evaluarInmueble', ['as' => 'evaluarInmueble', 'uses' => 'Admin\ProyectoController@evaluarInmueble']);
+Route::any('/admin/guardarImagenProyecto', ['as' => 'guardarImagenProyecto', 'uses' => 'Admin\ProyectoController@guardarImagenProyecto']);
+Route::any('/admin/borrarImagenProyecto', ['as' => 'borrarImagenProyecto', 'uses' => 'Admin\ProyectoController@borrarImagenProyecto']);
+Route::any('/admin/guardarProyecto', ['as' => 'guardarProyecto', 'uses' => 'Admin\ProyectoController@guardarProyecto']);

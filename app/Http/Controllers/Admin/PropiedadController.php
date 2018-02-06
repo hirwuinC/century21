@@ -39,7 +39,8 @@ class PropiedadController extends Controller{
   public function CrearInmueble1(){
     $datos=[];
     $consulta=[];
-    $datos=Propiedad::where('cargado',0)->first();
+    $usuario=Session::get('asesor');
+    $datos=Propiedad::where('cargado',0)->where('cargadoPor',$usuario->id)->first();
     if (count($datos)!=0) {
       $consulta=Ciudad::where('estado_id',$datos->estado_id)->get();
     }
@@ -55,6 +56,7 @@ class PropiedadController extends Controller{
 
 
   public function cargarPropiedad(){
+    $usuario=Session::get('asesor');
     $inmuebleIncompleto=Request::get('register');
     if (empty($inmuebleIncompleto)==false) {
       $id=Request::get('register');
@@ -74,7 +76,8 @@ class PropiedadController extends Controller{
                   "estado_id"           =>  Request::get('estatePropiety'),
                   "ciudad_id"           =>  Request::get('cityPropiety'),
                   "direccion"           =>  Request::get('addressPropiety'),
-                  "posicionMapa"        =>  Request::get('positionPropiety')
+                  "posicionMapa"        =>  Request::get('positionPropiety'),
+                  "cargadoPor"          =>  $usuario->id
                 ]);
     }
     else {
@@ -94,7 +97,8 @@ class PropiedadController extends Controller{
                   "estado_id"           =>  Request::get('estatePropiety'),
                   "ciudad_id"           =>  Request::get('cityPropiety'),
                   "direccion"           =>  Request::get('addressPropiety'),
-                  "posicionMapa"        =>  Request::get('positionPropiety')
+                  "posicionMapa"        =>  Request::get('positionPropiety'),
+                  "cargadoPor"          =>  $usuario->id
       ]);
     }
     Session::put('inmueble',$id);
@@ -102,10 +106,12 @@ class PropiedadController extends Controller{
   }
 
   public function guardarImagen(){
+    $sesiones=['inmueble','inmuebleEdit'];
+    $desicion=Request::get('desicion');
     $archivo= Request::file('file');
     $ubicacion=Request::get('register');
     $idImagen=Request::get('valor');
-    $inmueble=Session::get('inmueble');
+    $inmueble=Session::get($sesiones[$desicion]);
     $extension = strtolower($archivo->getClientOriginalExtension());
     $renombre = uniqid().'.'.$extension;
     $path ="images/inmuebles";
@@ -130,8 +136,10 @@ class PropiedadController extends Controller{
   }
 
   public function borrarImagen(){
+    $sesiones=['inmueble','inmuebleEdit'];
+    $desicion=Request::get('desicion');
     $respuesta=0;
-    $inmueble=Session::get('inmueble');
+    $inmueble=Session::get($sesiones[$desicion]);
     $imagen= Request::get('registro');
     $consulta=Media::where('id',$imagen)->where('propiedad_id',$inmueble)->first();
     if (count($consulta)!=0) {
@@ -151,8 +159,10 @@ class PropiedadController extends Controller{
   }
 
   public function guardarInmueble(){
+    $sesiones=['inmueble','inmuebleEdit'];
+    $desicion=Request::get('desicion');
     $respuesta=0;
-    $inmueble=Session::get('inmueble');
+    $inmueble=Session::get($sesiones[$desicion]);
     $seleccionado=Request::get('imgSelected');
     $marcado=Media::where('propiedad_id',$inmueble)->where('vista',1)->first();
     $ultimo=Media::where('propiedad_id',$inmueble)->first();
@@ -169,7 +179,7 @@ class PropiedadController extends Controller{
           Propiedad::where('id',$inmueble)->update([
             'cargado'=>1
           ]);
-          Session::forget('inmueble');
+          Session::forget($sesiones[$desicion]);
           $respuesta=1;
         }
         else{
@@ -179,7 +189,7 @@ class PropiedadController extends Controller{
           Propiedad::where('id',$inmueble)->update([
             'cargado'=>1
           ]);
-          Session::forget('inmueble');
+          Session::forget($sesiones[$desicion]);
           $respuesta=1;
         }
       }
@@ -192,7 +202,7 @@ class PropiedadController extends Controller{
           Propiedad::where('id',$inmueble)->update([
             'cargado'=>1
           ]);
-          Session::forget('inmueble');
+          Session::forget($sesiones[$desicion]);
           $respuesta=1;
         }
         else{
@@ -233,6 +243,7 @@ class PropiedadController extends Controller{
   }
 
   public function mostrarEditarInmueble1($id){
+    Session::forget('inmuebleEdit');
     $propiedad=Propiedad::where('id',$id)->first();
     $tiposIn=TipoInmueble::all();
     $estados=Estado::all();
