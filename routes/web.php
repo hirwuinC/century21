@@ -68,3 +68,8 @@ Route::any('/admin/evaluarInmueble', ['as' => 'evaluarInmueble', 'uses' => 'Admi
 Route::any('/admin/guardarImagenProyecto', ['as' => 'guardarImagenProyecto', 'uses' => 'Admin\ProyectoController@guardarImagenProyecto']);
 Route::any('/admin/borrarImagenProyecto', ['as' => 'borrarImagenProyecto', 'uses' => 'Admin\ProyectoController@borrarImagenProyecto']);
 Route::any('/admin/guardarProyecto', ['as' => 'guardarProyecto', 'uses' => 'Admin\ProyectoController@guardarProyecto']);
+Route::get('/admin/editar-proyectos-1/{id}', ['as' => 'editar-proyecto-1', 'uses' => 'Admin\ProyectoController@editarProyecto1']);
+Route::get('/admin/editar-proyectos-2/{id}', ['as' => 'editar-proyecto-2', 'uses' => 'Admin\ProyectoController@editarProyecto2']);
+Route::get('/admin/editar-proyectos-3/{id}', ['as' => 'editar-proyecto-3', 'uses' => 'Admin\ProyectoController@editarProyecto3']);
+Route::any('/admin/actualizarProyecto1', ['as' => 'actualizarProyecto1', 'uses' => 'Admin\ProyectoController@actualizarProyecto1']);
+Route::get('/admin/proyecto/{id}', ['as' => 'admin_detalle_proyecto', 'uses' => 'Admin\ProyectoController@detalleProyecto']);

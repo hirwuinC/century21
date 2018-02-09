@@ -14,7 +14,7 @@
                     @endslot
                     @slot('img') /proyectos/{{$proyecto->nombre_imagen}} @endslot
                     @slot('editar')
-                        <a href="/admin/editar-proyecto-1/{{$proyecto->id}}">
+                        <a href="/admin/editar-proyectos-1/{{$proyecto->id}}">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
                         </a>
                     @endslot

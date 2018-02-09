@@ -686,9 +686,11 @@ footer .copyright ul li a {
   overflow: hidden;
   position: relative;
   margin-bottom: 25px;
+  height: 220px;
+  width: 360px;
 }
 .thumbProject img {
-  height: auto;
+  height: 100%;
   width: 100%;
 }
 .thumbProject .caption {

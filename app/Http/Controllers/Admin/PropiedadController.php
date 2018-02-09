@@ -33,7 +33,6 @@ class PropiedadController extends Controller{
                                            ->paginate(30);
       }
       return view('/admin/lista_inmuebles',$this->cargarSidebar(),compact('inmuebles','usuario'));
-      //return $imagenes;
   }
 
   public function CrearInmueble1(){
@@ -49,6 +48,7 @@ class PropiedadController extends Controller{
     $asesores=Agente::all();
     return view('/admin/crear_inmueble_1',$this->cargarSidebar(),compact('tiposIn','estados','asesores','datos','consulta'));
   }
+
   public function listarCiudades(){
     $estado=Request::get('estado');
     return $this->cargarCiudades($estado);
@@ -57,6 +57,7 @@ class PropiedadController extends Controller{
 
   public function cargarPropiedad(){
     $usuario=Session::get('asesor');
+    $proximoInforme=date('Y-m-d', strtotime('+1 month'));
     $inmuebleIncompleto=Request::get('register');
     if (empty($inmuebleIncompleto)==false) {
       $id=Request::get('register');
@@ -98,7 +99,8 @@ class PropiedadController extends Controller{
                   "ciudad_id"           =>  Request::get('cityPropiety'),
                   "direccion"           =>  Request::get('addressPropiety'),
                   "posicionMapa"        =>  Request::get('positionPropiety'),
-                  "cargadoPor"          =>  $usuario->id
+                  "cargadoPor"          =>  $usuario->id,
+                  "proximoInforme"      =>  $proximoInforme
       ]);
     }
     Session::put('inmueble',$id);
@@ -239,7 +241,9 @@ class PropiedadController extends Controller{
                                        ->select('propiedades.*','agentes.fullname','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoInmueble.*')
                                        ->where('propiedades.id',$id)
                                        ->get();
-    return view('/admin/detalle_inmueble',$this->cargarSidebar(),compact('inmuebles','usuario','negociacion'));
+
+    $imagen=Media::where('propiedad_id',$id)->where('vista',1)->first();
+    return view('/admin/detalle_inmueble',$this->cargarSidebar(),compact('inmuebles','usuario','negociacion','imagen'));
   }
 
   public function mostrarEditarInmueble1($id){

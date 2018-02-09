@@ -14,6 +14,7 @@
                       $inmueble->id_mls
                     @endif
                   </p>
+                  <p><span>Código Interno:</span> {{$inmueble->id}}</p>
                   <p><span>Tipo de Negociacion:</span> {{$inmueble->tipoNegocio}}</p>
                   <p><span>Tipo de Inmueble:</span> {{$inmueble->nombre}}</p>
                   <p><span>Precio: Bs</span> {{$inmueble->precio}}</p>
@@ -28,8 +29,8 @@
                   <p><span>Ciudad:</span> {{$inmueble->nombre_ciudad}}</p>
                   <p><span>Urbanización:</span> {{$inmueble->urbanizacion}}</p>
               </div>
-              <div class="col-xs-4">
-                  <img src="{{ asset('images/img-demo.jpg')}}" alt="">
+              <div class="col-xs-4 cont-imagen">
+                  <img src="{{ asset('images/inmuebles')}}/{{$imagen->nombre}}" alt="">
               </div>
           </div>
           <h2 class="titleSection">DESCRIPCIÓN DEL INMUEBLE</h2>
@@ -82,7 +83,7 @@
             <div class="row">
                 <div class="col-xs-9">
                     <div class="alert alertGreen" role="alert">
-                        <h5>Próximo informe debe ser enviando antes de: <span>16/12/2012</span></h5>
+                        <h5>Próximo informe debe ser enviando antes de: <span>{{$inmueble->proximoInforme}}</span></h5>
                     </div>
                 </div>
                 <div class="col-xs-3">

@@ -28,11 +28,23 @@ class WebController extends Controller
     public function index()
     {
 
-        $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
+      $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
                                            ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*')
                                            ->where('medias.vista',1)
-                                           ->paginate(30);
-        return view('home',compact('inmuebles'));
+                                           ->where('destacado',1)
+                                           ->inRandomOrder()
+                                           ->get()
+                                           ->take(30);
+                                           
+     $proyectos=DB::table('proyectos')->Join('mediaProyectos','proyectos.id','mediaProyectos.proyecto_id')
+                                           ->join('ciudades','proyectos.ciudad_id','ciudades.id')
+                                           ->select('mediaProyectos.nombre as nombre_imagen','mediaProyectos.proyecto_id','mediaProyectos.id as id_imagen','proyectos.*','ciudades.nombre as nombre_ciudad')
+                                           ->where('mediaProyectos.vista',1)
+                                           ->where('destacado',1)
+                                           ->inRandomOrder()
+                                           ->get()
+                                           ->take(3);
+     return view('home',compact('inmuebles','proyectos'));
 
     }
 

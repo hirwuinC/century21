@@ -1019,6 +1019,11 @@ textarea:focus {
   border: #f1b311 3px solid;
   margin: 0 20px;
 }
+.sidebar-nav .contentAvatar span img{
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
+}
 .sidebar-nav .contentAvatar p {
   margin-top: 20px;
 }
@@ -1067,4 +1072,46 @@ textarea:focus {
 .sidebar-nav .nav-list li a:hover {
   background: #cccccc !important;
   color: #333333 !important;
+}
+.infoDetailProperties h2 {
+  font-size: 2em;
+  margin-bottom: 5px;
+  font-family: 'latobold';
+  color: #242424;
+}
+.infoDetailProperties h3 {
+  font-size: 2em;
+  margin: 5px 0 20px 0;
+  font-family: 'latoregular';
+}
+.infoDetailProperties p {
+  font-size: 1em;
+  font-family: 'latolight';
+}
+.infoDetailProperties .descriptionProperties {
+  margin-bottom: 45px;
+}
+.infoDetailProperties .descriptionProperties p {
+  font-size: 1em;
+  font-family: 'latolight';
+  color: #242424;
+  line-height: 2em;
+  margin-bottom: 25px;
+}
+.infoDetailProperties .descriptionProperties .characteristicsProperties ul {
+  padding: 0;
+  margin: 0 0 30px 0;
+}
+.infoDetailProperties .descriptionProperties .characteristicsProperties ul li {
+  display: inline-block;
+  text-align: center;
+  margin-right: 40px;
+}
+.infoDetailProperties .descriptionProperties .characteristicsProperties ul li p {
+  padding: 10px 15px;
+  background: #f0b310;
+  display: block;
+  margin: 0;
+  font-family: 'latobold';
+  font-size: 1.2em;
 }

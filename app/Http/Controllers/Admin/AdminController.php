@@ -21,7 +21,11 @@ class AdminController extends Controller{
   public function ingresar(){
     $usuario = Request::get('usuario');
     $pass = Request::get('password');
-    $consulta = User::where('name',$usuario)->first();
+    $consulta = DB::table('users')->join('agentes','users.agente_id','agentes.id')
+                                  ->join('imagenes','agentes.imagen_id','=','imagenes.id')
+                                  ->select('users.*','imagenes.id as id_imagen','imagenes.src as nombre_imagen','agentes.id as asesor_id','agentes.fullname as nombre_asesor')
+                                  ->where('users.name',$usuario)
+                                  ->first();
     $respuesta=[0];
     if(count($consulta)!=0){
       $password=Crypt::decryptString($consulta->password);

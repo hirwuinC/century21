@@ -65,10 +65,7 @@
                     @endcomponent
                 </div>
             @endforeach
-        </div>
-        <div class="row">
-          <center>{{$inmuebles->links()}}</center>
-        </div>
+      </div>
     </div>
     </section>
 @endsection

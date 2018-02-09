@@ -6,14 +6,14 @@
             </div>
         </div>
         <div class="row">
-            @for( $i = 0; $i< 3 ; $i++)
+            @foreach($proyectos as $proyecto)
                 @component('partials/proyecto')
-                    @slot('title') Flamingo Cerro Alto @endslot
-                    @slot('zone') San Antonio de los Altos @endslot
-                    @slot('img') img-demo.jpg @endslot
-                    @slot('url') # @endslot
+                    @slot('title') {{$proyecto->nombreProyecto}} @endslot
+                    @slot('zone') {{$proyecto->nombre_ciudad}} @endslot
+                    @slot('img') {{$proyecto->nombre_imagen}} @endslot
+                    @slot('url'){{$proyecto->id}}  @endslot
                 @endcomponent
-            @endfor
+            @endforeach
         </div>
     </div>
 </section>
