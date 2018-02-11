@@ -53,6 +53,7 @@ class ProyectoController extends Controller{
                   "ciudad_id"           =>  Request::get('cityProyect'),
                   "direccionProyecto"   =>  Request::get('addressProyect'),
                   "posicionMapa"        =>  Request::get('positionPropiety'),
+                  "destacado"           =>  Request::get('destacado'),
                   "cargadoPor"          =>  $usuario->id
                 ]);
     }
@@ -67,6 +68,7 @@ class ProyectoController extends Controller{
         "ciudad_id"           =>  Request::get('cityProyect'),
         "direccionProyecto"   =>  Request::get('addressProyect'),
         "posicionMapa"        =>  Request::get('positionPropiety'),
+        "destacado"           =>  Request::get('destacado'),
         "cargadoPor"          =>  $usuario->id
       ]);
     }
@@ -279,7 +281,8 @@ class ProyectoController extends Controller{
                 "estado_id"           =>  Request::get('estateProyect'),
                 "ciudad_id"           =>  Request::get('cityProyect'),
                 "direccionProyecto"   =>  Request::get('addressProyect'),
-                "posicionMapa"        =>  Request::get('positionPropiety')
+                "posicionMapa"        =>  Request::get('positionPropiety'),
+                "destacado"           =>  Request::get('destacado'),
               ]);
     $respuesta=$id;
     Session::put('proyectoEdit',$id);

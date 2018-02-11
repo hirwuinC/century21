@@ -10,7 +10,7 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-4">
               <select name="typeBussisness" id="typeBussisness">
                   <option value="">Tipo de Negociación</option>
                   @if($proyecto->tipoNegocio=="alquiler")
@@ -22,8 +22,18 @@
                   @endif
               </select>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-4">
                 <input type="text" class="inputs inputsLight form-control" name="nameProyect" id="nameProyect" value='{{$proyecto->nombreProyecto}}' placeholder="Nombre del inmueble">
+            </div>
+            <div class="col-xs-4">
+                <div class="styled-input-single">
+                  @if($proyecto->destacado==1)
+                    <input type="checkbox" name="destacado" value="1" checked="checked" id="checkbox-example-two" />
+                  @else
+                    <input type="checkbox" name="destacado" value="1" id="checkbox-example-two" />
+                  @endif
+                   <label for="checkbox-example-two">¿Proyecto Destacado?</label>
+                </div>
             </div>
         </div>
         <div class="row">

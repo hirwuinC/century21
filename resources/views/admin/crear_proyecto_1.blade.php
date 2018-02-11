@@ -11,15 +11,21 @@
     <div class="row">
         <div class="col-xs-12">
             <div class="row">
-                <div class="col-xs-6">
+                <div class="col-xs-4">
                   <select name="typeBussisness" id="typeBussisness" >
                       <option value="" selected >Tipo de Negociación</option>
                       <option value="alquiler">Alquiler</option>
                       <option value="venta">Venta</option>
                   </select>
                 </div>
-                <div class="col-xs-6">
+                <div class="col-xs-4">
                     <input type="text" class="inputs inputsLight form-control" name="nameProyect" id="nameProyect" value="" placeholder="Nombre del inmueble">
+                </div>
+                <div class="col-xs-4">
+                    <div class="styled-input-single">
+                      <input type="checkbox" name="destacado" value="1" id="checkbox-example-two" />
+                      <label for="checkbox-example-two">¿Proyecto Destacado?</label>
+                    </div>
                 </div>
             </div>
             <div class="row">
@@ -71,7 +77,7 @@
 <div class="row">
     <div class="col-xs-12">
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-4">
               <select name="typeBussisness" id="typeBussisness">
                   <option value="">Tipo de Negociación</option>
                   @if($datos->tipoNegocio=="alquiler")
@@ -83,8 +89,18 @@
                   @endif
               </select>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-4">
                 <input type="text" class="inputs inputsLight form-control" name="nameProyect" id="nameProyect" value='{{$datos->nombreProyecto}}' placeholder="Nombre del inmueble">
+            </div>
+            <div class="col-xs-4">
+                <div class="styled-input-single">
+                  @if($datos->destacado==1)
+                    <input type="checkbox" name="destacado" value="1" checked="checked" id="checkbox-example-two" />
+                  @else
+                    <input type="checkbox" name="destacado" value="1" id="checkbox-example-two" />
+                  @endif
+                   <label for="checkbox-example-two">¿Proyecto Destacado?</label>
+                </div>
             </div>
         </div>
         <div class="row">

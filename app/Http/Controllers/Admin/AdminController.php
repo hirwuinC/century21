@@ -62,6 +62,15 @@ class AdminController extends Controller{
     {
         return view('/admin/lista_agentes',$this->cargarSidebar());
     }
+    public function salir(){
+      Session::forget('asesor');
+      Session::forget('usuario');
+      Session::forget('pass');
+      Session::forget('permisos');
+      Session::forget('submodulos');
+      $respuesta =1;
+      return $respuesta;
+    }
 
 
 }

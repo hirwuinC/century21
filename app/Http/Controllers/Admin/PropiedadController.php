@@ -78,6 +78,7 @@ class PropiedadController extends Controller{
                   "ciudad_id"           =>  Request::get('cityPropiety'),
                   "direccion"           =>  Request::get('addressPropiety'),
                   "posicionMapa"        =>  Request::get('positionPropiety'),
+                  "destacado"           =>  Request::get('destacado'),
                   "cargadoPor"          =>  $usuario->id
                 ]);
     }
@@ -99,6 +100,7 @@ class PropiedadController extends Controller{
                   "ciudad_id"           =>  Request::get('cityPropiety'),
                   "direccion"           =>  Request::get('addressPropiety'),
                   "posicionMapa"        =>  Request::get('positionPropiety'),
+                  "destacado"           =>  Request::get('destacado'),
                   "cargadoPor"          =>  $usuario->id,
                   "proximoInforme"      =>  $proximoInforme
       ]);
@@ -274,6 +276,7 @@ class PropiedadController extends Controller{
               "estacionamientos"        =>  Request::get('parkingPropiety'),
               "comentario"              =>  Request::get('descriptionPropiety'),
               "agente_id"               =>  Request::get('asesorPropiety'),
+              "destacado"               =>  Request::get('destacado'),
               "tipo_inmueble"           =>  Request::get('typePropiety')
     ]);
     $respuesta=[1,$id];

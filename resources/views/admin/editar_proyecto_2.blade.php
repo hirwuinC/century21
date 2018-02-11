@@ -27,7 +27,7 @@
               </div>
               <div class="col-xs-4">
                   <ul class="viewRadio">
-                      <li><h6>Visible</h6></li>
+                      <li><h6>Precio visible</h6></li>
                       <li>
                           <div class="styled-input-single">
                               <input type="radio" name="visiblePrice" value="1" id="radio-example-one" checked="checked"/>

@@ -64,12 +64,12 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-6">
-                <input type="number" class="inputs inputsLight form-control" value='{{$propiedad->precio}}' name="pricePropiety" id="pricePropiety" placeholder="Precio">
+            <div class="col-xs-4">
+                <input type="number" min="0" class="inputs inputsLight form-control" value='{{$propiedad->precio}}' name="pricePropiety" id="pricePropiety" placeholder="Precio">
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-4">
                 <ul class="viewRadio">
-                    <li><h6>Visible</h6></li>
+                    <li><h6>Precio visible</h6></li>
                     @if($propiedad->visible==1)
                       <li>
                           <div class="styled-input-single">
@@ -99,24 +99,34 @@
                     @endif
                 </ul>
             </div>
+            <div class="col-xs-4">
+                <div class="styled-input-single">
+                  @if($propiedad->destacado==1)
+                    <input type="checkbox" name="destacado" value="1" checked="checked" id="checkbox-example-two" />
+                  @else
+                    <input type="checkbox" name="destacado" value="1" id="checkbox-example-two" />
+                  @endif
+                   <label for="checkbox-example-two">¿Inmueble Destacado?</label>
+                </div>
+            </div>
         </div>
         <div class="row">
           <div class="col-xs-6">
-              <input type="number" class="inputs inputsLight form-control" value='{{$propiedad->metros_construccion}}' name="constructionPropiety" id="constructionPropiety" placeholder="Construcción (Mtr2)">
+              <input type="number" min="0" class="inputs inputsLight form-control" value='{{$propiedad->metros_construccion}}' name="constructionPropiety" id="constructionPropiety" placeholder="Construcción (Mtr2)">
           </div>
           <div class="col-xs-6">
-              <input type="number" class="inputs inputsLight form-control" value='{{$propiedad->metros_terreno}}' name="areaPropiety" id="areaPropiety" placeholder="Terreno (Mtr2)">
+              <input type="number" min="0" class="inputs inputsLight form-control" value='{{$propiedad->metros_terreno}}' name="areaPropiety" id="areaPropiety" placeholder="Terreno (Mtr2)">
           </div>
         </div>
         <div class="row">
             <div class="col-xs-4">
-                <input type="number" class="inputs inputsLight form-control" value='{{$propiedad->habitaciones}}' id="roomPropiety"name="roomPropiety" placeholder="Habitaciones">
+                <input type="number" min="0" class="inputs inputsLight form-control" value='{{$propiedad->habitaciones}}' id="roomPropiety"name="roomPropiety" placeholder="Habitaciones">
             </div>
             <div class="col-xs-4">
-                <input type="number" class="inputs inputsLight form-control" value='{{$propiedad->banos}}' id="batroomPropiety" name="batroomPropiety" placeholder="Baños">
+                <input type="number" min="0" class="inputs inputsLight form-control" value='{{$propiedad->banos}}' id="batroomPropiety" name="batroomPropiety" placeholder="Baños">
             </div>
             <div class="col-xs-4">
-                <input type="number" class="inputs inputsLight form-control" value='{{$propiedad->estacionamientos}}' id="parkingPropiety" name="parkingPropiety" placeholder="Estacionamiento (Cantidad de Puestos)">
+                <input type="number" min="0" class="inputs inputsLight form-control" value='{{$propiedad->estacionamientos}}' id="parkingPropiety" name="parkingPropiety" placeholder="Estacionamiento (Cantidad de Puestos)">
             </div>
         </div>
         <div class="row">
