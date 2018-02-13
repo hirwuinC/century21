@@ -14,7 +14,7 @@
 Auth::routes();
 
 // Cliente
-Route::get('/prueba', ['as' => 'home', 'uses' => 'Admin\PropiedadController@prueba']);
+Route::get('/pdf', ['as' => 'pdf', 'uses' => 'Controller@pruebaPDF']);
 Route::get('/', ['as' => 'home', 'uses' => 'WebController@index']);
 Route::get('/buscador', ['as' => 'buscador', 'uses' => 'WebController@buscador']);
 Route::get('/proyectos', ['as' => 'proyectos', 'uses' => 'WebController@lista_proyectos']);

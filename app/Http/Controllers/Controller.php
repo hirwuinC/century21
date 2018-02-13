@@ -10,7 +10,10 @@ use App\Models\Agente;
 use App\Models\User;
 use App\Models\Ciudad;
 use Illuminate\Support\Facades\Session;
-use Illuminate\Support\Facades\Request;
+//use Illuminate\Support\Facades\Request;
+use App\Http\Requests;
+use Illuminate\Http\Request;
+use PDF;
 
 class Controller extends BaseController{
 
@@ -26,6 +29,17 @@ class Controller extends BaseController{
   public function cargarCiudades($estado){
     $ciudades=Ciudad::where('estado_id',$estado)->get();
     return compact('ciudades');
+  }
+  public function pruebaPDF(Request $request){
+    if($request->has('download')){
+         // Set extra option
+         //PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+         // pass view file
+           $pdf = PDF::loadView('pdf');
+           // download pdf
+           return @$pdf->stream('pdf');
+       }
+    return view('pdf');
   }
 
 }

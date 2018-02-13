@@ -12,10 +12,7 @@
                 <input type="search" class="inputs form-control" id="exampleInputSearch" placeholder="Nombre del Asesor">
                 <input type="hidden" id="valor">
                 <ul class="register-list">
-
                 </ul>
-
-
             </div>
         </div>
     </div>

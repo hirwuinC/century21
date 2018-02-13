@@ -159,7 +159,6 @@
     $('#positionPropiety').val(position);
   }
 </script>
-<script type="text/javascript" src="{{ asset('js/admin/propiedades/nuevoinmueble.js') }}"></script>
     <script async defer
    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG6RQhkoAPuKs-2VSCbNisZ0NQt5Qf3Co&callback=initMap">
    </script>
