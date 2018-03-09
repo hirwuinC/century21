@@ -8,14 +8,14 @@
             <div class="modal-body">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs marginForm" role="tablist">
-                    <li role="presentation" class="active"><a href="#home" aria-controls="home" role="tab" data-toggle="tab">NUEVA NEGOCIACIÓN</a></li>
-                    <li role="presentation" style="display:none;"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">NEGOCIACIÓN EN CURSO</a></li>
+                    <li role="presentation" ><a href="#home" aria-controls="home" role="tab" data-toggle="tab">NUEVA NEGOCIACIÓN</a></li>
+                    <li role="presentation" class="active"><a href="#profile" aria-controls="profile" role="tab" data-toggle="tab">NEGOCIACIÓN EN CURSO</a></li>
                     <li role="presentation"><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab">HISTORIAL DE NEGOCIACIONES</a></li>
                 </ul>
 
                 <!-- Tab panes -->
                 <div class="tab-content marginForm">
-                    <div role="tabpanel" class="tab-pane active" id="home">
+                    <div role="tabpanel" class="tab-pane " id="home">
                         <form action="" class="newNegotation">
                             <div class="row marginBottom20">
                                 <div class="col-xs-6">
@@ -61,9 +61,122 @@
                             </div>
                         </form>
                     </div>
-                    <div role="tabpanel" class="tab-pane" id="profile">
-                        2
+
+                    <div role="tabpanel" class="tab-pane active" id="profile">
+                      <div class="row cont-negotiation">
+                        <div class="col-xs-3">
+                          <div class="row">
+                              <div class="col-xs-12">
+                                  <div class="styled-input-single ">
+                                      <input type="checkbox" name="" id="publicarInmueble" />
+                                      <label for="publicarInmueble">¿Dejar de publicar inmueble?</label>
+                                  </div>
+                              </div>
+                          </div>
+                          <div class="row ">
+                              <div class="col-xs-12">
+                                  <button type="button" class="btnRed">Cancelar Negociación</button>
+                              </div>
+                          </div>
+                        </div>
+                        <div class="col-xs-9 newNegotation">
+                          <div class="title-progress" style="text-align:center;">
+                              <span>Progreso de Negociación<span>
+                          </div>
+                          <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+                              <div class="panel panel-default">
+                                  <div class="panel-heading" role="tab" id="paso1">
+                                      <h4 class="panel-title">
+                                          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#paso1collapse" aria-expanded="true" aria-controls="paso1collapse">
+                                              Propuesta de compra aprobada
+                                          </a>
+                                      </h4>
+                                  </div>
+                                  <div id="paso1collapse" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="paso1collapse">
+                                      <div class="panel-body">
+                                        <div class="row marginBottom20">
+                                            <div class="col-xs-8">
+                                                <label for="datePropuesta">Fecha de aprobacion de propuesta</label>
+                                                <input type="date" class="form-control" id="datePropuesta">
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <button class="btnYellow" type="button">Guardar</button>
+                                            </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="panel panel-default">
+                                  <div class="panel-heading" role="tab" id="paso2">
+                                      <h4 class="panel-title">
+                                          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#paso2collapse" aria-expanded="false" aria-controls="paso2collapse">
+                                              Depósito en garantía
+                                          </a>
+                                      </h4>
+                                  </div>
+                                  <div id="paso2collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="paso2">
+                                      <div class="panel-body">
+                                        <div class="row marginBottom20">
+                                            <div class="col-xs-8">
+                                                <label for="dateGarantia">Fecha de depósito en garantía</label>
+                                                <input type="date" class="form-control" id="dateGarantia">
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <button class="btnYellow" type="button">Guardar</button>
+                                            </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="panel panel-default">
+                                  <div class="panel-heading" role="tab" id="paso3">
+                                      <h4 class="panel-title">
+                                          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#paso3collapse" aria-expanded="false" aria-controls="paso3collapse">
+                                              Promesa Bilateral
+                                          </a>
+                                      </h4>
+                                  </div>
+                                  <div id="paso3collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="paso3">
+                                      <div class="panel-body">
+                                        <div class="row marginBottom20">
+                                            <div class="col-xs-8">
+                                                <label for="dateBilateral">Fecha de promesa bilateral</label>
+                                                <input type="date" class="form-control" id="dateBilateral">
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <button class="btnYellow" type="button">Guardar</button>
+                                            </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="panel panel-default">
+                                  <div class="panel-heading" role="tab" id="paso4">
+                                      <h4 class="panel-title">
+                                          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#paso4collapse" aria-expanded="false" aria-controls="paso4collapse">
+                                              Firma Registro
+                                          </a>
+                                      </h4>
+                                  </div>
+                                  <div id="paso4collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="paso4">
+                                      <div class="panel-body">
+                                        <div class="row marginBottom20">
+                                            <div class="col-xs-8">
+                                                <label for="dateBilateral">Fecha de firma en registro</label>
+                                                <input type="date" class="form-control" id="dateRegistro">
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <button class="btnYellow" type="button">Guardar</button>
+                                            </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
+
                     <div role="tabpanel" class="tab-pane" id="messages">
                         <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
                             <div class="panel panel-default">

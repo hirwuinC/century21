@@ -31,15 +31,6 @@ class Controller extends BaseController{
     return compact('ciudades');
   }
   public function pruebaPDF(Request $request){
-    if($request->has('download')){
-         // Set extra option
-         //PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
-         // pass view file
-           $pdf = PDF::loadView('pdf');
-           // download pdf
-           return @$pdf->stream('pdf');
-       }
-    return view('pdf');
+     return ('hola');
   }
-
 }

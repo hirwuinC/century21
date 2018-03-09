@@ -177,8 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Collective\Html\HtmlServiceProvider::class,
-        Barryvdh\DomPDF\ServiceProvider::class
+        Collective\Html\HtmlServiceProvider::class
     ],
 
     /*
@@ -228,8 +227,7 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => 'Collective\Html\FormFacade',
-        'Html' => 'Collective\Html\HtmlFacade',
-        'PDF' => Barryvdh\DomPDF\Facade::class
+        'Html' => 'Collective\Html\HtmlFacade'
     ],
 
 ];
