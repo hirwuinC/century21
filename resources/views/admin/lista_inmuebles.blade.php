@@ -33,7 +33,7 @@
                     @endslot
                     @slot('cambioEstatus')
                       @if($usuario->rol_id==1)
-                        <button type="button" class="btnAcction" data-toggle="modal" data-target="#cambioStatus">
+                        <button type="button" class="btnAcction cambioEstatus"  data-toggle="modal" data-target="#cambioStatus">
                             Cambiar Estatus
                         </button>
                       @endif
@@ -57,4 +57,5 @@
             window.location.href = redirectUrlDetalleInmueble;
         })
     </script>
+    <script type="text/javascript" src="{{ asset('js/admin/estatus.js') }}"></script>
 @endSection

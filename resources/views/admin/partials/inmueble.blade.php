@@ -23,6 +23,7 @@
                 <div class="row">
                     <div class="col-xs-12">
                         <div class="col-xs-6">
+                            <input type="hidden" class="inmueble" value="{{$id}}">
                             {{$cambioEstatus}}
                         </div>
                         <div class="col-xs-6">

@@ -25,7 +25,8 @@ $(document).ready(function(){
         url:   url,
         type:  'post',
         success:  function (response) {
-        	if (response[0]==1) {
+					console.log(response);
+					if (response[0]==1) {
 						swal({
 							title:'Bienvenido',
 						  text:response[1],

@@ -18,20 +18,10 @@
                     <div role="tabpanel" class="tab-pane " id="home">
                         <form action="" class="newNegotation">
                             <div class="row marginBottom20">
-                                <div class="col-xs-6">
-                                    <div class="styled-input-single right">
-                                        <input type="checkbox" name="fieldset-5" id="checkbox-example-two" />
-                                        <label for="checkbox-example-two">¿Compartido?</label>
-                                    </div>
-                                </div>
-                                <div class="col-xs-6">
-                                    <input type="text" class="form-control" placeholder="% de comisión compartida">
-                                </div>
-                            </div>
-                            <div class="row marginBottom20">
                                 <div class="col-xs-12">
-                                    <select class="" name="">
-                                        <option value="">Tipo de negociación</option>
+                                  <label for="asesorCerrador">Asesor cerrador de la operación</label>
+                                    <select id="asesorCerrador" class="" name="">
+                                        <option value="">Seleccione un asesor</option>
                                         <option value="TW">Venta</option>
                                         <option value="TH">Alquiler</option>
                                     </select>
@@ -39,16 +29,19 @@
                             </div>
                             <div class="row marginBottom20">
                                 <div class="col-xs-12">
+                                    <label for="">Porcentaje de comisión compartida</label>
+                                    <input type="text" class="form-control" placeholder="% de comisión compartida">
+                                </div>
+                            </div>
+                            <div class="row marginBottom20">
+                                <div class="col-xs-12">
+                                    <label for="">Monto final de la negociación</label>
                                     <input type="text" class="form-control" placeholder="Monto final de negociación">
                                 </div>
                             </div>
                             <div class="row marginBottom20">
                                 <div class="col-xs-12">
-                                    <input type="text" class="form-control" placeholder="% comisión de captación">
-                                </div>
-                            </div>
-                            <div class="row marginBottom20">
-                                <div class="col-xs-12">
+                                    <label for="">Porcentaje de comisión de Cierre</label>
                                     <input type="text" class="form-control" placeholder="% de comisión de cierre">
                                 </div>
                             </div>
@@ -164,6 +157,28 @@
                                             <div class="col-xs-8">
                                                 <label for="dateBilateral">Fecha de firma en registro</label>
                                                 <input type="date" class="form-control" id="dateRegistro">
+                                            </div>
+                                            <div class="col-xs-4">
+                                                <button class="btnYellow" type="button">Guardar</button>
+                                            </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="panel panel-default">
+                                  <div class="panel-heading" role="tab" id="paso5">
+                                      <h4 class="panel-title">
+                                          <a role="button" data-toggle="collapse" data-parent="#accordion" href="#paso5collapse" aria-expanded="false" aria-controls="paso5collapse">
+                                              Reporte de Inmueble Vendido
+                                          </a>
+                                      </h4>
+                                  </div>
+                                  <div id="paso5collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="paso5">
+                                      <div class="panel-body">
+                                        <div class="row marginBottom20">
+                                            <div class="col-xs-8">
+                                                <label for="dateBilateral">Fecha de reporte de inmueble</label>
+                                                <input type="date" class="form-control" id="dateReporte">
                                             </div>
                                             <div class="col-xs-4">
                                                 <button class="btnYellow" type="button">Guardar</button>
