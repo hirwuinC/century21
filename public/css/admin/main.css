@@ -1130,3 +1130,6 @@ textarea:focus {
   font-family: 'latobold';
   font-size: 1.2em;
 }
+.error{
+  color: #E53935;
+}

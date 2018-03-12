@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use App\Models\Estado;
@@ -217,24 +218,8 @@ class PropiedadController extends Controller{
     }
     return $respuesta;
   }
-  public function llenarModalNegociacion(){
-    $propuesta=(object)["negociacion_id"=>"","estatus_id"=>"","fechaEstatus"=>""];
-    $idInmueble=Request::get('parametro');
-    $consulta=Negociacion::where('propiedad_id',$idInmueble)->where('estatus',8)->first();
-    if(count($consulta)!=0){
-      $propuesta=(object)["negociacion_id"=>"","estatus_id"=>"","fechaEstatus"=>""];
-      $deposito=(object)["negociacion_id"=>"","estatus_id"=>"","fechaEstatus"=>""];
-      $promesa=(object)["negociacion_id"=>"","estatus_id"=>"","fechaEstatus"=>""];
-      $protocolo=(object)["negociacion_id"=>"","estatus_id"=>"","fechaEstatus"=>""];
-      $reporte=(object)["negociacion_id"=>"","estatus_id"=>"","fechaEstatus"=>""];
-      // $propuesta=NegociacionEstatus::where('negociacion_id',$consulta->id)->where('estatus_id',3)->first();
-      // $deposito=NegociacionEstatus::where('negociacion_id',$consulta->id)->where('estatus_id',4)->first();
-      // $promesa=NegociacionEstatus::where('negociacion_id',$consulta->id)->where('estatus_id',5)->first();
-      // $protocolo=NegociacionEstatus::where('negociacion_id',$consulta->id)->where('estatus_id',6)->first();
-      // $reporte=NegociacionEstatus::where('negociacion_id',$consulta->id)->where('estatus_id',7)->first();
-    }
-    return $propuesta;
-  }
+
+
   public function DetalleInmueble($id){
     $usuario=Session::get('asesor');
     $negociacion=DB::table('negociaciones')->where('negociaciones.propiedad_id',$id)

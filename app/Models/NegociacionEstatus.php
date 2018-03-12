@@ -7,4 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class NegociacionEstatus extends Model
 {
     protected $table='negociacion_estatus';
+    public $timestamps = false;
 }
