@@ -13,9 +13,9 @@ $(document).ready(function() {
 	  })
 	  .done(function(respuesta){
 		 	if (respuesta[0]==1) {
-			 console.log(respuesta[7]);
+			 //console.log(respuesta[7]);
 
-///////////////////// RESETEAR CAMPOS ///////////////////////////////////////////////////
+///////////////////// HABILITAR CAMPOS ///////////////////////////////////////////////////
 
 				$('#datePropuesta').attr('disabled',false);
 				$('#datePropuestaSubmit').attr('disabled',false);
@@ -23,6 +23,10 @@ $(document).ready(function() {
 				$('#garantiaSubmit').attr('disabled',false);
 				$('#dateBilateral').attr('disabled',false);
 				$('#submitBilateral').attr('disabled',false);
+				$('#dateRegistro').attr('disabled',false);
+				$('#registroSubmit').attr('disabled',false);
+				$('#dateReporte').attr('disabled',false);
+				$('#reporteSubmit').attr('disabled',false);
 
 ///////////////////////// MOSTRAR TAB DE NEGOCIACION EN CURSO ////////////////////////////////
 	      $('#tabNewNegotiation').css('display','none');
@@ -37,7 +41,8 @@ $(document).ready(function() {
 				$('#tabHistory').parent().removeClass('active');
 				$('#messages').removeClass('active');
 
-
+/////////////////////////// LLENAR CAMPOS DE PASOS DE NEGOCIACION DEL FORMULARIO ///////////////////////////////
+				$('#propiedadGeneral').val(respuesta[7].id)
 				$('#datePropuesta').val(respuesta[1].fechaEstatus);
 				$('#idNegociacion').val(respuesta[6].id)
 				$('#dateGarantia').val(respuesta[2].fechaEstatus);
@@ -45,8 +50,9 @@ $(document).ready(function() {
 				$('#dateBilateral').val(respuesta[3].fechaEstatus);
 				$('#idNegociacionBilateral').val(respuesta[6].id)
 				$('#dateRegistro').val(respuesta[4].fechaEstatus);
+				$('#idNegociacionRegistro').val(respuesta[6].id);
 				$('#dateReporte').val(respuesta[5].fechaEstatus);
-
+				$('#idNegociacionReporte').val(respuesta[6].id);
 
 ////////////////// DESHABILITAR PASOS QUE YA FUERON INGRESADOS ////////////////////////
 
@@ -62,6 +68,16 @@ $(document).ready(function() {
 					$('#dateBilateral').attr('disabled',true);
 					$('#bilateralSubmit').attr('disabled',true);
 				}
+				if (respuesta[4].fechaEstatus!='') {
+					$('#dateRegistro').attr('disabled',true);
+					$('#registroSubmit').attr('disabled',true);
+				}
+				if (respuesta[5].fechaEstatus!='') {
+					$('#dateReporte').attr('disabled',true);
+					$('#reporteSubmit').attr('disabled',true);
+				}
+
+
 
 
 //////////////////// MOSTRAR CHECK DE ESTATUS DE INMUEBLES ////////////////////////////////////
@@ -72,9 +88,6 @@ $(document).ready(function() {
 				else {
 					$('#publicarInmueble').attr('checked',false);
 				}
-
-
-
 
 				$('#cambioStatus').modal('show');
 	    }
@@ -94,6 +107,7 @@ $(document).ready(function() {
 			 $('#home').addClass('active');
 			 $('#asesorCaptador').val(respuesta[1].agente_id);
 			 $('#propiedad').val(respuesta[1].id);
+			 $('#propiedadGeneral').val(respuesta[1].id)
 			 $('#comisionCaptacion').val(respuesta[1].porcentajeCaptacion);
 			 $('.opcion').remove();
 			 $.each( respuesta[2], function(key,valor) {
@@ -181,7 +195,7 @@ $("#newNegotation").validate({
     })
     .done(function(respuesta){
     	if (respuesta) {
-				console.log (respuesta);
+				//console.log (respuesta);
 
 				swal({
 					title:'Buen trabajo!!',
@@ -249,7 +263,9 @@ $("#newPropuesta").validate({
 							timer: 2000,
 							button:false,
 						});
-						setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
+						$('#datePropuesta').attr('disabled',true);
+						$('#datePropuestaSubmit').attr('disabled',true);
+						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
 
 		      }
 		      else{
@@ -302,7 +318,7 @@ $("#newDeposito").validate({
 		    })
 		    .done(function(respuesta){
 		    	if (respuesta) {
-						console.log (respuesta);
+						//console.log (respuesta);
 						swal({
 							title:'Buen trabajo!!',
 							text:"Deposito en garantia aprobado con exito",
@@ -310,7 +326,9 @@ $("#newDeposito").validate({
 							timer: 2000,
 							button:false,
 						});
-						setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
+						$('#dateGarantia').attr('disabled',true);
+						$('#garantiaSubmit').attr('disabled',true);
+						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
 
 		      }
 		      else{
@@ -342,7 +360,7 @@ $("#newBilateral").validate({
   submitHandler: function(form) {
 		swal({
 	    title: "Asociar fecha de transacción",
-	    text: "Al ingresar la fecha de promesa bilateral la negociacion no podra ser cancelada nuevamente, ¿Desea Continuar?",
+	    text: "Al ingresar la fecha, esta no podra ser modificada, ¿Desea Continuar?",
 	    icon: "warning",
 	    buttons: ['No','Sí, Guardar'],
 	    dangerMode:false
@@ -364,13 +382,15 @@ $("#newBilateral").validate({
 		    	if (respuesta) {
 						console.log (respuesta);
 						swal({
-							title:'Buen trabajo!!',
-							text:"Promesa Bilateral aprobada con exito",
+							title:'Promesa Bilateral guardada con exito',
+							text:"El inmueble toma estatus procesado, por lo que el vendedor debe cancelar el pago de la comisión por servicios prestados",
 							icon:'success',
-							timer: 2000,
-							button:false,
+							//timer: 2000,
+							button:true,
 						});
-						setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
+						$('#dateBilateral').attr('disabled',true);
+						$('#bilateralSubmit').attr('disabled',true);
+						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
 
 		      }
 		      else{
@@ -386,287 +406,231 @@ $("#newBilateral").validate({
 		});
 	}
 });
-/////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-$('body').on('click','#datePropuestasubmit',function(){
-  swal({
-    title: "Asociar fecha de transacción",
-    text: "Al ingresar la fecha esta no podra ser modificada, ¿Desea Continuar?",
-    icon: "warning",
-    buttons: ['No','Sí, Guardar'],
-    dangerMode:false
-  })
-  .then((willDelete) => {
-    if (willDelete) {
-      var id=$(this).data('id');
-      var register=$('input[name=register]').val();
-      url="/admin/borrarInmuebleProyectos";
-      $.ajax({
-        url: url,
-        type: "post",
-        dataType: "html",
-        data:{id:id,register:register}
-      })
-      .done(function(respuesta){
-          swal({
-            title:'Inmueble Borrado',
-            text:"El inmueble seleccionado fue borrado con exito",
-            icon:'success',
-            timer: 2000,
-            button:false,
-          });
-          $('#listado').empty();
-          $('#listado').append(respuesta);
-      })
-      .fail(function(){
-        swal({
-          title:'Algo sucedio',
-          text:"Comuniquese con el administrador",
-          icon:'error',
-          timer: 2000,
-          button:false
-        });
-      });
-    }
-  });
-});
-////////////////////////////////////////////// VALIDAR LA CARGA DE INMUEBLES ASOCIADOS AL PROYECTO ////////////
-
-$('body').on('click','#nextPict',function(e){
-    var proyecto=$('input[name=register]').val();
-    url="/admin/evaluarInmueble";
-    $.ajax({
-      url: url,
-      type: "post",
-      dataType: "html",
-      data:{id:proyecto}
-    })
-    .done(function(respuesta){
-        console.log(respuesta);
-        if (respuesta==1) {
-          swal({
-            title:'Buen trabajo!!',
-            text:"Datos guardados con exito",
-            icon:'success',
-            timer: 2000,
-            button:false,
-          });
-          setTimeout(function(){location.href = "/admin/editar-proyectos-3/"+proyecto+"";},2300); // 3000ms = 3
-        }
-        else {
-          swal({
-            title:'Imposible realizar esta acción!!',
-            text:"Debe cargar al menos un tipo de inmueble al proyecto",
-            icon:'error',
-            //timer: 2000,
-            button:true,
-          });
-        }
-    })
-    .fail(function(){
-      swal({
-        title:'Algo sucedio',
-        text:"Comuniquese con el administrador",
-        icon:'error',
-        timer: 2000,
-        button:false
-      });
-    });
-});
-
-
-///////////////////////////////////////////// CARGA DE IMAGENES PARA EL INMUEBLE //////////////////////////////
-  var cont= $('.thumbPropiety').length;
-  if (cont>7) {
-    $('.addPicCont').css('display','none');
-  }
-  var inicio= $('#last').val();
-  let contador = 1;
-  if (inicio!='') {
-    contador=inicio;
-  }
-  $('body').on('click','#addPic',function(e){
-    var dominio=window.location.host;
-      contador++;
-      e.preventDefault()
-      $(`<div class='col-sm-3 thumbPropiety'>
-          <div class='thumbProperty'>
-            <div class='contentTop'>
-              <img class='imgInmueble' src='http://${dominio}/images/img-demo-images.jpg' alt=''>
-            </div>
-            <div class='contentInfo'>
-              <div class='buttonsAction'>
-                <div class='row'>
-                  <div class='col-xs-12'>
-                    <div class='col-xs-6' >
-                      <button type='button' class='btnAcction btnCargar'>
-                        <input type='file' id="imagen-${contador}" name='image[]' accept='image/png, .jpeg, .jpg, image/gif' class='file-input'>Cargar
-                        <input type="hidden" class="register" value="${contador}" id="index-${contador}">
-                      </button>
-                    </div>
-                    <div class='col-xs-6'>
-                      <button type='button' class='btnAcction btnBorrar'>Borrar</button>
-                    </div>
-                  </div>
-                </div>
-                <div class='row'>
-                  <div class='col-xs-12'>
-                    <div class='col-xs-6 col-xs-offset-4' >
-                      <div class="styled-input-single">
-                          <input type="radio" name="fotovisible" value="${contador}" id="radio-example-${contador}"/>
-                          <label for="radio-example-${contador}"></label>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>`).prependTo('.nueva');
-      var cont= $('.thumbPropiety').length;
-      if (cont>7) {
-        $('.addPicCont').css('display','none');
+////////////////////////////////////////////// GUARDAR FIRMA DE REGISTRO  ASOCIADA A NEGOCIACION ////////////////////////
+$("#newRegistro").validate({
+    onfocusout: false,
+    rules: {
+      dateRegistro: {
+        required:true
       }
-  });
-  $('body').on('click','.btnBorrar',function(e){
-    e.preventDefault();
-    var contBtn= $('.btnBorrar').length;
-    if (contBtn==1) {
-      swal({
-        title:'Imposible realizar esa acción',
-        text:"Debe cargar al menos una foto al proyecto",
-        icon:'warning',
-        button:true
-      });
+    },
+  messages: {
+    dateRegistro: {
+      required:"Seleccione la fecha cuando se realizo la protocolización de la venta"
     }
-    else {
-      var input= $(this).parent().parent().find('.register');
-      var registro=input.val();
-      var form= new FormData();
-      form.append('registro',registro);
-      form.append('desicion',1);
-      url="/admin/borrarImagenProyecto";
-      $.ajax({
-        url: url,
-        type: "post",
-        dataType: "json",
-        data: form,
-        cache: false,
-        contentType: false,
-        processData: false
-      })
-      .done(function(respuesta){
-        console.log(respuesta);
-      });
-      $(this).parent().parent().parent().parent().parent().parent().parent().remove();
-    }
-    var contThumb= $('.thumbPropiety').length;
-    if (contThumb<8) {
-      $('.addPicCont').css('display','block');
-    }
-  });
-  $('body').on('change','.file-input',function(){
-    var tamano=this.files[0].size/1024;
-    if (tamano<=1024) {
-      var form= new FormData();
-      var file= this.files[0];
-      var posicion= $(this).parent().find('.register');
-      var id=posicion.attr('id');
-      var valor=posicion.val();
-      form.append('file',file);
-      form.append('register',id);
-      form.append('valor',valor);
-      form.append('desicion',1);
-      url="/admin/guardarImagenProyecto";
-      $.ajax({
-        url: url,
-        type: "post",
-        dataType: "json",
-        data: form,
-        cache: false,
-        contentType: false,
-        processData: false
-      })
-      .done(function(respuesta){
-        var ubicacion=respuesta[0];
-        var id=respuesta[1];
-        $("#"+ubicacion+"").val(id);
-        $("#radio-example-"+valor).val(id);
-      });
-        var curElement = $(this).parent().parent().parent().parent().parent().parent().parent().find('.imgInmueble');
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            curElement.attr('src', e.target.result);
-        };
-        reader.readAsDataURL(this.files[0]);
-    }
-    else {
-      swal({
-        title:'Error al cargar Imagen!!!',
-        text:"La imagen es demasiado pesada, debe pesar menos de 1mb",
-        icon:'error',
-        button:true,
-      });
-    }
+  },
+  submitHandler: function(form) {
+		swal({
+	    title: "Asociar fecha de transacción",
+	    text: "Al ingresar la fecha, esta no podra ser modificada, ¿Desea Continuar?",
+	    icon: "warning",
+	    buttons: ['No','Sí, Guardar'],
+	    dangerMode:false
+	  })
+	  .then((willDelete) => {
+	    if (willDelete) {
+				var form= new FormData(document.getElementById("newRegistro"));
+		    url="/admin/guardarRegistro";
+		    $.ajax({
+		      url: url,
+		      type: "post",
+		      dataType: "html",
+		      data: form,
+		      cache: false,
+		      contentType: false,
+		      processData: false
+		    })
+		    .done(function(respuesta){
+		    	if (respuesta) {
+						console.log (respuesta);
+						swal({
+							title:'Protocolización guardada con exito',
+							text:"El inmueble toma estatus procesado, por lo que el vendedor debe cancelar el pago de la comisión por servicios prestados",
+							icon:'success',
+							//timer: 2000,
+							button:true,
+						});
+						$('#dateRegistro').attr('disabled',true);
+						$('#registroSubmit').attr('disabled',true);
+						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
 
-  });
-  $('body').on('submit','#picPropiety',function(e){
-    e.preventDefault();
-    var marcador=$('input[name=fotovisible]:checked');
-    if (marcador.length==1) {
-      var imgSelected=marcador.val();
-      var form= new FormData();
-      form.append('desicion',1);
-      form.append('imgSelected',imgSelected);
-      url="/admin/guardarProyecto";
-      $.ajax({
-        url: url,
-        type: "post",
-        dataType: "json",
-        data: form,
-        cache: false,
-        contentType: false,
-        processData: false
-      })
-      .done(function(respuesta){
-        if (respuesta==1) {
-          swal({
-            title:'Buen trabajo!!',
-            text:"El proyecto fue guardado con exito",
-            icon:'success',
-            timer: 2000,
-            button:false,
-          });
-          setTimeout(function(){location.href = "/admin/proyectos";},2300); // 3000ms = 3
-        }
-        else if(respuesta==2){
-          swal({
-            title:'Imposible realizar esa acción',
-            text:"El elemento que seleccione debe tener foto cargada",
-            icon:'error',
-            button:true
-          });
-        }
-        else {
-          swal({
-            title:'Imposible realizar esa acción',
-            text:"Debe cargar al menos una foto para el proyecto",
-            icon:'error',
-            button:true
-          });
-        }
-      });
+		      }
+		      else{
+						swal({
+		          title:'Imposible realizar la acción!!',
+		          text:"Comuniquese con el administrador del sistema",
+		          icon:'error',
+		          button:true
+		        });
+					}
+		    });
+  		}
+		});
+	}
+});
+
+////////////////////////////////////////////// GUARDAR REPORTE DE VENTA  ASOCIADO A NEGOCIACION ////////////////////////
+$("#newReporte").validate({
+    onfocusout: false,
+    rules: {
+      dateReporte: {
+        required:true
+      }
+    },
+  messages: {
+    dateReporte: {
+      required:"Seleccione la fecha cuando se realizo el reporte de la venta"
     }
-    else {
-      swal({
-        title:'Imposible realizar esa acción',
-        text:"Debe seleccionar una foto como portada del proyecto",
-        icon:'error',
-        button:true
-      });
-    }
+  },
+  submitHandler: function(form) {
+		swal({
+	    title: "Asociar fecha de transacción",
+	    text: "Al ingresar la fecha de reporte de venta, la negociacion tomara el estatus de finalizada y el inmueble tomara estatus de vendido, ¿Desea Continuar?",
+	    icon: "warning",
+	    buttons: ['No','Sí, Guardar'],
+	    dangerMode:false
+	  })
+	  .then((willDelete) => {
+	    if (willDelete) {
+				var form= new FormData(document.getElementById("newReporte"));
+		    url="/admin/guardarReporte";
+		    $.ajax({
+		      url: url,
+		      type: "post",
+		      dataType: "html",
+		      data: form,
+		      cache: false,
+		      contentType: false,
+		      processData: false
+		    })
+		    .done(function(respuesta){
+		    	if (respuesta) {
+						//console.log (respuesta);
+						swal({
+							title:'Reporte de venta guardado con exito',
+							text:"El inmueble toma estatus vendido, por lo que el vendedor debe cancelar el pago de la comisión por servicios prestados",
+							icon:'success',
+							//timer: 2000,
+							button:true,
+						});
+						$('#dateReporte').attr('disabled',true);
+						$('#reporteSubmit').attr('disabled',true);
+						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
+
+		      }
+		      else{
+						swal({
+		          title:'Imposible realizar la acción!!',
+		          text:"Comuniquese con el administrador del sistema",
+		          icon:'error',
+		          button:true
+		        });
+					}
+		    });
+  		}
+		});
+	}
+});
+/////////////////////////////////////////////MOSTRAR HISTORIAL DE NEGOCIACIONES ////////////////////////////////////////////////////////
 
 
-  });
+	$('body').on('click','#tabHistory',function(){
+		$('.areaResultado').empty();
+		var idpropiedad=$('#propiedadGeneral').val();
+	  url="/admin/historialNegociaciones";
+	  $.ajax({
+	    url: url,
+	    type: "post",
+	    dataType: "html",
+	    data:{id:idpropiedad}
+		})
+	  .done(function(respuesta){
+			//console.log(respuesta);
+			$('#tabHistory').addClass('active');
+			$('#tabHistory').parent().addClass('active');
+			$('#messages').addClass('active');
+			$('#tabnewNegotiation').removeClass('active');
+			$('#tabnewNegotiation').parent().removeClass('active');
+			$('#home').removeClass('active');
+			$('#tabNegotiation').removeClass('active');
+			$('#tabNegotiation').parent().removeClass('active');
+			$('#profile').removeClass('active');
+			$('.areaResultado').append(respuesta);
+	  })
+	  .fail(function(){
+	    swal({
+	      title:'Algo sucedio',
+	      text:"Comuniquese con el administrador",
+	      icon:'error',
+	      timer: 2000,
+	      button:false
+	    });
+	  });
+	});
+
+////////////////////////////////////////////////// CANCELAR NEGOCIACION //////////////////////////////////////////////////////
+
+$('body').on('click','#cancelNegotiation',function(){
+	swal({
+		title: "Cancelar Negociación",
+		text: "Al cancelar la negociacion el inmueble pasara a activo en caso que este inactivo, ¿Desea Continuar?",
+		icon: "warning",
+		buttons: ['No','Sí, Guardar'],
+		dangerMode:false
+	})
+	.then((willDelete) => {
+		if (willDelete) {
+			var idPropiedad=$('#propiedadGeneral').val();
+			var idNegociacion=$('#idNegociacion').val();
+			url="/admin/cancelarNegociacion";
+			$.ajax({
+				url: url,
+				type: "post",
+				dataType: "html",
+				data:{idPropiedad:idPropiedad,idNegociacion:idNegociacion},
+			})
+			.done(function(respuesta){
+				//console.log (respuesta);
+				if (respuesta==4) {
+
+					swal({
+						title:'Negociación Cancelada!!',
+						text:"El inmueble volvera a estar activo",
+						icon:'success',
+						timer: 2000,
+						button:false,
+					});
+
+					$('#cambioStatus').modal('hide');
+				}
+				else if(respuesta==1){
+					swal({
+						title:'Imposible realizar la acción!!',
+						text:"La negociación ya entro en promesa bilateral, por lo que el inmueble tomo estatus de procesado para el cálculo de comisiones",
+						icon:'error',
+						button:true
+					});
+				}
+				else if (respuesta==2) {
+					swal({
+						title:'Imposible realizar la acción!!',
+						text:"La negociación ya entro protocolización, por lo que el inmueble tomo estatus de procesado para el cálculo de comisiones",
+						icon:'error',
+						button:true
+					});
+				}
+				else if(respuesta==3){
+					swal({
+						title:'Imposible realizar la acción!!',
+						text:"La negociación ya fue reportado como vendido, por lo que el inmueble tomo estatus de vendido para el cálculo de comisiones",
+						icon:'error',
+						button:true
+					});
+				}
+			});
+		}
+	});
+});
+
 });

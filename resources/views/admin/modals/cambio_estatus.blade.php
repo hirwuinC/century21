@@ -4,6 +4,7 @@
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h1 class="titleSection">Cambio de estatus</h1>
+                <input type="hidden" id="propiedadGeneral" value="">
             </div>
             <div class="modal-body">
                 <!-- Nav tabs -->
@@ -79,7 +80,7 @@
                           </div>
                           <div class="row" style="padding-top:95px;">
                               <div class="col-xs-12">
-                                  <button type="button" class="btnRed">Cancelar Negociación</button>
+                                  <button type="button" id="cancelNegotiation" class="btnRed">Cancelar Negociación</button>
                               </div>
                           </div>
                         </div>
@@ -175,13 +176,16 @@
                                   <div id="paso4collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="paso4">
                                       <div class="panel-body">
                                         <div class="row marginBottom20">
+                                          <form id="newRegistro">
                                             <div class="col-xs-8">
                                                 <label for="dateBilateral">Fecha de firma en registro</label>
-                                                <input type="date" class="form-control paso" id="dateRegistro">
+                                                <input type="date" class="form-control paso" name="dateRegistro" id="dateRegistro">
+                                                <input type="hidden" class="form-control" name="idNegociacionRegistro" id="idNegociacionRegistro">
                                             </div>
                                             <div class="col-xs-4">
-                                                <button class="btnYellow" type="button">Guardar</button>
+                                                <button class="btnYellow" id="registroSubmit" type="submit">Guardar</button>
                                             </div>
+                                          </form>
                                         </div>
                                       </div>
                                   </div>
@@ -197,13 +201,16 @@
                                   <div id="paso5collapse" class="panel-collapse collapse" role="tabpanel" aria-labelledby="paso5">
                                       <div class="panel-body">
                                         <div class="row marginBottom20">
+                                          <form id="newReporte">
                                             <div class="col-xs-8">
                                                 <label for="dateBilateral">Fecha de reporte de inmueble</label>
-                                                <input type="date" class="form-control paso" id="dateReporte">
+                                                <input type="date" name="dateReporte" class="form-control paso" id="dateReporte">
+                                                <input type="hidden" name="idNegociacionReporte" id="idNegociacionReporte" value="">
                                             </div>
                                             <div class="col-xs-4">
-                                                <button class="btnYellow" type="button">Guardar</button>
+                                                <button class="btnYellow" id="reporteSubmit" type="submit">Guardar</button>
                                             </div>
+                                          </form>
                                         </div>
                                       </div>
                                   </div>
@@ -217,22 +224,7 @@
 
                     <div role="tabpanel" class="tab-pane" id="messages">
                         <div class="panel-group areaResultado" id="accordion1" role="tablist" aria-multiselectable="true">
-                          <div class="panel panel-default">
-            									<div class="panel-heading" role="tab" id="headingOne">
-            											<h4 class="panel-title">
-            													<a role="button" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
-            															Fecha de Inicio de Negociacion: Estatus de Negociación:
-            													</a>
-            											</h4>
-            									</div>
-            									<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
-            											<div class="panel-body">
-            													<div class="alert alertGrayLight marginBottom20" role="alert">
-            															Propuesta de compra aprobada 12/12
-            													</div>
-            											</div>
-            									</div>
-            							</div>
+
                         </div>
                     </div>
                 </div>

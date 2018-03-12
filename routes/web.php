@@ -63,6 +63,10 @@ Route::any('/admin/guardarNegociacion', ['as' => 'guardarNegociacion', 'uses' =>
 Route::any('/admin/guardarPaso', ['as' => 'guardarPaso', 'uses' => 'Admin\NegociacionController@guardarPaso']);
 Route::any('/admin/guardarDeposito', ['as' => 'guardarDeposito', 'uses' => 'Admin\NegociacionController@guardarDeposito']);
 Route::any('/admin/guardarBilateral', ['as' => 'guardarBilateral', 'uses' => 'Admin\NegociacionController@guardarBilateral']);
+Route::any('/admin/guardarRegistro', ['as' => 'guardarRegistro', 'uses' => 'Admin\NegociacionController@guardarRegistro']);
+Route::any('/admin/guardarReporte', ['as' => 'guardarReporte', 'uses' => 'Admin\NegociacionController@guardarReporte']);
+Route::any('/admin/historialNegociaciones', ['as' => 'historialNegociaciones', 'uses' => 'Admin\NegociacionController@historialNegociaciones']);
+Route::any('/admin/cancelarNegociacion', ['as' => 'cancelarNegociacion', 'uses' => 'Admin\NegociacionController@cancelarNegociacion']);
 
 
 //Proyectos

@@ -4,7 +4,6 @@
     <div class="contentDetail">
         <h2 class="titleSection">DETALLE DEL INMUEBLE</h2>
         <div class="row">
-          @foreach($inmuebles as $inmueble)
               <div class="col-xs-4">
                   <input type="hidden" id="positionPropiety" value="{{$inmueble->posicionMapa}}">
                   <p><span>Código MLS:</span>
@@ -16,7 +15,7 @@
                   </p>
                   <p><span>Código Interno:</span> {{$inmueble->id}}</p>
                   <p><span>Tipo de Negociacion:</span> {{$inmueble->tipoNegocio}}</p>
-                  <p><span>Tipo de Inmueble:</span> {{$inmueble->nombre}}</p>
+                  <p><span>Tipo de Inmueble:</span> {{$inmueble->nombreTipo}}</p>
                   <p><span>Precio: Bs</span> {{$inmueble->precio}}</p>
                   <p><span>Habitaciones:</span> {{$inmueble->habitaciones}}</p>
                   <p><span>Baños:</span> {{$inmueble->banos}}</p>
@@ -28,6 +27,14 @@
                   <p><span>Estado:</span> {{$inmueble->nombre_estado}}</p>
                   <p><span>Ciudad:</span> {{$inmueble->nombre_ciudad}}</p>
                   <p><span>Urbanización:</span> {{$inmueble->urbanizacion}}</p>
+                  <p><span>Asesor Captador:</span> {{$inmueble->fullname}}</p>
+                  <p><span>Comisión de Captación:</span>
+                    @if($inmueble->porcentajeCaptacion!='')
+                      {{$inmueble->porcentajeCaptacion}}%
+                    @endif
+                  </p>
+                  <p><span>Visitas Generadas:</span> {{$inmueble->visitas}}</p>
+                  <p><span>Compradores Interesados:</span> {{$inmueble->compradorInteresado}}</p>
               </div>
               <div class="col-xs-4 cont-imagen">
                   <img src="{{ asset('images/inmuebles')}}/{{$imagen->nombre}}" alt="">
@@ -57,27 +64,19 @@
                         Bs{{$negociacion->precioFinal}}
                       @endif
                     </p>
-                    <p><span>% Comisión Captación:</span>
-                      @if($negociacion->porcentajeCaptacion!='')
-                        {{$negociacion->porcentajeCaptacion}}%
-                      @endif
-                    </p>
-                    <p><span>% Comisión Cierre:</span>
+                    <p><span>Comisión Cierre:</span>
                       @if($negociacion->porcentajeCierre!='')
                         {{$negociacion->porcentajeCierre}}%
                       @endif
                     </p>
                 </div>
                 <div class="col-xs-4">
-                    <p><span>Comisión Bruta:</span> {{$negociacion->comisionBruta}}</p>
-                    <p><span>Pago Casa Nacional:</span> {{$negociacion->pagoCasaMatriz}}</p>
-                    <p><span>Ingreso Neto Oficina:</span> {{$negociacion->ingresoNeto}}</p>
-                    <p><span>Visitas Generadas:</span> {{$inmueble->visitas}}</p>
-                    <p><span>Compradores Interesados:</span> {{$inmueble->compradorInteresado}}</p>
+                    <p><span>Comisión Bruta: Bs</span> {{$negociacion->comisionBruta}}</p>
+                    <p><span>Pago Casa Nacional:Bs</span> {{$negociacion->pagoCasaMatriz}}</p>
+                    <p><span>Ingreso Neto Oficina:Bs</span> {{$negociacion->ingresoNeto}}</p>
                 </div>
             </div>
           @endif
-        @endforeach
         <h2 class="titleSection">INFORMES</h2>
         <div class="reports">
             <div class="row">

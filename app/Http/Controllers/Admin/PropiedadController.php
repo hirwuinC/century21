@@ -223,7 +223,7 @@ class PropiedadController extends Controller{
   public function DetalleInmueble($id){
     $usuario=Session::get('asesor');
     $negociacion=DB::table('negociaciones')->where('negociaciones.propiedad_id',$id)
-                                           ->where('negociaciones.estatus',1)
+                                           ->where('negociaciones.estatus',8)
                                            ->first();
     if ($negociacion==null) {
       $negociacion=(object)[
@@ -232,22 +232,24 @@ class PropiedadController extends Controller{
              "precioFinal"          => "",
              "porcentajeCaptacion"  => "",
              "porcentajeCierre"     => "",
+            "porcentajeCompartido"  => "",
+            "compartidoCon"         => "",
              "comisionBruta"        => "",
              "pagoCasaMatriz"       => "",
              "ingresoNeto"          => "",
-             "estatus"              => ""
+             "fechaCreacion"        => ""
            ];
     }
-    $inmuebles=DB::table('propiedades')->join('tipoInmueble','propiedades.tipo_inmueble','=','tipoInmueble.id')
+    $inmueble=DB::table('propiedades')->join('tipoInmueble','propiedades.tipo_inmueble','=','tipoInmueble.id')
                                        ->join('agentes','propiedades.agente_id','=','agentes.id')
                                        ->join('estados','propiedades.estado_id','=','estados.id')
                                        ->join('ciudades','propiedades.ciudad_id','=','ciudades.id')
-                                       ->select('propiedades.*','agentes.fullname','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoInmueble.*')
+                                       ->select('propiedades.*','agentes.fullname','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoInmueble.id as idTipo', 'tipoInmueble.nombre as nombreTipo')
                                        ->where('propiedades.id',$id)
-                                       ->get();
+                                       ->first();
 
     $imagen=Media::where('propiedad_id',$id)->where('vista',1)->first();
-    return view('/admin/detalle_inmueble',$this->cargarSidebar(),compact('inmuebles','usuario','negociacion','imagen'));
+    return view('/admin/detalle_inmueble',$this->cargarSidebar(),compact('inmueble','usuario','negociacion','imagen'));
   }
 
   public function mostrarEditarInmueble1($id){
