@@ -28,7 +28,7 @@ header {
 /*----- END HEADER -----*/
 /*----- GO GENERALS -------*/
 body {
-  background: #333333;
+  background: #fff;
 }
 body.login {
   background: #f6f6f6 !important;
@@ -538,13 +538,17 @@ textarea:focus {
   padding: 0;
   margin: 0;
 }
-.viewRadio li {
+.viewRadio li{
   display: inline-block;
   margin-right: 10px;
 }
 .viewRadio h6 {
   font-family: 'latobold';
   font-size: 1.3em;
+}
+.viewRadioEstadistica li{
+  display: block !important;
+  margin-right: 0;
 }
 
 /*----- LOGIN -----*/
@@ -1001,6 +1005,7 @@ textarea:focus {
 .affix-sidebar {
   padding-right: 0;
   padding-left: 0;
+
 }
 
 .affix-row, .affix-container, .affix-content {
@@ -1016,7 +1021,7 @@ textarea:focus {
 .sidebar-nav {
   position: fixed;
   top: 130px;
-  width: 90%;
+  width: 25%;
 }
 .sidebar-nav .contentAvatar {
   display: flex;
@@ -1079,7 +1084,7 @@ textarea:focus {
 .sidebar-nav .navbar ul li a .caret {
   margin-top: 8px;
   position: absolute;
-  left: 340px;
+  left: 300px;
 }
 .sidebar-nav .nav-list li {
   font-size: 0.9em !important;
@@ -1088,6 +1093,7 @@ textarea:focus {
   background: #cccccc !important;
   color: #333333 !important;
 }
+
 .infoDetailProperties h2 {
   font-size: 2em;
   margin-bottom: 5px;
@@ -1132,4 +1138,7 @@ textarea:focus {
 }
 .error{
   color: #E53935;
+}
+.ocultos{
+  display: none;
 }

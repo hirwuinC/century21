@@ -86,3 +86,7 @@ Route::get('/admin/editar-proyectos-2/{id}', ['as' => 'editar-proyecto-2', 'uses
 Route::get('/admin/editar-proyectos-3/{id}', ['as' => 'editar-proyecto-3', 'uses' => 'Admin\ProyectoController@editarProyecto3']);
 Route::any('/admin/actualizarProyecto1', ['as' => 'actualizarProyecto1', 'uses' => 'Admin\ProyectoController@actualizarProyecto1']);
 Route::get('/admin/proyecto/{id}', ['as' => 'admin_detalle_proyecto', 'uses' => 'Admin\ProyectoController@detalleProyecto']);
+
+// ESTADISTICAS
+Route::get('/admin/estadisticas', ['as' => 'estadisticas', 'uses' => 'Admin\EstadisticasController@index']);
+Route::post('/admin/listarTipoReporte', ['as' => 'listar', 'uses' => 'Admin\EstadisticasController@tipoReporte']);

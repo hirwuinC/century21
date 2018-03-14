@@ -14,7 +14,7 @@
                 @foreach($permisos as $permiso)
                   <li>
                     <a href="{{$permiso->url}}" data-toggle="{{$permiso->id_input}}" data-target="{{$permiso->target}}" data-parent="#sidenav01" class="{{$permiso->class_input}}">
-                        {{$permiso->nombre}} <span class="caret"></span>
+                        {{$permiso->nombre}} <span class="{{$permiso->url}}"></span>
                     </a>
                     <div class="{{$permiso->id_input}}" id="{{$permiso->padre}}" style="height: 0px;">
                           <ul class="nav nav-list">
