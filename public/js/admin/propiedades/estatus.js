@@ -547,6 +547,8 @@ $("#newReporte").validate({
 		})
 	  .done(function(respuesta){
 			//console.log(respuesta);
+
+			$('.areaResultado').append(respuesta);
 			$('#tabHistory').addClass('active');
 			$('#tabHistory').parent().addClass('active');
 			$('#messages').addClass('active');
@@ -556,7 +558,6 @@ $("#newReporte").validate({
 			$('#tabNegotiation').removeClass('active');
 			$('#tabNegotiation').parent().removeClass('active');
 			$('#profile').removeClass('active');
-			$('.areaResultado').append(respuesta);
 	  })
 	  .fail(function(){
 	    swal({
