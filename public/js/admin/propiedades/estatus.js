@@ -13,7 +13,7 @@ $(document).ready(function() {
 	  })
 	  .done(function(respuesta){
 		 	if (respuesta[0]==1) {
-			 //console.log(respuesta[7]);
+			 console.log(respuesta);
 
 ///////////////////// HABILITAR CAMPOS ///////////////////////////////////////////////////
 
@@ -22,8 +22,10 @@ $(document).ready(function() {
 				$('#dateGarantia').attr('disabled',false);
 				$('#garantiaSubmit').attr('disabled',false);
 				$('#dateBilateral').attr('disabled',false);
-				$('#submitBilateral').attr('disabled',false);
+				$('#comision1').attr('disabled',false);
+				$('#bilateralSubmit').attr('disabled',false);
 				$('#dateRegistro').attr('disabled',false);
+				$('#comision2').attr('disabled',false);
 				$('#registroSubmit').attr('disabled',false);
 				$('#dateReporte').attr('disabled',false);
 				$('#reporteSubmit').attr('disabled',false);
@@ -49,8 +51,23 @@ $(document).ready(function() {
 				$('#idNegociacionGarantia').val(respuesta[6].id)
 				$('#dateBilateral').val(respuesta[3].fechaEstatus);
 				$('#idNegociacionBilateral').val(respuesta[6].id)
+				if (respuesta[3].comisionPagada==1) {
+					$('#comision1').attr('checked',true);
+
+				}
+				else {
+					$('#comision1').attr('checked',false);
+				}
+
 				$('#dateRegistro').val(respuesta[4].fechaEstatus);
 				$('#idNegociacionRegistro').val(respuesta[6].id);
+				if (respuesta[4].comisionPagada==1) {
+					$('#comision2').attr('checked',true);
+				}
+				else {
+					$('#comision2').attr('checked',false);
+				}
+
 				$('#dateReporte').val(respuesta[5].fechaEstatus);
 				$('#idNegociacionReporte').val(respuesta[6].id);
 
@@ -67,26 +84,42 @@ $(document).ready(function() {
 				if (respuesta[3].fechaEstatus!='') {
 					$('#dateBilateral').attr('disabled',true);
 					$('#bilateralSubmit').attr('disabled',true);
+					$('#comision1').attr('disabled',true);
 				}
 				if (respuesta[4].fechaEstatus!='') {
 					$('#dateRegistro').attr('disabled',true);
 					$('#registroSubmit').attr('disabled',true);
+					$('#comision2').attr('disabled',true);
 				}
 				if (respuesta[5].fechaEstatus!='') {
 					$('#dateReporte').attr('disabled',true);
 					$('#reporteSubmit').attr('disabled',true);
 				}
 
+//////////////////// MOSTRAR LISTA DE ESTATUS DE INMUEBLES  CON ESTATUS ACTUAL ////////////////////////////////////
 
-
-
-//////////////////// MOSTRAR CHECK DE ESTATUS DE INMUEBLES ////////////////////////////////////
-
-				if (respuesta[7].estatus ==1) {
-					$('#publicarInmueble').attr('checked',true);
+				$('.estatusInmueble').css('display','block');
+				if (respuesta[7].estatus ==12 || respuesta[7].estatus ==11) {
+					$('.estatusInmueble').css('display','none');
 				}
 				else {
-					$('#publicarInmueble').attr('checked',false);
+					$('.opcion').remove();
+					$.each(respuesta[8],function(e){
+						$('#estatusInmueble').append("<option value="+respuesta[8][e].id+" class='opcion' >"+respuesta[8][e].descripcionEstatus+"</option>");
+					});
+
+					if (respuesta[7].estatus ==1) {
+						$('#estatusInmueble option[value="1"]').attr("selected", true);
+					}
+					else {
+						$('#estatusInmueble option[value="2"]').attr("selected", true);
+					}
+				}
+
+//////////////////// MOSTRAR CAMPOS DE PAGO DE COMISION  /////////////////////////////////////////////////
+				$('.ocultarComision').css('display','block');
+				if (respuesta[9]==1) {
+					$('.ocultarComision').css('display','none');
 				}
 
 				$('#cambioStatus').modal('show');
@@ -204,7 +237,8 @@ $("#newNegotation").validate({
 					timer: 2000,
 					button:false,
 				});
-				setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
+				setTimeout(function(){$('#cambioStatus').modal('hide');},2300); // 3000ms = 3
+
 
       }
       else{
@@ -254,7 +288,7 @@ $("#newPropuesta").validate({
 		      processData: false
 		    })
 		    .done(function(respuesta){
-		    	if (respuesta) {
+		    	if (respuesta==1) {
 						console.log (respuesta);
 						swal({
 							title:'Buen trabajo!!',
@@ -268,6 +302,22 @@ $("#newPropuesta").validate({
 						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
 
 		      }
+					else if(respuesta==2){
+						swal({
+		          title:'Imposible realizar la acción!!',
+		          text:"Ya fueron cargadas etapas del proceso superiores a la propuesta aprobada",
+		          icon:'error',
+		          button:true
+		        });
+					}
+					else if (respuesta==3) {
+						swal({
+		          title:'Imposible realizar la acción!!',
+		          text:"La negociación ha sido finalizada por lo que ya no se pueden cargar mas etapas",
+		          icon:'error',
+		          button:true
+		        });
+					}
 		      else{
 						swal({
 		          title:'Imposible realizar la acción!!',
@@ -317,7 +367,7 @@ $("#newDeposito").validate({
 		      processData: false
 		    })
 		    .done(function(respuesta){
-		    	if (respuesta) {
+		    	if (respuesta==1) {
 						//console.log (respuesta);
 						swal({
 							title:'Buen trabajo!!',
@@ -331,6 +381,22 @@ $("#newDeposito").validate({
 						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
 
 		      }
+					else if(respuesta==2){
+						swal({
+		          title:'Imposible realizar la acción!!',
+		          text:"Ya fueron cargadas etapas del proceso superiores al deposito en garantia",
+		          icon:'error',
+		          button:true
+		        });
+					}
+					else if (respuesta==3) {
+						swal({
+		          title:'Imposible realizar la acción!!',
+		          text:"La negociación ha sido finalizada por lo que ya no se pueden cargar mas etapas",
+		          icon:'error',
+		          button:true
+		        });
+					}
 		      else{
 						swal({
 		          title:'Imposible realizar la acción!!',
@@ -390,6 +456,7 @@ $("#newBilateral").validate({
 						});
 						$('#dateBilateral').attr('disabled',true);
 						$('#bilateralSubmit').attr('disabled',true);
+						$('#comision1').attr('disabled',true);
 						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
 
 		      }
@@ -453,6 +520,7 @@ $("#newRegistro").validate({
 						});
 						$('#dateRegistro').attr('disabled',true);
 						$('#registroSubmit').attr('disabled',true);
+						$('#comision2').attr('disabled',true);
 						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
 
 		      }
@@ -603,7 +671,7 @@ $('body').on('click','#cancelNegotiation',function(){
 						button:false,
 					});
 
-					$('#cambioStatus').modal('hide');
+					setTimeout(function(){$('#cambioStatus').modal('hide');},2300);
 				}
 				else if(respuesta==1){
 					swal({

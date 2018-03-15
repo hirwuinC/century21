@@ -11,13 +11,14 @@ use App\Models\Agente;
 use App\Models\Propiedad;
 use App\Models\Negociacion;
 use App\Models\NegociacionEstatus;
+use App\Models\Estatus;
 
 class NegociacionController extends Controller{
   public function llenarModalNegociacion(){
     $idInmueble=Request::get('parametro');
     $consulta=Negociacion::where('propiedad_id',$idInmueble)->where('estatus',8)->first();
     if(count($consulta)!=0){
-      $comun=(object)["negociacion_id"=>"","estatus_id"=>"","fechaEstatus"=>""];
+      $comun=(object)["negociacion_id"=>"","estatus_id"=>"","fechaEstatus"=>"","comisionPagada"=>""];
       $propuesta=NegociacionEstatus::where('negociacion_id',$consulta->id)->where('estatus_id',3)->first();
       $deposito=NegociacionEstatus::where('negociacion_id',$consulta->id)->where('estatus_id',4)->first();
       $promesa=NegociacionEstatus::where('negociacion_id',$consulta->id)->where('estatus_id',5)->first();
@@ -40,6 +41,12 @@ class NegociacionController extends Controller{
       if (count($reporte)==0) {
         $reporte=$comun;
       }
+      $estatus=Estatus::where('estatus.id','<>',12)
+                      ->where('estatus.familia',1)
+                      ->where('estatus.id','<>',11)
+                      ->get();
+      $pago=NegociacionEstatus::where('negociacion_id',$consulta->id)->where('estatus_id',5)->where('comisionPagada',1)->first();
+      $promesaPagada=count($pago);
       $valores= [ $respuesta,
                   $propuesta,
                   $deposito,
@@ -47,7 +54,9 @@ class NegociacionController extends Controller{
                   $protocolo,
                   $reporte,
                   $consulta,
-                  $propiedad
+                  $propiedad,
+                  $estatus,
+                  $promesaPagada
                 ];
       return Response::json($valores);
     }
@@ -102,38 +111,66 @@ class NegociacionController extends Controller{
   public function guardarPaso(){
     $fechaPaso=Request::get('datePropuesta');
     $idNegociacion=Request::get('idNegociacion');
-    $nuevoPaso=new NegociacionEstatus;
-    $nuevoPaso->negociacion_id=$idNegociacion;
-    $nuevoPaso->estatus_id=3;
-    $nuevoPaso->fechaEstatus=$fechaPaso;
-    $nuevoPaso->save();
-    $respuesta=1;
+    $consultaFinalizada=Negociacion::where('id',$idNegociacion)->where('estatus',11)->first();
+    if (count($consultaFinalizada)==0) {
+      $consultaPasoSuperior=NegociacionEstatus::where('negociacion_id',$idNegociacion)->first();
+      if (count($consultaPasoSuperior)==0) {
+        $nuevoPaso=new NegociacionEstatus;
+        $nuevoPaso->negociacion_id=$idNegociacion;
+        $nuevoPaso->estatus_id=3;
+        $nuevoPaso->fechaEstatus=$fechaPaso;
+        $nuevoPaso->save();
+        $respuesta=1;
+      }
+      else {
+        $respuesta=2;
+      }
+    }
+    else{
+      $respuesta=3;
+    }
+
     return $respuesta;
   }
 
   public function guardarDeposito(){
     $fechaPaso=Request::get('dateGarantia');
     $idNegociacion=Request::get('idNegociacionGarantia');
-    $nuevoPaso=new NegociacionEstatus;
-    $nuevoPaso->negociacion_id=$idNegociacion;
-    $nuevoPaso->estatus_id=4;
-    $nuevoPaso->fechaEstatus=$fechaPaso;
-    $nuevoPaso->save();
-    $respuesta=1;
+    $consultaFinalizada=Negociacion::where('id',$idNegociacion)->where('estatus',11)->first();
+    if (count($consultaFinalizada)==0) {
+      $consultaPasoSuperior=NegociacionEstatus::where('negociacion_id',$idNegociacion)->where('estatus_id','<>',3)->first();
+      if (count($consultaPasoSuperior)==0) {
+        $nuevoPaso=new NegociacionEstatus;
+        $nuevoPaso->negociacion_id=$idNegociacion;
+        $nuevoPaso->estatus_id=4;
+        $nuevoPaso->fechaEstatus=$fechaPaso;
+        $nuevoPaso->save();
+        $respuesta=1;
+      }
+      else {
+        $respuesta=2;
+      }
+    }
+    else{
+      $respuesta=3;
+    }
+
     return $respuesta;
   }
 
   public function guardarBilateral(){
     $fechaPaso=Request::get('dateBilateral');
     $idNegociacion=Request::get('idNegociacionBilateral');
+    $pagoComision=(int)Request::get('pagoComision');
     $nuevoPaso=new NegociacionEstatus;
     $nuevoPaso->negociacion_id=$idNegociacion;
     $nuevoPaso->estatus_id=5;
     $nuevoPaso->fechaEstatus=$fechaPaso;
+    $nuevoPaso->comisionPagada=$pagoComision;
     $nuevoPaso->save();
     $propiedad=Negociacion::where('id',$idNegociacion)->first();
     Propiedad::where('id',$propiedad->propiedad_id)->update([
-                "estatus"         =>  12,
+                "estatus"         =>  12
               ]);
     $respuesta=1;
     return $respuesta;
@@ -142,10 +179,12 @@ class NegociacionController extends Controller{
   public function guardarRegistro(){
     $fechaPaso=Request::get('dateRegistro');
     $idNegociacion=Request::get('idNegociacionRegistro');
+    $pagoComision=(int)Request::get('pagoComision');
     $nuevoPaso=new NegociacionEstatus;
     $nuevoPaso->negociacion_id=$idNegociacion;
     $nuevoPaso->estatus_id=6;
     $nuevoPaso->fechaEstatus=$fechaPaso;
+    $nuevoPaso->comisionPagada=$pagoComision;
     $nuevoPaso->save();
     $propiedad=Negociacion::where('id',$idNegociacion)->first();
     Propiedad::where('id',$propiedad->propiedad_id)->update([
@@ -180,6 +219,7 @@ class NegociacionController extends Controller{
                     ->join('estatus','estatus.id','negociaciones.estatus')
                     ->select('estatus.id as estatusId','estatus.descripcionEstatus as descripcionEstatus','negociaciones.*')
                     ->where('negociaciones.propiedad_id',$idpropiedad)
+                    ->orderByRaw('id DESC')
                     ->get();
     $pasosNegociaciones=DB::table('negociacion_estatus')
                           ->join('negociaciones','negociaciones.id','negociacion_estatus.negociacion_id')

@@ -25,7 +25,7 @@
                             <input type="hidden" name="comisionCaptacion" id="comisionCaptacion" value="">
                             <div class="row marginBottom20">
                                 <div class="col-xs-12">
-                                  <label for="asesorCerrador">Asesor cerrador de la operación</label>
+                                    <label for="asesorCerrador">Asesor cerrador de la operación</label>
                                     <select id="asesorCerrador" class="" name="asesorCerrador">
                                         <option value="">Seleccione un asesor</option>
                                     </select>
@@ -69,16 +69,15 @@
 
                     <div role="tabpanel" class="tab-pane" id="profile">
                       <div class="row cont-negotiation">
-                        <div class="col-xs-3">
-                          <div class="row" style="padding-top:120px;">
+                        <div class="col-xs-3 ">
+                          <div class="row  estatusInmueble ">
                               <div class="col-xs-12">
-                                  <div class="styled-input-single ">
-                                      <input type="checkbox" value="1" name="estatus" id="publicarInmueble" />
-                                      <label for="publicarInmueble">¿Inmueble Activo?</label>
-                                  </div>
+                                  <label for="estatusInmueble">Estatus del inmueble</label>
+                                  <select id="estatusInmueble" class="inputs inputsLight form-control " name="asesorCerrador">
+                                  </select>
                               </div>
                           </div>
-                          <div class="row" style="padding-top:95px;">
+                          <div class="row">
                               <div class="col-xs-12">
                                   <button type="button" id="cancelNegotiation" class="btnRed">Cancelar Negociación</button>
                               </div>
@@ -152,13 +151,19 @@
                                       <div class="panel-body">
                                         <div class="row marginBottom20">
                                           <form id="newBilateral">
-                                            <div class="col-xs-8">
+                                            <div class="col-xs-6">
                                                 <label for="dateBilateral">Fecha de promesa bilateral</label>
                                                 <input type="date" class="form-control paso" name="dateBilateral" id="dateBilateral">
                                                 <input type="hidden" class="form-control" name="idNegociacionBilateral" id="idNegociacionBilateral">
                                             </div>
-                                            <div class="col-xs-4">
-                                                <button class="btnYellow" id="bilateralSubmit" type="submit">Guardar</button>
+                                            <div class="col-xs-3">
+                                                <div class="styled-input-single" style="margin-top:20px;">
+                                                    <input type="checkbox" name="pagoComision" value="1" id="comision1" />
+                                                    <label for="comision1" id="prueba">¿Comisión Pagada?</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <button class="btnYellow  btnYellowEstatus" id="bilateralSubmit" type="submit">Guardar</button>
                                             </div>
                                           </form>
                                         </div>
@@ -177,13 +182,19 @@
                                       <div class="panel-body">
                                         <div class="row marginBottom20">
                                           <form id="newRegistro">
-                                            <div class="col-xs-8">
+                                            <div class="col-xs-6">
                                                 <label for="dateBilateral">Fecha de firma en registro</label>
                                                 <input type="date" class="form-control paso" name="dateRegistro" id="dateRegistro">
                                                 <input type="hidden" class="form-control" name="idNegociacionRegistro" id="idNegociacionRegistro">
                                             </div>
-                                            <div class="col-xs-4">
-                                                <button class="btnYellow" id="registroSubmit" type="submit">Guardar</button>
+                                            <div class="col-xs-3">
+                                                <div class="styled-input-single ocultarComision" style="margin-top:20px;">
+                                                    <input type="checkbox" name="pagoComision" value="1" id="comision2" />
+                                                    <label for="comision2">¿Comisión Pagada?</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-xs-2">
+                                                <button class="btnYellow btnYellowEstatus" id="registroSubmit" type="submit">Guardar</button>
                                             </div>
                                           </form>
                                         </div>

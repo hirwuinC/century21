@@ -4,8 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Status extends Model
+class Estatus extends Model
 {
     //
+    protected $table="estatus";
     public $timestamps = false;
 }
