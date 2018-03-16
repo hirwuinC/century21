@@ -20,11 +20,8 @@ $(document).ready(function(){
 		submitHandler: function(forma) {
 			var form=$("#login-form").serialize();
 			url="/admin/ingresar";
-      $.ajax({
-        data:form,
-        url:   url,
-        type:  'post',
-        success:  function (response) {
+      $.post(url,form)
+      .done(function(response) {
 					console.log(response);
 					if (response[0]==1) {
 						swal({
@@ -37,13 +34,14 @@ $(document).ready(function(){
 						setTimeout(function(){location.href = "/admin";},2200); // 3000ms = 3
         	}
 					else {
-						swal(
-						  'Error de autenticación',
-						  'Revise el usuario o la contraseña',
-						  'error'
-						);
+						swal({
+							title:'Error de Credenciales',
+						  text:'Las credenciales son incorrectas',
+							icon:'warning',
+							//timer: 1500,
+							button:true,
+						});
 					}
-        }
       });
 		}
 	});

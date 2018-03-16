@@ -305,7 +305,7 @@ $("#newPropuesta").validate({
 					else if(respuesta==2){
 						swal({
 		          title:'Imposible realizar la acción!!',
-		          text:"Ya fueron cargadas etapas del proceso superiores a la propuesta aprobada",
+		          text:"Fueron cargadas etapas del proceso superiores a la propuesta aprobada",
 		          icon:'error',
 		          button:true
 		        });
@@ -348,7 +348,7 @@ $("#newDeposito").validate({
   submitHandler: function(form) {
 		swal({
 	    title: "Asociar fecha de transacción",
-	    text: "Al ingresar la fecha, esta no podra ser modificada, ¿Desea Continuar?",
+	    text: "Al ingresar la fecha, esta no podra ser modificada, y todos los pasos previos seran inhabilitados ¿Desea Continuar?",
 	    icon: "warning",
 	    buttons: ['No','Sí, Guardar'],
 	    dangerMode:false
@@ -371,7 +371,7 @@ $("#newDeposito").validate({
 						//console.log (respuesta);
 						swal({
 							title:'Buen trabajo!!',
-							text:"Deposito en garantia aprobado con exito",
+							text:"Deposito en garantia guardado con exito",
 							icon:'success',
 							timer: 2000,
 							button:false,
@@ -426,7 +426,7 @@ $("#newBilateral").validate({
   submitHandler: function(form) {
 		swal({
 	    title: "Asociar fecha de transacción",
-	    text: "Al ingresar la fecha, esta no podra ser modificada, ¿Desea Continuar?",
+	    text: "Al ingresar la fecha, esta no podra ser modificada y todos los pasos previos seran inhabilitados ¿Desea Continuar?",
 	    icon: "warning",
 	    buttons: ['No','Sí, Guardar'],
 	    dangerMode:false
@@ -438,18 +438,18 @@ $("#newBilateral").validate({
 		    $.ajax({
 		      url: url,
 		      type: "post",
-		      dataType: "html",
+		      dataType: "json",
 		      data: form,
 		      cache: false,
 		      contentType: false,
 		      processData: false
 		    })
 		    .done(function(respuesta){
-		    	if (respuesta) {
-						console.log (respuesta);
+		    	if (respuesta[0]==1) {
+						//console.log (respuesta);
 						swal({
-							title:'Promesa Bilateral guardada con exito',
-							text:"El inmueble toma estatus procesado, por lo que el vendedor debe cancelar el pago de la comisión por servicios prestados",
+							title:'Buen Trabajo',
+							text:"Promesa Bilateral guardada con exito",
 							icon:'success',
 							//timer: 2000,
 							button:true,
@@ -457,9 +457,29 @@ $("#newBilateral").validate({
 						$('#dateBilateral').attr('disabled',true);
 						$('#bilateralSubmit').attr('disabled',true);
 						$('#comision1').attr('disabled',true);
+						if (respuesta[1]==1) {
+							$('.ocultarComision').css('display','none');
+							$('.estatusInmueble').css('display','none');
+						}
 						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
 
 		      }
+					else if(respuesta[0]==2){
+						swal({
+		          title:'Imposible realizar la acción!!',
+		          text:"Fue cargada la etapa de firma en registro por lo que esta etapa queda inhabilitada",
+		          icon:'error',
+		          button:true
+		        });
+					}
+					else if (respuesta[0]==3) {
+						swal({
+		          title:'Imposible realizar la acción!!',
+		          text:"La negociación ha sido finalizada por lo que ya no se pueden cargar mas etapas",
+		          icon:'error',
+		          button:true
+		        });
+					}
 		      else{
 						swal({
 		          title:'Imposible realizar la acción!!',
@@ -490,7 +510,7 @@ $("#newRegistro").validate({
   submitHandler: function(form) {
 		swal({
 	    title: "Asociar fecha de transacción",
-	    text: "Al ingresar la fecha, esta no podra ser modificada, ¿Desea Continuar?",
+	    text: "Al ingresar la fecha, esta no podra ser modificada y todos los pasos previos seran inhabilitados ¿Desea Continuar?",
 	    icon: "warning",
 	    buttons: ['No','Sí, Guardar'],
 	    dangerMode:false
@@ -502,18 +522,18 @@ $("#newRegistro").validate({
 		    $.ajax({
 		      url: url,
 		      type: "post",
-		      dataType: "html",
+		      dataType: "json",
 		      data: form,
 		      cache: false,
 		      contentType: false,
 		      processData: false
 		    })
 		    .done(function(respuesta){
-		    	if (respuesta) {
+		    	if (respuesta[0]==1) {
 						console.log (respuesta);
 						swal({
-							title:'Protocolización guardada con exito',
-							text:"El inmueble toma estatus procesado, por lo que el vendedor debe cancelar el pago de la comisión por servicios prestados",
+							title:'Buen Trabajo',
+							text:'Protocolización guardada con exito',
 							icon:'success',
 							//timer: 2000,
 							button:true,
@@ -521,9 +541,19 @@ $("#newRegistro").validate({
 						$('#dateRegistro').attr('disabled',true);
 						$('#registroSubmit').attr('disabled',true);
 						$('#comision2').attr('disabled',true);
-						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
+						if (respuesta[1]==1) {
+							$('.estatusInmueble').css('display','none');
+						}
 
 		      }
+					else if (respuesta[0]==2) {
+						swal({
+		          title:'Imposible realizar la acción!!',
+		          text:"La negociación ha sido finalizada por lo que ya no se pueden cargar mas etapas",
+		          icon:'error',
+		          button:true
+		        });
+					}
 		      else{
 						swal({
 		          title:'Imposible realizar la acción!!',
@@ -577,13 +607,14 @@ $("#newReporte").validate({
 						//console.log (respuesta);
 						swal({
 							title:'Reporte de venta guardado con exito',
-							text:"El inmueble toma estatus vendido, por lo que el vendedor debe cancelar el pago de la comisión por servicios prestados",
+							text:"Negociación Finalizada",
 							icon:'success',
 							//timer: 2000,
 							button:true,
 						});
 						$('#dateReporte').attr('disabled',true);
 						$('#reporteSubmit').attr('disabled',true);
+						$('.estatusInmueble').css('display','none');
 						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
 
 		      }
@@ -656,43 +687,38 @@ $('body').on('click','#cancelNegotiation',function(){
 			$.ajax({
 				url: url,
 				type: "post",
-				dataType: "html",
-				data:{idPropiedad:idPropiedad,idNegociacion:idNegociacion},
+				dataType: "json",
+				data:{idPropiedad:idPropiedad,idNegociacion:idNegociacion}
 			})
 			.done(function(respuesta){
-				//console.log (respuesta);
-				if (respuesta==4) {
+				console.log (respuesta);
+				if (respuesta[0]==1) {
+					if (respuesta[1]==1) {
+						swal({
+							title:'Negociación Cancelada con Exito!!',
+							text:"La negociacion fue cancelada sin embargo esta propiedad genero ingresos por gestion de venta, el inmueble volvera a estar activo",
+							icon:'success',
+							//timer: 2000,
+							button:true,
+						});
+					}
+					else{
+						swal({
+							title:'Negociación Cancelada con Exito!!',
+							text:"El inmueble volvera a estar activo",
+							icon:'success',
+							//timer: 2000,
+							button:true,
+						});
+					}
 
-					swal({
-						title:'Negociación Cancelada!!',
-						text:"El inmueble volvera a estar activo",
-						icon:'success',
-						timer: 2000,
-						button:false,
-					});
 
 					setTimeout(function(){$('#cambioStatus').modal('hide');},2300);
 				}
-				else if(respuesta==1){
+				else if(respuesta[0]==2){
 					swal({
 						title:'Imposible realizar la acción!!',
-						text:"La negociación ya entro en promesa bilateral, por lo que el inmueble tomo estatus de procesado para el cálculo de comisiones",
-						icon:'error',
-						button:true
-					});
-				}
-				else if (respuesta==2) {
-					swal({
-						title:'Imposible realizar la acción!!',
-						text:"La negociación ya entro protocolización, por lo que el inmueble tomo estatus de procesado para el cálculo de comisiones",
-						icon:'error',
-						button:true
-					});
-				}
-				else if(respuesta==3){
-					swal({
-						title:'Imposible realizar la acción!!',
-						text:"La negociación ya fue reportado como vendido, por lo que el inmueble tomo estatus de vendido para el cálculo de comisiones",
+						text:"La negociacion a finalizado, por lo que el inmueble tomo estatus de vendido para el cálculo de comisiones",
 						icon:'error',
 						button:true
 					});
