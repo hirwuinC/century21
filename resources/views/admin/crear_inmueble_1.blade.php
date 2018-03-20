@@ -12,9 +12,11 @@
         <div class="col-xs-12">
             <div class="row">
                 <div class="col-xs-6">
-                    <input type="text" class="inputs inputsLight form-control" name="namePropiety" id="namePropiety" value="" placeholder="Nombre del inmueble">
+                    <label for="">Urbanización</label>
+                    <input type="text" class="inputs inputsLight form-control" name="namePropiety" id="namePropiety" value="" placeholder="urbanización">
                 </div>
                 <div class="col-xs-6">
+                    <label for="">Tipo de Inmueble</label>
                     <select class="" name="typePropiety" id="typePropiety">
                         <option value="" selected >Tipo de inmueble</option>
                         @foreach ($tiposIn as $tipo)
@@ -27,6 +29,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-6">
+                  <label for="">Estado</label>
                   <select id="estatePropiety" name="estatePropiety">
                       <option value="" selected >Estado</option>
                       @foreach($estados as $estado)
@@ -35,6 +38,7 @@
                   </select>
                 </div>
                 <div class="col-xs-6">
+                    <label for="">Ciudad</label>
                     <select id="cityPropiety" name="cityPropiety">
                         <option value="">Ciudad</option>
                         <option class="opcion" value""> - </option>
@@ -43,6 +47,7 @@
             </div>
             <div class="row" style="padding-top:30px">
                 <div class="col-xs-12">
+                    <label for="">Dirección del inmueble</label>
                     <input type="text" class="inputs inputsLight form-control" name="addressPropiety" id="addressPropiety" placeholder="Dirección del inmueble (Incluir ubicacion en el mapa)">
                 </div>
             </div>
@@ -54,6 +59,7 @@
             </div>
             <div class="row">
                 <div class="col-xs-4">
+                    <label for="">Precio de Venta</label>
                     <input type="number" min="0" class="inputs inputsLight form-control" name="pricePropiety" id="pricePropiety" placeholder="Precio">
                 </div>
                 <div class="col-xs-4">
@@ -82,30 +88,37 @@
             </div>
             <div class="row">
               <div class="col-xs-6">
+                  <label for="">Metros de Construccion</label>
                   <input type="number" min="0" class="inputs inputsLight form-control" name="constructionPropiety" id="constructionPropiety" placeholder="Construcción (Mtr2)">
               </div>
               <div class="col-xs-6">
+                  <label for="">Metros de terreno</label>
                   <input type="number" min="0" class="inputs inputsLight form-control" name="areaPropiety" id="areaPropiety" placeholder="Terreno (Mtr2)">
               </div>
             </div>
             <div class="row">
                 <div class="col-xs-4">
+                    <label for="">Cantidad de habitaciones</label>
                     <input type="number" min="0" class="inputs inputsLight form-control" id="roomPropiety"name="roomPropiety" placeholder="Habitaciones">
                 </div>
                 <div class="col-xs-4">
+                    <label for="">Cantidad de baños</label>
                     <input type="number" min="0" class="inputs inputsLight form-control" id="batroomPropiety" name="batroomPropiety" placeholder="Baños">
                 </div>
                 <div class="col-xs-4">
+                    <label for="">Cantidad de estacionamientos</label>
                     <input type="number" min="0" class="inputs inputsLight form-control" id="parkingPropiety" name="parkingPropiety" placeholder="Estacionamiento (Cantidad de Puestos)">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
+                    <label for="">Comentarios sobre el inmueble</label>
                     <textarea class="inputs inputsLight" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble"></textarea>
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6">
+                  <label for="">Asesor Captador</label>
                   <select name="asesorPropiety" id="asesorPropiety">
                       <option value="" selected >Asesor</option>
                       @foreach($asesores as $asesor)
@@ -114,8 +127,9 @@
                   </select>
                 </div>
                 <div class="col-xs-6">
+                  <label for="">Tipo de Negociación</label>
                   <select name="typeBussisness" id="typeBussisness">
-                      <option value="" selected >Tipo de Negociación</option>
+                      <option value="" selected >Seleccione una opción</option>
                       <option value="alquiler">Alquiler</option>
                       <option value="venta">Venta</option>
                   </select>
@@ -128,9 +142,11 @@
     <div class="col-xs-12">
         <div class="row">
             <div class="col-xs-6">
-                <input type="text" class="inputs inputsLight form-control" name="namePropiety" id="namePropiety" value='{{$datos->urbanizacion}}' placeholder="Nombre del inmueble">
+                <label for="">Urbanización</label>
+                <input type="text" class="inputs inputsLight form-control" name="namePropiety" id="namePropiety" value='{{$datos->urbanizacion}}' placeholder="Urbanización">
             </div>
             <div class="col-xs-6">
+                <label for="">Tipo de Inmueble</label>
                 <select class="" name="typePropiety" id="typePropiety">
                     <option value="" >Tipo de inmueble</option>
                     @foreach ($tiposIn as $tipo)
@@ -145,6 +161,7 @@
         </div>
         <div class="row">
             <div class="col-xs-6">
+              <label for="">Estado</label>
               <select id="estatePropiety" name="estatePropiety">
                   <option value="" >Estado</option>
                   @foreach($estados as $estado)
@@ -157,6 +174,7 @@
               </select>
             </div>
             <div class="col-xs-6">
+                <label for="">Ciudad</label>
                 <select id="cityPropiety" name="cityPropiety">
                     <option value="">Ciudad</option>
                     @foreach($consulta as $ciudad)
@@ -171,6 +189,7 @@
         </div>
         <div class="row" style="padding-top:30px">
             <div class="col-xs-12">
+                <label for="">Dirección</label>
                 <input type="text" class="inputs inputsLight form-control" value='{{$datos->direccion}}' name="addressPropiety" id="addressPropiety" placeholder="Dirección del inmueble (Incluir ubicacion en el mapa)">
             </div>
         </div>
@@ -182,6 +201,7 @@
         </div>
         <div class="row">
             <div class="col-xs-6">
+                <label for="">Ciudad</label>
                 <input type="number" min="0" class="inputs inputsLight form-control" value='{{$datos->precio}}' name="pricePropiety" id="pricePropiety" placeholder="Precio">
             </div>
             <div class="col-xs-6">
@@ -229,30 +249,37 @@
         </div>
         <div class="row">
           <div class="col-xs-6">
+              <label for="">Metros de Construcción</label>
               <input type="number" min="0" class="inputs inputsLight form-control" value='{{$datos->metros_construccion}}' name="constructionPropiety" id="constructionPropiety" placeholder="Construcción (Mtr2)">
           </div>
           <div class="col-xs-6">
+              <label for="">Metros de Terreno</label>
               <input type="number" min="0" class="inputs inputsLight form-control" value='{{$datos->metros_terreno}}' name="areaPropiety" id="areaPropiety" placeholder="Terreno (Mtr2)">
           </div>
         </div>
         <div class="row">
             <div class="col-xs-4">
+                <label for="">Cantidad de Habitaciones</label>
                 <input type="number" min="0" class="inputs inputsLight form-control" value='{{$datos->habitaciones}}' id="roomPropiety"name="roomPropiety" placeholder="Habitaciones">
             </div>
             <div class="col-xs-4">
+                <label for="">Cantidad de Baños</label>
                 <input type="number" min="0" class="inputs inputsLight form-control" value='{{$datos->banos}}' id="batroomPropiety" name="batroomPropiety" placeholder="Baños">
             </div>
             <div class="col-xs-4">
+                <label for="">Cantidad de Estacionamientos</label>
                 <input type="number" min="0" class="inputs inputsLight form-control" value='{{$datos->estacionamientos}}' id="parkingPropiety" name="parkingPropiety" placeholder="Estacionamiento (Cantidad de Puestos)">
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
+                <label for="">Caracteristicas de la Propiedad</label>
                 <textarea class="inputs inputsLight" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble">{{$datos->comentario}}</textarea>
             </div>
         </div>
         <div class="row">
             <div class="col-xs-6">
+              <label for="">AsesorCaptador</label>
               <select name="asesorPropiety" id="asesorPropiety">
                   <option value="">Asesor</option>
                   @foreach($asesores as $asesor)
@@ -265,6 +292,7 @@
               </select>
             </div>
             <div class="col-xs-6">
+              <label for="">Tipo de Negociación</label>
               <select name="typeBussisness" id="typeBussisness">
                   <option value="">Tipo de Negociación</option>
                   @if($datos->tipoNegocio=="alquiler")

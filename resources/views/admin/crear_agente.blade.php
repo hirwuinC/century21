@@ -18,23 +18,28 @@
         <div class="col-xs-9">
             <div class="row">
                 <div class="col-xs-6">
+                    <label for="">Nombres</label>
                     <input type="hidden" name="argument" value="{{ $asesor->id}}">
                     <input type="text" value="{{ $fullname[0] }}" disabled="disabled" class="inputs inputsLight form-control"  placeholder="Nombre">
                 </div>
                 <div class="col-xs-6">
+                    <label for="">Apellidos</label>
                     <input type="text" value="{{ $fullname[1] }}" class="inputs inputsLight form-control" disabled="disabled"  placeholder="Apellido">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6">
+                    <label for="">Cédula de Identidad</label>
                     <input type="text" value="{{ $asesor->cedula }}" class="inputs inputsLight form-control" disabled="disabled"  placeholder="Cédula de Identidad">
                 </div>
                 <div class="col-xs-6">
+                    <label for="">Telefono Fijo</label>
                     <input type="text" value="{{$asesor->telefono}}" class="inputs inputsLight form-control" disabled="disabled"  placeholder="Telefóno">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6">
+                    <label for="">Telefono Móvil</label>
                     <input type="text" disabled="disabled" value="{{$asesor->celular}}" class="inputs inputsLight form-control"  placeholder="Celular">
                 </div>
                 <div class="col-xs-6">
@@ -53,17 +58,21 @@
             @if($usuario)
                 <div class="row">
                     <div class="col-xs-6">
+                        <label for="">Usuario</label>
                         <input type="text" class="inputs inputsLight form-control" name="user" id="user" value="{{ $usuario->name }}" placeholder="Usuario">
                     </div>
                     <div class="col-xs-6">
+                        <label for="">Correo Electrónico</label>
                         <input type="text" class="inputs inputsLight form-control" id="emailUser" name="emailUser" value="{{ $usuario->email }}" placeholder="Correo">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-6">
+                        <label for="">Contraseña</label>
                         <input type="password" class="inputs inputsLight form-control" id="pass" name="pass" value="{{ $password }}" placeholder="Contraseña">
                     </div>
                     <div class="col-xs-6">
+                        <label for="">Repetir Contraseña</label>
                         <input type="password" class="inputs inputsLight form-control" id="repeatPass" name="repeatPass" value="{{ $password }}"placeholder="Repetir Contraseña">
                     </div>
                 </div>
@@ -80,15 +89,17 @@
                 </div>
                  <div class="row">
                     <div class="col-xs-6">
+                        <label for="">Dirección de Habitación</label>
                         <input type="text" class="inputs inputsLight form-control" id="addressUser" name="addressUser" value="{{$usuario->address_user}}" placeholder="Dirección">
                     </div>
                     <div class="col-xs-6">
+                        <label for="">RIF</label>
                         <input type="text" class="inputs inputsLight form-control" id="rifUser" name="rifUser" value="{{ $usuario->rif_user }}" placeholder="Rif (V123456789)">
                     </div>
                 </div>
                  <div class="row">
                     <div class="col-xs-12">
-
+                        <label for="">Perfil de usuario</label>
                         <select class="inputs inputsLight form-control" id="rolUser" name="rolUser" >
                             <option value="">Seleccione un perfil</option>
                             @foreach($roles as $rol)
@@ -106,17 +117,21 @@
             @else
                 <div class="row">
                     <div class="col-xs-6">
+                        <label for="">Usuario</label>
                         <input type="text" class="inputs inputsLight form-control" name="user" id="user" placeholder="Usuario">
                     </div>
                     <div class="col-xs-6">
+                        <label for="">Correo Electrónico</label>
                         <input type="text" class="inputs inputsLight form-control" id="emailUser" name="emailUser" placeholder="Correo">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-6">
+                        <label for="">Contraseña</label>
                         <input type="password" class="inputs inputsLight form-control" id="pass" name="pass" placeholder="Contraseña">
                     </div>
                     <div class="col-xs-6">
+                        <label for="">Repetir Contraseña</label>
                         <input type="password" class="inputs inputsLight form-control" id="repeatPass" name="repeatPass" placeholder="Repetir Contraseña">
                     </div>
                 </div>
@@ -133,15 +148,18 @@
                 </div>
                  <div class="row">
                     <div class="col-xs-6">
+                        <label for="">Dirección de Habitación</label>
                         <input type="text" class="inputs inputsLight form-control" id="addressUser" name="addressUser" placeholder="Dirección">
                     </div>
                     <div class="col-xs-6">
+                        <label for="">RIF</label>
                         <input type="text" class="inputs inputsLight form-control" id="rifUser" name="rifUser" placeholder="Rif (V123456789)">
                     </div>
 
                 </div>
                 <div class="row">
                     <div class="col-xs-12">
+                        <label for="">Perfil de Usuario</label>
                         <select class="inputs inputsLight form-control" id="rolUser" name="rolUser">
                             <option value="">Seleccione un perfil</option>
                             @foreach($roles as $rol)

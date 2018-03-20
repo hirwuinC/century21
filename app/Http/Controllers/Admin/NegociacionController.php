@@ -282,4 +282,13 @@ class NegociacionController extends Controller{
     return  $respuesta;
   }
 
+  public function cambiarEstatusInmueble(){
+    $idpropiedad=Request::get('idPropiedad');
+    $opcion=Request::get('opcion');
+    Propiedad::where('id',$idpropiedad)->update([
+      "estatus"=>  $opcion]);
+    $respueta=1;
+    return $respueta;
+  }
+
 }

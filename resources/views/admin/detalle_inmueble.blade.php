@@ -58,7 +58,7 @@
             <div class="row">
                 <div class="col-xs-4">
                     <p><span>Asesor Captador:</span> {{$negociacion->asesorCaptador}}</p>
-                    <p><span>Asesor Cerrador:</span> {{$negociacion->asesorCaptador}}</p>
+                    <p><span>Asesor Cerrador:</span> {{$negociacion->asesorCerrador}}</p>
                     <p><span>Monto de Venta Final:</span>
                       @if($negociacion->precioFinal!='')
                         Bs{{$negociacion->precioFinal}}
@@ -72,6 +72,12 @@
                 </div>
                 <div class="col-xs-4">
                     <p><span>Comisión Bruta: Bs</span> {{$negociacion->comisionBruta}}</p>
+                    @if($negociacion->asesorCaptador=="Asesor Generico" || $negociacion->asesorCerrador=="Asesor Generico" )
+                      <p><span>Operación Compartida:</span> Si</p>
+                      <p><span>Comisión por operación Compartida:</span> {{$negociacion->porcentajeCompartido}}%</p>
+                    @else
+                      <p><span>Operación Compartida:</span> No</p>
+                    @endif
                     <p><span>Pago Casa Nacional:Bs</span> {{$negociacion->pagoCasaMatriz}}</p>
                     <p><span>Ingreso Neto Oficina:Bs</span> {{$negociacion->ingresoNeto}}</p>
                 </div>

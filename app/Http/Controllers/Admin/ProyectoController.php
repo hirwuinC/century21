@@ -18,9 +18,9 @@ use App\Models\InmuebleProyecto;
 class ProyectoController extends Controller{
 
   public function ListaProyectos(){
-        $proyectos=DB::table('mediaProyectos')->Join('proyectos','mediaProyectos.proyecto_id','proyectos.id')
-                                           ->select('mediaProyectos.nombre as nombre_imagen','mediaProyectos.proyecto_id','mediaProyectos.id as id_imagen','proyectos.*')
-                                           ->where('mediaProyectos.vista',1)
+        $proyectos=DB::table('mediaproyectos')->Join('proyectos','mediaproyectos.proyecto_id','proyectos.id')
+                                           ->select('mediaproyectos.nombre as nombre_imagen','mediaproyectos.proyecto_id','mediaproyectos.id as id_imagen','proyectos.*')
+                                           ->where('mediaproyectos.vista',1)
                                            ->paginate(30);
 
       return view('/admin/lista_proyectos',$this->cargarSidebar(),compact('proyectos'));
@@ -77,9 +77,9 @@ class ProyectoController extends Controller{
   }
 
   public function CrearProyecto2(){
-    $consulta=DB::table('inmuebleProyectos')->Join('tipoInmuebleProyectos','inmuebleProyectos.tipoinmueble_id','tipoInmuebleProyectos.id')
-                                            ->select('tipoInmuebleProyectos.nombre as nombreTipoInmueble','inmuebleProyectos.*')
-                                            ->where('inmuebleProyectos.proyecto_id',Session::get('proyecto'))
+    $consulta=DB::table('inmuebleproyectos')->Join('tipoinmuebleproyectos','inmuebleproyectos.tipoinmueble_id','tipoinmuebleproyectos.id')
+                                            ->select('tipoinmuebleproyectos.nombre as nombreTipoInmueble','inmuebleproyectos.*')
+                                            ->where('inmuebleproyectos.proyecto_id',Session::get('proyecto'))
                                             ->get();
     $inmuebles=TipoInmuebleProyecto::all();
     return view('/admin/crear_proyecto_2',$this->cargarSidebar(),compact('inmuebles','consulta'));
@@ -93,7 +93,7 @@ class ProyectoController extends Controller{
                                         ->where('proyecto_id',$proyecto)
                                         ->first();
     if (count($tipoInmuebleExiste)==0) {
-      $id=DB::table('inmuebleProyectos')->insertGetId([
+      $id=DB::table('inmuebleproyectos')->insertGetId([
         "tipoinmueble_id"         =>  Request::get('typeProyect'),
         "cantidad"                =>  Request::get('quantityProyect'),
         "precio"                  =>  Request::get('priceProyect'),
@@ -105,9 +105,9 @@ class ProyectoController extends Controller{
         "descripcionInmueble"     =>  Request::get('descriptionProyect'),
         "proyecto_id"             =>  Request::get('register')
       ]);
-      $consulta=DB::table('inmuebleProyectos')->Join('tipoInmuebleProyectos','inmuebleProyectos.tipoinmueble_id','tipoInmuebleProyectos.id')
-                                              ->select('tipoInmuebleProyectos.nombre as nombreTipoInmueble','inmuebleProyectos.*')
-                                              ->where('inmuebleProyectos.proyecto_id',$proyecto)
+      $consulta=DB::table('inmuebleproyectos')->Join('tipoinmuebleproyectos','inmuebleproyectos.tipoinmueble_id','tipoinmuebleproyectos.id')
+                                              ->select('tipoinmuebleproyectos.nombre as nombreTipoInmueble','inmuebleproyectos.*')
+                                              ->where('inmuebleproyectos.proyecto_id',$proyecto)
                                               ->get();
       $resultado=view('/admin/partials/tipoInmueble',$this->cargarSidebar(),compact('consulta'));
     }
@@ -118,9 +118,9 @@ class ProyectoController extends Controller{
     $proyecto=Request::get('register');
     $inmueble=InmuebleProyecto::find(Request::get('id'));
     $inmueble->delete();
-    $consulta=DB::table('inmuebleProyectos')->Join('tipoInmuebleProyectos','inmuebleProyectos.tipoinmueble_id','tipoInmuebleProyectos.id')
-                                            ->select('tipoInmuebleProyectos.nombre as nombreTipoInmueble','inmuebleProyectos.*')
-                                            ->where('inmuebleProyectos.proyecto_id',$proyecto)
+    $consulta=DB::table('inmuebleproyectos')->Join('tipoinmuebleproyectos','inmuebleproyectos.tipoinmueble_id','tipoinmuebleproyectos.id')
+                                            ->select('tipoinmuebleproyectos.nombre as nombreTipoInmueble','inmuebleproyectos.*')
+                                            ->where('inmuebleproyectos.proyecto_id',$proyecto)
                                             ->get();
     $resultado=view('/admin/partials/tipoInmueble',$this->cargarSidebar(),compact('consulta'));
     return $resultado;
@@ -162,7 +162,7 @@ class ProyectoController extends Controller{
       $archivo->move($path,$renombre);
     }
     else{
-      $idImagen=DB::table('mediaProyectos')->insertGetId([
+      $idImagen=DB::table('mediaproyectos')->insertGetId([
                   "nombre"        =>  $renombre,
                   "proyecto_id"  =>  $inmueble
       ]);
@@ -245,18 +245,18 @@ class ProyectoController extends Controller{
   }
 
   public function detalleProyecto($id){
-    $proyecto=DB::table('proyectos')->join('mediaProyectos','proyectos.id','mediaProyectos.proyecto_id')
+    $proyecto=DB::table('proyectos')->join('mediaproyectos','proyectos.id','mediaproyectos.proyecto_id')
                                      ->join('estados','proyectos.estado_id','=','estados.id')
                                      ->join('ciudades','proyectos.ciudad_id','=','ciudades.id')
-                                     ->select('proyectos.*','mediaProyectos.nombre as nombre_imagen','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad')
+                                     ->select('proyectos.*','mediaproyectos.nombre as nombre_imagen','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad')
                                      ->where('proyectos.id',$id)
-                                     ->where('mediaProyectos.vista',1)
-                                     ->where('mediaProyectos.proyecto_id',$id)
+                                     ->where('mediaproyectos.vista',1)
+                                     ->where('mediaproyectos.proyecto_id',$id)
                                      ->first();
 
-    $inmuebles=DB::table('inmuebleProyectos')->join('tipoInmuebleProyectos','inmuebleProyectos.tipoinmueble_id','tipoInmuebleProyectos.id')
-                                             ->select('inmuebleProyectos.*','tipoInmuebleProyectos.nombre as nombre_tipo')
-                                             ->where('inmuebleProyectos.proyecto_id',$id)
+    $inmuebles=DB::table('inmuebleproyectos')->join('tipoinmuebleproyectos','inmuebleproyectos.tipoinmueble_id','tipoinmuebleproyectos.id')
+                                             ->select('inmuebleproyectos.*','tipoinmuebleproyectos.nombre as nombre_tipo')
+                                             ->where('inmuebleproyectos.proyecto_id',$id)
                                              ->get();
 
     return view('/admin/detalle_proyecto',$this->cargarSidebar(),compact('inmuebles','proyecto'));
@@ -290,9 +290,9 @@ class ProyectoController extends Controller{
   }
   public function editarProyecto2($id){
     $proyecto=$id;
-    $consulta=DB::table('inmuebleProyectos')->Join('tipoInmuebleProyectos','inmuebleProyectos.tipoinmueble_id','tipoInmuebleProyectos.id')
-                                            ->select('tipoInmuebleProyectos.nombre as nombreTipoInmueble','inmuebleProyectos.*')
-                                            ->where('inmuebleProyectos.proyecto_id',$id)
+    $consulta=DB::table('inmuebleproyectos')->Join('tipoinmuebleproyectos','inmuebleproyectos.tipoinmueble_id','tipoinmuebleproyectos.id')
+                                            ->select('tipoinmuebleproyectos.nombre as nombreTipoInmueble','inmuebleproyectos.*')
+                                            ->where('inmuebleproyectos.proyecto_id',$id)
                                             ->get();
     $inmuebles=TipoInmuebleProyecto::all();
     return view('/admin/editar_proyecto_2',$this->cargarSidebar(),compact('inmuebles','consulta','proyecto'));

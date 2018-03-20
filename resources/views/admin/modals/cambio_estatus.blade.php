@@ -46,13 +46,13 @@
                             <div class="row marginBottom20">
                                 <div class="col-xs-12">
                                     <label for="">Monto final de la negociación</label>
-                                    <input type="number" name="montoFinal" class="form-control" placeholder="Monto en Bs.">
+                                    <input type="number" id="montoFinal" name="montoFinal" class="form-control" placeholder="Monto en Bs.">
                                 </div>
                             </div>
                             <div class="row marginBottom20">
                                 <div class="col-xs-12">
                                     <label for="">Porcentaje de comisión de Cierre</label>
-                                    <input type="number" min="0" max="100" name="comisionCierre" class="form-control" placeholder="% de comisión de cierre">
+                                    <input type="number" min="0" max="100" id="comisionCierre" name="comisionCierre" class="form-control" placeholder="% de comisión de cierre">
                                 </div>
                             </div>
                             <div class="row">
@@ -73,7 +73,8 @@
                           <div class="row  estatusInmueble ">
                               <div class="col-xs-12">
                                   <label for="estatusInmueble">Estatus del inmueble</label>
-                                  <select id="estatusInmueble" class="inputs inputsLight form-control " name="asesorCerrador">
+                                  <input type="hidden" id="anterior" value="">
+                                  <select id="estatusInmueble" class="inputs inputsLight form-control " name="estatusInmueble">
                                   </select>
                               </div>
                           </div>

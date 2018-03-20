@@ -240,11 +240,11 @@ class PropiedadController extends Controller{
              "fechaCreacion"        => ""
            ];
     }
-    $inmueble=DB::table('propiedades')->join('tipoInmueble','propiedades.tipo_inmueble','=','tipoInmueble.id')
+    $inmueble=DB::table('propiedades')->join('tipoinmueble','propiedades.tipo_inmueble','=','tipoinmueble.id')
                                        ->join('agentes','propiedades.agente_id','=','agentes.id')
                                        ->join('estados','propiedades.estado_id','=','estados.id')
                                        ->join('ciudades','propiedades.ciudad_id','=','ciudades.id')
-                                       ->select('propiedades.*','agentes.fullname','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoInmueble.id as idTipo', 'tipoInmueble.nombre as nombreTipo')
+                                       ->select('propiedades.*','agentes.fullname','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoinmueble.id as idTipo', 'tipoinmueble.nombre as nombreTipo')
                                        ->where('propiedades.id',$id)
                                        ->first();
 

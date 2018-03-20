@@ -13,7 +13,20 @@ $(document).ready(function() {
 	  })
 	  .done(function(respuesta){
 		 	if (respuesta[0]==1) {
-			 console.log(respuesta);
+			 //console.log(respuesta);
+
+////////////////////////////////// RESETEAR FORMULARIOS DE PASOS ///////////////////////////////////////////
+
+				var validator1 = $( "#newPropuesta" ).validate();
+				validator1.resetForm();
+				var validator2 = $( "#newDeposito" ).validate();
+				validator2.resetForm();
+				var validator3 = $( "#newBilateral" ).validate();
+				validator3.resetForm();
+				var validator4 = $( "#newRegistro" ).validate();
+				validator4.resetForm();
+				var validator5 = $( "#newReporte" ).validate();
+				validator5.resetForm();
 
 ///////////////////// HABILITAR CAMPOS ///////////////////////////////////////////////////
 
@@ -115,6 +128,8 @@ $(document).ready(function() {
 						$('#estatusInmueble option[value="2"]').attr("selected", true);
 					}
 				}
+				var opcion=$("#estatusInmueble option:selected").val();
+				$('#anterior').val(opcion);
 
 //////////////////// MOSTRAR CAMPOS DE PAGO DE COMISION  /////////////////////////////////////////////////
 				$('.ocultarComision').css('display','block');
@@ -156,6 +171,12 @@ $(document).ready(function() {
 					$('#personaComparte').css('display','block');
 					$('#comisionCompartidaInput').val('0');
 				}
+////////////////// LIMPIAR CAMPOS DEL MODAL //////////////////////////////////////////////////////
+
+				$('#asesorCerrador').val('');
+				$('#personaComparteInput').val('');
+				$('#montoFinal').val('');
+				$('#comisionCierre').val('');
 
 
 				$('#cambioStatus').modal('show');
@@ -289,7 +310,7 @@ $("#newPropuesta").validate({
 		    })
 		    .done(function(respuesta){
 		    	if (respuesta==1) {
-						console.log (respuesta);
+						//console.log (respuesta);
 						swal({
 							title:'Buen trabajo!!',
 							text:"Propuesta aprobada guardada con exito",
@@ -530,7 +551,7 @@ $("#newRegistro").validate({
 		    })
 		    .done(function(respuesta){
 		    	if (respuesta[0]==1) {
-						console.log (respuesta);
+						//console.log (respuesta);
 						swal({
 							title:'Buen Trabajo',
 							text:'Protocolización guardada con exito',
@@ -691,7 +712,7 @@ $('body').on('click','#cancelNegotiation',function(){
 				data:{idPropiedad:idPropiedad,idNegociacion:idNegociacion}
 			})
 			.done(function(respuesta){
-				console.log (respuesta);
+				//console.log (respuesta);
 				if (respuesta[0]==1) {
 					if (respuesta[1]==1) {
 						swal({
@@ -724,6 +745,60 @@ $('body').on('click','#cancelNegotiation',function(){
 					});
 				}
 			});
+		}
+	});
+});
+//////////////////////////////////////////////////CAMBIAR ESTATUS PROPIEDAD //////////////////////////////////////////////////////
+$('body').on('change','#estatusInmueble',function(){
+	//console.log(opcion);
+	var anterior=$('#anterior').val();
+	$("#estatusInmueble option[value="+ anterior +"]").removeAttr("selected");
+	swal({
+		title: "Estatus de publicación de Inmueble",
+		text: "¿Esta seguro que desea cambiar el estatus del inmueble?",
+		icon: "warning",
+		buttons: ['No','Sí, Cambiar'],
+		dangerMode:false
+	})
+	.then((cambiarEstatus) => {
+		if (cambiarEstatus) {
+			var opcion=$("#estatusInmueble option:selected").val();
+			var idPropiedad=$('#propiedadGeneral').val();
+			url="/admin/cambiarEstatusInmueble";
+			$.ajax({
+				url: url,
+				type: "post",
+				dataType: "html",
+				data:{idPropiedad:idPropiedad,opcion:opcion}
+			})
+			.done(function(respuesta){
+				//console.log (respuesta);
+				if (respuesta) {
+					var opcion=$("#estatusInmueble option:selected").val();
+					$("#estatusInmueble option[value="+ opcion +"]").attr("selected",true);
+					$('#anterior').val(opcion);
+						swal({
+							title:'Buen Trabajo!!',
+							text:"El estatus fue cambiado con exito",
+							icon:'success',
+							//timer: 2000,
+							button:true,
+						});
+				}
+				else {
+					swal({
+						title:'Imposible realizar la acción!!',
+						text:"Comuniquese con el administrador del sistema",
+						icon:'error',
+						button:true
+					});
+				}
+			});
+		}
+		else{
+			var anterior=$('#anterior').val();
+			//console.log(anterior);
+			$("#estatusInmueble option[value="+ anterior +"]").attr("selected",true);
 		}
 	});
 });

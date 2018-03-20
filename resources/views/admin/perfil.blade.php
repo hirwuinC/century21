@@ -17,23 +17,28 @@
         <div class="col-xs-9">
             <div class="row">
                 <div class="col-xs-6">
+                    <label for="">Nombres</label>
                     <input type="hidden" name="argument" value="{{ $asesor->id}}">
                     <input type="text" value="{{ $fullname[0] }}" disabled="disabled" class="inputs inputsLight form-control"  placeholder="Nombre">
                 </div>
                 <div class="col-xs-6">
+                    <label for="">Apellidos</label>
                     <input type="text" value="{{ $fullname[1] }}" class="inputs inputsLight form-control" disabled="disabled"  placeholder="Apellido">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6">
+                    <label for="">Cédula de Identidad</label>
                     <input type="text" value="{{ $asesor->cedula }}" class="inputs inputsLight form-control" disabled="disabled"  placeholder="Cédula de Identidad">
                 </div>
                 <div class="col-xs-6">
+                    <label for="">Telefóno Fijo</label>
                     <input type="text" value="{{$asesor->telefono}}" class="inputs inputsLight form-control" disabled="disabled"  placeholder="Telefóno">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-6">
+                    <label for="">Telefóno Móvil</label>
                     <input type="text" disabled="disabled" value="{{$asesor->celular}}" class="inputs inputsLight form-control"  placeholder="Celular">
                 </div>
                 <div class="col-xs-6">
@@ -51,17 +56,21 @@
         <div class="col-xs-12">
                 <div class="row">
                     <div class="col-xs-6">
+                        <label for="">Usuario</label>
                         <input type="text" class="inputs inputsLight form-control" name="user" id="user" disabled="disabled" value="{{ $userall->name }}" placeholder="Usuario">
                     </div>
                     <div class="col-xs-6">
+                        <label for="">Correo Electrónico</label>
                         <input type="text" class="inputs inputsLight form-control" id="emailUser" disabled="disabled" name="emailUser" value="{{ $userall->email }}" placeholder="Correo">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-xs-6">
+                        <label for="">Contraseña</label>
                         <input type="password" class="inputs inputsLight form-control" id="pass" name="pass" value="{{ $password }}" placeholder="Contraseña">
                     </div>
                     <div class="col-xs-6">
+                        <label for="">Repetir Contraseña</label>
                         <input type="password" class="inputs inputsLight form-control" id="repeatPass" name="repeatPass" value="{{ $password }}"placeholder="Repetir Contraseña">
                     </div>
                 </div>
@@ -78,9 +87,11 @@
                 </div>
                  <div class="row">
                     <div class="col-xs-6">
+                        <label for="">Dirección de Habitación</label>
                         <input type="text" class="inputs inputsLight form-control" id="addressUser" name="addressUser" value="{{$userall->address_user}}" placeholder="Dirección">
                     </div>
                     <div class="col-xs-6">
+                        <label for="">RIF</label>
                         <input type="text" class="inputs inputsLight form-control" id="rifUser" name="rifUser" disabled="disabled" value="{{ $userall->rif_user }}" placeholder="Rif (V123456789)">
                     </div>
                 </div>
