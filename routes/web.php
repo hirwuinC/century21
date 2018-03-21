@@ -69,6 +69,8 @@ Route::any('/admin/historialNegociaciones', ['as' => 'historialNegociaciones', '
 Route::any('/admin/cancelarNegociacion', ['as' => 'cancelarNegociacion', 'uses' => 'Admin\NegociacionController@cancelarNegociacion']);
 Route::any('/admin/cambiarEstatusInmueble', ['as' => 'cambiarEstatusInmueble', 'uses' => 'Admin\NegociacionController@cambiarEstatusInmueble']);
 
+/// INFORMES DE GESTION
+Route::get('/admin/pruebaInforme',['as'=>'pruebaInforme','uses'=>'Admin\InformeController@pruebaInforme'] );
 
 //Proyectos
 Route::get('/admin/proyectos', ['as' => 'admin_lista_proyectos', 'uses' => 'Admin\ProyectoController@ListaProyectos']);
