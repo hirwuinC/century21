@@ -94,3 +94,7 @@ Route::get('/admin/proyecto/{id}', ['as' => 'admin_detalle_proyecto', 'uses' => 
 // ESTADISTICAS
 Route::get('/admin/estadisticas', ['as' => 'estadisticas', 'uses' => 'Admin\EstadisticasController@index']);
 Route::post('/admin/listarTipoReporte', ['as' => 'listar', 'uses' => 'Admin\EstadisticasController@tipoReporte']);
+
+// PRUEBAS
+
+Route::get('/admin/pruebas', ['as' => 'prueba', 'uses' => 'Correo@listarPropiedades']);

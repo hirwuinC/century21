@@ -100,7 +100,7 @@ $("#formularioInforme").validate({
       },
       recomendacion:{
         required:true
-      },
+      }
 
     },
   messages: {
