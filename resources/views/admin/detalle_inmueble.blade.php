@@ -6,6 +6,7 @@
         <div class="row">
               <div class="col-xs-4">
                   <input type="hidden" id="positionPropiety" value="{{$inmueble->posicionMapa}}">
+                  <input type="hidden" id="idPropiety" value="{{$inmueble->id}}">
                   <p><span>Código MLS:</span>
                     @if($inmueble->id_mls==0)
                       N/A
@@ -93,7 +94,7 @@
                 </div>
                 <div class="col-xs-3">
                     <div class="buttons">
-                        <button type="button" class="btnYellow noMargin" data-toggle="modal" data-target="#modalReport">NUEVO</button>
+                        <button type="submit" class="btnYellow noMargin" id="newInforme">NUEVO</button>
                     </div>
                 </div>
             </div>
@@ -167,5 +168,6 @@
     <script async defer
    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG6RQhkoAPuKs-2VSCbNisZ0NQt5Qf3Co&callback=initMap">
    </script>
+   <script type="text/javascript" src="{{ asset('js/admin/informes/informe.js') }}"></script>
 
 @endSection

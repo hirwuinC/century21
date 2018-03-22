@@ -71,6 +71,7 @@ Route::any('/admin/cambiarEstatusInmueble', ['as' => 'cambiarEstatusInmueble', '
 
 /// INFORMES DE GESTION
 Route::get('/admin/pruebaInforme',['as'=>'pruebaInforme','uses'=>'Admin\InformeController@pruebaInforme'] );
+Route::post('/admin/nuevoInforme',['as'=>'pruebaInforme','uses'=>'Admin\InformeController@nuevoInforme'] );
 
 //Proyectos
 Route::get('/admin/proyectos', ['as' => 'admin_lista_proyectos', 'uses' => 'Admin\ProyectoController@ListaProyectos']);
