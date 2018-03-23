@@ -156,6 +156,7 @@ class InformeController extends Controller{
     if (count($informe)==0) {
       $informe=[
         'nombre_cliente'=>'',
+        'correoCliente'=>'',
         'fechaExclusiva'=>'',
         'promocionRotulo'=>'',
         'promocionVolanteo'=>'',
@@ -189,6 +190,43 @@ class InformeController extends Controller{
       ];
     }
     return Response::json($informe);
+  }
+  public function guardarInforme(){
+
+    $nuevoInforme = new Informe;
+    $nuevoInforme->nombre_cliente                     = Request::get('nombreCliente');
+    $nuevoInforme->correoCliente                      = Request::get('correoCliente');
+    $nuevoInforme->fechaExclusiva                     = Request::get('contratoExclusiva');
+    $nuevoInforme->promocionRotulo                    = Request::get('rotuloComercial');
+    $nuevoInforme->promocionVolanteo                  = Request::get('volanteoDigital');
+    $nuevoInforme->publicacionVenezuela               = Request::get('codigoVenezuela');
+    $nuevoInforme->publicacionCaracas                 = Request::get('codigoCaracas');
+    $nuevoInforme->publicacionTuInmueble              = Request::get('codigoTuInmueble');
+    $nuevoInforme->publicacionLlave                   = Request::get('codigoConLaLlave');
+    $nuevoInforme->visitasDigitalesTotales            = Request::get('visitasDigitales');
+    $nuevoInforme->existeCompradores                  = Request::get('compradorInteresado');
+    $nuevoInforme->cantidadCompradoresInteresados     = Request::get('cantidadCInteresados');
+    $nuevoInforme->primerInteresado                   = Request::get('interesado1');
+    $nuevoInforme->segundoInteresado                  = Request::get('interesado2');
+    $nuevoInforme->tercerInteresado                   = Request::get('interesado3');
+    $nuevoInforme->cuartoInteresado                   = Request::get('interesado4');
+    $nuevoInforme->quintoInteresado                   = Request::get('interesado5');
+    $nuevoInforme->existeVisitasFisicas               = Request::get('visitasFisicas');
+    $nuevoInforme->cantidadVisitasFisicas             = Request::get('cantidadVisitasFisicas');
+    $nuevoInforme->evaluacionCaro                     = Request::get('caro');
+    $nuevoInforme->evaluacionMalaCondicion            = Request::get('malasCondiciones');
+    $nuevoInforme->evaluacionMalUbicado               = Request::get('malUbicado');
+    $nuevoInforme->evaluacionFormaPago                = Request::get('formaPago');
+    $nuevoInforme->evaluacionEnEspera                 = Request::get('enEspera');
+    $nuevoInforme->evaluacionVolverVisita             = Request::get('volverVisitar');
+    $nuevoInforme->evaluacionOtro                     = Request::get('otro');
+    $nuevoInforme->observaciones                      = Request::get('observacion');
+    $nuevoInforme->recomendaciones                    = Request::get('recomendacion');
+    $nuevoInforme->propiedad_id                       = Request::get('idPropietyModal');
+    $nuevoInforme->fechaCreado                        = date('Y-m-d');
+    $nuevoInforme->save();
+
+    return $nuevoInforme;
   }
 
 }

@@ -8,7 +8,7 @@
             </div>
             <div class="modal-body">
                 <form class="form marginForm" id="formularioInforme">
-                  <input type="hidden" id="idPropietyModal" value="">
+                  <input type="hidden" name="idPropietyModal" id="idPropietyModal" value="">
                     <div class="modal-body-top">
                         <div class="row">
                           <div class="col-xs-4">
@@ -19,6 +19,18 @@
                           <div class="col-xs-8">
                               <div style="padding-bottom:20px;" >
                                   <input type="text" class="inputs inputsLight form-control limpiar" name="nombreCliente" id="nombreCliente" value="">
+                              </div>
+                          </div>
+                        </div>
+                        <div class="row">
+                          <div class="col-xs-4">
+                              <div class="form-group">
+                                  <label>Correo Cliente:</label>
+                              </div>
+                          </div>
+                          <div class="col-xs-8">
+                              <div style="padding-bottom:20px;" >
+                                  <input type="text" class="inputs inputsLight form-control limpiar" name="correoCliente" id="correoCliente" value="">
                               </div>
                           </div>
                         </div>
@@ -216,7 +228,7 @@
                                     <label>Cantidad de visitas físicas:</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input type="number" min="0" name="cantidadVisitasFisicas" id="cantidadVisitasFisicas" class="form-control limpiar ocultoEvaluacion">
+                                    <input type="number" min="0" name="cantidadVisitasFisicas" id="cantidadVisitasFisicas" class="form-control limpiar ocultoEvaluacion" value="">
                                 </div>
                             </div>
                             <div class="row marginBottom20">

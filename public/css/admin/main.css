@@ -119,12 +119,26 @@ hr {
   font-family: 'latolight';
   border-radius: 5px;
 }
-.alertGreen h5 {
+.alertRed{
+  background: #EF5350;
+  height: 60px;
+  color: #ffffff;
+  font-family: 'latolight';
+  border-radius: 5px;
+}
+.alertOrange{
+  background: #FF9800;
+  height: 60px;
+  color: #ffffff;
+  font-family: 'latolight';
+  border-radius: 5px;
+}
+.alertGreen h5, .alertRed h5, .alertOrange h5{
   font-size: 1.3em;
   text-align: center;
   margin: 3px 0;
 }
-.alertGreen h5 span {
+.alertGreen h5 span,.alertRed h5 span, .alertOrange h5 span {
   font-family: 'latobold';
 }
 .alertGrayLight {

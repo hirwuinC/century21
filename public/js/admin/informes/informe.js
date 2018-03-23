@@ -5,6 +5,7 @@ $(document).ready(function() {
   $('body').on('click', '#newInforme', function() {
     $('.limpiar').val('');
     var propiedad=$('#idPropiety').val() ;
+    var valor=$('#idPropietyModal').val(propiedad);
     url="/admin/nuevoInforme";
     $.ajax({
       url: url,
@@ -16,6 +17,7 @@ $(document).ready(function() {
       if (respuesta) {
         //console.log(respuesta)
         $('#nombreCliente').val(respuesta.nombre_cliente);
+        $('#correoCliente').val(respuesta.correoCliente);
         $('#contratoExclusiva').val(respuesta.fechaExclusiva);
         $('#rotuloComercial').val(respuesta.promocionRotulo);
         $('#volanteoDigital').val(respuesta.promocionVolanteo);
@@ -34,6 +36,16 @@ $(document).ready(function() {
       }
     });
   });
+  /////////////////////////////////////////////  OCULTAR O MOSTRAR INFORMACION DE COMPRADORES INTERESADOS  ///////////////////////////////////
+    $('body').on('change', 'input:radio[name=compradorInteresado]', function() {
+      if ($(this).val()==0) {
+        $('.compradoresInteresados').css('display','none');
+        $('.ocultoInteresado').val('');
+      }
+      else{
+        $('.compradoresInteresados').css('display','block');
+      }
+    });
 
 /////////////////////////////////////////////  OCULTAR O MOSTRAR INFORMACION DE EVALUACION DE VISITAS AL INMUEBLE  ///////////////////////////////////
   $('body').on('change', 'input:radio[name=visitasFisicas]', function() {
@@ -46,16 +58,6 @@ $(document).ready(function() {
     }
   });
 
-/////////////////////////////////////////////  OCULTAR O MOSTRAR INFORMACION DE COMPRADORES INTERESADOS  ///////////////////////////////////
-  $('body').on('change', 'input:radio[name=compradorInteresado]', function() {
-    if ($(this).val()==0) {
-      $('.compradoresInteresados').css('display','none');
-      $('.ocultoInteresado').val('');
-    }
-    else{
-      $('.compradoresInteresados').css('display','block');
-    }
-  });
 
 ////////////////////////////////////////////// VALIDAR Y ENVIAR NUEVO INFORME ////////////////////////////////////////////////////////////
 $("#formularioInforme").validate({
@@ -64,6 +66,10 @@ $("#formularioInforme").validate({
       nombreCliente: {
         required:true,
         minlength: 5
+      },
+      correoCliente: {
+        required:true,
+        email: true
       },
       contratoExclusiva: {
         required: true
@@ -92,7 +98,16 @@ $("#formularioInforme").validate({
       compradorInteresado:{
         required:true
       },
+      cantidadCInteresados:{
+        required:true
+      },
+      interesado1:{
+        required:true
+      },
       visitasFisicas:{
+        required:true
+      },
+      cantidadVisitasFisicas:{
         required:true
       },
       observacion:{
@@ -108,8 +123,12 @@ $("#formularioInforme").validate({
       required:"Debe indicar el nombre del cliente",
       minlength: "EL nombre del cliente debe ser minimo de 5 caracteres"
     },
+    correoCliente: {
+      required:"Debe indicar el correo del cliente",
+      email:"El correo debe tener el formato minombre@midominio.com"
+    },
     contratoExclusiva: {
-      required: "Debe indicarla fecha cuando se firmo el contrato de exclusiva"
+      required: "Debe indicar la fecha cuando se firmo el contrato de exclusiva"
     },
     rotuloComercial:{
       required:"Debe indicar la gestión de este punto"
@@ -135,8 +154,17 @@ $("#formularioInforme").validate({
     compradorInteresado:{
       required:"Debe indicar si hay nuevos compradores interesados"
     },
+    cantidadCInteresados:{
+      required:"Debe indicar la cantidad de interesados de todos los portales"
+    },
+    interesado1:{
+      required:"Debe indicar el nombre de al menos un comprador"
+    },
     visitasFisicas:{
       required:"Debe indicar si hay nuevas visitas físicas al inmueble"
+    },
+    cantidadVisitasFisicas:{
+      required:"Debe indicar la cantidad de visitas al inmueble"
     },
     observacion:{
       required:"Indique sus observaciones"
@@ -146,8 +174,9 @@ $("#formularioInforme").validate({
     }
   },
   submitHandler: function(form) {
-    var form=$("#asesorCreate").serialize();
-    url="/admin/buscaruser";
+    var form=$("#formularioInforme").serialize();
+    console.log(form);
+    url="/admin/guardarInforme";
     $.post(url,form,function(respuesta){
       console.log(respuesta);
       /*var mensajes={0:"Error Inesperado, pongase en contacto con el administrador",

@@ -88,7 +88,7 @@
         <div class="reports">
             <div class="row">
                 <div class="col-xs-9">
-                    <div class="alert alertGreen" role="alert">
+                    <div class="alert alertRed" role="alert">
                         <h5>Próximo informe debe ser enviando antes de: <span>{{$inmueble->proximoInforme}}</span></h5>
                     </div>
                 </div>
@@ -109,7 +109,6 @@
                                     <li><a href=""><i class="fa fa-eye" aria-hidden="true"></i></a></li>
                                     <li><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
                                     <li><button type="button" class="btnGraySmall">Enviar</button></li>
-                                    <li class="circleYellow"></li>
                                 </ul>
                             </div>
                         </div>
@@ -122,7 +121,6 @@
                                 <ul>
                                     <li><a href=""><i class="fa fa-eye" aria-hidden="true"></i></a></li>
                                     <li><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                                    <li class="circleGreen"></li>
                                 </ul>
                             </div>
                         </div>
