@@ -14,6 +14,7 @@ use App\Models\TipoInmueble;
 use App\Models\Agente;
 use App\Models\Propiedad;
 use App\Models\Negociacion;
+use App\Models\Informe;
 use App\Models\Media;
 use App\Models\NegociacionEstatus;
 
@@ -249,7 +250,8 @@ class PropiedadController extends Controller{
                                        ->first();
 
     $imagen=Media::where('propiedad_id',$id)->where('vista',1)->first();
-    return view('/admin/detalle_inmueble',$this->cargarSidebar(),compact('inmueble','usuario','negociacion','imagen'));
+    $informes=Informe::where('propiedad_id',$id)->orderBy('id','DESC')->get();
+    return view('/admin/detalle_inmueble',$this->cargarSidebar(),compact('inmueble','usuario','negociacion','imagen','informes'));
   }
 
   public function mostrarEditarInmueble1($id){

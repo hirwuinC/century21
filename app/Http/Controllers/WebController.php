@@ -35,11 +35,11 @@ class WebController extends Controller
                                            ->inRandomOrder()
                                            ->get()
                                            ->take(30);
-                                           
-     $proyectos=DB::table('proyectos')->Join('mediaProyectos','proyectos.id','mediaProyectos.proyecto_id')
+
+     $proyectos=DB::table('proyectos')->Join('mediaproyectos','proyectos.id','mediaproyectos.proyecto_id')
                                            ->join('ciudades','proyectos.ciudad_id','ciudades.id')
-                                           ->select('mediaProyectos.nombre as nombre_imagen','mediaProyectos.proyecto_id','mediaProyectos.id as id_imagen','proyectos.*','ciudades.nombre as nombre_ciudad')
-                                           ->where('mediaProyectos.vista',1)
+                                           ->select('mediaproyectos.nombre as nombre_imagen','mediaproyectos.proyecto_id','mediaproyectos.id as id_imagen','proyectos.*','ciudades.nombre as nombre_ciudad')
+                                           ->where('mediaproyectos.vista',1)
                                            ->where('destacado',1)
                                            ->inRandomOrder()
                                            ->get()
@@ -79,11 +79,11 @@ class WebController extends Controller
       $contVisita = Propiedad::find($id);
       $contVisita->visitas =$contVisita->visitas+1;
       $contVisita->save();
-      $inmueble=DB::table('propiedades')->join('tipoInmueble','propiedades.tipo_inmueble','=','tipoInmueble.id')
+      $inmueble=DB::table('propiedades')->join('tipoinmueble','propiedades.tipo_inmueble','=','tipoinmueble.id')
                                          ->join('agentes','propiedades.agente_id','=','agentes.id')
                                          ->join('estados','propiedades.estado_id','=','estados.id')
                                          ->join('ciudades','propiedades.ciudad_id','=','ciudades.id')
-                                         ->select('propiedades.*','agentes.fullname','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoInmueble.*')
+                                         ->select('propiedades.*','agentes.fullname','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoinmueble.*')
                                          ->where('propiedades.id',$id)
                                          ->first();
       $imagenes=Media::where('propiedad_id',$id)->get();

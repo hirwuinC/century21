@@ -23,7 +23,7 @@ class InformeController extends Controller{
 
   public function Header($dia,$mes,$ano){
     // Logo
-    Fpdf::Image('images\logo-header.png',10,8,50);
+    Fpdf::Image('images/logo-header.png',10,8,50);
     // Arial bold 15
     Fpdf::SetFont('Arial','B',12);
     // Movernos a la derecha
@@ -146,7 +146,7 @@ class InformeController extends Controller{
     Fpdf::MultiCell(0,7,utf8_decode('Por Inmobiliaria CENTURY 21 INMUEBLES CARACAS'),0,'J',false);
     Fpdf::Ln();
     Fpdf::MultiCell(0,7,utf8_decode('[Asesor Captador]'),0,'C',false);
-    Fpdf::Output();
+    Fpdf::Output('F','informes/documento1.pdf');
     exit;
   }
 
@@ -192,41 +192,228 @@ class InformeController extends Controller{
     return Response::json($informe);
   }
   public function guardarInforme(){
+    $nombreCliente                      = ucwords(strtolower(Request::get('nombreCliente')));
+    $correoCliente                      = strtolower(Request::get('correoCliente'));
+    $fechaExclusiva                     = Request::get('contratoExclusiva');
+    $promocionRotulo                    = ucfirst(strtolower(Request::get('rotuloComercial')));
+    $promocionVolanteo                  = ucfirst(strtolower(Request::get('volanteoDigital')));
+    $publicacionVenezuela               = ucfirst(strtolower(Request::get('codigoVenezuela')));
+    $publicacionCaracas                 = ucfirst(strtolower(Request::get('codigoCaracas')));
+    $publicacionTuInmueble              = ucfirst(strtolower(Request::get('codigoTuInmueble')));
+    $publicacionLlave                   = ucfirst(strtolower(Request::get('codigoConLaLlave')));
+    $visitasDigitalesTotales            = Request::get('visitasDigitales');
+    $existeCompradores                  = Request::get('compradorInteresado');
+    $cantidadCompradoresInteresados     = Request::get('cantidadCInteresados');
+    $primerInteresado                   = ucwords(strtolower(Request::get('interesado1')));
+    $segundoInteresado                  = ucwords(strtolower(Request::get('interesado2')));
+    $tercerInteresado                   = ucwords(strtolower(Request::get('interesado3')));
+    $cuartoInteresado                   = ucwords(strtolower(Request::get('interesado4')));
+    $quintoInteresado                   = ucwords(strtolower(Request::get('interesado5')));
+    $existeVisitasFisicas               = Request::get('visitasFisicas');
+    $cantidadVisitasFisicas             = Request::get('cantidadVisitasFisicas');
+    $evaluacionCaro                     = Request::get('caro');
+    $evaluacionMalaCondicion            = Request::get('malasCondiciones');
+    $evaluacionMalUbicado               = Request::get('malUbicado');
+    $evaluacionFormaPago                = Request::get('formaPago');
+    $evaluacionEnEspera                 = Request::get('enEspera');
+    $evaluacionVolverVisita             = Request::get('volverVisitar');
+    $evaluacionOtro                     = Request::get('otro');
+    $observaciones                      = ucfirst(strtolower(Request::get('observacion')));
+    $recomendaciones                    = ucfirst(strtolower(Request::get('recomendacion')));
+    $propiedad_id                       = Request::get('idPropietyModal');
+
 
     $nuevoInforme = new Informe;
-    $nuevoInforme->nombre_cliente                     = Request::get('nombreCliente');
-    $nuevoInforme->correoCliente                      = Request::get('correoCliente');
-    $nuevoInforme->fechaExclusiva                     = Request::get('contratoExclusiva');
-    $nuevoInforme->promocionRotulo                    = Request::get('rotuloComercial');
-    $nuevoInforme->promocionVolanteo                  = Request::get('volanteoDigital');
-    $nuevoInforme->publicacionVenezuela               = Request::get('codigoVenezuela');
-    $nuevoInforme->publicacionCaracas                 = Request::get('codigoCaracas');
-    $nuevoInforme->publicacionTuInmueble              = Request::get('codigoTuInmueble');
-    $nuevoInforme->publicacionLlave                   = Request::get('codigoConLaLlave');
-    $nuevoInforme->visitasDigitalesTotales            = Request::get('visitasDigitales');
-    $nuevoInforme->existeCompradores                  = Request::get('compradorInteresado');
-    $nuevoInforme->cantidadCompradoresInteresados     = Request::get('cantidadCInteresados');
-    $nuevoInforme->primerInteresado                   = Request::get('interesado1');
-    $nuevoInforme->segundoInteresado                  = Request::get('interesado2');
-    $nuevoInforme->tercerInteresado                   = Request::get('interesado3');
-    $nuevoInforme->cuartoInteresado                   = Request::get('interesado4');
-    $nuevoInforme->quintoInteresado                   = Request::get('interesado5');
-    $nuevoInforme->existeVisitasFisicas               = Request::get('visitasFisicas');
-    $nuevoInforme->cantidadVisitasFisicas             = Request::get('cantidadVisitasFisicas');
-    $nuevoInforme->evaluacionCaro                     = Request::get('caro');
-    $nuevoInforme->evaluacionMalaCondicion            = Request::get('malasCondiciones');
-    $nuevoInforme->evaluacionMalUbicado               = Request::get('malUbicado');
-    $nuevoInforme->evaluacionFormaPago                = Request::get('formaPago');
-    $nuevoInforme->evaluacionEnEspera                 = Request::get('enEspera');
-    $nuevoInforme->evaluacionVolverVisita             = Request::get('volverVisitar');
-    $nuevoInforme->evaluacionOtro                     = Request::get('otro');
-    $nuevoInforme->observaciones                      = Request::get('observacion');
-    $nuevoInforme->recomendaciones                    = Request::get('recomendacion');
-    $nuevoInforme->propiedad_id                       = Request::get('idPropietyModal');
+    $nuevoInforme->nombre_cliente                     =$nombreCliente;
+    $nuevoInforme->correoCliente                      =$correoCliente;
+    $nuevoInforme->fechaExclusiva                     =$fechaExclusiva;
+    $nuevoInforme->promocionRotulo                    =$promocionRotulo;
+    $nuevoInforme->promocionVolanteo                  =$promocionVolanteo;
+    $nuevoInforme->publicacionVenezuela               =$publicacionVenezuela;
+    $nuevoInforme->publicacionCaracas                 =$publicacionCaracas;
+    $nuevoInforme->publicacionTuInmueble              =$publicacionTuInmueble;
+    $nuevoInforme->publicacionLlave                   =$publicacionLlave;
+    $nuevoInforme->visitasDigitalesTotales            =$visitasDigitalesTotales;
+    $nuevoInforme->existeCompradores                  =$existeCompradores;
+    if ($existeCompradores!=0) {
+      $nuevoInforme->cantidadCompradoresInteresados   =$cantidadCompradoresInteresados;
+    }
+    $nuevoInforme->primerInteresado                   =$primerInteresado;
+    $nuevoInforme->segundoInteresado                  =$segundoInteresado;
+    $nuevoInforme->tercerInteresado                   =$tercerInteresado;
+    $nuevoInforme->cuartoInteresado                   =$cuartoInteresado;
+    $nuevoInforme->quintoInteresado                   =$quintoInteresado;
+    $nuevoInforme->existeVisitasFisicas               =$existeVisitasFisicas;
+    if ($existeVisitasFisicas!=0) {
+      $nuevoInforme->cantidadVisitasFisicas           =$cantidadVisitasFisicas;
+    }
+    if ($evaluacionCaro!='') {
+      $nuevoInforme->evaluacionCaro                   =$evaluacionCaro;
+    }
+    if ($evaluacionMalUbicado!='') {
+      $nuevoInforme->evaluacionMalUbicado             =$evaluacionCaro;
+    }
+    if($evaluacionFormaPago!=''){
+      $nuevoInforme->evaluacionFormaPago              =$evaluacionFormaPago;
+    }
+    if($evaluacionEnEspera!=''){
+      $nuevoInforme->evaluacionEnEspera               =$evaluacionEnEspera;
+    }
+    if($evaluacionVolverVisita!=''){
+      $nuevoInforme->evaluacionVolverVisita           =$evaluacionVolverVisita;
+    }
+    if ($evaluacionOtro!='') {
+      $nuevoInforme->evaluacionOtro                   =$evaluacionOtro;
+    }
+    $nuevoInforme->observaciones                      =$observaciones;
+    $nuevoInforme->recomendaciones                    =$recomendaciones;
+    $nuevoInforme->propiedad_id                       =$propiedad_id;
     $nuevoInforme->fechaCreado                        = date('Y-m-d');
     $nuevoInforme->save();
+    $respuesta=1;
+    return Response::json($respuesta);
+  }
 
-    return $nuevoInforme;
+  public function previewInforme($id){
+    $idInforme=$id;
+    $consulta=Informe::where('id',$idInforme)->first();
+    $propiedad=Propiedad::join('estados','propiedades.estado_id','estados.id')
+                        ->join('ciudades','propiedades.ciudad_id','ciudades.id')
+                        ->join('agentes','propiedades.agente_id','agentes.id')
+                        ->where('propiedades.id',$consulta->propiedad_id)
+                        ->select('propiedades.*','estados.nombre as nombreEstado','ciudades.nombre as nombreCiudad','agentes.fullname')
+                        ->first();
+    $datetime1 = date_create($propiedad->fechaCreado);
+    $datetime2 = date_create();
+    $diaTranscurrido= date_diff($datetime1, $datetime2);
+    $dia=date('j');
+    $ano=date('Y');
+    $mes=self::traductor(date('n'));
+    Fpdf::SetTextColor(78,84,82);
+    Fpdf::AddPage();
+    self::Header($dia,$mes,$ano);
+    Fpdf::Ln(30);
+    Fpdf::Cell(0,12, utf8_decode('Estimado Sr(a).'.$consulta->nombre_cliente));
+    Fpdf::Ln();
+    Fpdf::MultiCell(0,7,utf8_decode("Me es grato dirigirme a usted en esta oportunidad para informarle las actividades que han ocurrido en relación a la comercialización de su inmueble ubicado en : ".$propiedad->direccion.", de la urbanización ".$propiedad->urbanizacion.", en la ciudad de " .$propiedad->nombreCiudad. " del estado ".$propiedad->nombreEstado."."),0,'J',false);
+    Fpdf::Ln(1);
+    Fpdf::Cell(10);
+    Fpdf::Cell(0,7, "Fecha de inicio de los Contratos de Exclusiva: ".date("d-m-Y", strtotime($consulta->fechaExclusiva)));
+    Fpdf::Ln();
+    Fpdf::Cell(10);
+    Fpdf::Cell(0,7, utf8_decode('Promoción del inmueble'));
+    Fpdf::Ln();
+    Fpdf::Cell(15);
+    Fpdf::MultiCell(0,7,utf8_decode('Colocación de rótulo comercial: '.$consulta->promocionRotulo.'.'),0,'J',false);
+    Fpdf::Ln(1);
+    Fpdf::Cell(15);
+    Fpdf::MultiCell(0,7,utf8_decode('Volanteo digital a base de datos del sistema: '.$consulta->promocionVolanteo.'.'),0,'J',false);
+    Fpdf::Ln(1);
+    Fpdf::Cell(15);
+    Fpdf::MultiCell(0,7,utf8_decode('Se han realizado actividades de canvaseo (búsqueda de potenciales compradores persona a persona) a través de la red de relaciones de la oficina y de Century 21 Venezuela.'),0,'J',false);
+    Fpdf::Ln(1);
+    Fpdf::Cell(15);
+    Fpdf::MultiCell(0,7,utf8_decode('Publicación en portales de Internet'),0,'J',false);
+    Fpdf::Ln(1);
+    Fpdf::Cell(20);
+    Fpdf::MultiCell(0,7,utf8_decode('century21.com.ve código: '.$consulta->publicacionVenezuela.'.'),0,'J',false);
+    Fpdf::Ln(1);
+    Fpdf::Cell(20);
+    Fpdf::MultiCell(0,7,utf8_decode('century21caracas.com código: '.$consulta->publicacionCaracas.'.'),0,'J',false);
+    Fpdf::Ln(1);
+    Fpdf::Cell(20);
+    Fpdf::MultiCell(0,7,utf8_decode('tuinmueble.com código: '.$consulta->publicacionTuInmueble.'.'),0,'J',false);
+    Fpdf::Ln(1);
+    Fpdf::Cell(20);
+    Fpdf::MultiCell(0,7,utf8_decode('conlallave.com código: '.$consulta->publicacionLlave.'.'),0,'J',false);
+    Fpdf::Ln(1);
+    Fpdf::Cell(15);
+    Fpdf::MultiCell(0,7,utf8_decode('Mediante este informe le referimos los datos estadísticos que nos arrojan las páginas web desde el '.date("d-m-Y", strtotime($propiedad->fechaCreado)).' al '.date("d-m-Y").' contabilizando '.$consulta->visitasDigitalesTotales.' visitas en '.$diaTranscurrido->format('%a').' días de gestión'),0,'J',false);
+    Fpdf::Ln(1);
+    Fpdf::Cell(15);
+    Fpdf::MultiCell(0,7,utf8_decode('La exposición del inmueble desde la ultima comunicación a generado '.$consulta->cantidadCompradoresInteresados.' nuevos compradores interesados.'),0,'J',false);
+    if ($consulta->existeCompradores!=0) {
+      Fpdf::Ln(1);
+      Fpdf::Cell(15);
+      Fpdf::MultiCell(0,7,utf8_decode('A continuación se presenta una lista de las ultimas personas interesadas en su inmueble:'),0,'J',false);
+      Fpdf::Ln(1);
+      Fpdf::Cell(20);
+      Fpdf::MultiCell(0,7,utf8_decode($consulta->primerInteresado),0,'J',false);
+      if ($consulta->segundoInteresado!='') {
+        Fpdf::Ln(1);
+        Fpdf::Cell(20);
+        Fpdf::MultiCell(0,7,utf8_decode($consulta->segundoInteresado),0,'J',false);
+      }
+      if ($consulta->tercerInteresado!='') {
+        Fpdf::Ln(1);
+        Fpdf::Cell(20);
+        Fpdf::MultiCell(0,7,utf8_decode($consulta->tercerInteresado),0,'J',false);
+      }
+      if ($consulta->cuartoInteresado!='') {
+        Fpdf::Ln(1);
+        Fpdf::Cell(20);
+        Fpdf::MultiCell(0,7,utf8_decode($consulta->cuartoInteresado),0,'J',false);
+      }
+      if ($consulta->quintoInteresado!='') {
+        Fpdf::Ln(1);
+        Fpdf::Cell(20);
+        Fpdf::MultiCell(0,7,utf8_decode($consulta->quintoInteresado),0,'J',false);
+      }
+      Fpdf::Ln(1);
+      Fpdf::Cell(15);
+      Fpdf::MultiCell(0,7,utf8_decode('A los cuales se les suministró la información a través de nuestras oficinas en caracas, produciéndose finalmente, '.$consulta->cantidadVisitasFisicas.' visitas de clientes potenciales al mismo, generando el siguiente resultado:'),0,'J',false);
+      Fpdf::Ln(1);
+      Fpdf::Cell(20);
+      Fpdf::MultiCell(0,7,utf8_decode('Muy caro: '.$consulta->evaluacionCaro),0,'J',false);
+      Fpdf::Ln(1);
+      Fpdf::Cell(20);
+      Fpdf::MultiCell(0,7,utf8_decode('En malas condiciones: '.$consulta->evaluacionMalaCondicion),0,'J',false);
+      Fpdf::Ln(1);
+      Fpdf::Cell(20);
+      Fpdf::MultiCell(0,7,utf8_decode('Mal ubicado: '.$consulta->evaluacionMalUbicado),0,'J',false);
+      Fpdf::Ln(1);
+      Fpdf::Cell(20);
+      Fpdf::MultiCell(0,7,utf8_decode('Forma de pago N/A: '.$consulta->evaluacionMalUbicado),0,'J',false);
+      Fpdf::Ln(1);
+      Fpdf::Cell(20);
+      Fpdf::MultiCell(0,7,utf8_decode('En espera: '.$consulta->evaluacionEnEspera),0,'J',false);
+      Fpdf::Ln(1);
+      Fpdf::Cell(20);
+      Fpdf::MultiCell(0,7,utf8_decode('Quiero volver a visitar: '.$consulta->evaluacionVolverVisita),0,'J',false);
+      Fpdf::Ln(1);
+      Fpdf::Cell(20);
+      Fpdf::MultiCell(0,7,utf8_decode('Otro: '.$consulta->evaluacionOtro),0,'J',false);
+    }
+    Fpdf::Ln();
+    Fpdf::Cell(10);
+    Fpdf::Cell(0,7, utf8_decode('Observaciones:'));
+    Fpdf::Ln();
+    Fpdf::Cell(15);
+    Fpdf::MultiCell(0,7,utf8_decode($consulta->observaciones),0,'J',false);
+    Fpdf::Ln();
+    Fpdf::Cell(10);
+    Fpdf::Cell(0,7, utf8_decode('Recomendaciones:'));
+    Fpdf::Ln();
+    Fpdf::Cell(15);
+    Fpdf::MultiCell(0,7,utf8_decode($consulta->recomendaciones),0,'J',false);
+    Fpdf::Ln();
+    Fpdf::MultiCell(0,7,utf8_decode('Espero que esta información pueda ser de su utilidad y consideración y que contribuya al logro de los objetivos que nos hemos propuesto.'),0,'J',false);
+    Fpdf::Ln();
+    Fpdf::MultiCell(0,7,utf8_decode('Sin otro particular al que referirme, quedo de Ud. muy atentamente,'),0,'J',false);
+    Fpdf::Ln();
+    Fpdf::MultiCell(0,7,utf8_decode('Por Inmobiliaria CENTURY 21 INMUEBLES CARACAS'),0,'J',false);
+    Fpdf::Ln();
+    Fpdf::MultiCell(0,7,utf8_decode($propiedad->fullname),0,'C',false);
+    Fpdf::Ln();
+    Fpdf::MultiCell(0,0,utf8_decode('Asesor Inmobiliario'),0,'C',false);
+    Fpdf::Output('I','Informecliente');
+    exit;
+  }
+
+  public function editarInforme(){
+    $idInforme=Request::get('id');
+    $informe=Informe::where('id',$idInforme)->first();
+    return $informe;
   }
 
 }

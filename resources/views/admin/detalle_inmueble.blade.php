@@ -100,36 +100,27 @@
             </div>
             <div class="row">
                 <div class="col-xs-12 listReports">
+                  @foreach($informes as $informe)
                     <div class="alert alertGrayLight" role="alert">
                         <div class="row">
-                            <div class="col-xs-3"><h5>Informe 1</h5></div>
-                            <div class="col-xs-3"><h5>16/12/2012</h5></div>
+                            <div class="col-xs-3"><h5>Informe {{$informe->id}}</h5></div>
+                            <div class="col-xs-3"><h5>{{$informe->fechaCreado}}</h5></div>
                             <div class="col-xs-6">
                                 <ul>
-                                    <li><a href=""><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
+                                    <li><a href="/admin/previewInforme/{{$informe->id}}" target="_blank"><i class="fa fa-eye preview" aria-hidden="true"></i></a></li>
+                                    <li><a href=""><i class="fa fa-pencil editInforme" data-id="{{$informe->id}}" aria-hidden="true"></i></a></li>
                                     <li><button type="button" class="btnGraySmall">Enviar</button></li>
                                 </ul>
                             </div>
                         </div>
                     </div>
-                    <div class="alert alertGrayLight" role="alert">
-                        <div class="row">
-                            <div class="col-xs-3"><h5>Informe 1</h5></div>
-                            <div class="col-xs-3"><h5>16/12/2012</h5></div>
-                            <div class="col-xs-6">
-                                <ul>
-                                    <li><a href=""><i class="fa fa-eye" aria-hidden="true"></i></a></li>
-                                    <li><a href=""><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
+                  @endforeach
                 </div>
             </div>
         </div>
     </div>
     @include('admin/modals/reporte_modal')
+    @include('admin/modals/modificar_reporte_modal')
 @endsection
 @section('js')
 <script>

@@ -46,6 +46,17 @@ $(document).ready(function() {
         $('.compradoresInteresados').css('display','block');
       }
     });
+    /////////////////////////////////////////////  OCULTAR O MOSTRAR INFORMACION DE COMPRADORES INTERESADOS  ///////////////////////////////////
+      $('body').on('change', 'input:radio[name=compradorInteresadoM]', function() {
+        //alert('hola');
+        if ($(this).val()==0) {
+          $('.compradoresInteresadosM').css('display','none');
+          $('.ocultoInteresadoM').val('');
+        }
+        else{
+          $('.compradoresInteresadosM').css('display','block');
+        }
+      });
 
 /////////////////////////////////////////////  OCULTAR O MOSTRAR INFORMACION DE EVALUACION DE VISITAS AL INMUEBLE  ///////////////////////////////////
   $('body').on('change', 'input:radio[name=visitasFisicas]', function() {
@@ -175,38 +186,90 @@ $("#formularioInforme").validate({
   },
   submitHandler: function(form) {
     var form=$("#formularioInforme").serialize();
-    console.log(form);
     url="/admin/guardarInforme";
-    $.post(url,form,function(respuesta){
-      console.log(respuesta);
-      /*var mensajes={0:"Error Inesperado, pongase en contacto con el administrador",
-                    1:"El rif ya esta registrado para otro usuario",
-                    2:"El email ya esta registrado para otro usuario",
-                    3:"El email y el rif ya estan registrados para otro usuario",
-                    4:"El nombre ya existe para otro usuario",
-                    5:"El nombre y el email ya existen para otro usuario",
-                    6:"El nombre y el rif ya existen para otro usuario",
-                    7:"El nombre, el email y el rif ya existen para otro usuario",
-                   10:"Usuario actualizado",
-                   20:"Nuevo usuario registrado"
-                 };
-      if(respuesta==10 || respuesta==20){
-        swal(
-          'Buen Trabajo!!',
-          mensajes[respuesta],
-          'success'
-        );
+    $.ajax({
+      url: url,
+      type: "post",
+      dataType: "json",
+      data: form,
+    })
+    .done(function(respuesta){
+      if(respuesta){
+        swal({
+            title: "Buen Trabajo!!",
+            text: "El informe fue registrado con exito, revise la lista para visualizarlo antes de enviar al cliente",
+            icon: "success",
+            button: "Ok",
+        })
+        .then((value) => {
+          location.reload();
+        });
       }
       else {
         swal(
-          'Casi Terminamos!!',
-          mensajes[respuesta],
+          'Imposible Realizar la acción',
+          'Comuniquese con el administrador del sistema',
           'error'
         );
-      }*/
+      }
     });
   }
 });
 
+////////////////////////////////////// ABRIR MODAL PARA EDITAR INFORME /////////////////////////////////////////
+
+  $('body').on('click', '.editInforme', function(e) {
+    e.preventDefault();
+    var id=$(this).data('id');
+    $('#idInformeModalM').val(id);
+    var propiedad=$('#idPropiety').val() ;
+    $('#idPropietyModalM').val(propiedad);
+    url="/admin/modaleditarinforme";
+    $.ajax({
+      url: url,
+      type: "post",
+      dataType: "json",
+      data: {id:id},
+    })
+    .done(function(respuesta){
+      if (respuesta) {
+        console.log(respuesta)
+        $('#nombreClienteM').val(respuesta.nombre_cliente);
+        $('#correoClienteM').val(respuesta.correoCliente);
+        $('#contratoExclusivaM').val(respuesta.fechaExclusiva);
+        $('#rotuloComercialM').val(respuesta.promocionRotulo);
+        $('#volanteoDigitalM').val(respuesta.promocionVolanteo);
+        $('#codigoVenezuelaM').val(respuesta.publicacionVenezuela);
+        $('#codigoCaracasM').val(respuesta.publicacionCaracas);
+        $('#codigoTuInmuebleM').val(respuesta.publicacionTuInmueble);
+        $('#codigoConLaLlaveM').val(respuesta.publicacionLlave);
+        $('#visitasDigitalesM').val(respuesta.visitasDigitalesTotales);
+        if (respuesta.existeCompradores==0) {
+          $('#compradorInteresadoSiM').prop('checked',false);
+          $('#compradorInteresadoNoM').prop('checked',true);
+          $('.compradoresInteresadosM').css('display','none');
+          $('.ocultoInteresadoM').val('');
+        }
+        else {
+          $('#compradorInteresadoNoM').prop('checked',false);
+          $('#compradorInteresadoSiM').prop('checked',true);
+          $('.compradoresInteresadosM').css('display','block');
+
+        }
+
+
+
+
+        $('#modificarModalReport').modal('show');
+      }
+      else {
+        swal(
+          'Algo Sucedio',
+          'Intente guardar el inmueble nuevamente',
+          'error'
+        );
+      }
+    });
+  });
 
 });
