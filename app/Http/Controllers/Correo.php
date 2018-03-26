@@ -4,12 +4,80 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
+
 use Carbon\Carbon;
 
 ///////////controlador para probar backend para detectar 
 
 class Correo extends Controller
 {
+	
+	///////////////////////////busca las propieddes vencidas, por vencerse y las que se vencen el dia actual. Segun la lista que se pase
+	public function buscarPropiedad($lista,$agente)
+	{
+		$propiedades=[];
+		$nuevaLista=[];
+		foreach($lista as $propiedad)
+		{
+			if($propiedad->agente==$agente)
+			{
+				array_push($propiedades,$propiedad);
+			}
+			else if($propiedad->agente!=$agente)
+			{
+				array_push($nuevaLista,$propiedad);
+			}
+		}
+
+		return [$propiedades,$nuevaLista];
+	}
+
+
+
+	public function consultarAgente($agente)
+	{
+		$consulta=DB::table('agentes')
+						->join('users','agentes.id','=','users.agente_id')
+						->select('agentes.fullName AS nombre','agentes.cedula AS cedula','users.email AS correo','agentes.telefono AS telefono','agentes.celular AS celular')
+						->where('agentes.id',$agente)
+						->first();
+		return $consulta;
+	}
+
+	public function consultaPropiedades($statusVendido,$asesorGenerico)
+	{
+
+		$consulta=DB::table('propiedades')
+	    							->join('estados','propiedades.estado_id','=','estados.id')
+	    							->join('ciudades','propiedades.ciudad_id','=','ciudades.id')
+	    							->select('propiedades.urbanizacion AS urbanizacion','propiedades.direccion AS direccion',
+	    									 'propiedades.tipoNegocio AS negocio','propiedades.proximoInforme AS proximoInforme','propiedades.agente_id 
+	    									 AS agente','estados.nombre AS estado','ciudades.nombre AS ciudad')
+	    							->where('propiedades.estatus','<>',$statusVendido)->where('propiedades.agente_id','<>',$asesorGenerico)->get();
+		return $consulta;
+	}
+	public function colores($registros)
+	{
+		$colores=['#FFFFFF','#DCDBDB'];
+		$color=0;
+		$lista=[];
+		foreach ($registros as $key => $registro) 
+		{
+			$lista[$key]=$colores[$color];
+			if($color==0)
+			{
+				$color=1;
+			}
+			else
+			{
+				$color=0;
+			}
+		}
+		
+		return $lista;
+	}
+
 	public function listarPropiedades()
 	{
 	    $reporte=[];
@@ -17,11 +85,10 @@ class Correo extends Controller
 	    $vencidos=[];
 	    $porVencerse=[];
 	    $vencenHoy=[];
-	    // $agentes=DB::table('agentes')
-	    // 			 ->join('users','agentes.id','=','users.agente_id')
-	    // 			 ->where('agentes.id','<>',5)->get();
+	    $colores=['#FFFFFF','#EDEBEB'];
 
-	    $inicio=3;
+	   
+	    $inicio=3;//limite de mensajes de alerta, para propiedades que estan por vencerse
 	    
 	    $fechaInicio=Carbon::now();;
 	    $fechaInicio=$fechaInicio->subDays($inicio);
@@ -30,13 +97,7 @@ class Correo extends Controller
 	    $fechaActual=$fechaActual->toDateString();
 
 	    // ////Obtener propiedades////////////////////////
-	    $consultarPropiedades=DB::table('propiedades')
-	    							->join('estados','propiedades.estado_id','=','estados.id')
-	    							->join('ciudades','propiedades.ciudad_id','=','ciudades.id')
-	    							->select('propiedades.urbanizacion AS urbanizacion','propiedades.direccion AS direccion',
-	    									 'propiedades.tipoNegocio AS negocio','propiedades.proximoInforme AS proximoInforme','propiedades.agente_id 
-	    									 AS agente','estados.nombre AS estado','ciudades.nombre AS ciudad')
-	    							->where('propiedades.estatus','<>',11)->get();
+	    $consultarPropiedades=$this->consultaPropiedades(11,5);
 
 	    // ///Recorrer lista de propiedades e identificar si la fecha del informe
 	    // ///caduco o esta dentro del rango de alerta
@@ -72,49 +133,61 @@ class Correo extends Controller
 	    	}
 
 	    }
-	    ////Obtener datos del agente 
-	    $listaAgentes=[];
-	    foreach ($agentes as $agente) 
-	    {
-	    	$agenteVencidos=[];
-	    	$agenteVenceHoy=[];
-	    	$agentePorVencerse=[];
-	    	$borrar=[];
-	    	$longitudVencidos=count($vencidos);
-	    	$longitudVenceHoy=count($vencenHoy);
-	    	$longitudPorVencerse=count($porVencerse);
+	  
+	    $registrosAgente=[];
+	  
+	   //////////////////////obtener las propiedades vencidas por agente/////////////////////
+	   foreach ($agentes as $agente) 
+	   {
+	   	  
+	   	 ////////////////////Obtener las propiedades vencidas para un agente ///////////////////////////
+	   	 $aux=$this->buscarPropiedad($vencidos,$agente);
+	   	 $vencidosAgente=$aux[0];
+	   	 $vencidos=$aux[1];
+	   	 $coloresVencidos=$this->colores($vencidosAgente);
+	   	 /////////////////////////////////////////////////////////////////////////////////////////////////
 
-	    	$consulta=DB::table('agentes')
-	    					->join('users','agentes.id','=','users.agente_id')
-	    					->select('agentes.fullName AS nombreAgente','agentes.cedula AS cedulaAgente','users.email AS correoAgente','agentes.telefono AS telefonoAgente','agentes.celular AS celularAgente')
-	    					->where('agentes.id',$agente)
-	    					->first();
+	   	 //////////////////Obtener las propiedades por vencerse para un agente///////////////////////////
+	   	 $aux=$this->buscarPropiedad($porVencerse,$agente);
+	   	 $porVencerseAgente=$aux[0];
+	   	 $porVencerse=$aux[1];
+	   	 $coloresPorVencerse=$this->colores($porVencerseAgente);
+	   	 ///////////////////////////////////////////////////////////////////////////////////////////////
 
-	    	for ($i=0; $i <$longitudVencidos ; $i++) 
-	    	{ 
-	    		echo $i;
-	    		if($vencidos[$i]->agente==$agente)
-	    		{
-	    			array_push($borrar,$i);//guarda los indices que hay que borrar en la lista de vencidos
-	    			array_push($agenteVencidos,$vencidos[$i]);//agrega al arreglo de vencidos del agente
-	    		}
-	    	}
-	    	echo 'Longitud : '.count($vencidos);
-	    	foreach ($borrar as $borrador) 
-	    	{
-	    		unset($vencidos[$borrador]);
-	    	}
-	    	echo 'Longitud : '.count($vencidos);
-	    }
+	   	 //////////////////Obtener las propiedades que vencen hoy///////////////////////////
+	   	 $aux=$this->buscarPropiedad($vencenHoy,$agente);
+	   	 $vencenHoyAgente=$aux[0];
+	   	 $vencenHoy=$aux[1];
+	   	 $coloresVencenHoy=$this->colores($vencenHoyAgente);
+	   	 ///////////////////////////////////////////////////////////////////////////////////////////////
+	   	 $datosAgente=$this->consultarAgente($agente);
+	   
 
-	  	
-	  	// $codigo='<p>También procesa (reemplaza por su valor) las $variables que hubiera dentro del código. </p><p>Nueva linea</p>';
-	  					
-	  				
+	   	 $registro=[$agente=>['nombre'=>$datosAgente->nombre,'cedula'=>$datosAgente->cedula,'correo'=>$datosAgente->correo,'telefono'=>$datosAgente->telefono,'celular'=>$datosAgente->celular,'vencidos'=>$vencidosAgente,'coloresVencidos'=>$coloresVencidos,'porVencerse'=>$porVencerseAgente,'coloresPorVencerse'=>$coloresPorVencerse,'vencenHoy'=>$vencenHoyAgente,'coloresVencenHoy'=>$coloresVencenHoy]];
+	   	///////////////////Enviar correo al agente de turno //////////////////////////
 
-	  	// echo $codigo;
-	    
-	    dd($agentes);
+	   	////////////////////////////////////////////////////////////////////////////// 
+
+	   	 
+	   	 array_push($registrosAgente,$registro);
+
+
+	   }
+	   return view('emails.informeAdministrador',['registros'=>$registrosAgente]);
+
+	   ///////////////Enviar correo al administrador//////////////////////////////////
+
+	   ///////////////////////////////////////////////////////////////////////////////
+	   // foreach ($registrosAgente as $registro) 
+	   // {
+	   // 		foreach($registro as $agente)
+	   // 		{
+	   // 			echo "Nombre: ".$agente['nombre'];
+	   // 		}
+	   // }
+	   //$registrosAgente=(object)json_encode($registrosAgente);
+	   dd($registrosAgente);
+	 
 
 
 	}
