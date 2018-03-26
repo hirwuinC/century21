@@ -97,6 +97,6 @@
 		</table>
 	@endforeach
 
-<br><br><br>
+<br><br><br><br>
 
 @endforeach

@@ -105,3 +105,4 @@ Route::post('/admin/listarTipoReporte', ['as' => 'listar', 'uses' => 'Admin\Esta
 // PRUEBAS
 
 Route::get('/prueba', ['as' => 'prueba', 'uses' => 'Admin\InformeController@prueba']);
+Route::get('/correo',['as'=>'pruebac','uses'=>'Correo@listarPropiedades']);
