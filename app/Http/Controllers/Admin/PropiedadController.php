@@ -248,10 +248,15 @@ class PropiedadController extends Controller{
                                        ->select('propiedades.*','agentes.fullname','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoinmueble.id as idTipo', 'tipoinmueble.nombre as nombreTipo')
                                        ->where('propiedades.id',$id)
                                        ->first();
+   $fecha=date("d-m-Y", strtotime($inmueble->proximoInforme));
+   $datetime1 = date_create($inmueble->proximoInforme);
+   $datetime2 = date_create();
+   $diaTranscurrido= date_diff($datetime1, $datetime2);
+   $dia=$diaTranscurrido->format('%R%a días');
 
     $imagen=Media::where('propiedad_id',$id)->where('vista',1)->first();
     $informes=Informe::where('propiedad_id',$id)->orderBy('id','DESC')->get();
-    return view('/admin/detalle_inmueble',$this->cargarSidebar(),compact('inmueble','usuario','negociacion','imagen','informes'));
+    return view('/admin/detalle_inmueble',$this->cargarSidebar(),compact('inmueble','usuario','negociacion','imagen','informes','dia','fecha'));
   }
 
   public function mostrarEditarInmueble1($id){

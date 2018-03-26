@@ -51,6 +51,9 @@
             </div>
         </div>
     </div>
+    <div class="load" id="load">
+        <hr/><hr/><hr/><hr/>
+    </div>
 </div>
 <!-- END GENERAL WRAPPER -->
 

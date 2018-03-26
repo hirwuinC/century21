@@ -30,7 +30,7 @@
                           </div>
                           <div class="col-xs-8">
                               <div style="padding-bottom:20px;" >
-                                  <input type="text" class="inputs inputsLight form-control limpiar" maxlength="30" name="correoCliente" id="correoCliente" value="">
+                                  <input type="text" class="inputs inputsLight form-control limpiar" maxlength="60" name="correoCliente" id="correoCliente" value="">
                               </div>
                           </div>
                         </div>

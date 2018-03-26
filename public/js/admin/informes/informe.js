@@ -14,22 +14,30 @@ $(document).ready(function() {
       data: {propiedad:propiedad},
     })
     .done(function(respuesta){
-      if (respuesta) {
-        //console.log(respuesta)
+      if (respuesta[0]==1 || respuesta[0]==3) {
+        console.log(respuesta)
         var validator = $( "#formularioInforme" ).validate();
         validator.resetForm();
-        $('#nombreCliente').val(respuesta.nombre_cliente);
-        $('#correoCliente').val(respuesta.correoCliente);
-        $('#contratoExclusiva').val(respuesta.fechaExclusiva);
-        $('#rotuloComercial').val(respuesta.promocionRotulo);
-        $('#volanteoDigital').val(respuesta.promocionVolanteo);
-        $('#codigoVenezuela').val(respuesta.publicacionVenezuela);
-        $('#codigoCaracas').val(respuesta.publicacionCaracas);
-        $('#codigoTuInmueble').val(respuesta.publicacionTuInmueble);
-        $('#codigoConLaLlave').val(respuesta.publicacionLlave);
+        $('#nombreCliente').val(respuesta[1].nombre_cliente);
+        $('#correoCliente').val(respuesta[1].correoCliente);
+        $('#contratoExclusiva').val(respuesta[1].fechaExclusiva);
+        $('#rotuloComercial').val(respuesta[1].promocionRotulo);
+        $('#volanteoDigital').val(respuesta[1].promocionVolanteo);
+        $('#codigoVenezuela').val(respuesta[1].publicacionVenezuela);
+        $('#codigoCaracas').val(respuesta[1].publicacionCaracas);
+        $('#codigoTuInmueble').val(respuesta[1].publicacionTuInmueble);
+        $('#codigoConLaLlave').val(respuesta[1].publicacionLlave);
         $('#modalReport').modal('show');
       }
-      else {
+      else if(respuesta[0]==2 ) {
+        swal({
+            title: "Imposible realizar la acción!!",
+            text: "Debe enviar el último informe al cliente antes de poder crear uno nuevo",
+            icon: "error",
+            button: "Ok",
+        })
+      }
+      else{
         swal(
           'Algo Sucedio',
           'Intente guardar el inmueble nuevamente',
@@ -285,9 +293,9 @@ $("#formularioInforme").validate({
           $('#malasCondicionesM').val(respuesta.evaluacionMalaCondicion);
           $('#malUbicadoM').val(respuesta.evaluacionMalUbicado);
           $('#formaPagoM').val(respuesta.evaluacionFormaPago);
-          $('#enEsperaM').val(respuesta.evaluacionFormaPago);
+          $('#enEsperaM').val(respuesta.evaluacionEnEspera);
           $('#volverVisitarM').val(respuesta.evaluacionVolverVisita);
-          $('#otroM').val(respuesta.evaluacionVolverVisita);
+          $('#otroM').val(respuesta.evaluacionOtro);
         }
         $('#observacionM').val(respuesta.observaciones);
         $('#recomendacionM').val(respuesta.recomendaciones);
@@ -467,6 +475,20 @@ $('body').on('click','.enviarInforme',function(e){
       var id=$(this).data('id');
       url="/admin/enviarCorreo";
       $.ajax({
+        beforeSend: function(){
+          var ancho = 0;
+          var alto = 0;
+          if (window.innerWidth == undefined) ancho = window.screen.width;
+          else ancho = window.innerWidth;
+          if (window.innerHeight == undefined) alto = window.screen.height;
+          else alto = window.innerHeight;
+          div = document.createElement("div");
+          div.id = "WindowLoad"
+          div.style.width = ancho + "px";
+          div.style.height = alto + "px";
+          $("body").append(div);
+					$('#load').css('display','block');
+				},
         url: url,
         type: "post",
         dataType: "json",
@@ -475,6 +497,8 @@ $('body').on('click','.enviarInforme',function(e){
       .done(function(respuesta){
         //console.log(respuesta);
         if(respuesta==1){
+          $("#WindowLoad").remove();
+          $('#load').css('display','none');
           swal({
               title: "Buen Trabajo!!",
               text: "El informe fue enviado con exito",
@@ -492,9 +516,17 @@ $('body').on('click','.enviarInforme',function(e){
             'error'
           );
         }
+      })
+      .fail( function() {
+        swal(
+          'Imposible Realizar la acción',
+          'Comuniquese con el administrador del sistema',
+          'error'
+        );
       });
     }
   });
 });
+
 
 });

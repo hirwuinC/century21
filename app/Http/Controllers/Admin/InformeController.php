@@ -151,7 +151,7 @@ class InformeController extends Controller{
       Fpdf::MultiCell(0,7,utf8_decode('Mal ubicado: '.$consulta->evaluacionMalUbicado),0,'J',false);
       Fpdf::Ln(1);
       Fpdf::Cell(20);
-      Fpdf::MultiCell(0,7,utf8_decode('Forma de pago N/A: '.$consulta->evaluacionMalUbicado),0,'J',false);
+      Fpdf::MultiCell(0,7,utf8_decode('Forma de pago N/A: '.$consulta->evaluacionFormaPago),0,'J',false);
       Fpdf::Ln(1);
       Fpdf::Cell(20);
       Fpdf::MultiCell(0,7,utf8_decode('En espera: '.$consulta->evaluacionEnEspera),0,'J',false);
@@ -191,7 +191,7 @@ class InformeController extends Controller{
     $inmuebleId=Request::get('propiedad');
     $informe=Informe::where('propiedad_id',$inmuebleId)->orderBy('id', 'desc')->first();
     if (count($informe)==0) {
-      $informe=[
+      $informe=(object)[
         'nombre_cliente'=>'',
         'correoCliente'=>'',
         'fechaExclusiva'=>'',
@@ -225,8 +225,17 @@ class InformeController extends Controller{
         'fechaCreado'=>'',
         'fechaEnviado'=>''
       ];
+      $valores=[1,$informe];
     }
-    return Response::json($informe);
+    else{
+      if ($informe->estatusEnviado==0) {
+        $valores=[2];
+      }
+      else{
+        $valores=[3,$informe];
+      }
+    }
+    return Response::json($valores);
   }
   public function guardarInforme(){
     $nombreCliente                      = ucwords(strtolower(Request::get('nombreCliente')));
@@ -286,6 +295,9 @@ class InformeController extends Controller{
     }
     if ($evaluacionCaro!='') {
       $nuevoInforme->evaluacionCaro                   =$evaluacionCaro;
+    }
+    if ($evaluacionMalaCondicion!='') {
+      $nuevoInforme->evaluacionMalaCondicion          =$evaluacionMalaCondicion;
     }
     if ($evaluacionMalUbicado!='') {
       $nuevoInforme->evaluacionMalUbicado             =$evaluacionCaro;
@@ -410,7 +422,7 @@ class InformeController extends Controller{
       Fpdf::MultiCell(0,7,utf8_decode('Mal ubicado: '.$consulta->evaluacionMalUbicado),0,'J',false);
       Fpdf::Ln(1);
       Fpdf::Cell(20);
-      Fpdf::MultiCell(0,7,utf8_decode('Forma de pago N/A: '.$consulta->evaluacionMalUbicado),0,'J',false);
+      Fpdf::MultiCell(0,7,utf8_decode('Forma de pago N/A: '.$consulta->evaluacionFormaPago),0,'J',false);
       Fpdf::Ln(1);
       Fpdf::Cell(20);
       Fpdf::MultiCell(0,7,utf8_decode('En espera: '.$consulta->evaluacionEnEspera),0,'J',false);
@@ -497,7 +509,10 @@ class InformeController extends Controller{
     $nuevoInforme->publicacionLlave                   =$publicacionLlave;
     $nuevoInforme->visitasDigitalesTotales            =$visitasDigitalesTotales;
     $nuevoInforme->existeCompradores                  =$existeCompradores;
-    if ($existeCompradores!=0) {
+    if ($existeCompradores==0) {
+      $nuevoInforme->cantidadCompradoresInteresados   =0;
+    }
+    else {
       $nuevoInforme->cantidadCompradoresInteresados   =$cantidadCompradoresInteresados;
     }
     $nuevoInforme->primerInteresado                   =$primerInteresado;
@@ -506,26 +521,53 @@ class InformeController extends Controller{
     $nuevoInforme->cuartoInteresado                   =$cuartoInteresado;
     $nuevoInforme->quintoInteresado                   =$quintoInteresado;
     $nuevoInforme->existeVisitasFisicas               =$existeVisitasFisicas;
-    if ($existeVisitasFisicas!=0) {
+    if ($existeVisitasFisicas==0) {
+      $nuevoInforme->cantidadVisitasFisicas           =0;
+    }
+    else {
       $nuevoInforme->cantidadVisitasFisicas           =$cantidadVisitasFisicas;
     }
     if ($evaluacionCaro!='') {
       $nuevoInforme->evaluacionCaro                   =$evaluacionCaro;
     }
+    else {
+      $nuevoInforme->evaluacionCaro                   =0;
+    }
     if ($evaluacionMalUbicado!='') {
-      $nuevoInforme->evaluacionMalUbicado             =$evaluacionCaro;
+      $nuevoInforme->evaluacionMalUbicado             =$evaluacionMalUbicado;
+    }
+    else {
+      $nuevoInforme->evaluacionMalUbicado             =0;
+    }
+    if ($evaluacionMalaCondicion!='') {
+      $nuevoInforme->evaluacionMalaCondicion          =$evaluacionMalaCondicion;
+    }
+    else {
+      $nuevoInforme->evaluacionMalaCondicion          =0;
     }
     if($evaluacionFormaPago!=''){
       $nuevoInforme->evaluacionFormaPago              =$evaluacionFormaPago;
     }
+    else {
+      $nuevoInforme->evaluacionFormaPago              =0;
+    }
     if($evaluacionEnEspera!=''){
       $nuevoInforme->evaluacionEnEspera               =$evaluacionEnEspera;
+    }
+    else {
+      $nuevoInforme->evaluacionEnEspera               =0;
     }
     if($evaluacionVolverVisita!=''){
       $nuevoInforme->evaluacionVolverVisita           =$evaluacionVolverVisita;
     }
+    else {
+      $nuevoInforme->evaluacionVolverVisita           =0;
+    }
     if ($evaluacionOtro!='') {
       $nuevoInforme->evaluacionOtro                   =$evaluacionOtro;
+    }
+    else {
+      $nuevoInforme->evaluacionOtro                   =0;
     }
     $nuevoInforme->observaciones                      =$observaciones;
     $nuevoInforme->recomendaciones                    =$recomendaciones;
@@ -562,7 +604,13 @@ class InformeController extends Controller{
     $propiedad->save();
     return $enviado;
   }
+  public function prueba(){
+    $datetime1 = date_create("2018-04-1");
+    $datetime2 = date_create();
+    $diaTranscurrido= date_diff($datetime1, $datetime2);
+    $dia=$diaTranscurrido->format('%R%a días');
 
+  }
 
 
 }

@@ -87,11 +87,26 @@
         <h2 class="titleSection">INFORMES</h2>
         <div class="reports">
             <div class="row">
+              @if($dia<-4)
                 <div class="col-xs-9">
-                    <div class="alert alertRed" role="alert">
-                        <h5>Próximo informe debe ser enviando antes de: <span>{{$inmueble->proximoInforme}}</span></h5>
+                    <div class="alert alertGreen" role="alert">
+                        <h5>Próximo informe debe ser enviando antes de: <span>{{$fecha}}</span></h5>
                     </div>
                 </div>
+              @elseif($dia>-4 && $dia<=0)
+                <div class="col-xs-9">
+                    <div class="alert alertOrange" role="alert">
+                        <h5>Próximo informe debe ser enviando antes de: <span>{{$fecha}}</span></h5>
+                    </div>
+                </div>
+              @else
+              <div class="col-xs-9">
+                  <div class="alert alertRed" role="alert">
+                      <h5>Próximo informe debió ser enviando antes de: <span>{{$fecha}}</span></h5>
+                  </div>
+              </div>
+              @endif
+
                 <div class="col-xs-3">
                     <div class="buttons">
                         <button type="submit" class="btnYellow noMargin" id="newInforme">NUEVO</button>
@@ -104,7 +119,7 @@
                     <div class="alert alertGrayLight" role="alert">
                         <div class="row">
                             <div class="col-xs-3"><h5>Informe {{$informe->id}}</h5></div>
-                            <div class="col-xs-3"><h5>{{$informe->fechaCreado}}</h5></div>
+                            <div class="col-xs-3"><h5>{{ date("d-m-Y", strtotime($informe->fechaCreado))}}</h5></div>
                             <div class="col-xs-6">
                                 <ul>
                                     <li><a href="/admin/previewInforme/{{$informe->id}}" target="_blank"><i class="fa fa-eye preview" aria-hidden="true"></i></a></li>

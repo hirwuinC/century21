@@ -78,7 +78,6 @@ Route::any('/admin/modaleditarinforme',['as'=>'editarInforme','uses'=>'Admin\Inf
 Route::any('/admin/actualizarInforme',['as'=>'actualizarInforme','uses'=>'Admin\InformeController@actualizarInforme'] );
 Route::any('/admin/enviarCorreo',['as'=>'enviarCorreo','uses'=>'Admin\InformeController@enviarCorreo'] );
 
-Route::any('/admin/pruebaCorreo',['as'=>'pruebaCorreo','uses'=>'Admin\InformeController@pruebaCorreo'] );
 
 
 //Proyectos
@@ -105,4 +104,4 @@ Route::post('/admin/listarTipoReporte', ['as' => 'listar', 'uses' => 'Admin\Esta
 
 // PRUEBAS
 
-Route::get('/admin/pruebas', ['as' => 'prueba', 'uses' => 'Correo@listarPropiedades']);
+Route::get('/prueba', ['as' => 'prueba', 'uses' => 'Admin\InformeController@prueba']);
