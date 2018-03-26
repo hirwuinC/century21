@@ -108,8 +108,10 @@
                             <div class="col-xs-6">
                                 <ul>
                                     <li><a href="/admin/previewInforme/{{$informe->id}}" target="_blank"><i class="fa fa-eye preview" aria-hidden="true"></i></a></li>
-                                    <li><a href=""><i class="fa fa-pencil editInforme" data-id="{{$informe->id}}" aria-hidden="true"></i></a></li>
-                                    <li><button type="button" class="btnGraySmall">Enviar</button></li>
+                                    @if($informe->estatusEnviado==0)
+                                      <li><a href=""><i class="fa fa-pencil editInforme" data-id="{{$informe->id}}" aria-hidden="true"></i></a></li>
+                                      <li><button type="button" data-id="{{$informe->id}}" class="btnGraySmall enviarInforme">Enviar</button></li>
+                                    @endif
                                 </ul>
                             </div>
                         </div>

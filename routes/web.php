@@ -75,6 +75,10 @@ Route::any('/admin/nuevoInforme',['as'=>'nuevoInforme','uses'=>'Admin\InformeCon
 Route::any('/admin/guardarInforme',['as'=>'guardarInforme','uses'=>'Admin\InformeController@guardarInforme'] );
 Route::any('/admin/previewInforme/{id}',['as'=>'previewInforme','uses'=>'Admin\InformeController@previewInforme'] );
 Route::any('/admin/modaleditarinforme',['as'=>'editarInforme','uses'=>'Admin\InformeController@editarInforme'] );
+Route::any('/admin/actualizarInforme',['as'=>'actualizarInforme','uses'=>'Admin\InformeController@actualizarInforme'] );
+Route::any('/admin/enviarCorreo',['as'=>'enviarCorreo','uses'=>'Admin\InformeController@enviarCorreo'] );
+
+Route::any('/admin/pruebaCorreo',['as'=>'pruebaCorreo','uses'=>'Admin\InformeController@pruebaCorreo'] );
 
 
 //Proyectos

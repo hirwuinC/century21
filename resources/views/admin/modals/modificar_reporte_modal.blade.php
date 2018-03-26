@@ -7,7 +7,7 @@
                 <h1 class="titleSection">Información Básica</h1>
             </div>
             <div class="modal-body">
-                <form class="form marginForm" id="formularioInforme">
+                <form class="form marginForm" id="formularioInformeM">
                   <input type="hidden" name="idPropietyModal" id="idPropietyModalM" value="">
                   <input type="hidden" name="idInformeModal" id="idInformeModalM" value="">
                     <div class="modal-body-top">
@@ -120,14 +120,14 @@
                                     <li><h6>¿Existen Compradores Interesados?</h6></li>
                                     <li>
                                         <div class="styled-input-single">
-                                            <input type="radio" name="compradorInteresadoM" value="1" id="compradorInteresadoSiM"/>
-                                            <label for="compradorInteresadoSi">Si</label>
+                                            <input type="radio" name="compradorInteresadoM" value="1" id="compradorInteresadoSiM" checked/>
+                                            <label for="compradorInteresadoSiM">Si</label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="styled-input-single">
                                             <input type="radio" name="compradorInteresadoM" value="0" id="compradorInteresadoNoM" />
-                                            <label for="compradorInteresadoNo" >No</label>
+                                            <label for="compradorInteresadoNoM" >No</label>
                                         </div>
                                     </li>
                                 </ul>
@@ -210,26 +210,26 @@
                                     <li><h6>¿Nuevas Visitas físicas al inmueble?</h6></li>
                                     <li>
                                         <div class="styled-input-single">
-                                            <input type="radio" name="visitasFisicas" id="visitasFisicasSiM" value="1" checked="checked"/>
-                                            <label for="visitasFisicasSi">Si</label>
+                                            <input type="radio" name="visitasFisicasM" id="visitasFisicasSiM" value="1" checked="checked"/>
+                                            <label for="visitasFisicasSiM">Si</label>
                                         </div>
                                     </li>
                                     <li>
                                         <div class="styled-input-single">
-                                            <input type="radio" name="visitasFisicas" id="visitasFisicasNoM" value="0" />
-                                            <label for="visitasFisicasNo">No</label>
+                                            <input type="radio" name="visitasFisicasM" id="visitasFisicasNoM" value="0" />
+                                            <label for="visitasFisicasNoM">No</label>
                                         </div>
                                     </li>
                                 </ul>
                             </div>
                           </div>
-                          <div class="evaluaciones">
+                          <div class="evaluacionesM">
                             <div class="row marginBottom20">
                                 <div class="col-xs-4">
                                     <label>Cantidad de visitas físicas:</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input type="number" min="0" name="cantidadVisitasFisicas" maxlength="11" id="cantidadVisitasFisicasM" class="form-control limpiar ocultoEvaluacion" value="">
+                                    <input type="number" min="0" name="cantidadVisitasFisicas" maxlength="11" id="cantidadVisitasFisicasM" class="form-control limpiar ocultoEvaluacionM" value="">
                                 </div>
                             </div>
                             <div class="row marginBottom20">
@@ -237,7 +237,7 @@
                                     <label>Muy caro:</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input type="number" maxlength="11" name="caro" id="caroM" class="form-control limpiar ocultoEvaluacion">
+                                    <input type="number" maxlength="11" name="caro" id="caroM" class="form-control limpiar ocultoEvaluacionM">
                                 </div>
                             </div>
                             <div class="row marginBottom20">
@@ -245,7 +245,7 @@
                                     <label>En malas condiciones:</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input type="number" maxlength="11" name="malasCondiciones" id="malasCondicionesM" class="form-control limpiar ocultoEvaluacion">
+                                    <input type="number" maxlength="11" name="malasCondiciones" id="malasCondicionesM" class="form-control limpiar ocultoEvaluacionM">
                                 </div>
                             </div>
                             <div class="row marginBottom20">
@@ -253,7 +253,7 @@
                                     <label>Mal ubicado:</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input type="number" maxlength="11" name="malUbicado" id="malUbicadoM" class="form-control limpiar ocultoEvaluacion">
+                                    <input type="number" maxlength="11" name="malUbicado" id="malUbicadoM" class="form-control limpiar ocultoEvaluacionM">
                                 </div>
                             </div>
                             <div class="row marginBottom20">
@@ -261,7 +261,7 @@
                                     <label>Forma de pago N/A:</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input type="number" maxlength="11" name="formaPago" id="formaPagoM" class="form-control limpiar ocultoEvaluacion">
+                                    <input type="number" maxlength="11" name="formaPago" id="formaPagoM" class="form-control limpiar ocultoEvaluacionM">
                                 </div>
                             </div>
                             <div class="row marginBottom20">
@@ -269,7 +269,7 @@
                                     <label>En espera:</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input type="number" maxlength="11" name="enEspera" id="enEsperaM" class="form-control limpiar ocultoEvaluacion">
+                                    <input type="number" maxlength="11" name="enEspera" id="enEsperaM" class="form-control limpiar ocultoEvaluacionM">
                                 </div>
                             </div>
                             <div class="row marginBottom20">
@@ -277,7 +277,7 @@
                                     <label>Quiere volver a visitar:</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input type="number" maxlength="11" name="volverVisitar" id="volverVisitarM" class="form-control limpiar ocultoEvaluacion">
+                                    <input type="number" maxlength="11" name="volverVisitar" id="volverVisitarM" class="form-control limpiar ocultoEvaluacionM">
                                 </div>
                             </div>
                             <div class="row marginBottom20">
@@ -285,7 +285,7 @@
                                     <label>Otro:</label>
                                 </div>
                                 <div class="col-xs-4">
-                                    <input type="number" maxlength="11" name="otro" id="otroM" class="form-control limpiar ocultoEvaluacion">
+                                    <input type="number" maxlength="11" name="otro" id="otroM" class="form-control limpiar ocultoEvaluacionM">
                                 </div>
                             </div>
                           </div>
