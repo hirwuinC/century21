@@ -167,7 +167,7 @@ $('body').on('click','#addPic',function(e){
     $(`<div class='col-sm-3 thumbPropiety'>
         <div class='thumbProperty'>
           <div class='contentTop'>
-            <img class='imgInmueble' src='http://${dominio}/images/img-demo-images.jpg' alt=''>
+            <img class='imgInmueble' src='http://${dominio}/images/img-demo-images.png' alt=''>
           </div>
           <div class='contentInfo'>
             <div class='buttonsAction'>

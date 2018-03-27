@@ -15,7 +15,7 @@ $(document).ready(function() {
     })
     .done(function(respuesta){
       if (respuesta[0]==1 || respuesta[0]==3) {
-        console.log(respuesta)
+        //console.log(respuesta)
         var validator = $( "#formularioInforme" ).validate();
         validator.resetForm();
         $('#nombreCliente').val(respuesta[1].nombre_cliente);
@@ -518,6 +518,8 @@ $('body').on('click','.enviarInforme',function(e){
         }
       })
       .fail( function() {
+        $("#WindowLoad").remove();
+        $('#load').css('display','none');
         swal(
           'Imposible Realizar la acción',
           'Comuniquese con el administrador del sistema',

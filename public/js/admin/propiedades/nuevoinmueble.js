@@ -16,6 +16,25 @@ $(document).ready(function() {
       }
     });
   });
+/////////////////////////////////////////MOSTRAR Y OCULTAR PRELOAD ///////////////////////////////////////////////////////
+  function mostrarPreload(){
+    var ancho = 0;
+    var alto = 0;
+    if (window.innerWidth == undefined) ancho = window.screen.width;
+    else ancho = window.innerWidth;
+    if (window.innerHeight == undefined) alto = window.screen.height;
+    else alto = window.innerHeight;
+    div = document.createElement("div");
+    div.id = "WindowLoad"
+    div.style.width = ancho + "px";
+    div.style.height = alto + "px";
+    $("body").append(div);
+    $('#load').css('display','block');
+  };
+  function ocultarPreload(){
+    $("#WindowLoad").remove();
+    $('#load').css('display','none');
+  }
 //////////////////////////////////////// Validador del formulario///////////////////////////////////////////////
 
 $("#propietyCreate").validate({
@@ -129,6 +148,7 @@ $("#propietyCreate").validate({
         var form= new FormData(document.getElementById("propietyCreate"));
         url="/admin/cargarPropiedad";
         $.ajax({
+          beforeSend: mostrarPreload(),
           url: url,
           type: "post",
           dataType: "json",
@@ -139,6 +159,7 @@ $("#propietyCreate").validate({
         })
         .done(function(respuesta){
           if (respuesta) {
+            ocultarPreload();
             swal({
               title:'Buen trabajo!!',
               text:"Datos guardados con exito",
@@ -149,12 +170,20 @@ $("#propietyCreate").validate({
             setTimeout(function(){location.href = "/admin/crear-inmueble-2";},2300); // 3000ms = 3
           }
           else {
+            ocultarPreload();
             swal(
               'Algo Sucedio',
               'Intente guardar el inmueble nuevamente',
               'error'
             );
           }
+        }).fail( function() {
+          ocultarPreload();
+          swal(
+            'Imposible Realizar la acción',
+            'Comuniquese con el administrador del sistema',
+            'error'
+          );
         });
       }
 
@@ -178,7 +207,7 @@ $("#propietyCreate").validate({
       $(`<div class='col-sm-3 thumbPropiety'>
           <div class='thumbProperty'>
             <div class='contentTop'>
-              <img class='imgInmueble' src='http://${dominio}/images/img-demo-images.jpg' alt=''>
+              <img class='imgInmueble' src='http://${dominio}/images/img-demo-images.png' alt=''>
             </div>
             <div class='contentInfo'>
               <div class='buttonsAction'>
@@ -214,6 +243,7 @@ $("#propietyCreate").validate({
         $('.addPicCont').css('display','none');
       }
   });
+
   $('body').on('click','.btnBorrar',function(e){
     e.preventDefault();
     var contBtn= $('.btnBorrar').length;
@@ -228,12 +258,13 @@ $("#propietyCreate").validate({
     else {
       var input= $(this).parent().parent().find('.register');
       var registro=input.val();
-      console.log(registro)
+      //console.log(registro)
       var form= new FormData();
       form.append('registro',registro);
       form.append('desicion',0);
       url="/admin/borrarImagen";
       $.ajax({
+        beforeSend:mostrarPreload(),
         url: url,
         type: "post",
         dataType: "json",
@@ -243,7 +274,15 @@ $("#propietyCreate").validate({
         processData: false
       })
       .done(function(respuesta){
-        console.log(respuesta);
+        ocultarPreload();
+        //console.log(respuesta);
+      }).fail( function() {
+          ocultarPreload();
+          swal(
+            'Imposible Realizar la acción',
+            'Comuniquese con el administrador del sistema',
+            'error'
+          );
       });
       $(this).parent().parent().parent().parent().parent().parent().parent().remove();
     }
@@ -266,6 +305,7 @@ $("#propietyCreate").validate({
       form.append('desicion',0);
       url="/admin/guardarImagen";
       $.ajax({
+        beforeSend:mostrarPreload(),
         url: url,
         type: "post",
         dataType: "json",
@@ -275,9 +315,10 @@ $("#propietyCreate").validate({
         processData: false
       })
       .done(function(respuesta){
+        ocultarPreload();
         var ubicacion=respuesta[0];
         var id=respuesta[1];
-        console.log(respuesta);
+        //console.log(respuesta);
         $("#"+ubicacion+"").val(id);
         $("#radio-example-"+valor).val(id);
       });
@@ -308,6 +349,7 @@ $("#propietyCreate").validate({
       form.append('imgSelected',imgSelected);
       url="/admin/guardarInmueble";
       $.ajax({
+        beforeSend:mostrarPreload(),
         url: url,
         type: "post",
         dataType: "json",
@@ -317,7 +359,8 @@ $("#propietyCreate").validate({
         processData: false
       })
       .done(function(respuesta){
-        console.log(respuesta)
+        ocultarPreload();
+        //console.log(respuesta)
         if (respuesta==1) {
           swal({
             title:'Buen trabajo!!',
@@ -344,6 +387,13 @@ $("#propietyCreate").validate({
             button:true
           });
         }
+      }).fail( function() {
+        ocultarPreload();
+        swal(
+          'Imposible Realizar la acción',
+          'Comuniquese con el administrador del sistema',
+          'error'
+        );
       });
     }
     else {

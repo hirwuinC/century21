@@ -20,9 +20,29 @@ $(document).ready(function(){
 		submitHandler: function(forma) {
 			var form=$("#login-form").serialize();
 			url="/admin/ingresar";
+			$.ajaxSetup({
+			   beforeSend: function(){
+           var ancho = 0;
+           var alto = 0;
+           if (window.innerWidth == undefined) ancho = window.screen.width;
+           else ancho = window.innerWidth;
+           if (window.innerHeight == undefined) alto = window.screen.height;
+           else alto = window.innerHeight;
+           div = document.createElement("div");
+           div.id = "WindowLoad"
+           div.style.width = ancho + "px";
+           div.style.height = alto + "px";
+           $("body").append(div);
+ 					$('#load').css('display','block');
+ 				},
+			   complete: function(){
+					 $("#WindowLoad").remove();
+           $('#load').css('display','none');
+				 }
+			});
       $.post(url,form)
       .done(function(response) {
-					console.log(response);
+					//console.log(response);
 					if (response[0]==1) {
 						swal({
 							title:'Bienvenido',
@@ -42,6 +62,14 @@ $(document).ready(function(){
 							button:true,
 						});
 					}
+      }).fail( function() {
+        $("#WindowLoad").remove();
+        $('#load').css('display','none');
+        swal(
+          'Imposible Realizar la acción',
+          'Comuniquese con el administrador del sistema',
+          'error'
+        );
       });
 		}
 	});

@@ -8,11 +8,11 @@ use Illuminate\Support\Facades\Mail;
 
 use Carbon\Carbon;
 
-///////////controlador para probar backend para detectar 
+///////////controlador para probar backend para detectar
 
 class Correo extends Controller
 {
-	
+
 	///////////////////////////busca las propieddes vencidas, por vencerse y las que se vencen el dia actual. Segun la lista que se pase
 	public function buscarPropiedad($lista,$agente)
 	{
@@ -35,8 +35,7 @@ class Correo extends Controller
 
 
 
-	public function consultarAgente($agente)
-	{
+	public function consultarAgente($agente){
 		$consulta=DB::table('agentes')
 						->join('users','agentes.id','=','users.agente_id')
 						->select('agentes.fullName AS nombre','agentes.cedula AS cedula','users.email AS correo','agentes.telefono AS telefono','agentes.celular AS celular')
@@ -52,7 +51,7 @@ class Correo extends Controller
 	    							->join('estados','propiedades.estado_id','=','estados.id')
 	    							->join('ciudades','propiedades.ciudad_id','=','ciudades.id')
 	    							->select('propiedades.urbanizacion AS urbanizacion','propiedades.direccion AS direccion',
-	    									 'propiedades.tipoNegocio AS negocio','propiedades.proximoInforme AS proximoInforme','propiedades.agente_id 
+	    									 'propiedades.tipoNegocio AS negocio','propiedades.proximoInforme AS proximoInforme','propiedades.agente_id
 	    									 AS agente','estados.nombre AS estado','ciudades.nombre AS ciudad')
 	    							->where('propiedades.estatus','<>',$statusVendido)->where('propiedades.agente_id','<>',$asesorGenerico)->get();
 		return $consulta;
@@ -62,7 +61,7 @@ class Correo extends Controller
 		$colores=['#FFFFFF','#DCDBDB'];
 		$color=0;
 		$lista=[];
-		foreach ($registros as $key => $registro) 
+		foreach ($registros as $key => $registro)
 		{
 			$lista[$key]=$colores[$color];
 			if($color==0)
@@ -74,7 +73,7 @@ class Correo extends Controller
 				$color=0;
 			}
 		}
-		
+
 		return $lista;
 	}
 
@@ -87,9 +86,9 @@ class Correo extends Controller
 	    $vencenHoy=[];
 	    $colores=['#FFFFFF','#EDEBEB'];
 
-	   
+
 	    $inicio=3;//limite de mensajes de alerta, para propiedades que estan por vencerse
-	    
+
 	    $fechaInicio=Carbon::now();;
 	    $fechaInicio=$fechaInicio->subDays($inicio);
 	    $fechaInicio=$fechaInicio->toDateString();
@@ -101,9 +100,9 @@ class Correo extends Controller
 
 	    // ///Recorrer lista de propiedades e identificar si la fecha del informe
 	    // ///caduco o esta dentro del rango de alerta
-	    foreach ($consultarPropiedades as $propiedad) 
+	    foreach ($consultarPropiedades as $propiedad)
 	    {
-	    	
+
 	    	if($propiedad->proximoInforme>=$fechaInicio && $propiedad->proximoInforme<$fechaActual)//por vencerse
 	    	{
 	    		array_push($porVencerse,$propiedad);
@@ -120,7 +119,7 @@ class Correo extends Controller
 	    		{
 	    			array_push($agentes,$propiedad->agente);
 	    		}
-	    	
+
 	    	}
 	    	else if($propiedad->proximoInforme==$fechaActual)
 	    	{
@@ -129,17 +128,17 @@ class Correo extends Controller
 	    		{
 	    			array_push($agentes,$propiedad->agente);
 	    		}
-	    		
+
 	    	}
 
 	    }
-	  
+
 	    $registrosAgente=[];
-	  
+
 	   //////////////////////obtener las propiedades vencidas por agente/////////////////////
-	   foreach ($agentes as $agente) 
+	   foreach ($agentes as $agente)
 	   {
-	   	  
+
 	   	 ////////////////////Obtener las propiedades vencidas para un agente ///////////////////////////
 	   	 $aux=$this->buscarPropiedad($vencidos,$agente);
 	   	 $vencidosAgente=$aux[0];
@@ -161,14 +160,14 @@ class Correo extends Controller
 	   	 $coloresVencenHoy=$this->colores($vencenHoyAgente);
 	   	 ///////////////////////////////////////////////////////////////////////////////////////////////
 	   	 $datosAgente=$this->consultarAgente($agente);
-	   
+
 
 	   	 $registro=[$agente=>['nombre'=>$datosAgente->nombre,'cedula'=>$datosAgente->cedula,'correo'=>$datosAgente->correo,'telefono'=>$datosAgente->telefono,'celular'=>$datosAgente->celular,'vencidos'=>$vencidosAgente,'coloresVencidos'=>$coloresVencidos,'porVencerse'=>$porVencerseAgente,'coloresPorVencerse'=>$coloresPorVencerse,'vencenHoy'=>$vencenHoyAgente,'coloresVencenHoy'=>$coloresVencenHoy]];
 	   	///////////////////Enviar correo al agente de turno //////////////////////////
 
-	   	////////////////////////////////////////////////////////////////////////////// 
+	   	//////////////////////////////////////////////////////////////////////////////
 
-	   	 
+
 	   	 array_push($registrosAgente,$registro);
 
 
@@ -178,7 +177,7 @@ class Correo extends Controller
 	   ///////////////Enviar correo al administrador//////////////////////////////////
 
 	   ///////////////////////////////////////////////////////////////////////////////
-	   // foreach ($registrosAgente as $registro) 
+	   // foreach ($registrosAgente as $registro)
 	   // {
 	   // 		foreach($registro as $agente)
 	   // 		{
@@ -187,7 +186,7 @@ class Correo extends Controller
 	   // }
 	   //$registrosAgente=(object)json_encode($registrosAgente);
 	   dd($registrosAgente);
-	 
+
 
 
 	}

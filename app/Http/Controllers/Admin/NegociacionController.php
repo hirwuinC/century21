@@ -73,6 +73,7 @@ class NegociacionController extends Controller{
   }
 
   public function guardarNegociacion(){
+    sleep(1);
     $propiedad=Request::get('propiedad');
     $idCaptador=Request::get('asesorCaptador');
     $idCerrador=Request::get('asesorCerrador');
@@ -244,6 +245,7 @@ class NegociacionController extends Controller{
   }
 
   public function historialNegociaciones(){
+    sleep(1);
     $idpropiedad=Request::get('id');
     $negociaciones=DB::table('negociaciones')
                     ->join('estatus','estatus.id','negociaciones.estatus')

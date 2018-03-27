@@ -62,6 +62,9 @@
 				</div>
 			</div>
 		</div>
+		<div class="load" id="load">
+        <hr/><hr/><hr/><hr/>
+    </div>
 		<!-- END GENERAL WRAPPER -->
 
 		<!--JAVASCRIPTS / JQUERY-->

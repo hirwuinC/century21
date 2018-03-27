@@ -239,6 +239,20 @@ $("#newNegotation").validate({
     var form= new FormData(document.getElementById("newNegotation"));
     url="/admin/guardarNegociacion";
     $.ajax({
+			beforeSend: function(){
+				var ancho = 0;
+				var alto = 0;
+				if (window.innerWidth == undefined) ancho = window.screen.width;
+				else ancho = window.innerWidth;
+				if (window.innerHeight == undefined) alto = window.screen.height;
+				else alto = window.innerHeight;
+				div = document.createElement("div");
+				div.id = "WindowLoad"
+				div.style.width = ancho + "px";
+				div.style.height = alto + "px";
+				$("body").append(div);
+				$('#load').css('display','block');
+			},
       url: url,
       type: "post",
       dataType: "html",
@@ -250,7 +264,8 @@ $("#newNegotation").validate({
     .done(function(respuesta){
     	if (respuesta) {
 				//console.log (respuesta);
-
+				$("#WindowLoad").remove();
+				$('#load').css('display','none');
 				swal({
 					title:'Buen trabajo!!',
 					text:"Datos guardados con exito",
@@ -263,6 +278,8 @@ $("#newNegotation").validate({
 
       }
       else{
+				$("#WindowLoad").remove();
+				$('#load').css('display','none');
 				swal({
           title:'Imposible realizar la acción!!',
           text:"Comuniquese con el administrador del sistema",
@@ -270,7 +287,15 @@ $("#newNegotation").validate({
           button:true
         });
 			}
-    });
+    }).fail( function() {
+			$("#WindowLoad").remove();
+			$('#load').css('display','none');
+			swal(
+				'Imposible Realizar la acción',
+				'Comuniquese con el administrador del sistema',
+				'error'
+			);
+		});
   }
 });
 
@@ -660,6 +685,20 @@ $("#newReporte").validate({
 		var idpropiedad=$('#propiedadGeneral').val();
 	  url="/admin/historialNegociaciones";
 	  $.ajax({
+			beforeSend: function(){
+				var ancho = 0;
+				var alto = 0;
+				if (window.innerWidth == undefined) ancho = window.screen.width;
+				else ancho = window.innerWidth;
+				if (window.innerHeight == undefined) alto = window.screen.height;
+				else alto = window.innerHeight;
+				div = document.createElement("div");
+				div.id = "WindowLoad"
+				div.style.width = ancho + "px";
+				div.style.height = alto + "px";
+				$("body").append(div);
+				$('#load').css('display','block');
+			},
 	    url: url,
 	    type: "post",
 	    dataType: "html",
@@ -667,7 +706,8 @@ $("#newReporte").validate({
 		})
 	  .done(function(respuesta){
 			//console.log(respuesta);
-
+			$("#WindowLoad").remove();
+			$('#load').css('display','none');
 			$('.areaResultado').append(respuesta);
 			$('#tabHistory').addClass('active');
 			$('#tabHistory').parent().addClass('active');
@@ -680,6 +720,8 @@ $("#newReporte").validate({
 			$('#profile').removeClass('active');
 	  })
 	  .fail(function(){
+			$("#WindowLoad").remove();
+			$('#load').css('display','none');
 	    swal({
 	      title:'Algo sucedio',
 	      text:"Comuniquese con el administrador",

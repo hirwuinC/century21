@@ -81,7 +81,8 @@ class PropiedadController extends Controller{
                   "direccion"           =>  Request::get('addressPropiety'),
                   "posicionMapa"        =>  Request::get('positionPropiety'),
                   "destacado"           =>  Request::get('destacado'),
-                  "cargadoPor"          =>  $usuario->id
+                  "cargadoPor"          =>  $usuario->id,
+                  "estatus"             =>  1
                 ]);
     }
     else {
@@ -104,6 +105,7 @@ class PropiedadController extends Controller{
                   "posicionMapa"        =>  Request::get('positionPropiety'),
                   "destacado"           =>  Request::get('destacado'),
                   "cargadoPor"          =>  $usuario->id,
+                  "estatus"             =>  1,
                   "proximoInforme"      =>  $proximoInforme
       ]);
     }
