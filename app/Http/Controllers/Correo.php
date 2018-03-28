@@ -167,25 +167,14 @@ class Correo extends Controller
 
 	   	//////////////////////////////////////////////////////////////////////////////
 
-
+	   	 return view('emails.informeAsesor',['asesor'=>$registro,'agente'=>$agente]);
 	   	 array_push($registrosAgente,$registro);
 
 
 	   }
 	   return view('emails.informeAdministrador',['registros'=>$registrosAgente]);
 
-	   ///////////////Enviar correo al administrador//////////////////////////////////
-
-	   ///////////////////////////////////////////////////////////////////////////////
-	   // foreach ($registrosAgente as $registro)
-	   // {
-	   // 		foreach($registro as $agente)
-	   // 		{
-	   // 			echo "Nombre: ".$agente['nombre'];
-	   // 		}
-	   // }
-	   //$registrosAgente=(object)json_encode($registrosAgente);
-	   dd($registrosAgente);
+	 	
 
 
 
