@@ -52,7 +52,7 @@ class Correo extends Controller
 	    							->join('ciudades','propiedades.ciudad_id','=','ciudades.id')
 	    							->select('propiedades.urbanizacion AS urbanizacion','propiedades.direccion AS direccion',
 	    									 'propiedades.tipoNegocio AS negocio','propiedades.proximoInforme AS proximoInforme','propiedades.agente_id
-	    									 AS agente','estados.nombre AS estado','ciudades.nombre AS ciudad')
+	    									 AS agente','estados.nombre AS estado','ciudades.nombre AS ciudad','propiedades.id AS id','propiedades.id_mls AS mls')
 	    							->where('propiedades.estatus','<>',$statusVendido)->where('propiedades.agente_id','<>',$asesorGenerico)->get();
 		return $consulta;
 	}
@@ -90,7 +90,7 @@ class Correo extends Controller
 	    $inicio=3;//limite de mensajes de alerta, para propiedades que estan por vencerse
 
 	    $fechaInicio=Carbon::now();;
-	    $fechaInicio=$fechaInicio->subDays($inicio);
+	    $fechaInicio=$fechaInicio->addDays($inicio);
 	    $fechaInicio=$fechaInicio->toDateString();
 	    $fechaActual=Carbon::now();
 	    $fechaActual=$fechaActual->toDateString();
@@ -103,7 +103,7 @@ class Correo extends Controller
 	    foreach ($consultarPropiedades as $propiedad)
 	    {
 
-	    	if($propiedad->proximoInforme>=$fechaInicio && $propiedad->proximoInforme<$fechaActual)//por vencerse
+	    	if($propiedad->proximoInforme>$fechaActual&& $propiedad->proximoInforme<$fechaInicio)//por vencerse
 	    	{
 	    		array_push($porVencerse,$propiedad);
 	    		if(!in_array($propiedad->agente,$agentes))
@@ -112,7 +112,7 @@ class Correo extends Controller
 	    		}
 
 	    	}
-	    	else if($propiedad->proximoInforme<$fechaInicio)//vencidos
+	    	else if($propiedad->proximoInforme<$fechaActual)//vencidos
 	    	{
 	    		array_push($vencidos,$propiedad);
 	    		if(!in_array($propiedad->agente,$agentes))
