@@ -197,7 +197,7 @@ class correoGestionInformes extends Command
          Mail::send('emails.informeAsesor',['asesor'=>$registro,'agente'=>$agente],function($message)use($correo)
          {
                 $message->to($correo)->subject('Lista de informes pendientes por enviar');
-        });
+         });
 
          //return view('emails.informeAsesor',['asesor'=>$registro,'agente'=>$agente]);
          array_push($registrosAgente,$registro);
@@ -205,7 +205,7 @@ class correoGestionInformes extends Command
 
        }
         $correo='vinrast@gmail.com';
-         Mail::send('emails.informeAsesor',['registros'=>$registrosAgente],function($message)use($correo)
+         Mail::send('emails.informeAdministrador',['registros'=>$registrosAgente],function($message)use($correo)
          {
                 $message->to($correo)->subject('Lista por asesor, con los informes pendientes por enviar');
         });
