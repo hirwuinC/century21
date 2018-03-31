@@ -12,12 +12,18 @@
                 <div class="editProperty">
                   {{$editar}}
                 </div>
+                <div class="deleteProperty">
+                  {{$eliminar}}
+                </div>
             </div>
         </div>
         <div class="contentInfo">
             <div class="infoProperty">
                 <h4>{{$residencia}}</h4>
-                <p><span>Código MLS: </span>{{$code}}</p>
+                <p><span>Tipo de Inmueble: </span>{{$tipoInmueble}}</p>
+                <p><span>Código MLS: </span>{{$codeMLS}}</p>
+                <p><span>Código: </span>{{$code}}</p>
+                <p><span>Asesor: </span>{{$asesor}}</p>
             </div>
             <div class="buttonsAction">
                 <div class="row">

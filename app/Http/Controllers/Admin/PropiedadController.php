@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use App\Models\Estado;
 use App\Models\Ciudad;
+use App\Models\Urbanizacion;
 use App\Models\TipoInmueble;
 use App\Models\Agente;
 use App\Models\Propiedad;
@@ -22,20 +23,16 @@ class PropiedadController extends Controller{
 
   public function ListaInmuebles(){
       $usuario=Session::get('asesor');
-      if ($usuario->rol_id==1) {
-        $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
-                                           ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*')
-                                           ->where('medias.vista',1)
-                                           ->paginate(30);
-      }
-      else {
-        $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
-                                           ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*')
-                                           ->where('medias.vista',1)
-                                           ->where('propiedades.agente_id',$usuario->agente_id)
-                                           ->paginate(30);
-      }
-      return view('/admin/lista_inmuebles',$this->cargarSidebar(),compact('inmuebles','usuario'));
+      $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
+                                    ->Join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
+                                    ->Join('agentes','propiedades.agente_id','agentes.id')
+                                    ->Join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
+                                    ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','tipoinmueble.nombre as nombreInmueble','agentes.fullName as nombreAsesor','urbanizaciones.nombre as nombreUrbanizacion')
+                                    ->where('medias.vista',1)
+                                    ->paginate(30);
+      $asesores=Agente::all();
+      $estados=Estado::all();
+      return view('/admin/lista_inmuebles',$this->cargarSidebar(),compact('inmuebles','usuario','asesores','estados'));
   }
 
   public function CrearInmueble1(){
@@ -45,11 +42,12 @@ class PropiedadController extends Controller{
     $datos=Propiedad::where('cargado',0)->where('cargadoPor',$usuario->id)->first();
     if (count($datos)!=0) {
       $consulta=Ciudad::where('estado_id',$datos->estado_id)->get();
+      $urbanizaciones=Urbanizacion::where('ciudad_id',$datos->ciudad_id)->get();
     }
     $tiposIn=TipoInmueble::all();
     $estados=Estado::all();
     $asesores=Agente::all();
-    return view('/admin/crear_inmueble_1',$this->cargarSidebar(),compact('tiposIn','estados','asesores','datos','consulta'));
+    return view('/admin/crear_inmueble_1',$this->cargarSidebar(),compact('tiposIn','estados','asesores','datos','consulta','urbanizaciones'));
   }
 
   public function listarCiudades(){
@@ -57,6 +55,10 @@ class PropiedadController extends Controller{
     return $this->cargarCiudades($estado);
   }
 
+  public function listarUrbanizaciones(){
+    $ciudad=Request::get('estado');
+    return $this->cargarUrbanizaciones($ciudad);
+  }
   public function cargarPropiedad(){
     $usuario=Session::get('asesor');
     $proximoInforme=date('Y-m-d', strtotime('+1 month'));

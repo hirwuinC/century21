@@ -10,24 +10,42 @@
                     @slot('type') {{$inmueble->tipoNegocio}} @endslot
                     @slot('price')
                       @if($inmueble->visible==1)
-                        <span>Bsf.:</span>{{$inmueble->precio}}
+                        <span>Bs. </span>{{ number_format($inmueble->precio, 0, '', '.')}}
                       @else
                         Consultar Precio
                       @endif
                     @endslot
-                    @slot('residencia'){{$inmueble->urbanizacion}} @endslot
-                    @slot('code')
+                    @slot('residencia')
+                      {{$inmueble->nombreUrbanizacion}}
+                    @endslot
+                    @slot('tipoInmueble')
+                      {{$inmueble->nombreInmueble}}
+                    @endslot
+                    @slot('codeMLS')
                       @if($inmueble->id_mls==0)
                         <span>No Aplica</span>
                       @else
                         {{$inmueble->id_mls}}
                       @endif
                     @endslot
+                    @slot('code')
+                      {{$inmueble->id}}
+                    @endslot
+                    @slot('asesor')
+                      {{$inmueble->nombreAsesor}}
+                    @endslot
                     @slot('img') /inmuebles/{{$inmueble->nombre_imagen}} @endslot
                     @slot('editar')
                       @if($usuario->rol_id==1)
                         <a href="/admin/editar-inmueble1/{{$inmueble->id}}">
                             <i class="fa fa-pencil" aria-hidden="true"></i>
+                        </a>
+                      @endif
+                    @endslot
+                    @slot('eliminar')
+                      @if($usuario->rol_id==1)
+                        <a href="">
+                            <i class="fa fa-trash" aria-hidden="true"></i>
                         </a>
                       @endif
                     @endslot
@@ -43,7 +61,7 @@
             @endforeach
         </div>
         <div class="row">
-          {{ $inmuebles->links() }}
+          <center>{{ $inmuebles->links() }}</center>
         </div>
     </section>
     @include('admin/modals/cambio_estatus')

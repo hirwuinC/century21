@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 use App\Models\Agente;
 use App\Models\User;
 use App\Models\Ciudad;
+use App\Models\Urbanizacion;
 use Illuminate\Support\Facades\Session;
 //use Illuminate\Support\Facades\Request;
 use App\Http\Requests;
@@ -30,7 +31,8 @@ class Controller extends BaseController{
     $ciudades=Ciudad::where('estado_id',$estado)->get();
     return compact('ciudades');
   }
-  public function pruebaPDF(Request $request){
-     return ('hola');
+  public function cargarUrbanizaciones($ciudad){
+    $urbanizaciones=Urbanzacion::where('ciudad_id',$ciudad)->get();
+    return compact('urbanizaciones');
   }
 }

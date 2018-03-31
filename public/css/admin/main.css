@@ -29,6 +29,7 @@ header {
 /*----- GO GENERALS -------*/
 body {
   background: #fff;
+  height: 100%;
 }
 body.login {
   background: #f6f6f6 !important;
@@ -64,7 +65,6 @@ hr {
 .right {
   float: right;
 }
-
 .textLeft {
   text-align: left;
 }
@@ -634,7 +634,7 @@ textarea:focus {
 }
 
 /*----- SEARCH -----*/
-.alertSearch input {
+.alertSearch .buscador,.alertSearch .btnYellow{
   height: 40px;
   position: relative;
   padding: 10px 25px 10px 50px;
@@ -654,12 +654,12 @@ textarea:focus {
 }
 .alertSearch select {
   border: none;
-  height: 30px;
-  color: #333333;
+  height: 40px;
+  color: #cbcbcb;
   font-family: 'latoregular';
-  font-size: 1.2em;
+  font-size: 1em;
   box-shadow: none;
-  background: URL("../images/arrow-down.png") no-repeat !important;
+  background-color: #363636;
   background-position: 80% 60% !important;
   -moz-appearance: none;
   -webkit-appearance: none;
@@ -668,7 +668,7 @@ textarea:focus {
   text-align: center;
 }
 .alertSearch select option {
-  background-color: #cccccc;
+  background-color: #363636;
   height: 40px;
   top: 50px;
   border: none !important;
@@ -678,7 +678,17 @@ textarea:focus {
   border: none;
   box-shadow: none;
 }
-
+.alertSearch .btnYellow {
+  background-color: #fcaf37;
+  color: #000;
+  margin: 0px 0;
+  border: none;
+  text-transform: uppercase;
+  border-radius: 5px;
+  width: 100%;
+  padding: 0px 0;
+  text-align: center;
+}
 /*----- AVATAR -----*/
 .avatarForm {
   margin: 40px 0;
@@ -759,24 +769,31 @@ textarea:focus {
   width: 100%;
   height: 150px;
 }
-.thumbProperty .contentTop .editProperty {
+.thumbProperty .contentTop .editProperty, .thumbProperty .contentTop .deleteProperty{
   display: none;
 }
-.thumbProperty .contentTop:hover .editProperty {
+.thumbProperty .contentTop:hover .editProperty{
   display: block;
   position: absolute;
   top: 35%;
-  left: 43%;
+  left: 35%;
   text-align: center;
 }
-.thumbProperty .contentTop:hover .editProperty a {
+.thumbProperty .contentTop:hover .deleteProperty{
   display: block;
-  height: 60px;
-  width: 60px;
+  position: absolute;
+  top: 35%;
+  left: 55%;
+  text-align: center;
+}
+.thumbProperty .contentTop:hover .editProperty a, .thumbProperty .contentTop:hover .deleteProperty a {
+  display: block;
+  height: 45px;
+  width: 45px;
   background: rgba(255, 255, 255, 0.6);
   border-radius: 50%;
   color: #333333;
-  font-size: 2em;
+  font-size: 1.6em;
   padding: 8px 0;
 }
 .thumbProperty .contentTop .caption {
@@ -974,29 +991,6 @@ textarea:focus {
   vertical-align: super;
 }
 
-.paginator {
-  margin: 60px 0;
-  text-align: center;
-}
-.paginator .pagination li {
-  font-family: 'latobold';
-}
-.paginator .pagination li.active a {
-  background-color: #f1b311;
-  border-color: #f1b311;
-  color: #333333;
-}
-.paginator .pagination li a {
-  border-radius: 50%;
-  margin: 0 5px;
-  color: #f1b311;
-}
-.paginator .pagination li a:hover, .paginator .pagination li a:focus {
-  color: #333333;
-  background-color: #f1b311;
-  border-color: #f1b311;
-}
-
 /* make sidebar nav vertical */
 .affix-content .container {
   margin-top: 0;
@@ -1027,7 +1021,7 @@ textarea:focus {
 .affix-sidebar {
   padding-right: 0;
   padding-left: 0;
-
+  background: #333333;
 }
 
 .affix-row, .affix-container, .affix-content {
@@ -1038,12 +1032,39 @@ textarea:focus {
 
 .navbar-default {
   background: #333333;
+  height: 480px;
+  overflow-y: scroll;
+}
+.navbar-default::-webkit-scrollbar-track
+{
+	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+	background-color: #F5F5F5;
+}
+
+.navbar-default::-webkit-scrollbar
+{
+	width: 10px;
+	background-color: #F5F5F5;
+}
+
+.navbar-default::-webkit-scrollbar-thumb
+{
+	background-color: #F90;
+	background-image: -webkit-linear-gradient(90deg,
+                    rgba(255, 255, 255, .2) 25%,
+									  transparent 25%,
+									  transparent 50%,
+									  rgba(255, 255, 255, .2) 50%,
+									  rgba(255, 255, 255, .2) 75%,
+									  transparent 75%,
+									  transparent)
 }
 
 .sidebar-nav {
   position: fixed;
   top: 130px;
   width: 25%;
+
 }
 .sidebar-nav .contentAvatar {
   display: flex;
@@ -1220,4 +1241,27 @@ textarea:focus {
    -moz-opacity:65;
     opacity:0.65;
     background:#000;
+}
+/* ---------------- PAGINADOR ------------*/
+.pagination {
+  margin: 60px 0;
+  text-align: center;
+}
+.pagination li{
+  font-family: 'latobold';
+}
+.pagination li.active span {
+  background-color: #f1b311;
+  border-color: #f1b311;
+  color: #333333;
+}
+.pagination li span,.pagination li a{
+  border-radius: 50% !important;
+  margin: 0 5px;
+  color: #f1b311;
+}
+.pagination li span:hover, .pagination li span:focus,.pagination li a:hover,.pagination li a:focus {
+  color: #333333;
+  background-color: #f1b311 !important;
+  border-color: #f1b311 !important;
 }
