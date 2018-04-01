@@ -24,6 +24,7 @@
                 <div class='row'>
                   <div class='col-xs-12'>
                     <div class='col-xs-6 col-xs-offset-4' >
+                      <div class="portada">¿Portada?</div>
                       <div class="styled-input-single">
                         {{$marcador}}
                       </div>

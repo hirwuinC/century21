@@ -1265,3 +1265,10 @@ textarea:focus {
   background-color: #f1b311 !important;
   border-color: #f1b311 !important;
 }
+/*--------------MARCARDOR DE FOTO DE PORTADA --------------*/
+.portada{
+  position: absolute;
+  font-family:latobold;
+  left: 0px;
+  bottom: 40px;
+}

@@ -3,7 +3,7 @@
 @section('content')
     <h2 class="titleSection">inmuebles - <span>Agregar o quitar imágenes</span></h2>
     <section>
-      <form class="" id="picPropiety" action="" enctype= multipart/form-data method="post">
+      <form class="" id="picPropiety" action="" enctype="multipart/form-data" method="post">
         <input type="hidden" id="last" value="{{$ultimo['id']}}">
         <div class="row nueva">
           @foreach($imagenes as $imagen)

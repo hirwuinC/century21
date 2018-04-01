@@ -49,7 +49,7 @@
             <div class="row" style="padding-top:30px">
                 <div class="col-xs-12">
                     <label for="">Dirección del inmueble</label>
-                    <input type="text" class="inputs inputsLight form-control" name="addressPropiety" id="addressPropiety" placeholder="Dirección del inmueble (Incluir ubicacion en el mapa)">
+                    <input type="text" maxlength="150" class="inputs inputsLight form-control" name="addressPropiety" id="addressPropiety" placeholder="Dirección del inmueble (Incluir ubicacion en el mapa)">
                 </div>
             </div>
             <div class="row">
@@ -103,45 +103,45 @@
             <div class="row">
                 <div class="col-xs-4">
                     <label for="">Precio de Venta</label>
-                    <input type="number" min="0" class="inputs inputsLight form-control" name="pricePropiety" id="pricePropiety" placeholder="Precio">
+                    <input type="number" min="0" maxlength="20" class="inputs inputsLight form-control" name="pricePropiety" id="pricePropiety" placeholder="Precio">
                 </div>
                 <div class="col-xs-4">
                     <label for="">Porcentaje de Captación</label>
-                    <input type="number" min="0" max="100" class="inputs inputsLight form-control" name="porcentajeCaptacion" id="porcentajeCaptacion" placeholder="Porcentaje">
+                    <input type="number" min="0" maxlength="4" max="100" class="inputs inputsLight form-control" name="porcentajeCaptacion" id="porcentajeCaptacion" placeholder="Porcentaje">
                 </div>
                 <div class="col-xs-4">
                   <label for="">Referencia Dolares</label>
-                  <input type="number"  min="0" class="inputs inputsLight form-control" name="refDolares" id="refDolares" placeholder="Referencia en dolares">
+                  <input type="number"  min="0" maxlength="20" class="inputs inputsLight form-control" name="refDolares" id="refDolares" placeholder="Referencia en dolares">
                 </div>
             </div>
             <div class="row">
               <div class="col-xs-6">
                   <label for="">Metros de Construccion</label>
-                  <input type="number" min="0" class="inputs inputsLight form-control" name="constructionPropiety" id="constructionPropiety" placeholder="Construcción (Mtr2)">
+                  <input type="number" min="0" maxlength="11" class="inputs inputsLight form-control" name="constructionPropiety" id="constructionPropiety" placeholder="Construcción (Mtr2)">
               </div>
               <div class="col-xs-6">
                   <label for="">Metros de terreno</label>
-                  <input type="number" min="0" class="inputs inputsLight form-control" name="areaPropiety" id="areaPropiety" placeholder="Terreno (Mtr2)">
+                  <input type="number" min="0" maxlength="11" class="inputs inputsLight form-control" name="areaPropiety" id="areaPropiety" placeholder="Terreno (Mtr2)">
               </div>
             </div>
             <div class="row">
                 <div class="col-xs-4">
                     <label for="">Cantidad de habitaciones</label>
-                    <input type="number" min="0" class="inputs inputsLight form-control" id="roomPropiety"name="roomPropiety" placeholder="Habitaciones">
+                    <input type="number" min="0"  maxlength="11" class="inputs inputsLight form-control" id="roomPropiety"name="roomPropiety" placeholder="Habitaciones">
                 </div>
                 <div class="col-xs-4">
                     <label for="">Cantidad de baños</label>
-                    <input type="number" min="0" class="inputs inputsLight form-control" id="batroomPropiety" name="batroomPropiety" placeholder="Baños">
+                    <input type="number" min="0" maxlength="11" class="inputs inputsLight form-control" id="batroomPropiety" name="batroomPropiety" placeholder="Baños">
                 </div>
                 <div class="col-xs-4">
                     <label for="">Cantidad de estacionamientos</label>
-                    <input type="number" min="0" class="inputs inputsLight form-control" id="parkingPropiety" name="parkingPropiety" placeholder="Estacionamiento (Cantidad de Puestos)">
+                    <input type="number" min="0" maxlength="11" class="inputs inputsLight form-control" id="parkingPropiety" name="parkingPropiety" placeholder="Estacionamiento (Cantidad de Puestos)">
                 </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
                     <label for="">Comentarios sobre el inmueble</label>
-                    <textarea class="inputs inputsLight" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble"></textarea>
+                    <textarea class="inputs inputsLight" maxlength="600" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble"></textarea>
                 </div>
             </div>
             <div class="row">
@@ -227,7 +227,7 @@
         <div class="row" style="padding-top:30px">
             <div class="col-xs-12">
                 <label for="">Dirección</label>
-                <input type="text" class="inputs inputsLight form-control" value='{{$datos->direccion}}' name="addressPropiety" id="addressPropiety" placeholder="Dirección del inmueble (Incluir ubicacion en el mapa)">
+                <input type="text" maxlength="150" class="inputs inputsLight form-control" value='{{$datos->direccion}}' name="addressPropiety" id="addressPropiety" placeholder="Dirección del inmueble (Incluir ubicacion en el mapa)">
             </div>
         </div>
         <div class="row">
@@ -240,21 +240,36 @@
           <div class="col-xs-4">
               <ul class="viewRadio">
                   <li><h6>Mostrar Mapa</h6></li>
-                  <li>
-                      <div class="styled-input-single">
-                          <input type="radio" name="visibleMapa" value="1" id="visibleMapaSi" checked="checked"/>
-                          <label for="visibleMapaSi">Si</label>
-                      </div>
-                  </li>
-                  <li>
-                      <div class="styled-input-single">
-                          <input type="radio" name="visibleMapa" value="0" id="visibleMapaNo" />
-                          <label for="visibleMapaNo">No</label>
-                      </div>
-                  </li>
+                  @if($datos->mostrarMapa==1)
+                    <li>
+                        <div class="styled-input-single">
+                            <input type="radio" name="visibleMapa" value="1" id="visibleMapaSi" checked="checked"/>
+                            <label for="visibleMapaSi">Si</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="styled-input-single">
+                            <input type="radio" name="visibleMapa" value="0" id="visibleMapaNo" />
+                            <label for="visibleMapaNo">No</label>
+                        </div>
+                    </li>
+                  @else
+                    <li>
+                        <div class="styled-input-single">
+                            <input type="radio" name="visibleMapa" value="1" id="visibleMapaSi" />
+                            <label for="visibleMapaSi">Si</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="styled-input-single">
+                            <input type="radio" name="visibleMapa" value="0" id="visibleMapaNo" checked="checked"/>
+                            <label for="visibleMapaNo">No</label>
+                        </div>
+                    </li>
+                  @endif
               </ul>
           </div>
-          <div class="col-xs-6">
+          <div class="col-xs-4">
               <div class="styled-input-single">
                 @if($datos->destacado==1)
                   <input type="checkbox" name="destacado" value="1" checked="checked" id="checkbox-example-two" />
@@ -264,7 +279,7 @@
                  <label for="checkbox-example-two">¿Inmueble Destacado?</label>
               </div>
           </div>
-          <div class="col-xs-6">
+          <div class="col-xs-4">
               <ul class="viewRadio">
                   <li><h6>Precio visible</h6></li>
                   @if($datos->visible==1)
@@ -298,47 +313,47 @@
           </div>
         </div>
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-4">
                 <label for="">Precio de Venta</label>
-                <input type="number" min="0" class="inputs inputsLight form-control" value='{{$datos->precio}}' name="pricePropiety" id="pricePropiety" placeholder="Precio">
+                <input type="number" min="0" maxlength="20" class="inputs inputsLight form-control" value='{{$datos->precio}}' name="pricePropiety" id="pricePropiety" placeholder="Precio">
             </div>
             <div class="col-xs-4">
                 <label for="">Porcentaje de Captación</label>
-                <input type="number" min="0" max="100" class="inputs inputsLight form-control" name="porcentajeCaptacion" id="porcentajeCaptacion" placeholder="Porcentaje">
+                <input type="number" min="0" maxlength="11" max="100" class="inputs inputsLight form-control" value='{{$datos->porcentajeCaptacion}}' name="porcentajeCaptacion" id="porcentajeCaptacion" placeholder="Porcentaje">
             </div>
             <div class="col-xs-4">
               <label for="">Referencia Dolares</label>
-              <input type="number" min="0" class="inputs inputsLight form-control" name="refDolares" id="refDolares" placeholder="Referencia en dolares">
+              <input type="number" min="0" maxlength="20" class="inputs inputsLight form-control" value='{{$datos->referenciaDolares}}'  name="refDolares" id="refDolares" placeholder="Referencia en dolares">
             </div>
         </div>
         <div class="row">
           <div class="col-xs-6">
               <label for="">Metros de Construcción</label>
-              <input type="number" min="0" class="inputs inputsLight form-control" value='{{$datos->metros_construccion}}' name="constructionPropiety" id="constructionPropiety" placeholder="Construcción (Mtr2)">
+              <input type="number" min="0" maxlength="11" class="inputs inputsLight form-control" value='{{$datos->metros_construccion}}' name="constructionPropiety" id="constructionPropiety" placeholder="Construcción (Mtr2)">
           </div>
           <div class="col-xs-6">
               <label for="">Metros de Terreno</label>
-              <input type="number" min="0" class="inputs inputsLight form-control" value='{{$datos->metros_terreno}}' name="areaPropiety" id="areaPropiety" placeholder="Terreno (Mtr2)">
+              <input type="number" min="0" maxlength="11" class="inputs inputsLight form-control" value='{{$datos->metros_terreno}}' name="areaPropiety" id="areaPropiety" placeholder="Terreno (Mtr2)">
           </div>
         </div>
         <div class="row">
             <div class="col-xs-4">
                 <label for="">Cantidad de Habitaciones</label>
-                <input type="number" min="0" class="inputs inputsLight form-control" value='{{$datos->habitaciones}}' id="roomPropiety"name="roomPropiety" placeholder="Habitaciones">
+                <input type="number" min="0" maxlength="11"  class="inputs inputsLight form-control" value='{{$datos->habitaciones}}' id="roomPropiety"name="roomPropiety" placeholder="Habitaciones">
             </div>
             <div class="col-xs-4">
                 <label for="">Cantidad de Baños</label>
-                <input type="number" min="0" class="inputs inputsLight form-control" value='{{$datos->banos}}' id="batroomPropiety" name="batroomPropiety" placeholder="Baños">
+                <input type="number" min="0" maxlength="11" class="inputs inputsLight form-control" value='{{$datos->banos}}' id="batroomPropiety" name="batroomPropiety" placeholder="Baños">
             </div>
             <div class="col-xs-4">
                 <label for="">Cantidad de Estacionamientos</label>
-                <input type="number" min="0" class="inputs inputsLight form-control" value='{{$datos->estacionamientos}}' id="parkingPropiety" name="parkingPropiety" placeholder="Estacionamiento (Cantidad de Puestos)">
+                <input type="number" min="0" maxlength="11" class="inputs inputsLight form-control" value='{{$datos->estacionamientos}}' id="parkingPropiety" name="parkingPropiety" placeholder="Estacionamiento (Cantidad de Puestos)">
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
                 <label for="">Caracteristicas de la Propiedad</label>
-                <textarea class="inputs inputsLight" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble">{{$datos->comentario}}</textarea>
+                <textarea class="inputs inputsLight"  maxlength="600" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble">{{$datos->comentario}}</textarea>
             </div>
         </div>
         <div class="row">

@@ -32,7 +32,7 @@ class Controller extends BaseController{
     return compact('ciudades');
   }
   public function cargarUrbanizaciones($ciudad){
-    $urbanizaciones=Urbanzacion::where('ciudad_id',$ciudad)->get();
+    $urbanizaciones=Urbanizacion::where('ciudad_id',$ciudad)->get();
     return compact('urbanizaciones');
   }
 }

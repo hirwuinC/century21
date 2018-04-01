@@ -56,56 +56,63 @@ class PropiedadController extends Controller{
   }
 
   public function listarUrbanizaciones(){
-    $ciudad=Request::get('estado');
+    $ciudad=Request::get('ciudad');
     return $this->cargarUrbanizaciones($ciudad);
   }
   public function cargarPropiedad(){
+    sleep(1);
     $usuario=Session::get('asesor');
     $proximoInforme=date('Y-m-d', strtotime('+1 month'));
     $inmuebleIncompleto=Request::get('register');
     if (empty($inmuebleIncompleto)==false) {
       $id=Request::get('register');
       Propiedad::where('id',$inmuebleIncompleto)->update([
-                  "tipo_inmueble"       =>  Request::get('typePropiety'),
-                  "tipoNegocio"         =>  Request::get('typeBussisness'),
-                  "urbanizacion"        =>  Request::get('namePropiety'),
+                  "tipo_inmueble"       =>  (int)Request::get('typePropiety'),
+                  "estado_id"           =>  (int)Request::get('estatePropiety'),
+                  "ciudad_id"           =>  (int)Request::get('cityPropiety'),
+                  "urbanizacion"        =>  (int)Request::get('namePropiety'),
+                  "direccion"           =>  ucfirst(strtolower(Request::get('addressPropiety'))),
+                  "posicionMapa"        =>  Request::get('positionPropiety'),
+                  "mostrarMapa"         =>  (int)Request::get('visibleMapa'),
+                  "destacado"           =>  (int)Request::get('destacado'),
+                  "visible"             =>  (int)Request::get('visiblePrice'),
                   "precio"              =>  Request::get('pricePropiety'),
-                  "visible"             =>  Request::get('visiblePrice'),
+                  "porcentajeCaptacion" =>  Request::get('porcentajeCaptacion'),
+                  "referenciaDolares"   =>  Request::get('refDolares'),
+                  "metros_construccion" =>  Request::get('constructionPropiety'),
+                  "metros_terreno"      =>  Request::get('areaPropiety'),
                   "habitaciones"        =>  Request::get('roomPropiety'),
                   "banos"               =>  Request::get('batroomPropiety'),
                   "estacionamientos"    =>  Request::get('parkingPropiety'),
-                  "metros_construccion" =>  Request::get('constructionPropiety'),
-                  "metros_terreno"      =>  Request::get('areaPropiety'),
-                  "comentario"          =>  Request::get('descriptionPropiety'),
+                  "comentario"          =>  ucfirst(strtolower(Request::get('descriptionPropiety'))),
                   "agente_id"           =>  Request::get('asesorPropiety'),
-                  "estado_id"           =>  Request::get('estatePropiety'),
-                  "ciudad_id"           =>  Request::get('cityPropiety'),
-                  "direccion"           =>  Request::get('addressPropiety'),
-                  "posicionMapa"        =>  Request::get('positionPropiety'),
-                  "destacado"           =>  Request::get('destacado'),
+                  "tipoNegocio"         =>  Request::get('typeBussisness'),
                   "cargadoPor"          =>  $usuario->id,
                   "estatus"             =>  1
                 ]);
     }
     else {
       $id=DB::table('propiedades')->insertGetId([
-                  "tipo_inmueble"       =>  Request::get('typePropiety'),
-                  "tipoNegocio"         =>  Request::get('typeBussisness'),
-                  "urbanizacion"        =>  Request::get('namePropiety'),
+                  "tipo_inmueble"       =>  (int)Request::get('typePropiety'),
+                  "estado_id"           =>  (int)Request::get('estatePropiety'),
+                  "ciudad_id"           =>  (int)Request::get('cityPropiety'),
+                  "urbanizacion"        =>  (int)Request::get('namePropiety'),
+                  "direccion"           =>  ucfirst(strtolower(Request::get('addressPropiety'))),
+                  "posicionMapa"        =>  Request::get('positionPropiety'),
+                  "mostrarMapa"         =>  (int)Request::get('visibleMapa'),
+                  "destacado"           =>  (int)Request::get('destacado'),
+                  "visible"             =>  (int)Request::get('visiblePrice'),
                   "precio"              =>  Request::get('pricePropiety'),
-                  "visible"             =>  Request::get('visiblePrice'),
+                  "porcentajeCaptacion" =>  Request::get('porcentajeCaptacion'),
+                  "referenciaDolares"   =>  Request::get('refDolares'),
+                  "metros_construccion" =>  Request::get('constructionPropiety'),
+                  "metros_terreno"      =>  Request::get('areaPropiety'),
                   "habitaciones"        =>  Request::get('roomPropiety'),
                   "banos"               =>  Request::get('batroomPropiety'),
                   "estacionamientos"    =>  Request::get('parkingPropiety'),
-                  "metros_construccion" =>  Request::get('constructionPropiety'),
-                  "metros_terreno"      =>  Request::get('areaPropiety'),
-                  "comentario"          =>  Request::get('descriptionPropiety'),
+                  "comentario"          =>  ucfirst(strtolower(Request::get('descriptionPropiety'))),
                   "agente_id"           =>  Request::get('asesorPropiety'),
-                  "estado_id"           =>  Request::get('estatePropiety'),
-                  "ciudad_id"           =>  Request::get('cityPropiety'),
-                  "direccion"           =>  Request::get('addressPropiety'),
-                  "posicionMapa"        =>  Request::get('positionPropiety'),
-                  "destacado"           =>  Request::get('destacado'),
+                  "tipoNegocio"         =>  Request::get('typeBussisness'),
                   "cargadoPor"          =>  $usuario->id,
                   "estatus"             =>  1,
                   "proximoInforme"      =>  $proximoInforme
@@ -153,11 +160,15 @@ class PropiedadController extends Controller{
     $imagen= Request::get('registro');
     $consulta=Media::where('id',$imagen)->where('propiedad_id',$inmueble)->first();
     if (count($consulta)!=0) {
-      File::delete(public_path('images/inmuebles/'.$consulta->nombre.''));
-      Media::destroy($imagen);
-      $respuesta=1;
+      if ($consulta->vista==1) {
+        $respuesta=2;
+      }
+      else{
+        File::delete(public_path('images/inmuebles/'.$consulta->nombre.''));
+        Media::destroy($imagen);
+        $respuesta=1;
+      }
     }
-
     return $respuesta;
   }
 
@@ -187,7 +198,8 @@ class PropiedadController extends Controller{
           $imgNew->vista=1;
           $imgNew->save();
           Propiedad::where('id',$inmueble)->update([
-            'cargado'=>1
+            'cargado'=>1,
+            'fechaCreado'=>date('Y-m-d')
           ]);
           Session::forget($sesiones[$desicion]);
           $respuesta=1;
@@ -197,7 +209,8 @@ class PropiedadController extends Controller{
           $imgNew->vista=1;
           $imgNew->save();
           Propiedad::where('id',$inmueble)->update([
-            'cargado'=>1
+            'cargado'=>1,
+            'fechaCreado'=>date('Y-m-d')
           ]);
           Session::forget($sesiones[$desicion]);
           $respuesta=1;
@@ -210,7 +223,8 @@ class PropiedadController extends Controller{
           $imgNew->vista=1;
           $imgNew->save();
           Propiedad::where('id',$inmueble)->update([
-            'cargado'=>1
+            'cargado'=>1,
+            'fechaCreado'=>date('Y-m-d')
           ]);
           Session::forget($sesiones[$desicion]);
           $respuesta=1;
@@ -227,8 +241,10 @@ class PropiedadController extends Controller{
 
   public function DetalleInmueble($id){
     $usuario=Session::get('asesor');
-    $negociacion=DB::table('negociaciones')->where('negociaciones.propiedad_id',$id)
-                                           ->where('negociaciones.estatus',8)
+    $negociacion=DB::table('negociaciones')->join('estatus','negociaciones.estatus','estatus.id')
+                                           ->where('negociaciones.propiedad_id',$id)
+                                           ->select('negociaciones.*','estatus.descripcionEstatus')
+                                           ->orderBy('id','desc')
                                            ->first();
     if ($negociacion==null) {
       $negociacion=(object)[
@@ -242,14 +258,17 @@ class PropiedadController extends Controller{
              "comisionBruta"        => "",
              "pagoCasaMatriz"       => "",
              "ingresoNeto"          => "",
-             "fechaCreacion"        => ""
+             "fechaCreacion"        => "",
+             "descripcionEstatus"   => ""
            ];
     }
-    $inmueble=DB::table('propiedades')->join('tipoinmueble','propiedades.tipo_inmueble','=','tipoinmueble.id')
-                                       ->join('agentes','propiedades.agente_id','=','agentes.id')
-                                       ->join('estados','propiedades.estado_id','=','estados.id')
-                                       ->join('ciudades','propiedades.ciudad_id','=','ciudades.id')
-                                       ->select('propiedades.*','agentes.fullname','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoinmueble.id as idTipo', 'tipoinmueble.nombre as nombreTipo')
+    $inmueble=DB::table('propiedades')->join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
+                                       ->join('agentes','propiedades.agente_id','agentes.id')
+                                       ->join('estados','propiedades.estado_id','estados.id')
+                                       ->join('ciudades','propiedades.ciudad_id','ciudades.id')
+                                       ->join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
+                                       ->join('estatus','propiedades.estatus','estatus.id')
+                                       ->select('propiedades.*','agentes.fullname','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoinmueble.id as idTipo', 'tipoinmueble.nombre as nombreTipo','urbanizaciones.nombre as nombreUrbanizacion','estatus.descripcionEstatus')
                                        ->where('propiedades.id',$id)
                                        ->first();
    $fecha=date("d-m-Y", strtotime($inmueble->proximoInforme));

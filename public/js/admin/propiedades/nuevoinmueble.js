@@ -8,7 +8,7 @@ $(document).ready(function() {
       url:url,
       type:'post',
       success:function(respuesta){
-        console.log(respuesta);
+        //console.log(respuesta);
         $('.opcion').remove();
         $.each(respuesta.ciudades,function(e){
           $('#cityPropiety').append("<option value="+respuesta.ciudades[e].id+" class='opcion' >"+respuesta.ciudades[e].nombre+"</option>");
@@ -16,6 +16,23 @@ $(document).ready(function() {
       }
     });
   });
+  //////////////////////////////////////// Select dependiente de Ciudad ///////////////////////////////////////////////
+    $('body').on('change','#cityPropiety',function(){
+      var ciudad=$(this).val();
+      var url='/admin/listarUrbanizaciones';
+      $.ajax({
+        data:{ciudad:ciudad},
+        url:url,
+        type:'post',
+        success:function(respuesta){
+          console.log(respuesta);
+          $('.opcionUrbanizacion').remove();
+          $.each(respuesta.urbanizaciones,function(e){
+            $('#namePropiety').append("<option value="+respuesta.urbanizaciones[e].id+" class='opcion' >"+respuesta.urbanizaciones[e].nombre+"</option>");
+          });
+        }
+      });
+    });
 /////////////////////////////////////////MOSTRAR Y OCULTAR PRELOAD ///////////////////////////////////////////////////////
   function mostrarPreload(){
     var ancho = 0;
@@ -41,8 +58,7 @@ $("#propietyCreate").validate({
     onfocusout: false,
     rules: {
       namePropiety: {
-        required:true,
-        minlength: 3
+        required:true
       },
       typePropiety: {
         required: true
@@ -57,6 +73,12 @@ $("#propietyCreate").validate({
         required:true
       },
       pricePropiety:{
+        required:true
+      },
+      porcentajeCaptacion:{
+        required:true
+      },
+      refDolares:{
         required:true
       },
       visiblePrice:{
@@ -89,8 +111,7 @@ $("#propietyCreate").validate({
     },
   messages: {
     namePropiety: {
-      required:"Indique el nombre del Inmueble (Residencia, Urbanizacion...)",
-      minlength: "El nombre debe tener minimo 3 caracteres"
+      required:"Indique el nombre del Inmueble (Residencia, Urbanizacion...)"
     },
     typePropiety: {
       required: "Indique el tipo de inmueble que desea crear"
@@ -106,6 +127,12 @@ $("#propietyCreate").validate({
     },
     pricePropiety:{
       required:"El precio del inmueble es un campo requerido"
+    },
+    porcentajeCaptacion:{
+      required:"El porcentaje de descuento es un campo requerido"
+    },
+    refDolares:{
+      required:"El monto en dolares es un campo requerido"
     },
     visiblePrice:{
       required:"Debe especificar si desea que se muestre o no el precio de venta"
@@ -190,7 +217,7 @@ $("#propietyCreate").validate({
     });
   }
 });
-///////////////////////////////////////////// CARGA DE IMAGENES PARA EL INMUEBLE //////////////////////////////
+///////////////////////////////////////////// CARGA DE CONTENEDORES DE IMAGENES PARA EL INMUEBLE //////////////////////////////
   var cont= $('.thumbPropiety').length;
   if (cont>7) {
     $('.addPicCont').css('display','none');
@@ -227,6 +254,7 @@ $("#propietyCreate").validate({
                 <div class='row'>
                   <div class='col-xs-12'>
                     <div class='col-xs-6 col-xs-offset-4' >
+                      <div class="portada">¿Portada?</div>
                       <div class="styled-input-single">
                           <input type="radio" name="fotovisible" value="${contador}" id="radio-example-${contador}"/>
                           <label for="radio-example-${contador}"></label>
@@ -243,7 +271,7 @@ $("#propietyCreate").validate({
         $('.addPicCont').css('display','none');
       }
   });
-
+/////////////////////////////////////// BORRAR IMAGENES CARGADAS ////////////////////////////////////////////////
   $('body').on('click','.btnBorrar',function(e){
     e.preventDefault();
     var contBtn= $('.btnBorrar').length;
@@ -275,6 +303,13 @@ $("#propietyCreate").validate({
       })
       .done(function(respuesta){
         ocultarPreload();
+        if (respuesta==2) {
+          swal(
+            'Imposible Realizar la acción',
+            'La foto que esta intentando borrar esta seleccionada como portada del inmueble, seleccione otra como inmueble e intentelo de nuevo',
+            'error'
+          );
+        }
         //console.log(respuesta);
       }).fail( function() {
           ocultarPreload();
@@ -291,6 +326,9 @@ $("#propietyCreate").validate({
       $('.addPicCont').css('display','block');
     }
   });
+
+/////////////////////////////////////////// CARGA DE IMAGENES PARA EL INMUEBLE ///////////////////////////////////////////////////
+
   $('body').on('change','.file-input',function(){
     var tamano=this.files[0].size/1024;
     if (tamano<=1024) {
@@ -339,6 +377,8 @@ $("#propietyCreate").validate({
     }
 
   });
+
+///////////////////////////////////// GUARDAR SEGUNDO PASO DEL INMUEBLE /////////////////////////////////////////////////////////////
   $('body').on('submit','#picPropiety',function(e){
     e.preventDefault();
     var marcador=$('input[name=fotovisible]:checked');
@@ -369,7 +409,7 @@ $("#propietyCreate").validate({
             timer: 2000,
             button:false,
           });
-          setTimeout(function(){location.href = "/admin/crear-inmueble-1";},2300); // 3000ms = 3
+          setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
         }
         else if(respuesta==2){
           swal({
@@ -404,7 +444,5 @@ $("#propietyCreate").validate({
         button:true
       });
     }
-
-
   });
 });

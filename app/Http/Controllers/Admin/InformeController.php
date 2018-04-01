@@ -58,22 +58,23 @@ class InformeController extends Controller{
     $propiedad=Propiedad::join('estados','propiedades.estado_id','estados.id')
                         ->join('ciudades','propiedades.ciudad_id','ciudades.id')
                         ->join('agentes','propiedades.agente_id','agentes.id')
+                        ->join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
                         ->where('propiedades.id',$consulta->propiedad_id)
-                        ->select('propiedades.*','estados.nombre as nombreEstado','ciudades.nombre as nombreCiudad','agentes.fullname')
+                        ->select('propiedades.*','estados.nombre as nombreEstado','ciudades.nombre as nombreCiudad','agentes.fullname','urbanizaciones.nombre as nombreUrbanizacion')
                         ->first();
     $datetime1 = date_create($propiedad->fechaCreado);
     $datetime2 = date_create();
     $diaTranscurrido= date_diff($datetime1, $datetime2);
-    $dia=date('j');
-    $ano=date('Y');
-    $mes=self::traductor(date('n'));
+    $dia=date("j", strtotime($propiedad->fechaCreado));
+    $ano=date("Y", strtotime($propiedad->fechaCreado));
+    $mes=self::traductor(date("n", strtotime($propiedad->fechaCreado)));
     Fpdf::SetTextColor(78,84,82);
     Fpdf::AddPage();
     self::Header($dia,$mes,$ano);
     Fpdf::Ln(30);
     Fpdf::Cell(0,12, utf8_decode('Estimado Sr(a).'.$consulta->nombre_cliente));
     Fpdf::Ln();
-    Fpdf::MultiCell(0,7,utf8_decode("Me es grato dirigirme a usted en esta oportunidad para informarle las actividades que han ocurrido en relación a la comercialización de su inmueble ubicado en : ".$propiedad->direccion.", de la urbanización ".$propiedad->urbanizacion.", en la ciudad de " .$propiedad->nombreCiudad. " del estado ".$propiedad->nombreEstado."."),0,'J',false);
+    Fpdf::MultiCell(0,7,utf8_decode("Me es grato dirigirme a usted en esta oportunidad para informarle las actividades que han ocurrido en relación a la comercialización de su inmueble ubicado en : ".$propiedad->direccion.", de la urbanización ".$propiedad->nombreUrbanizacion.", en la ciudad de " .$propiedad->nombreCiudad. " del estado ".$propiedad->nombreEstado."."),0,'J',false);
     Fpdf::Ln(1);
     Fpdf::Cell(10);
     Fpdf::Cell(0,7, "Fecha de inicio de los Contratos de Exclusiva: ".date("d-m-Y", strtotime($consulta->fechaExclusiva)));
@@ -328,23 +329,24 @@ class InformeController extends Controller{
     $consulta=Informe::where('id',$idInforme)->first();
     $propiedad=Propiedad::join('estados','propiedades.estado_id','estados.id')
                         ->join('ciudades','propiedades.ciudad_id','ciudades.id')
+                        ->join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
                         ->join('agentes','propiedades.agente_id','agentes.id')
                         ->where('propiedades.id',$consulta->propiedad_id)
-                        ->select('propiedades.*','estados.nombre as nombreEstado','ciudades.nombre as nombreCiudad','agentes.fullname')
+                        ->select('propiedades.*','estados.nombre as nombreEstado','ciudades.nombre as nombreCiudad','agentes.fullname','urbanizaciones.nombre as nombreUrbanizacion')
                         ->first();
     $datetime1 = date_create($propiedad->fechaCreado);
     $datetime2 = date_create();
     $diaTranscurrido= date_diff($datetime1, $datetime2);
-    $dia=date('j');
-    $ano=date('Y');
-    $mes=self::traductor(date('n'));
+    $dia=date("j", strtotime($propiedad->fechaCreado));
+    $ano=date("Y", strtotime($propiedad->fechaCreado));
+    $mes=self::traductor(date("n", strtotime($propiedad->fechaCreado)));
     Fpdf::SetTextColor(78,84,82);
     Fpdf::AddPage();
     self::Header($dia,$mes,$ano);
     Fpdf::Ln(30);
     Fpdf::Cell(0,12, utf8_decode('Estimado Sr(a).'.$consulta->nombre_cliente));
     Fpdf::Ln();
-    Fpdf::MultiCell(0,7,utf8_decode("Me es grato dirigirme a usted en esta oportunidad para informarle las actividades que han ocurrido en relación a la comercialización de su inmueble ubicado en : ".$propiedad->direccion.", de la urbanización ".$propiedad->urbanizacion.", en la ciudad de " .$propiedad->nombreCiudad. " del estado ".$propiedad->nombreEstado."."),0,'J',false);
+    Fpdf::MultiCell(0,7,utf8_decode("Me es grato dirigirme a usted en esta oportunidad para informarle las actividades que han ocurrido en relación a la comercialización de su inmueble ubicado en : ".$propiedad->direccion.", de la urbanización ".$propiedad->nombreUrbanizacion.", en la ciudad de " .$propiedad->nombreCiudad. " del estado ".$propiedad->nombreEstado."."),0,'J',false);
     Fpdf::Ln(1);
     Fpdf::Cell(10);
     Fpdf::Cell(0,7, "Fecha de inicio de los Contratos de Exclusiva: ".date("d-m-Y", strtotime($consulta->fechaExclusiva)));
@@ -377,7 +379,7 @@ class InformeController extends Controller{
     Fpdf::MultiCell(0,7,utf8_decode('conlallave.com código: '.$consulta->publicacionLlave.'.'),0,'J',false);
     Fpdf::Ln(1);
     Fpdf::Cell(15);
-    Fpdf::MultiCell(0,7,utf8_decode('Mediante este informe le referimos los datos estadísticos que nos arrojan las páginas web desde el '.date("d-m-Y", strtotime($propiedad->fechaCreado)).' al '.date("d-m-Y").' contabilizando '.$consulta->visitasDigitalesTotales.' visitas en '.$diaTranscurrido->format('%a').' días de gestión'),0,'J',false);
+    Fpdf::MultiCell(0,7,utf8_decode('Mediante este informe le referimos los datos estadísticos que nos arrojan las páginas web desde el '.date("d-m-Y", strtotime($propiedad->fechaCreado)).' al '.date("d-m-Y").' contabilizando '.$consulta->visitasDigitalesTotales.' visitas en '.$diaTranscurrido->format('%a').' días de gestión.'),0,'J',false);
     Fpdf::Ln(1);
     Fpdf::Cell(15);
     Fpdf::MultiCell(0,7,utf8_decode('La exposición del inmueble desde la ultima comunicación a generado '.$consulta->cantidadCompradoresInteresados.' nuevos compradores interesados.'),0,'J',false);
