@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 use App\Models\Estado;
+use App\Models\Estatus;
 use App\Models\Ciudad;
 use App\Models\Urbanizacion;
 use App\Models\TipoInmueble;
@@ -289,29 +290,36 @@ class PropiedadController extends Controller{
     $estados=Estado::all();
     $asesores=Agente::all();
     $consulta=Ciudad::where('estado_id',$propiedad->estado_id)->get();
-    return view('/admin/editar_inmueble_1',$this->cargarSidebar(),compact('tiposIn','estados','asesores','consulta','propiedad'));
+    $urbanizaciones=Urbanizacion::where('ciudad_id',$propiedad->ciudad_id)->get();
+    $estatus=Estatus::where('familia',1)->where('id','<>','11')->get();
+    return view('/admin/editar_inmueble_1',$this->cargarSidebar(),compact('tiposIn','estados','asesores','consulta','propiedad','urbanizaciones','estatus'));
   }
 
   public function actualizarInmueble1(){
+    sleep(1);
     $id=Request::get('register');
     Propiedad::where('id',$id)->update([
-              "urbanizacion"            =>  Request::get('namePropiety'),
-              "tipoNegocio"             =>  Request::get('typeBussisness'),
-              "posicionMapa"            =>  Request::get('positionPropiety'),
-              "estado_id"               =>  Request::get('estatePropiety'),
-              "ciudad_id"               =>  Request::get('cityPropiety'),
-              "direccion"               =>  Request::get('addressPropiety'),
-              "precio"                  =>  Request::get('pricePropiety'),
-              "visible"                 =>  Request::get('visiblePrice'),
-              "metros_construccion"     =>  Request::get('constructionPropiety'),
-              "metros_terreno"          =>  Request::get('areaPropiety'),
-              "habitaciones"            =>  Request::get('roomPropiety'),
-              "banos"                   =>  Request::get('batroomPropiety'),
-              "estacionamientos"        =>  Request::get('parkingPropiety'),
-              "comentario"              =>  Request::get('descriptionPropiety'),
-              "agente_id"               =>  Request::get('asesorPropiety'),
-              "destacado"               =>  Request::get('destacado'),
-              "tipo_inmueble"           =>  Request::get('typePropiety')
+      "tipo_inmueble"       =>  (int)Request::get('typePropiety'),
+      "estado_id"           =>  (int)Request::get('estatePropiety'),
+      "ciudad_id"           =>  (int)Request::get('cityPropiety'),
+      "urbanizacion"        =>  (int)Request::get('namePropiety'),
+      "direccion"           =>  ucfirst(strtolower(Request::get('addressPropiety'))),
+      "posicionMapa"        =>  Request::get('positionPropiety'),
+      "mostrarMapa"         =>  (int)Request::get('visibleMapa'),
+      "destacado"           =>  (int)Request::get('destacado'),
+      "visible"             =>  (int)Request::get('visiblePrice'),
+      "precio"              =>  Request::get('pricePropiety'),
+      "porcentajeCaptacion" =>  Request::get('porcentajeCaptacion'),
+      "referenciaDolares"   =>  Request::get('refDolares'),
+      "metros_construccion" =>  Request::get('constructionPropiety'),
+      "metros_terreno"      =>  Request::get('areaPropiety'),
+      "habitaciones"        =>  Request::get('roomPropiety'),
+      "banos"               =>  Request::get('batroomPropiety'),
+      "estacionamientos"    =>  Request::get('parkingPropiety'),
+      "comentario"          =>  ucfirst(strtolower(Request::get('descriptionPropiety'))),
+      "agente_id"           =>  Request::get('asesorPropiety'),
+      "tipoNegocio"         =>  Request::get('typeBussisness'),
+      "estatus"             =>  Request::get('estatusPropiedad')
     ]);
     $respuesta=[1,$id];
     Session::put('inmuebleEdit',$id);

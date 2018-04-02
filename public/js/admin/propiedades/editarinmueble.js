@@ -16,6 +16,42 @@ $(document).ready(function() {
       }
     });
   });
+//////////////////////////////////////// Select dependiente de urbanizacion ///////////////////////////////////////////////
+    $('body').on('change','#cityPropiety',function(){
+      var ciudad=$(this).val();
+      var url='/admin/listarUrbanizaciones';
+      $.ajax({
+        data:{ciudad:ciudad},
+        url:url,
+        type:'post',
+        success:function(respuesta){
+          //console.log(respuesta);
+          $('.opcionUrbanizacion').remove();
+          $.each(respuesta.urbanizaciones,function(e){
+            $('#namePropiety').append("<option value="+respuesta.urbanizaciones[e].id+" class='opcionUrbanizacion' >"+respuesta.urbanizaciones[e].nombre+"</option>");
+          });
+        }
+      });
+    });
+/////////////////////////////////////////MOSTRAR Y OCULTAR PRELOAD ///////////////////////////////////////////////////////
+      function mostrarPreload(){
+        var ancho = 0;
+        var alto = 0;
+        if (window.innerWidth == undefined) ancho = window.screen.width;
+        else ancho = window.innerWidth;
+        if (window.innerHeight == undefined) alto = window.screen.height;
+        else alto = window.innerHeight;
+        div = document.createElement("div");
+        div.id = "WindowLoad"
+        div.style.width = ancho + "px";
+        div.style.height = alto + "px";
+        $("body").append(div);
+        $('#load').css('display','block');
+      };
+      function ocultarPreload(){
+        $("#WindowLoad").remove();
+        $('#load').css('display','none');
+      }
 //////////////////////////////////////// Validador del formulario///////////////////////////////////////////////
 
 $("#propietyEdit").validate({
@@ -23,7 +59,6 @@ $("#propietyEdit").validate({
     rules: {
       namePropiety: {
         required:true,
-        minlength: 3
       },
       typePropiety: {
         required: true
@@ -38,6 +73,12 @@ $("#propietyEdit").validate({
         required:true
       },
       pricePropiety:{
+        required:true
+      },
+      porcentajeCaptacion:{
+        required:true
+      },
+      refDolares:{
         required:true
       },
       visiblePrice:{
@@ -66,12 +107,14 @@ $("#propietyEdit").validate({
       },
       typeBussisness:{
           required:true
+      },
+      estatusPropiedad:{
+        required:true
       }
     },
   messages: {
     namePropiety: {
-      required:"Indique el nombre del Inmueble (Residencia, Urbanizacion...)",
-      minlength: "El nombre debe tener minimo 3 caracteres"
+      required:"Indique el nombre del Inmueble (Residencia, Urbanizacion...)"
     },
     typePropiety: {
       required: "Indique el tipo de inmueble que desea crear"
@@ -90,6 +133,12 @@ $("#propietyEdit").validate({
     },
     visiblePrice:{
       required:"Debe especificar si desea que se muestre o no el precio de venta"
+    },
+    porcentajeCaptacion:{
+      required:"El porcentaje de descuento es un campo requerido"
+    },
+    refDolares:{
+      required:"El monto en dolares es un campo requerido"
     },
     constructionPropiety:{
       required:"Los metros cuadrados de construcción del inmueble son requeridos"
@@ -114,12 +163,16 @@ $("#propietyEdit").validate({
     },
     typeBussisness:{
       required:"Debe seleccionar el tipo de Negociación"
+    },
+    estatusPropiedad:{
+      required:"Debe seleccionar el estatus del inmueble"
     }
   },
   submitHandler: function(form) {
     var form= new FormData(document.getElementById("propietyEdit"));
     url="/admin/actualizarInmueble";
     $.ajax({
+      beforeSend: mostrarPreload(),
       url: url,
       type: "post",
       dataType: "json",
@@ -129,8 +182,8 @@ $("#propietyEdit").validate({
       processData: false
     })
     .done(function(respuesta){
+      ocultarPreload();
       if (respuesta) {
-        console.log(respuesta)
         swal({
           title:'Edición Exitosa!!',
           text:"Los datos fueron actualizados",
@@ -147,6 +200,13 @@ $("#propietyEdit").validate({
           'error'
         );
       }
+    }).fail( function() {
+      ocultarPreload();
+      swal(
+        'Imposible Realizar la acción',
+        'Comuniquese con el administrador del sistema',
+        'error'
+      );
     });
   }
 });
@@ -187,6 +247,7 @@ $('body').on('click','#addPic',function(e){
               <div class='row'>
                 <div class='col-xs-12'>
                   <div class='col-xs-6 col-xs-offset-4' >
+                    <div class="portada">¿Portada?</div>
                     <div class="styled-input-single">
                         <input type="radio" name="fotovisible" value="${contador}" id="radio-example-${contador}"/>
                         <label for="radio-example-${contador}"></label>
@@ -223,6 +284,7 @@ $('body').on('click','.btnBorrar',function(e){
     form.append('desicion',1);
     url="/admin/borrarImagen";
     $.ajax({
+      beforeSend:mostrarPreload(),
       url: url,
       type: "post",
       dataType: "json",
@@ -232,21 +294,39 @@ $('body').on('click','.btnBorrar',function(e){
       processData: false
     })
     .done(function(respuesta){
-      console.log(respuesta);
+      ocultarPreload();
+      if (respuesta==2) {
+        swal(
+          'Imposible Realizar la acción',
+          'La foto que esta intentando borrar esta seleccionada como portada del inmueble, seleccione y guarde otra e intentelo de nuevo',
+          'error'
+        );
+      }
+      else{
+        $(this).parent().parent().parent().parent().parent().parent().parent().remove();
+      }
+    }).fail( function() {
+        ocultarPreload();
+        swal(
+          'Imposible Realizar la acción',
+          'Comuniquese con el administrador del sistema',
+          'error'
+        );
     });
-    $(this).parent().parent().parent().parent().parent().parent().parent().remove();
   }
   var contThumb= $('.thumbPropiety').length;
   if (contThumb<8) {
     $('.addPicCont').css('display','block');
   }
 });
+/////////////////////////////////////////// CARGA DE IMAGENES PARA EL INMUEBLE ///////////////////////////////////////////////////
+
 $('body').on('change','.file-input',function(){
   var tamano=this.files[0].size/1024;
   if (tamano<=1024) {
     var form= new FormData();
     var file= this.files[0];
-    console.log(file);
+    //console.log(file);
     var posicion= $(this).parent().find('.register');
     var id=posicion.attr('id');
     var valor=posicion.val();
@@ -256,6 +336,7 @@ $('body').on('change','.file-input',function(){
     form.append('desicion',1);
     url="/admin/guardarImagen";
     $.ajax({
+      beforeSend:mostrarPreload(),
       url: url,
       type: "post",
       dataType: "json",
@@ -265,18 +346,27 @@ $('body').on('change','.file-input',function(){
       processData: false
     })
     .done(function(respuesta){
-      console.log(respuesta);
+      //console.log(respuesta);
+      ocultarPreload();
       var ubicacion=respuesta[0];
       var id=respuesta[1];
       $("#"+ubicacion+"").val(id);
       $("#radio-example-"+valor).val(id);
+
+    }).fail( function() {
+        ocultarPreload();
+        swal(
+          'Imposible Realizar la acción',
+          'Comuniquese con el administrador del sistema',
+          'error'
+        );
     });
-      var curElement = $(this).parent().parent().parent().parent().parent().parent().parent().find('.imgInmueble');
-      var reader = new FileReader();
-      reader.onload = function (e) {
-          curElement.attr('src', e.target.result);
-      };
-      reader.readAsDataURL(this.files[0]);
+    var curElement = $(this).parent().parent().parent().parent().parent().parent().parent().find('.imgInmueble');
+    var reader = new FileReader();
+    reader.onload = function (e) {
+        curElement.attr('src', e.target.result);
+    };
+    reader.readAsDataURL(this.files[0]);
   }
   else {
     swal({
@@ -298,6 +388,7 @@ $('body').on('submit','#picPropiety',function(e){
     form.append('desicion',1);
     url="/admin/guardarInmueble";
     $.ajax({
+      beforeSend:mostrarPreload(),
       url: url,
       type: "post",
       dataType: "json",
@@ -307,7 +398,8 @@ $('body').on('submit','#picPropiety',function(e){
       processData: false
     })
     .done(function(respuesta){
-      console.log(respuesta)
+      ocultarPreload();
+      //console.log(respuesta)
       if (respuesta==1) {
         swal({
           title:'Buen trabajo!!',
@@ -334,6 +426,13 @@ $('body').on('submit','#picPropiety',function(e){
           button:true
         });
       }
+    }).fail( function() {
+      ocultarPreload();
+      swal(
+        'Imposible Realizar la acción',
+        'Comuniquese con el administrador del sistema',
+        'error'
+      );
     });
   }
   else {

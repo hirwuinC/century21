@@ -11,9 +11,7 @@
     <div class="col-xs-12">
         <div class="row">
             <div class="col-xs-6">
-                <input type="text" class="inputs inputsLight form-control" name="namePropiety" id="namePropiety" value='{{$propiedad->urbanizacion}}' placeholder="Nombre del inmueble">
-            </div>
-            <div class="col-xs-6">
+                <label for="typePropiety">Tipo de Inmueble</label>
                 <select class="" name="typePropiety" id="typePropiety">
                     <option value="" >Tipo de inmueble</option>
                     @foreach ($tiposIn as $tipo)
@@ -25,9 +23,8 @@
                     @endforeach
                 </select>
             </div>
-        </div>
-        <div class="row">
             <div class="col-xs-6">
+              <label for="estatePropiety">Estado</label>
               <select id="estatePropiety" name="estatePropiety">
                   <option value="" >Estado</option>
                   @foreach($estados as $estado)
@@ -39,7 +36,10 @@
                   @endforeach
               </select>
             </div>
+        </div>
+        <div class="row">
             <div class="col-xs-6">
+                <label for="cityPropiety">Ciudad</label>
                 <select id="cityPropiety" name="cityPropiety">
                     <option value="">Ciudad</option>
                     @foreach($consulta as $ciudad)
@@ -51,10 +51,24 @@
                     @endforeach
                 </select>
             </div>
+            <div class="col-xs-6">
+                <label for="namePropiety">Urbanización</label>
+                <select id="namePropiety" name="namePropiety">
+                    <option value="">Urbanización</option>
+                    @foreach($urbanizaciones as $urbanizacion)
+                      @if($urbanizacion->id ==  $propiedad->urbanizacion)
+                        <option class="opcionUrbanizacion" value='{{$urbanizacion->id}}' selected> {{$urbanizacion->nombre}} </option>
+                      @else
+                        <option class="opcionUrbanizacion" value='{{$urbanizacion->id}}'> {{$urbanizacion->nombre}} </option>
+                      @endif
+                    @endforeach
+                </select>
+            </div>
         </div>
         <div class="row" style="padding-top:30px">
             <div class="col-xs-12">
-                <input type="text" class="inputs inputsLight form-control" value='{{$propiedad->direccion}}' name="addressPropiety" id="addressPropiety" placeholder="Dirección del inmueble (Incluir ubicacion en el mapa)">
+                <label for="addressPropiety">Dirección</label>
+                <input type="text" maxlength="150" class="inputs inputsLight form-control" value='{{$propiedad->direccion}}' name="addressPropiety" id="addressPropiety" placeholder="Dirección del inmueble (Incluir ubicacion en el mapa)">
             </div>
         </div>
         <div class="row">
@@ -64,78 +78,128 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-4">
-                <input type="number" min="0" class="inputs inputsLight form-control" value='{{$propiedad->precio}}' name="pricePropiety" id="pricePropiety" placeholder="Precio">
-            </div>
-            <div class="col-xs-4">
-                <ul class="viewRadio">
-                    <li><h6>Precio visible</h6></li>
-                    @if($propiedad->visible==1)
-                      <li>
-                          <div class="styled-input-single">
-                              <input type="radio" name="visiblePrice" value="1" id="radio-example-one" checked="checked"/>
-                              <label for="radio-example-one">Si</label>
-                          </div>
-                      </li>
-                      <li>
-                          <div class="styled-input-single">
-                              <input type="radio" name="visiblePrice" value="0" id="radio-example-two" />
-                              <label for="radio-example-two">No</label>
-                          </div>
-                      </li>
-                    @else
-                      <li>
-                          <div class="styled-input-single">
-                              <input type="radio" name="visiblePrice" value="1" id="radio-example-one" />
-                              <label for="radio-example-one">Si</label>
-                          </div>
-                      </li>
-                      <li>
-                          <div class="styled-input-single">
-                              <input type="radio" name="visiblePrice" value="0" id="radio-example-two" checked="checked"/>
-                              <label for="radio-example-two">No</label>
-                          </div>
-                      </li>
-                    @endif
-                </ul>
-            </div>
-            <div class="col-xs-4">
-                <div class="styled-input-single">
-                  @if($propiedad->destacado==1)
-                    <input type="checkbox" name="destacado" value="1" checked="checked" id="checkbox-example-two" />
+          <div class="col-xs-4">
+              <ul class="viewRadio">
+                  <li><h6>Mostrar Mapa</h6></li>
+                  @if($propiedad->mostrarMapa==1)
+                    <li>
+                        <div class="styled-input-single">
+                            <input type="radio" name="visibleMapa" value="1" id="visibleMapaSi" checked="checked"/>
+                            <label for="visibleMapaSi">Si</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="styled-input-single">
+                            <input type="radio" name="visibleMapa" value="0" id="visibleMapaNo" />
+                            <label for="visibleMapaNo">No</label>
+                        </div>
+                    </li>
                   @else
-                    <input type="checkbox" name="destacado" value="1" id="checkbox-example-two" />
+                    <li>
+                        <div class="styled-input-single">
+                            <input type="radio" name="visibleMapa" value="1" id="visibleMapaSi" />
+                            <label for="visibleMapaSi">Si</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="styled-input-single">
+                            <input type="radio" name="visibleMapa" value="0" id="visibleMapaNo" checked="checked"/>
+                            <label for="visibleMapaNo">No</label>
+                        </div>
+                    </li>
                   @endif
-                   <label for="checkbox-example-two">¿Inmueble Destacado?</label>
-                </div>
+              </ul>
+          </div>
+          <div class="col-xs-4">
+              <div class="styled-input-single">
+                @if($propiedad->destacado==1)
+                  <input type="checkbox" name="destacado" value="1" checked="checked" id="checkbox-example-two" />
+                @else
+                  <input type="checkbox" name="destacado" value="1" id="checkbox-example-two" />
+                @endif
+                 <label for="checkbox-example-two">¿Inmueble Destacado?</label>
+              </div>
+          </div>
+          <div class="col-xs-4">
+              <ul class="viewRadio">
+                  <li><h6>Precio visible</h6></li>
+                  @if($propiedad->visible==1)
+                    <li>
+                        <div class="styled-input-single">
+                            <input type="radio" name="visiblePrice" value="1" id="radio-example-one" checked="checked"/>
+                            <label for="radio-example-one">Si</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="styled-input-single">
+                            <input type="radio" name="visiblePrice" value="0" id="radio-example-two" />
+                            <label for="radio-example-two">No</label>
+                        </div>
+                    </li>
+                  @else
+                    <li>
+                        <div class="styled-input-single">
+                            <input type="radio" name="visiblePrice" value="1" id="radio-example-one" />
+                            <label for="radio-example-one">Si</label>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="styled-input-single">
+                            <input type="radio" name="visiblePrice" value="0" id="radio-example-two" checked="checked"/>
+                            <label for="radio-example-two">No</label>
+                        </div>
+                    </li>
+                  @endif
+              </ul>
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-4">
+                <label for="">Precio de Venta</label>
+                <input type="number" min="0" maxlength="20" class="inputs inputsLight form-control" value='{{$propiedad->precio}}' name="pricePropiety" id="pricePropiety" placeholder="Precio">
+            </div>
+            <div class="col-xs-4">
+                <label for="">Porcentaje de Captación</label>
+                <input type="number" min="0" maxlength="11" max="100" class="inputs inputsLight form-control" value='{{$propiedad->porcentajeCaptacion}}' name="porcentajeCaptacion" id="porcentajeCaptacion" placeholder="Porcentaje">
+            </div>
+            <div class="col-xs-4">
+              <label for="">Referencia Dolares</label>
+              <input type="number" min="0" maxlength="20" class="inputs inputsLight form-control" value='{{$propiedad->referenciaDolares}}'  name="refDolares" id="refDolares" placeholder="Referencia en dolares">
             </div>
         </div>
         <div class="row">
           <div class="col-xs-6">
-              <input type="number" min="0" class="inputs inputsLight form-control" value='{{$propiedad->metros_construccion}}' name="constructionPropiety" id="constructionPropiety" placeholder="Construcción (Mtr2)">
+              <label for="">Metros de Construcción</label>
+              <input type="number" min="0" maxlength="11" class="inputs inputsLight form-control" value='{{$propiedad->metros_construccion}}' name="constructionPropiety" id="constructionPropiety" placeholder="Construcción (Mtr2)">
           </div>
           <div class="col-xs-6">
-              <input type="number" min="0" class="inputs inputsLight form-control" value='{{$propiedad->metros_terreno}}' name="areaPropiety" id="areaPropiety" placeholder="Terreno (Mtr2)">
+              <label for="">Metros de Terreno</label>
+              <input type="number" min="0" maxlength="11" class="inputs inputsLight form-control" value='{{$propiedad->metros_terreno}}' name="areaPropiety" id="areaPropiety" placeholder="Terreno (Mtr2)">
           </div>
         </div>
         <div class="row">
             <div class="col-xs-4">
-                <input type="number" min="0" class="inputs inputsLight form-control" value='{{$propiedad->habitaciones}}' id="roomPropiety"name="roomPropiety" placeholder="Habitaciones">
+                <label for="">Habitaciones</label>
+                <input type="number" min="0" maxlength="11" class="inputs inputsLight form-control" value='{{$propiedad->habitaciones}}' id="roomPropiety"name="roomPropiety" placeholder="Habitaciones">
             </div>
             <div class="col-xs-4">
-                <input type="number" min="0" class="inputs inputsLight form-control" value='{{$propiedad->banos}}' id="batroomPropiety" name="batroomPropiety" placeholder="Baños">
+                <label for="">Baños</label>
+                <input type="number" min="0" maxlength="11" class="inputs inputsLight form-control" value='{{$propiedad->banos}}' id="batroomPropiety" name="batroomPropiety" placeholder="Baños">
             </div>
             <div class="col-xs-4">
-                <input type="number" min="0" class="inputs inputsLight form-control" value='{{$propiedad->estacionamientos}}' id="parkingPropiety" name="parkingPropiety" placeholder="Estacionamiento (Cantidad de Puestos)">
+                <label for="">Puestos de Estacionamiento</label>
+                <input type="number" min="0" maxlength="11" class="inputs inputsLight form-control" value='{{$propiedad->estacionamientos}}' id="parkingPropiety" name="parkingPropiety" placeholder="Estacionamiento (Cantidad de Puestos)">
             </div>
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <textarea class="inputs inputsLight" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble">{{$propiedad->comentario}}</textarea>
+                <label for="">Descripcion del Inmueble</label>
+                <textarea class="inputs inputsLight" maxlength="600" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble">{{$propiedad->comentario}}</textarea>
             </div>
         </div>
         <div class="row">
-            <div class="col-xs-6">
+            <div class="col-xs-4">
+              <label for="">Asesor Captador</label>
               <select name="asesorPropiety" id="asesorPropiety">
                   <option value="">Asesor</option>
                   @foreach($asesores as $asesor)
@@ -147,7 +211,8 @@
                   @endforeach
               </select>
             </div>
-            <div class="col-xs-6">
+            <div class="col-xs-4">
+              <label for="">Tipo de Negociación</label>
               <select name="typeBussisness" id="typeBussisness">
                   <option value="">Tipo de Negociación</option>
                   @if($propiedad->tipoNegocio=="alquiler")
@@ -157,6 +222,19 @@
                     <option value="alquiler">Alquiler</option>
                     <option value="venta" selected>Venta</option>
                   @endif
+              </select>
+            </div>
+            <div class="col-xs-4">
+              <label for="">Estatus del Inmueble</label>
+              <select name="estatusPropiedad" id="estatusPropiedad">
+                  <option value="">Estatus</option>
+                  @foreach($estatus as $seleccionado)
+                    @if($seleccionado->id==$propiedad->estatus)
+                      <option value="{{$propiedad->estatus}}" selected>{{$seleccionado->descripcionEstatus}}</option>
+                    @else
+                      <option value="{{$seleccionado->id}}">{{$seleccionado->descripcionEstatus}}</option>
+                    @endif
+                  @endforeach
               </select>
             </div>
         </div>

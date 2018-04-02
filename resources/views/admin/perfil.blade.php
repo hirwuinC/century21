@@ -16,14 +16,10 @@
         </div>
         <div class="col-xs-9">
             <div class="row">
-                <div class="col-xs-6">
-                    <label for="">Nombres</label>
+                <div class="col-xs-12">
+                    <label for="">Nombre Asesor</label>
                     <input type="hidden" name="argument" value="{{ $asesor->id}}">
-                    <input type="text" value="{{ $fullname[0] }}" disabled="disabled" class="inputs inputsLight form-control"  placeholder="Nombre">
-                </div>
-                <div class="col-xs-6">
-                    <label for="">Apellidos</label>
-                    <input type="text" value="{{ $fullname[1] }}" class="inputs inputsLight form-control" disabled="disabled"  placeholder="Apellido">
+                    <input type="text" value="{{ $asesor->fullName }}" disabled="disabled" class="inputs inputsLight form-control"  placeholder="Nombre">
                 </div>
             </div>
             <div class="row">
@@ -88,7 +84,7 @@
                  <div class="row">
                     <div class="col-xs-6">
                         <label for="">Dirección de Habitación</label>
-                        <input type="text" class="inputs inputsLight form-control" id="addressUser" name="addressUser" value="{{$userall->address_user}}" placeholder="Dirección">
+                        <input type="text" maxlength="255" class="inputs inputsLight form-control" id="addressUser" name="addressUser" value="{{$userall->address_user}}" placeholder="Dirección">
                     </div>
                     <div class="col-xs-6">
                         <label for="">RIF</label>

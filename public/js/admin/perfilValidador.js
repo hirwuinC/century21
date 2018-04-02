@@ -48,13 +48,14 @@ $(document).ready(function(){
           processData: false
       })
       .done(function(res){
-				if (res==1) {
+				console.log(res);
+				/*if (res==1) {
           swal(
             'Listo!!',
             'Tu usuario ha sido actualizado, los cambios seran aplicados una vez inicies sesión nuevamente',
             'success'
           );
-        }
+        }*/
       });
     }
 	});

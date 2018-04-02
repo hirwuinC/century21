@@ -21,7 +21,6 @@ class PerfilController extends Controller{
     $usuario=Session::get('asesor');
     $asesor=Agente::where('id',$usuario->agente_id)->first();
     $avatar=Imagen::where('id',$asesor->imagen_id)->first();
-    $fullname=explode(" ", $asesor->fullName);
     $roles=Role::all();
     $respuesta=0;
     return view('/admin/perfil',$this->cargarSidebar(),compact('password','asesor','fullname','roles','avatar'));
@@ -30,7 +29,7 @@ class PerfilController extends Controller{
   public function actualizarPerfil(){
     $file = Request::file('image');
     $password = Crypt::encryptString(Request::get('pass'));
-    $address = Request::get('addressUser');
+    $address = ucfirst(strtolower(Request::get('addressUser')));
     $fechaNac = Request::get('dateBirth');
     $asesorId= Request::get('argumento');
 
@@ -46,6 +45,6 @@ class PerfilController extends Controller{
                                                 'date_birth' => $fechaNac,
                                               ]);
     $respuesta=1;
-    return $respuesta;
+    return $asesorId;
   }
 }

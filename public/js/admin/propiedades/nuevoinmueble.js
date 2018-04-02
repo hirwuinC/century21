@@ -16,7 +16,7 @@ $(document).ready(function() {
       }
     });
   });
-  //////////////////////////////////////// Select dependiente de Ciudad ///////////////////////////////////////////////
+  //////////////////////////////////////// Select dependiente de urbanizacion ///////////////////////////////////////////////
     $('body').on('change','#cityPropiety',function(){
       var ciudad=$(this).val();
       var url='/admin/listarUrbanizaciones';
@@ -28,7 +28,7 @@ $(document).ready(function() {
           console.log(respuesta);
           $('.opcionUrbanizacion').remove();
           $.each(respuesta.urbanizaciones,function(e){
-            $('#namePropiety').append("<option value="+respuesta.urbanizaciones[e].id+" class='opcion' >"+respuesta.urbanizaciones[e].nombre+"</option>");
+            $('#namePropiety').append("<option value="+respuesta.urbanizaciones[e].id+" class='opcionUrbanizacion' >"+respuesta.urbanizaciones[e].nombre+"</option>");
           });
         }
       });
@@ -185,8 +185,8 @@ $("#propietyCreate").validate({
           processData: false
         })
         .done(function(respuesta){
+          ocultarPreload();
           if (respuesta) {
-            ocultarPreload();
             swal({
               title:'Buen trabajo!!',
               text:"Datos guardados con exito",
@@ -197,7 +197,6 @@ $("#propietyCreate").validate({
             setTimeout(function(){location.href = "/admin/crear-inmueble-2";},2300); // 3000ms = 3
           }
           else {
-            ocultarPreload();
             swal(
               'Algo Sucedio',
               'Intente guardar el inmueble nuevamente',
@@ -310,6 +309,9 @@ $("#propietyCreate").validate({
             'error'
           );
         }
+        else{
+          $(this).parent().parent().parent().parent().parent().parent().parent().remove();
+        }
         //console.log(respuesta);
       }).fail( function() {
           ocultarPreload();
@@ -319,7 +321,6 @@ $("#propietyCreate").validate({
             'error'
           );
       });
-      $(this).parent().parent().parent().parent().parent().parent().parent().remove();
     }
     var contThumb= $('.thumbPropiety').length;
     if (contThumb<8) {
@@ -359,13 +360,22 @@ $("#propietyCreate").validate({
         //console.log(respuesta);
         $("#"+ubicacion+"").val(id);
         $("#radio-example-"+valor).val(id);
+
+      }).fail( function() {
+          ocultarPreload();
+          swal(
+            'Imposible Realizar la acción',
+            'Comuniquese con el administrador del sistema',
+            'error'
+          );
       });
-        var curElement = $(this).parent().parent().parent().parent().parent().parent().parent().find('.imgInmueble');
-        var reader = new FileReader();
-        reader.onload = function (e) {
-            curElement.attr('src', e.target.result);
-        };
-        reader.readAsDataURL(this.files[0]);
+      var curElement = $(this).parent().parent().parent().parent().parent().parent().parent().find('.imgInmueble');
+      var reader = new FileReader();
+      reader.onload = function (e) {
+          curElement.attr('src', e.target.result);
+      };
+      reader.readAsDataURL(this.files[0]);
+
     }
     else {
       swal({
