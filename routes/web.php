@@ -79,9 +79,7 @@ Route::any('/admin/modaleditarinforme',['as'=>'editarInforme','uses'=>'Admin\Inf
 Route::any('/admin/actualizarInforme',['as'=>'actualizarInforme','uses'=>'Admin\InformeController@actualizarInforme'] );
 Route::any('/admin/enviarCorreo',['as'=>'enviarCorreo','uses'=>'Admin\InformeController@enviarCorreo'] );
 
-
-
-//Proyectos
+//PROYECTOS
 Route::get('/admin/proyectos', ['as' => 'admin_lista_proyectos', 'uses' => 'Admin\ProyectoController@ListaProyectos']);
 Route::get('/admin/crear-proyectos-1', ['as' => 'crear-proyecto-1', 'uses' => 'Admin\ProyectoController@CrearProyecto1']);
 Route::get('/admin/crear-proyectos-2', ['as' => 'crear-proyecto-2', 'uses' => 'Admin\ProyectoController@CrearProyecto2']);
@@ -107,3 +105,6 @@ Route::post('/admin/listarTipoReporte', ['as' => 'listar', 'uses' => 'Admin\Esta
 
 Route::get('/prueba', ['as' => 'prueba', 'uses' => 'Admin\InformeController@prueba']);
 Route::get('/correo',['as'=>'pruebac','uses'=>'Correo@listarPropiedades']);
+
+//GESTOR DE EVENTOS DIARIOS
+Route::get('/admin/index',['as'=>'pruebac','uses'=>'Admin\GestorEventosController@index']);
