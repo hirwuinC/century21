@@ -1023,7 +1023,6 @@ textarea:focus {
   padding-right: 0;
   padding-left: 0;
   background: #333333;
-  height: 680px;
 
 }
 
@@ -1035,7 +1034,6 @@ textarea:focus {
 
 .navbar-default {
   background: #333333;
-  height: 480px;
   overflow-y: scroll;
   overflow-x:hidden;
 }
@@ -1066,7 +1064,7 @@ textarea:focus {
 
 .sidebar-nav {
   position: fixed;
-  top: 130px;
+  bottom: 0px;
   width: 25%;
 
 }
@@ -1280,23 +1278,53 @@ textarea:focus {
 .cabeceraGestor {
   margin-top: 20px;
   font-family: latobold;
-  font-size: 2.5em;
-  text-align: center;
-  border-radius: 5px;
-  -webkit-box-shadow: 0px 0px 20px 0px rgba(118,118,122,1);
-  -moz-box-shadow: 0px 0px 20px 0px rgba(118,118,122,1);
-  box-shadow: 0px 0px 20px 0px rgba(118,118,122,1);
+  font-size:3em;
+  border-radius: 5px 5px 0 0;
   color:#fff;
   background-color:#00BCD4;
+  border: solid 1px;
+  border-color: #CFD8DC !important;
 }
+.flechaIzquierda{
+  left: -15px;
+  margin-top: 5px;
+}
+.flechaDerecha{
+  margin-top: 5px;
+}
+.mes{
+  text-align: center;
+}
+.arrow {
+  position: absolute;
+  padding: 1.5rem; /* Arrow size */
+  box-shadow: 1px -1px 0 1px inset;
+  -webkit-box-shadow: 2px -2px inset;
+  border: solid transparent;
+  border-width: 0 0 2rem 2rem;
+  transition: 0.2s;
+}
+.arrow:hover {
+  box-shadow: 2px -2px 0 2px inset;
+  -webkit-box-shadow: 4px -4px  inset;
+}
+.arrow-right {
+  transform:rotate(225deg)
+
+}
+.arrow-left {
+  transform:rotate(45deg)
+}
+
 .contDias{
-  margin-top: 20px;
+  padding: 0;
 }
 .dias{
   background-color: #ECEFF1;
+  border: solid 1px;
+  border-color: #CFD8DC !important;
 }
 .celdaDia{
-  border:  5px;
   padding: 10px;
   border-radius: 3px;
   font-family: latobold;
@@ -1314,4 +1342,27 @@ textarea:focus {
   font-size:3em;
   width:150px;
   text-align: center;
+}
+.celda{
+  border-color: #CFD8DC;
+  border: solid 1px;
+  text-align: center;
+}
+.celdallena{
+  cursor: pointer;
+}
+.notification-counter {
+  padding: 2px 4px 2px 3px;
+  position: relative;
+  top: -35px;
+  right: 50px;
+  color: white;
+  font-size: 0.3em;
+  border: solid 2px;
+  border-color:#BF360C;
+  background-color:#D84315;
+  border-radius:50%;
+  -webkit-box-shadow: 2px 5px 5px -4px rgba(0,0,0,0.75);
+  -moz-box-shadow: 2px 5px 5px -4px rgba(0,0,0,0.75);
+  box-shadow: 2px 5px 5px -4px rgba(0,0,0,0.75);
 }

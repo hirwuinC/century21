@@ -62,8 +62,8 @@ class GestorEventosController extends Controller
     return $meses[$clave];
   }
     public function index(){
-      $month=date("n");
-      $year=date("Y");
+      //$month=date("n");
+      //$year=date("Y");
       $diaActual=date("j");
       $primerDia=self::primerDia();
       $ultimoDiaMes=self::ultimoDia();
@@ -77,6 +77,6 @@ class GestorEventosController extends Controller
              7=>'Domingo'
             ];
 
-      return view('.admin.gestor_eventos',$this->cargarSidebar(),compact('dias','mes','primerDia','ultimoDiaMes','month','year','diaActual'));
+      return view('.admin.gestor_eventos',$this->cargarSidebar(),compact('dias','mes','primerDia','ultimoDiaMes','diaActual'));
     }
 }

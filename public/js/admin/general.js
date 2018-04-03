@@ -1,4 +1,7 @@
 $(document).ready(function(){
+	var alto = 0;
+	alto = $( window ).height()-130;
+	$('.navbar-default').css('height',alto);
 	$('.padre').click(function(e){
 		e.preventDefault();
 	});

@@ -8,7 +8,7 @@ $(document).ready(function() {
       url:url,
       type:'post',
       success:function(respuesta){
-        console.log(respuesta);
+        //console.log(respuesta);
         $('.opcion').remove();
         $.each(respuesta.ciudades,function(e){
           $('#cityPropiety').append("<option value="+respuesta.ciudades[e].id+" class='opcion' >"+respuesta.ciudades[e].nombre+"</option>");
@@ -278,7 +278,7 @@ $('body').on('click','.btnBorrar',function(e){
   else {
     var input= $(this).parent().parent().find('.register');
     var registro=input.val();
-    console.log(registro)
+    //console.log(registro)
     var form= new FormData();
     form.append('registro',registro);
     form.append('desicion',1);
