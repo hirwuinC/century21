@@ -107,4 +107,9 @@ Route::get('/prueba', ['as' => 'prueba', 'uses' => 'Admin\InformeController@prue
 Route::get('/correo',['as'=>'pruebac','uses'=>'Correo@listarPropiedades']);
 
 //GESTOR DE EVENTOS DIARIOS
-Route::get('/admin/index',['as'=>'pruebac','uses'=>'Admin\GestorEventosController@index']);
+Route::get('/admin/index',['as'=>'gestorEventos','uses'=>'Admin\GestorEventosController@index']);
+Route::post('/admin/proximoMes',['as'=>'proximoMes','uses'=>'Admin\GestorEventosController@proximoMes']);
+Route::post('/admin/mesAnterior',['as'=>'mesAnterior','uses'=>'Admin\GestorEventosController@mesAnterior']);
+Route::post('/admin/guardarEvento',['as'=>'guardarEvento','uses'=>'Admin\GestorEventosController@guardarEvento']);
+
+Route::get('/admin/pruebaEvento',['as'=>'guardarEvento','uses'=>'Admin\GestorEventosController@eventoMes']);
