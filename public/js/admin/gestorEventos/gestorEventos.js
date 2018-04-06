@@ -52,8 +52,8 @@ $(document).ready(function() {
             'success'
           );
           $('.padreCalendario').empty();
+          $('.limpiar').val('');
           $('.padreCalendario').append(res);
-          $('#nuevoEvento').modal('hide');
         }
       })
       .fail(function(){

@@ -49,17 +49,42 @@ class GestorEventosController extends Controller
            ];
     return $meses[$clave];
   }
-    public function eventoMes(){
-      $mes=date('m');
-      $año=date('Y');
+    public function eventoMes($var1,$var2){
+      $mes=$var1;
+      $año=$var2;
+      $arreglo=array();
       $ultimodia=date("d",(mktime(0,0,0,$mes+1,1,$año)-1));
       $fechaInicio=$año.'-'.$mes.'-1';
       $fechaFin=$año.'-'.$mes.'-'.$ultimodia;
-      $consulta=Calendario::whereBetween('fechaAgendado', [$fechaInicio,$fechaFin])->get();
-      return $consulta;
+      $userall=Session::get('asesor');
+      if ($userall->rol_id==1) {
+        $consulta=Calendario::whereBetween('fechaAgendado', [$fechaInicio,$fechaFin])->get();
+        for ($i=1; $i <=31 ; $i++) {
+          $prueba=0;
+          foreach ($consulta as $evento) {
+            $dia=date("j", strtotime ( $evento->fechaAgendado));
+            if ($dia==$i) {
+              $arreglo[$i]=++$prueba;
+            }
+          }
+        }
+      }
+      else{
+        $consulta=Calendario::whereBetween('fechaAgendado', [$fechaInicio,$fechaFin])->where('creador',$userall->agente_id)->get();
+        for ($i=1; $i <=31 ; $i++) {
+          $prueba=0;
+          foreach ($consulta as $evento) {
+            $dia=date("j", strtotime ( $evento->fechaAgendado));
+            if ($dia==$i) {
+              $arreglo[$i]=++$prueba;
+            }
+          }
+        }
+      }
+      return $arreglo;
     }
     public function index(){
-      //$month=date("n");
+      $month=date("m");
       $year=date("Y");
       $primerDia=self::primerDia(date('m'),date('Y'));
       $ultimoDiaMes=self::ultimoDia(date('m'),date('Y'));
@@ -72,8 +97,8 @@ class GestorEventosController extends Controller
              6=>'Sábado',
              7=>'Domingo'
             ];
-
-      return view('.admin.gestor_eventos',$this->cargarSidebar(),compact('dias','mes','primerDia','ultimoDiaMes','year'));
+      $arreglo=self::eventoMes($month,$year);
+      return view('.admin.gestor_eventos',$this->cargarSidebar(),compact('dias','mes','primerDia','ultimoDiaMes','year','arreglo'));
     }
 
     public function proximoMes(){
@@ -93,8 +118,8 @@ class GestorEventosController extends Controller
              6=>'Sábado',
              7=>'Domingo'
             ];
-
-      return view('.admin.partials.calendario',$this->cargarSidebar(),compact('dias','mes','primerDia','ultimoDiaMes','nuevoAno','nuevo'));
+      $arreglo=self::eventoMes($nuevoMes,$nuevoAno);
+      return view('.admin.partials.calendario',$this->cargarSidebar(),compact('dias','mes','primerDia','ultimoDiaMes','nuevoAno','nuevo','arreglo'));
     }
 
     public function mesAnterior(){
@@ -114,8 +139,8 @@ class GestorEventosController extends Controller
              6=>'Sábado',
              7=>'Domingo'
             ];
-
-      return view('.admin.partials.calendario',$this->cargarSidebar(),compact('dias','mes','primerDia','ultimoDiaMes','nuevoAno','nuevo'));
+      $arreglo=self::eventoMes($nuevoMes,$nuevoAno);
+      return view('.admin.partials.calendario',$this->cargarSidebar(),compact('dias','mes','primerDia','ultimoDiaMes','nuevoAno','nuevo','arreglo'));
     }
 
     public function guardarEvento(){
@@ -129,10 +154,10 @@ class GestorEventosController extends Controller
       $nuevoEvento->save();
       $nuevo=date("Y-m-d", strtotime ( $fechaEvento ));
       $nuevoAno=date("Y", strtotime ( $fechaEvento ));
-      $mes= date( 'm' , strtotime ( $fechaEvento ));
-      $primerDia=self::primerDia($mes,$nuevoAno);
-      $ultimoDiaMes=self::ultimoDia($mes,$nuevoAno);
-      $mes=self::traductorMes($mes);
+      $month= date( 'm' , strtotime ( $fechaEvento ));
+      $primerDia=self::primerDia($month,$nuevoAno);
+      $ultimoDiaMes=self::ultimoDia($month,$nuevoAno);
+      $mes=self::traductorMes($month);
       $dias=[1=>'Lúnes',
              2=>'Martes',
              3=>'Miércoles',
@@ -141,7 +166,7 @@ class GestorEventosController extends Controller
              6=>'Sábado',
              7=>'Domingo'
            ];
-
-      return view('.admin.partials.calendario',$this->cargarSidebar(),compact('dias','mes','primerDia','ultimoDiaMes','nuevoAno','nuevo'));
+      $arreglo=self::eventoMes($month,$nuevoAno);
+      return view('.admin.partials.calendario',$this->cargarSidebar(),compact('dias','mes','primerDia','ultimoDiaMes','nuevoAno','nuevo','arreglo'));
   }
 }

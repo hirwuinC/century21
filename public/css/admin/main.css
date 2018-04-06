@@ -1352,15 +1352,15 @@ textarea:focus {
   cursor: pointer;
 }
 .notification-counter {
-  padding: 2px 3px 3px 3px;
+  padding: 3px 6px 3px 6px;
   position: relative;
   top: -25px;
   right: 5px;
   color: white;
   font-size: 0.3em;
   border: solid 2px;
-  border-color:#BF360C;
-  background-color:#D84315;
+  border-color:black;
+  background-color:#546E7A;
   border-radius:50%;
   -webkit-box-shadow: 2px 5px 5px -4px rgba(0,0,0,0.75);
   -moz-box-shadow: 2px 5px 5px -4px rgba(0,0,0,0.75);

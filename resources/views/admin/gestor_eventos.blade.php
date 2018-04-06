@@ -43,7 +43,12 @@
                     <td class="celda"></td>
                   @else
                       <!-- mostramos el dia -->
-                      <td class="celda celdallena" data-fecha="{{$day}}">{{$day}}<span class="notification-counter"><i class="fa fa-comments-o" aria-hidden="true"></i></span></a></td>
+                      <td class="celda celdallena" data-fecha="{{$day}}">
+                        {{$day}}
+                        @if(array_key_exists($day, $arreglo))
+                          <span class="notification-counter">{{$arreglo[$day]}}</span>
+                        @endif
+                      </td>
                     @php($day++)
                   @endif
                   <!-- cuando llega al final de la semana, iniciamos una columna nueva -->
