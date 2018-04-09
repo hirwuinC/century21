@@ -296,6 +296,7 @@ $("#propietyCreate").validate({
         type: "post",
         dataType: "json",
         data: form,
+        context:$(this),
         cache: false,
         contentType: false,
         processData: false

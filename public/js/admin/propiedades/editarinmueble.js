@@ -289,6 +289,7 @@ $('body').on('click','.btnBorrar',function(e){
       type: "post",
       dataType: "json",
       data: form,
+      context:$(this),
       cache: false,
       contentType: false,
       processData: false
@@ -343,7 +344,7 @@ $('body').on('change','.file-input',function(){
       data: form,
       cache: false,
       contentType: false,
-      processData: false
+      processData: false,
     })
     .done(function(respuesta){
       //console.log(respuesta);

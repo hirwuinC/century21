@@ -32,6 +32,7 @@ $(document).ready(function() {
     submitHandler: function(form) {
       var form = new FormData(document.getElementById('nuevoEventoForm'));
       url="/admin/guardarEvento";
+      //console.log($('#evento').val());
       $.ajax({
           beforeSend:mostrarPreload(),
           url: url,
@@ -39,7 +40,7 @@ $(document).ready(function() {
           dataType: "html",
           data: form,
           cache: false,
-          contentType: false,
+          contentType:false,
           processData: false
       })
       .done(function(res){
@@ -111,6 +112,11 @@ $(document).ready(function() {
     })
     .fail(function() {
       ocultarPreload();
+      swal(
+        'Imposible Realizar la acción',
+        'Comuniquese con el administrador del sistema',
+        'error'
+      );
       //console.log("error");
     });
   });
@@ -133,6 +139,11 @@ $(document).ready(function() {
       })
       .fail(function() {
         ocultarPreload();
+        swal(
+          'Imposible Realizar la acción',
+          'Comuniquese con el administrador del sistema',
+          'error'
+        );
         //console.log("error");
       });
     });
