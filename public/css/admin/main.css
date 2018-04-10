@@ -1267,14 +1267,14 @@ textarea:focus {
   background-color: #f1b311 !important;
   border-color: #f1b311 !important;
 }
-/*--------------MARCARDOR DE FOTO DE PORTADA --------------*/
+/*--------------MARCADOR DE FOTO DE PORTADA --------------*/
 .portada{
   position: absolute;
   font-family:latobold;
   left: 0px;
   bottom: 40px;
 }
-/*------------------ GESTOR DE EVENTOS ----------------------*/
+/*------------------ GESTOR DE EVENTOS (CALENDARIO)----------------------*/
 .cabeceraGestor {
   margin-top: 20px;
   font-family: latobold;
@@ -1297,7 +1297,7 @@ textarea:focus {
 }
 .arrow {
   position: absolute;
-  padding: 1.5rem; /* Arrow size */
+  padding: 1.5rem;
   box-shadow: 1px -1px 0 1px inset;
   -webkit-box-shadow: 2px -2px inset;
   border: solid transparent;

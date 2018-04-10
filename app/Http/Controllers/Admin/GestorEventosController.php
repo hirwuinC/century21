@@ -18,10 +18,9 @@ use App\Models\Media;
 use App\Models\NegociacionEstatus;
 use App\Models\Reporte;
 use App\Models\Calendario;
-//use Carbon\Carbon;
 
-class GestorEventosController extends Controller
-{
+
+class GestorEventosController extends Controller{
   function ultimoDia($var1,$var2) {
       $mes = $var1;
       $año = $var2;
@@ -168,5 +167,27 @@ class GestorEventosController extends Controller
            ];
       $arreglo=self::eventoMes($month,$nuevoAno);
       return view('.admin.partials.calendario',$this->cargarSidebar(),compact('dias','mes','primerDia','ultimoDiaMes','nuevoAno','nuevo','arreglo'));
+  }
+  public function eventoDia(){
+    $dia=Request::get('fechaDia');
+    $userall=Session::get('asesor');
+    $arreglo =array();
+    if ($userall->rol_id==1) {
+      $consulta=Calendario::join('agentes','calendario.creador','agentes.id')
+                          ->where('fechaAgendado',$dia)
+                          ->select('agentes.fullname','calendario.*')
+                          ->get();
+      foreach ($consulta as $evento ) {
+        $arreglo[$evento->fullname][]=$evento;
+      }
+    }
+    else{
+      $consulta=Calendario::join('agentes','calendario.creador','agentes.id')
+                          ->where('fechaAgendado',$dia)
+                          ->where('creador',$userall->agente_id)
+                          ->select('agentes.fullname','calendario.*')
+                          ->get();
+    }
+    return $arreglo;
   }
 }

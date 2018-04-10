@@ -147,4 +147,29 @@ $(document).ready(function() {
         //console.log("error");
       });
     });
+//////////////////////////////////////// ABRIR MODAL PARA NUEVO EVENTO //////////////////////////////////////////////////////
+    $('body').on('click','.notification-counter',function(e) {
+      e.preventDefault();
+      var dia=$(this).parent().data('fecha');
+      if (dia<10) {
+        dia='0'+dia;
+      }
+      var fecha=$('#fechaCompleta').val();
+      var mesAno =fecha.split('-',2);
+      var fechaDia=mesAno[0]+'-'+mesAno[1]+'-'+dia;
+      $.ajax({
+        url: '/admin/eventoDia',
+        type: 'post',
+        dataType: 'json',
+        data: {fechaDia:fechaDia}
+      })
+      .done(function(respuesta) {
+        console.log(respuesta);
+      })
+      .fail(function() {
+        console.log("error");
+      });
+
+      $('#historialEvento').modal('show');
+    });
 });
