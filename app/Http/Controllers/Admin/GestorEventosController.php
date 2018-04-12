@@ -171,6 +171,7 @@ class GestorEventosController extends Controller{
   public function eventoDia(){
     $dia=Request::get('fechaDia');
     $userall=Session::get('asesor');
+    $agente=$userall->agente_id;
     $arreglo =array();
     if ($userall->rol_id==1) {
       $consulta=Calendario::join('agentes','calendario.creador','agentes.id')
@@ -192,7 +193,23 @@ class GestorEventosController extends Controller{
       }
     }
     $asesores=Agente::all();
-    return view('.admin.partials.historial_eventos',compact('arreglo','asesores'));
+    return view('.admin.partials.historial_eventos',compact('arreglo','asesores','agente'));
+  }
+  public function eliminarEvento(){
+    $registro=Request::get('registro');
+    $consulta=Calendario::find($registro);
+    $consulta->delete();
+    $respuesta=1;
+    return $respuesta;
+  }
+  public function modificarEvento(){
+    $registro=Request::get('registro');
+    $texto=Request::get('texto');
+    $consulta=Calendario::find($registro);
+    $consulta->descripcion=$texto;
+    $consulta->save();
+    $respuesta=1;
+    return $respuesta;
   }
   public function prueba(){
     return view('.admin.partials.historial_eventos');

@@ -42,7 +42,7 @@ $(document).ready(function(){
 			});
       $.post(url,form)
       .done(function(response) {
-					//console.log(response);
+					console.log(response);
 					if (response[0]==1) {
 						swal({
 							title:'Bienvenido',
@@ -51,7 +51,7 @@ $(document).ready(function(){
 							timer: 1500,
 							button:false,
 						});
-						setTimeout(function(){location.href = "/admin";},2200); // 3000ms = 3
+						setTimeout(function(){location.href = "/admin/index";},2200); // 3000ms = 3
         	}
 					else {
 						swal({

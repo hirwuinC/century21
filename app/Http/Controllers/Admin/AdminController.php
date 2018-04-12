@@ -27,20 +27,18 @@ class AdminController extends Controller{
                                   ->select('users.*','imagenes.id as id_imagen','imagenes.src as nombre_imagen','agentes.id as asesor_id','agentes.fullname as nombre_asesor')
                                   ->where('users.name',$usuario)
                                   ->first();
-    $permisos=DB::table('permisorole')->join('permisos', 'permisorole.permiso_id','permisos.id')
-                                      ->select('permisos.*')
-                                      ->where('permisorole.role_id',$consulta->rol_id)
-                                      ->get();
-    $submodulos=DB::table('submodulorole')->join('submodulos', 'submodulorole.submodulo_id', '=', 'submodulos.id')
-                                          ->select('submodulos.*')
-                                          ->where('submodulorole.role_id',$consulta->rol_id)
-                                          ->get();
     $respuesta=[0];
     if(count($consulta)!=0){
       $password=Crypt::decryptstring($consulta->password);
       if ($pass == $password) {
-
-
+        $permisos=DB::table('permisorole')->join('permisos', 'permisorole.permiso_id','permisos.id')
+                                          ->select('permisos.*')
+                                          ->where('permisorole.role_id',$consulta->rol_id)
+                                          ->get();
+        $submodulos=DB::table('submodulorole')->join('submodulos', 'submodulorole.submodulo_id', '=', 'submodulos.id')
+                                              ->select('submodulos.*')
+                                              ->where('submodulorole.role_id',$consulta->rol_id)
+                                              ->get();
         Session::put('asesor',$consulta);
         Session::put('usuario',$usuario);
         Session::put('pass',$pass);

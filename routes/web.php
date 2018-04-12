@@ -111,5 +111,6 @@ Route::get('/admin/index',['as'=>'gestorEventos','uses'=>'Admin\GestorEventosCon
 Route::post('/admin/proximoMes',['as'=>'proximoMes','uses'=>'Admin\GestorEventosController@proximoMes']);
 Route::post('/admin/mesAnterior',['as'=>'mesAnterior','uses'=>'Admin\GestorEventosController@mesAnterior']);
 Route::any('/admin/guardarEvento',['as'=>'guardarEvento','uses'=>'Admin\GestorEventosController@guardarEvento']);
-Route::get('/admin/pruebaEvento',['as'=>'guardarEvento','uses'=>'Admin\GestorEventosController@prueba']);
 Route::post('/admin/eventoDia',['as'=>'eventoDia','uses'=>'Admin\GestorEventosController@eventoDia']);
+Route::post('/admin/eliminarEvento',['as'=>'eliminarEvento','uses'=>'Admin\GestorEventosController@eliminarEvento']);
+Route::post('/admin/modificarEvento',['as'=>'modificarEvento','uses'=>'Admin\GestorEventosController@modificarEvento']);

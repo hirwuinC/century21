@@ -46,7 +46,7 @@
                       <td class="celda celdallena" data-fecha="{{$day}}">
                         {{$day}}
                         @if(array_key_exists($day, $arreglo))
-                          <span class="notification-counter">{{$arreglo[$day]}}</span>
+                          <span class="notification-counter" id="counter{{$day}}">{{$arreglo[$day]}}</span>
                         @endif
                       </td>
                     @php($day++)

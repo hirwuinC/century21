@@ -14,8 +14,8 @@ $(document).ready(function(){
 	    buttons: ['No','Sí, Cerrar'],
 	    dangerMode:false
 	  })
-	  .then((willDelete) => {
-	    if (willDelete) {
+	  .then((aceptar) => {
+	    if (aceptar) {
 	      url="/admin/salir";
 	      $.ajax({
 	        url: url,
@@ -23,7 +23,7 @@ $(document).ready(function(){
 	        dataType: "html",
 	      })
 	      .done(function(respuesta){
-					  setTimeout(function(){location.href = "/admin/login";},1000);
+					location.href = "/admin/login";
 	      })
 	      .fail(function(){
 	        swal({

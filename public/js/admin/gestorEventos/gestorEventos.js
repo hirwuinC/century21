@@ -146,6 +146,7 @@ $(document).ready(function() {
     $('body').on('click','.notification-counter',function(e) {
       e.preventDefault();
       var dia=$(this).parent().data('fecha');
+      $('#contador').val(this.id);
       if (dia<10) {
         dia='0'+dia;
       }
@@ -162,7 +163,6 @@ $(document).ready(function() {
         data: {fechaDia:fechaDia}
       })
       .done(function(respuesta) {
-        //console.log(respuesta);
         ocultarPreload();
         $('#padreHistorial').empty();
         $('#padreHistorial').append(respuesta);
@@ -180,13 +180,65 @@ $(document).ready(function() {
 //////////////////////////////////////// ELIMINAR EVENTOS DEL DIA  ///////////////////////////////////////////////////////////////////////////
   $('body').on('click', '.close-event', function(event) {
     event.preventDefault();
-    var contHijos= $(this).parent().parent().parent().parent().children('.row').length;
-    if (contHijos==1) {
-      $(this).parent().parent().parent().parent().parent().remove();
-      $(this).parent().parent().parent().remove();
-    }
-    else{
-      $(this).parent().parent().parent().remove();
-    }
+    var registro=$(this).parent().children('.registro').val();
+    $.ajax({
+      beforeSend:mostrarPreload(),
+      url: '/admin/eliminarEvento',
+      type: 'post',
+      context:$(this),
+      dataType: 'html',
+      data: {registro:registro}
+    })
+    .done(function(respuesta) {
+      ocultarPreload();
+        var contador=$('#contador').val();
+        var actual=$('#'+contador).html();
+        var resta=actual-1;
+        if (resta==0) {
+          $('#'+contador).remove();
+          $('#historialEvento').modal('hide');
+        }
+        else {
+          var nuevo=$('#'+contador).html(resta);
+        }
+        var contHijos= $(this).parent().parent().parent().parent().children('.row').length;
+        if (contHijos==1) {
+          $(this).parent().parent().parent().parent().parent().remove();
+          $(this).parent().parent().parent().remove();
+        }
+        else{
+          $(this).parent().parent().parent().remove();
+        }
+    })
+    .fail(function() {
+      ocultarPreload();
+      swal(
+        'Imposible Realizar la acción',
+        'Comuniquese con el administrador del sistema',
+        'error'
+      );
+    });
+  });
+//////////////////////////////////////// MODIFICAR EVENTOS DEL DIA  ///////////////////////////////////////////////////////////////////////////
+  $('body').on('focusout', '.modificarCampo', function() {
+    var registro=$(this).parent().children('.registro').val();
+    var texto=$(this).val();
+    $.ajax({
+      url: '/admin/modificarEvento',
+      type: 'post',
+      context:$(this),
+      dataType: 'html',
+      data: {registro:registro,texto:texto}
+    })
+    .done(function(respuesta) {
+      console.log(respuesta);
+    })
+    .fail(function() {
+      swal(
+        'Imposible Realizar la acción',
+        'Comuniquese con el administrador del sistema',
+        'error'
+      );
+    });
   });
 });
