@@ -239,23 +239,23 @@ class InformeController extends Controller{
     return Response::json($valores);
   }
   public function guardarInforme(){
-    $nombreCliente                      = ucwords(strtolower(Request::get('nombreCliente')));
-    $correoCliente                      = strtolower(Request::get('correoCliente'));
+    $nombreCliente                      = ucwords(mb_strtolower(Request::get('nombreCliente')));
+    $correoCliente                      = mb_strtolower(Request::get('correoCliente'));
     $fechaExclusiva                     = Request::get('contratoExclusiva');
-    $promocionRotulo                    = ucfirst(strtolower(Request::get('rotuloComercial')));
-    $promocionVolanteo                  = ucfirst(strtolower(Request::get('volanteoDigital')));
-    $publicacionVenezuela               = ucfirst(strtolower(Request::get('codigoVenezuela')));
-    $publicacionCaracas                 = ucfirst(strtolower(Request::get('codigoCaracas')));
-    $publicacionTuInmueble              = ucfirst(strtolower(Request::get('codigoTuInmueble')));
-    $publicacionLlave                   = ucfirst(strtolower(Request::get('codigoConLaLlave')));
+    $promocionRotulo                    = ucfirst(mb_strtolower(Request::get('rotuloComercial')));
+    $promocionVolanteo                  = ucfirst(mb_strtolower(Request::get('volanteoDigital')));
+    $publicacionVenezuela               = ucfirst(mb_strtolower(Request::get('codigoVenezuela')));
+    $publicacionCaracas                 = ucfirst(mb_strtolower(Request::get('codigoCaracas')));
+    $publicacionTuInmueble              = ucfirst(mb_strtolower(Request::get('codigoTuInmueble')));
+    $publicacionLlave                   = ucfirst(mb_strtolower(Request::get('codigoConLaLlave')));
     $visitasDigitalesTotales            = Request::get('visitasDigitales');
     $existeCompradores                  = Request::get('compradorInteresado');
     $cantidadCompradoresInteresados     = Request::get('cantidadCInteresados');
-    $primerInteresado                   = ucwords(strtolower(Request::get('interesado1')));
-    $segundoInteresado                  = ucwords(strtolower(Request::get('interesado2')));
-    $tercerInteresado                   = ucwords(strtolower(Request::get('interesado3')));
-    $cuartoInteresado                   = ucwords(strtolower(Request::get('interesado4')));
-    $quintoInteresado                   = ucwords(strtolower(Request::get('interesado5')));
+    $primerInteresado                   = ucwords(mb_strtolower(Request::get('interesado1')));
+    $segundoInteresado                  = ucwords(mb_strtolower(Request::get('interesado2')));
+    $tercerInteresado                   = ucwords(mb_strtolower(Request::get('interesado3')));
+    $cuartoInteresado                   = ucwords(mb_strtolower(Request::get('interesado4')));
+    $quintoInteresado                   = ucwords(mb_strtolower(Request::get('interesado5')));
     $existeVisitasFisicas               = Request::get('visitasFisicas');
     $cantidadVisitasFisicas             = Request::get('cantidadVisitasFisicas');
     $evaluacionCaro                     = Request::get('caro');
@@ -265,8 +265,8 @@ class InformeController extends Controller{
     $evaluacionEnEspera                 = Request::get('enEspera');
     $evaluacionVolverVisita             = Request::get('volverVisitar');
     $evaluacionOtro                     = Request::get('otro');
-    $observaciones                      = ucfirst(strtolower(Request::get('observacion')));
-    $recomendaciones                    = ucfirst(strtolower(Request::get('recomendacion')));
+    $observaciones                      = ucfirst(mb_strtolower(Request::get('observacion')));
+    $recomendaciones                    = ucfirst(mb_strtolower(Request::get('recomendacion')));
     $propiedad_id                       = Request::get('idPropietyModal');
 
 
@@ -469,23 +469,23 @@ class InformeController extends Controller{
 
   public function actualizarInforme(){
     $idInforme                          = Request::get('idInformeModal');
-    $nombreCliente                      = ucwords(strtolower(Request::get('nombreCliente')));
-    $correoCliente                      = strtolower(Request::get('correoCliente'));
+    $nombreCliente                      = ucwords(mb_strtolower(Request::get('nombreCliente')));
+    $correoCliente                      = mb_strtolower(Request::get('correoCliente'));
     $fechaExclusiva                     = Request::get('contratoExclusiva');
-    $promocionRotulo                    = ucfirst(strtolower(Request::get('rotuloComercial')));
-    $promocionVolanteo                  = ucfirst(strtolower(Request::get('volanteoDigital')));
-    $publicacionVenezuela               = ucfirst(strtolower(Request::get('codigoVenezuela')));
-    $publicacionCaracas                 = ucfirst(strtolower(Request::get('codigoCaracas')));
-    $publicacionTuInmueble              = ucfirst(strtolower(Request::get('codigoTuInmueble')));
-    $publicacionLlave                   = ucfirst(strtolower(Request::get('codigoConLaLlave')));
+    $promocionRotulo                    = ucfirst(mb_strtolower(Request::get('rotuloComercial')));
+    $promocionVolanteo                  = ucfirst(mb_strtolower(Request::get('volanteoDigital')));
+    $publicacionVenezuela               = ucfirst(mb_strtolower(Request::get('codigoVenezuela')));
+    $publicacionCaracas                 = ucfirst(mb_strtolower(Request::get('codigoCaracas')));
+    $publicacionTuInmueble              = ucfirst(mb_strtolower(Request::get('codigoTuInmueble')));
+    $publicacionLlave                   = ucfirst(mb_strtolower(Request::get('codigoConLaLlave')));
     $visitasDigitalesTotales            = Request::get('visitasDigitales');
     $existeCompradores                  = Request::get('compradorInteresadoM');
     $cantidadCompradoresInteresados     = Request::get('cantidadCInteresados');
-    $primerInteresado                   = ucwords(strtolower(Request::get('interesado1')));
-    $segundoInteresado                  = ucwords(strtolower(Request::get('interesado2')));
-    $tercerInteresado                   = ucwords(strtolower(Request::get('interesado3')));
-    $cuartoInteresado                   = ucwords(strtolower(Request::get('interesado4')));
-    $quintoInteresado                   = ucwords(strtolower(Request::get('interesado5')));
+    $primerInteresado                   = ucwords(mb_strtolower(Request::get('interesado1')));
+    $segundoInteresado                  = ucwords(mb_strtolower(Request::get('interesado2')));
+    $tercerInteresado                   = ucwords(mb_strtolower(Request::get('interesado3')));
+    $cuartoInteresado                   = ucwords(mb_strtolower(Request::get('interesado4')));
+    $quintoInteresado                   = ucwords(mb_strtolower(Request::get('interesado5')));
     $existeVisitasFisicas               = Request::get('visitasFisicasM');
     $cantidadVisitasFisicas             = Request::get('cantidadVisitasFisicas');
     $evaluacionCaro                     = Request::get('caro');
@@ -495,8 +495,8 @@ class InformeController extends Controller{
     $evaluacionEnEspera                 = Request::get('enEspera');
     $evaluacionVolverVisita             = Request::get('volverVisitar');
     $evaluacionOtro                     = Request::get('otro');
-    $observaciones                      = ucfirst(strtolower(Request::get('observacion')));
-    $recomendaciones                    = ucfirst(strtolower(Request::get('recomendacion')));
+    $observaciones                      = ucfirst(mb_strtolower(Request::get('observacion')));
+    $recomendaciones                    = ucfirst(mb_strtolower(Request::get('recomendacion')));
     $propiedad_id                       = Request::get('idPropietyModal');
 
     $nuevoInforme = Informe::find($idInforme);

@@ -72,7 +72,7 @@ class PropiedadController extends Controller{
                   "estado_id"           =>  (int)Request::get('estatePropiety'),
                   "ciudad_id"           =>  (int)Request::get('cityPropiety'),
                   "urbanizacion"        =>  (int)Request::get('namePropiety'),
-                  "direccion"           =>  ucfirst(strtolower(Request::get('addressPropiety'))),
+                  "direccion"           =>  ucfirst(mb_strtolower(Request::get('addressPropiety'))),
                   "posicionMapa"        =>  Request::get('positionPropiety'),
                   "mostrarMapa"         =>  (int)Request::get('visibleMapa'),
                   "destacado"           =>  (int)Request::get('destacado'),
@@ -85,7 +85,7 @@ class PropiedadController extends Controller{
                   "habitaciones"        =>  Request::get('roomPropiety'),
                   "banos"               =>  Request::get('batroomPropiety'),
                   "estacionamientos"    =>  Request::get('parkingPropiety'),
-                  "comentario"          =>  ucfirst(strtolower(Request::get('descriptionPropiety'))),
+                  "comentario"          =>  ucfirst(mb_strtolower(Request::get('descriptionPropiety'))),
                   "agente_id"           =>  Request::get('asesorPropiety'),
                   "tipoNegocio"         =>  Request::get('typeBussisness'),
                   "cargadoPor"          =>  $usuario->id,
@@ -98,7 +98,7 @@ class PropiedadController extends Controller{
                   "estado_id"           =>  (int)Request::get('estatePropiety'),
                   "ciudad_id"           =>  (int)Request::get('cityPropiety'),
                   "urbanizacion"        =>  (int)Request::get('namePropiety'),
-                  "direccion"           =>  ucfirst(strtolower(Request::get('addressPropiety'))),
+                  "direccion"           =>  ucfirst(mb_strtolower(Request::get('addressPropiety'))),
                   "posicionMapa"        =>  Request::get('positionPropiety'),
                   "mostrarMapa"         =>  (int)Request::get('visibleMapa'),
                   "destacado"           =>  (int)Request::get('destacado'),
@@ -111,7 +111,7 @@ class PropiedadController extends Controller{
                   "habitaciones"        =>  Request::get('roomPropiety'),
                   "banos"               =>  Request::get('batroomPropiety'),
                   "estacionamientos"    =>  Request::get('parkingPropiety'),
-                  "comentario"          =>  ucfirst(strtolower(Request::get('descriptionPropiety'))),
+                  "comentario"          =>  ucfirst(mb_strtolower(Request::get('descriptionPropiety'))),
                   "agente_id"           =>  Request::get('asesorPropiety'),
                   "tipoNegocio"         =>  Request::get('typeBussisness'),
                   "cargadoPor"          =>  $usuario->id,
@@ -130,7 +130,7 @@ class PropiedadController extends Controller{
     $ubicacion=Request::get('register');
     $idImagen=Request::get('valor');
     $inmueble=Session::get($sesiones[$desicion]);
-    $extension = strtolower($archivo->getClientOriginalExtension());
+    $extension = mb_strtolower($archivo->getClientOriginalExtension());
     $renombre = uniqid().'.'.$extension;
     $path ="images/inmuebles";
     $consulta=Media::where('id',$idImagen)->first();
@@ -303,7 +303,7 @@ class PropiedadController extends Controller{
       "estado_id"           =>  (int)Request::get('estatePropiety'),
       "ciudad_id"           =>  (int)Request::get('cityPropiety'),
       "urbanizacion"        =>  (int)Request::get('namePropiety'),
-      "direccion"           =>  ucfirst(strtolower(Request::get('addressPropiety'))),
+      "direccion"           =>  ucfirst(mb_strtolower(Request::get('addressPropiety'))),
       "posicionMapa"        =>  Request::get('positionPropiety'),
       "mostrarMapa"         =>  (int)Request::get('visibleMapa'),
       "destacado"           =>  (int)Request::get('destacado'),
@@ -316,7 +316,7 @@ class PropiedadController extends Controller{
       "habitaciones"        =>  Request::get('roomPropiety'),
       "banos"               =>  Request::get('batroomPropiety'),
       "estacionamientos"    =>  Request::get('parkingPropiety'),
-      "comentario"          =>  ucfirst(strtolower(Request::get('descriptionPropiety'))),
+      "comentario"          =>  ucfirst(mb_strtolower(Request::get('descriptionPropiety'))),
       "agente_id"           =>  Request::get('asesorPropiety'),
       "tipoNegocio"         =>  Request::get('typeBussisness'),
       "estatus"             =>  Request::get('estatusPropiedad')

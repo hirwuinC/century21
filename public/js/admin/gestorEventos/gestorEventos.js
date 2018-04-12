@@ -68,11 +68,6 @@ $(document).ready(function() {
     }
   });
 
-/////////////////////////////////////////ABRIR MODAL DE HISTORIAL DE EVENTOS //////////////////////////////////////////////////////////
-  $('body').on('click','.notification-counter',function(e) {
-    e.preventDefault();
-    $('#historialEvento').modal('show');
-  });
   /////////////////////////////////////////MOSTRAR Y OCULTAR PRELOAD ////////////////////////////////////////////////////////////////
     function mostrarPreload(){
       var ancho = 0;
@@ -147,7 +142,7 @@ $(document).ready(function() {
         //console.log("error");
       });
     });
-//////////////////////////////////////// ABRIR MODAL PARA NUEVO EVENTO //////////////////////////////////////////////////////
+//////////////////////////////////////// ABRIR MODAL PARA HISTORIAL DE EVENTOS  POR DIA ////////////////////////////////////////////
     $('body').on('click','.notification-counter',function(e) {
       e.preventDefault();
       var dia=$(this).parent().data('fecha');
@@ -157,19 +152,41 @@ $(document).ready(function() {
       var fecha=$('#fechaCompleta').val();
       var mesAno =fecha.split('-',2);
       var fechaDia=mesAno[0]+'-'+mesAno[1]+'-'+dia;
+      var fechamostrar=dia+'-'+mesAno[1]+'-'+mesAno[0];
+      $('#fechaMostrar').html(fechamostrar);
       $.ajax({
+        beforeSend:mostrarPreload(),
         url: '/admin/eventoDia',
         type: 'post',
-        dataType: 'json',
+        dataType: 'html',
         data: {fechaDia:fechaDia}
       })
       .done(function(respuesta) {
-        console.log(respuesta);
+        //console.log(respuesta);
+        ocultarPreload();
+        $('#padreHistorial').empty();
+        $('#padreHistorial').append(respuesta);
+        $('#historialEvento').modal('show');
       })
       .fail(function() {
-        console.log("error");
+        ocultarPreload();
+        swal(
+          'Imposible Realizar la acción',
+          'Comuniquese con el administrador del sistema',
+          'error'
+        );
       });
-
-      $('#historialEvento').modal('show');
     });
+//////////////////////////////////////// ELIMINAR EVENTOS DEL DIA  ///////////////////////////////////////////////////////////////////////////
+  $('body').on('click', '.close-event', function(event) {
+    event.preventDefault();
+    var contHijos= $(this).parent().parent().parent().parent().children('.row').length;
+    if (contHijos==1) {
+      $(this).parent().parent().parent().parent().parent().remove();
+      $(this).parent().parent().parent().remove();
+    }
+    else{
+      $(this).parent().parent().parent().remove();
+    }
+  });
 });

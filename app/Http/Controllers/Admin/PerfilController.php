@@ -29,7 +29,7 @@ class PerfilController extends Controller{
   public function actualizarPerfil(){
     $file = Request::file('image');
     $password = Crypt::encryptString(Request::get('pass'));
-    $address = ucfirst(strtolower(Request::get('addressUser')));
+    $address = ucfirst(mb_strtolower(Request::get('addressUser')));
     $fechaNac = Request::get('dateBirth');
     $asesorId= Request::get('argumento');
 

@@ -143,7 +143,7 @@ class GestorEventosController extends Controller{
     }
 
     public function guardarEvento(){
-      $evento=ucfirst(strtolower(Request::get('evento')));
+      $evento=ucfirst(mb_strtolower(Request::get('evento')));
       $fechaEvento=Request::get('fechaCompletaModal');
       $userall=Session::get('asesor');
       $nuevoEvento= new Calendario;
@@ -187,7 +187,14 @@ class GestorEventosController extends Controller{
                           ->where('creador',$userall->agente_id)
                           ->select('agentes.fullname','calendario.*')
                           ->get();
+      foreach ($consulta as $evento ) {
+        $arreglo[$evento->fullname][]=$evento;
+      }
     }
-    return $arreglo;
+    $asesores=Agente::all();
+    return view('.admin.partials.historial_eventos',compact('arreglo','asesores'));
+  }
+  public function prueba(){
+    return view('.admin.partials.historial_eventos');
   }
 }
