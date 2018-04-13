@@ -1,10 +1,32 @@
 $(document).ready(function() {
-////////////////////////////////////////  ///////////////////////////////////////////////
+
+	////////////////////////////////// MOSTRAR Y OCULTAR PRELOAD ////////////////////////////////////////////////
+		function mostrarPreload(){
+		 var ancho = 0;
+		 var alto = 0;
+		 if (window.innerWidth == undefined) ancho = window.screen.width;
+		 else ancho = window.innerWidth;
+		 if (window.innerHeight == undefined) alto = window.screen.height;
+		 else alto = window.innerHeight;
+		 div = document.createElement("div");
+		 div.id = "WindowLoad"
+		 div.style.width = ancho + "px";
+		 div.style.height = alto + "px";
+		 $("body").append(div);
+		$('#load').css('display','block');
+		};
+		function ocultarPreload(){
+		 $("#WindowLoad").remove();
+		 $('#load').css('display','none');
+		};
+
+//////////////////////////////////////// ABRIR MODAL PARA GESTION DE NEGOCIACION ///////////////////////////////////////////////
 	$('.cambioEstatus').on('click', function(){
 		var parametro=$(this).parent().find('.inmueble').val();
 		//console.log(parametro);
 	  url="/admin/llenarModalNegociacion";
 	  $.ajax({
+			beforeSend:mostrarPreload(),
 	    url: url,
 	    type: "post",
 	    dataType: "json",
@@ -12,8 +34,10 @@ $(document).ready(function() {
 
 	  })
 	  .done(function(respuesta){
+			ocultarPreload();
 		 	if (respuesta[0]==1) {
 			 //console.log(respuesta);
+
 
 ////////////////////////////////// RESETEAR FORMULARIOS DE PASOS ///////////////////////////////////////////
 
@@ -112,7 +136,7 @@ $(document).ready(function() {
 //////////////////// MOSTRAR LISTA DE ESTATUS DE INMUEBLES  CON ESTATUS ACTUAL ////////////////////////////////////
 
 				$('.estatusInmueble').css('display','block');
-				if (respuesta[7].estatus ==12 || respuesta[7].estatus ==11) {
+				if (respuesta[7].estatus==11) {
 					$('.estatusInmueble').css('display','none');
 				}
 				else {
@@ -122,10 +146,10 @@ $(document).ready(function() {
 					});
 
 					if (respuesta[7].estatus ==1) {
-						$('#estatusInmueble option[value="1"]').attr("selected", true);
+						$('#estatusInmueble option[value="1"]').prop("selected", true);
 					}
 					else {
-						$('#estatusInmueble option[value="2"]').attr("selected", true);
+						$('#estatusInmueble option[value="2"]').prop("selected", true);
 					}
 				}
 				var opcion=$("#estatusInmueble option:selected").val();
@@ -181,7 +205,15 @@ $(document).ready(function() {
 
 				$('#cambioStatus').modal('show');
 		 }
-	  });
+	 }).fail(function(){
+		 ocultarPreload();
+		 swal({
+				title:'Imposible realizar la acción!!',
+				text:"Comuniquese con el administrador del sistema",
+				icon:'error',
+				button:true
+			});
+	 });
 	});
 
 //////////////////////////////////////// MOSTRAR CAMPO DE COMISION COMPARTIDA ////////////////////////////////////
@@ -239,20 +271,7 @@ $("#newNegotation").validate({
     var form= new FormData(document.getElementById("newNegotation"));
     url="/admin/guardarNegociacion";
     $.ajax({
-			beforeSend: function(){
-				var ancho = 0;
-				var alto = 0;
-				if (window.innerWidth == undefined) ancho = window.screen.width;
-				else ancho = window.innerWidth;
-				if (window.innerHeight == undefined) alto = window.screen.height;
-				else alto = window.innerHeight;
-				div = document.createElement("div");
-				div.id = "WindowLoad"
-				div.style.width = ancho + "px";
-				div.style.height = alto + "px";
-				$("body").append(div);
-				$('#load').css('display','block');
-			},
+			beforeSend: mostrarPreload(),
       url: url,
       type: "post",
       dataType: "html",
@@ -263,9 +282,7 @@ $("#newNegotation").validate({
     })
     .done(function(respuesta){
     	if (respuesta) {
-				//console.log (respuesta);
-				$("#WindowLoad").remove();
-				$('#load').css('display','none');
+				ocultarPreload();
 				swal({
 					title:'Buen trabajo!!',
 					text:"Datos guardados con exito",
@@ -274,8 +291,6 @@ $("#newNegotation").validate({
 					button:false,
 				});
 				setTimeout(function(){$('#cambioStatus').modal('hide');},2300); // 3000ms = 3
-
-
       }
       else{
 				$("#WindowLoad").remove();
@@ -288,8 +303,7 @@ $("#newNegotation").validate({
         });
 			}
     }).fail( function() {
-			$("#WindowLoad").remove();
-			$('#load').css('display','none');
+			ocultarPreload();
 			swal(
 				'Imposible Realizar la acción',
 				'Comuniquese con el administrador del sistema',
@@ -325,6 +339,7 @@ $("#newPropuesta").validate({
 				var form= new FormData(document.getElementById("newPropuesta"));
 		    url="/admin/guardarPaso";
 		    $.ajax({
+					beforeSend:mostrarPreload(),
 		      url: url,
 		      type: "post",
 		      dataType: "html",
@@ -335,7 +350,7 @@ $("#newPropuesta").validate({
 		    })
 		    .done(function(respuesta){
 		    	if (respuesta==1) {
-						//console.log (respuesta);
+						ocultarPreload();
 						swal({
 							title:'Buen trabajo!!',
 							text:"Propuesta aprobada guardada con exito",
@@ -364,15 +379,15 @@ $("#newPropuesta").validate({
 		          button:true
 		        });
 					}
-		      else{
-						swal({
-		          title:'Imposible realizar la acción!!',
-		          text:"Comuniquese con el administrador del sistema",
-		          icon:'error',
-		          button:true
-		        });
-					}
-		    });
+		    }).fail(function() {
+					ocultarPreload();
+					swal({
+						title:'Imposible realizar la acción!!',
+						text:"Comuniquese con el administrador del sistema",
+						icon:'error',
+						button:true
+					});
+				});
   		}
 		});
 	}
@@ -404,6 +419,7 @@ $("#newDeposito").validate({
 				var form= new FormData(document.getElementById("newDeposito"));
 		    url="/admin/guardarDeposito";
 		    $.ajax({
+					beforeSend:mostrarPreload(),
 		      url: url,
 		      type: "post",
 		      dataType: "html",
@@ -414,7 +430,7 @@ $("#newDeposito").validate({
 		    })
 		    .done(function(respuesta){
 		    	if (respuesta==1) {
-						//console.log (respuesta);
+						ocultarPreload();
 						swal({
 							title:'Buen trabajo!!',
 							text:"Deposito en garantia guardado con exito",
@@ -443,15 +459,15 @@ $("#newDeposito").validate({
 		          button:true
 		        });
 					}
-		      else{
-						swal({
-		          title:'Imposible realizar la acción!!',
-		          text:"Comuniquese con el administrador del sistema",
-		          icon:'error',
-		          button:true
-		        });
-					}
-		    });
+		    }).fail(function() {
+					ocultarPreload();
+					swal({
+						title:'Imposible realizar la acción!!',
+						text:"Comuniquese con el administrador del sistema",
+						icon:'error',
+						button:true
+					});
+				});
   		}
 		});
 	}
@@ -482,6 +498,7 @@ $("#newBilateral").validate({
 				var form= new FormData(document.getElementById("newBilateral"));
 		    url="/admin/guardarBilateral";
 		    $.ajax({
+					beforeSend:mostrarPreload(),
 		      url: url,
 		      type: "post",
 		      dataType: "json",
@@ -491,6 +508,7 @@ $("#newBilateral").validate({
 		      processData: false
 		    })
 		    .done(function(respuesta){
+					ocultarPreload();
 		    	if (respuesta[0]==1) {
 						//console.log (respuesta);
 						swal({
@@ -505,7 +523,6 @@ $("#newBilateral").validate({
 						$('#comision1').attr('disabled',true);
 						if (respuesta[1]==1) {
 							$('.ocultarComision').css('display','none');
-							$('.estatusInmueble').css('display','none');
 						}
 						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
 
@@ -513,7 +530,7 @@ $("#newBilateral").validate({
 					else if(respuesta[0]==2){
 						swal({
 		          title:'Imposible realizar la acción!!',
-		          text:"Fue cargada la etapa de firma en registro por lo que esta etapa queda inhabilitada",
+		          text:"Fue cargada la etapa de firma en registro por lo que esta etapa quedo inhabilitada",
 		          icon:'error',
 		          button:true
 		        });
@@ -526,15 +543,15 @@ $("#newBilateral").validate({
 		          button:true
 		        });
 					}
-		      else{
-						swal({
-		          title:'Imposible realizar la acción!!',
-		          text:"Comuniquese con el administrador del sistema",
-		          icon:'error',
-		          button:true
-		        });
-					}
-		    });
+		    }).fail(function() {
+					ocultarPreload();
+					swal({
+						title:'Imposible realizar la acción!!',
+						text:"Comuniquese con el administrador del sistema",
+						icon:'error',
+						button:true
+					});
+				});
   		}
 		});
 	}
@@ -566,6 +583,7 @@ $("#newRegistro").validate({
 				var form= new FormData(document.getElementById("newRegistro"));
 		    url="/admin/guardarRegistro";
 		    $.ajax({
+					beforeSend:mostrarPreload(),
 		      url: url,
 		      type: "post",
 		      dataType: "json",
@@ -575,6 +593,7 @@ $("#newRegistro").validate({
 		      processData: false
 		    })
 		    .done(function(respuesta){
+					ocultarPreload();
 		    	if (respuesta[0]==1) {
 						//console.log (respuesta);
 						swal({
@@ -587,10 +606,6 @@ $("#newRegistro").validate({
 						$('#dateRegistro').attr('disabled',true);
 						$('#registroSubmit').attr('disabled',true);
 						$('#comision2').attr('disabled',true);
-						if (respuesta[1]==1) {
-							$('.estatusInmueble').css('display','none');
-						}
-
 		      }
 					else if (respuesta[0]==2) {
 						swal({
@@ -600,15 +615,16 @@ $("#newRegistro").validate({
 		          button:true
 		        });
 					}
-		      else{
-						swal({
-		          title:'Imposible realizar la acción!!',
-		          text:"Comuniquese con el administrador del sistema",
-		          icon:'error',
-		          button:true
-		        });
-					}
-		    });
+		    })
+				.fail(function() {
+					ocultarPreload();
+					swal({
+						title:'Imposible realizar la acción!!',
+						text:"Comuniquese con el administrador del sistema",
+						icon:'error',
+						button:true
+					});
+				});
   		}
 		});
 	}
@@ -640,6 +656,7 @@ $("#newReporte").validate({
 				var form= new FormData(document.getElementById("newReporte"));
 		    url="/admin/guardarReporte";
 		    $.ajax({
+					beforeSend:mostrarPreload(),
 		      url: url,
 		      type: "post",
 		      dataType: "html",
@@ -649,6 +666,7 @@ $("#newReporte").validate({
 		      processData: false
 		    })
 		    .done(function(respuesta){
+					ocultarPreload();
 		    	if (respuesta) {
 						//console.log (respuesta);
 						swal({
@@ -664,15 +682,15 @@ $("#newReporte").validate({
 						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
 
 		      }
-		      else{
-						swal({
-		          title:'Imposible realizar la acción!!',
-		          text:"Comuniquese con el administrador del sistema",
-		          icon:'error',
-		          button:true
-		        });
-					}
-		    });
+		    }).fail(function() {
+					ocultarPreload();
+					swal({
+						title:'Imposible realizar la acción!!',
+						text:"Comuniquese con el administrador del sistema",
+						icon:'error',
+						button:true
+					});
+				});
   		}
 		});
 	}
@@ -685,20 +703,7 @@ $("#newReporte").validate({
 		var idpropiedad=$('#propiedadGeneral').val();
 	  url="/admin/historialNegociaciones";
 	  $.ajax({
-			beforeSend: function(){
-				var ancho = 0;
-				var alto = 0;
-				if (window.innerWidth == undefined) ancho = window.screen.width;
-				else ancho = window.innerWidth;
-				if (window.innerHeight == undefined) alto = window.screen.height;
-				else alto = window.innerHeight;
-				div = document.createElement("div");
-				div.id = "WindowLoad"
-				div.style.width = ancho + "px";
-				div.style.height = alto + "px";
-				$("body").append(div);
-				$('#load').css('display','block');
-			},
+			beforeSend: mostrarPreload(),
 	    url: url,
 	    type: "post",
 	    dataType: "html",
@@ -706,8 +711,7 @@ $("#newReporte").validate({
 		})
 	  .done(function(respuesta){
 			//console.log(respuesta);
-			$("#WindowLoad").remove();
-			$('#load').css('display','none');
+			ocultarPreload();
 			$('.areaResultado').append(respuesta);
 			$('#tabHistory').addClass('active');
 			$('#tabHistory').parent().addClass('active');
@@ -720,8 +724,7 @@ $("#newReporte").validate({
 			$('#profile').removeClass('active');
 	  })
 	  .fail(function(){
-			$("#WindowLoad").remove();
-			$('#load').css('display','none');
+			ocultarPreload();
 	    swal({
 	      title:'Algo sucedio',
 	      text:"Comuniquese con el administrador",

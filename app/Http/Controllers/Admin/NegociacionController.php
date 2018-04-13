@@ -41,9 +41,8 @@ class NegociacionController extends Controller{
       if (count($reporte)==0) {
         $reporte=$comun;
       }
-      $estatus=Estatus::where('estatus.id','<>',12)
+      $estatus=Estatus::where('estatus.id','<>',11)
                       ->where('estatus.familia',1)
-                      ->where('estatus.id','<>',11)
                       ->get();
       $pago=NegociacionEstatus::where('negociacion_id',$consulta->id)->where('estatus_id',5)->where('comisionPagada',1)->first();
       $promesaPagada=count($pago);
@@ -62,7 +61,12 @@ class NegociacionController extends Controller{
     }
     else{
       $propiedad=Propiedad::where('id',$idInmueble)->first();
-      $listaAsesores=Agente::all();
+      if ($propiedad->agente_id==5) {
+        $listaAsesores=Agente::where('id','<>',5)->get();
+      }
+      else {
+        $listaAsesores=Agente::all();
+      }
       $respuesta=2;
       $valores= [ $respuesta,
                   $propiedad,
@@ -177,12 +181,12 @@ class NegociacionController extends Controller{
         $nuevoPaso->fechaEstatus=$fechaPaso;
         $nuevoPaso->comisionPagada=$pagoComision;
         $nuevoPaso->save();
-        if ($pagoComision==1) {
+        /*if ($pagoComision==1) {
           $propiedad=Negociacion::where('id',$idNegociacion)->first();
           Propiedad::where('id',$propiedad->propiedad_id)->update([
                       "estatus"         =>  12
                     ]);
-        }
+        }*/
         $valores=[1,$pagoComision];
         $respuesta=$valores;
       }
@@ -210,12 +214,12 @@ class NegociacionController extends Controller{
         $nuevoPaso->fechaEstatus=$fechaPaso;
         $nuevoPaso->comisionPagada=$pagoComision;
         $nuevoPaso->save();
-        if ($pagoComision==1) {
+        /*if ($pagoComision==1) {
           $propiedad=Negociacion::where('id',$idNegociacion)->first();
           Propiedad::where('id',$propiedad->propiedad_id)->update([
                       "estatus"         =>  12
                     ]);
-        }
+        }*/
         $valores=[1,$pagoComision];
         $respuesta=$valores;
     }
