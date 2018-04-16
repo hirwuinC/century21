@@ -69,7 +69,9 @@ Route::any('/admin/guardarReporte', ['as' => 'guardarReporte', 'uses' => 'Admin\
 Route::any('/admin/historialNegociaciones', ['as' => 'historialNegociaciones', 'uses' => 'Admin\NegociacionController@historialNegociaciones']);
 Route::any('/admin/cancelarNegociacion', ['as' => 'cancelarNegociacion', 'uses' => 'Admin\NegociacionController@cancelarNegociacion']);
 Route::any('/admin/cambiarEstatusInmueble', ['as' => 'cambiarEstatusInmueble', 'uses' => 'Admin\NegociacionController@cambiarEstatusInmueble']);
-
+Route::any('/admin/compradorCargado', ['as' => 'compradorCargado', 'uses' => 'Admin\NegociacionController@compradorCargado']);
+Route::any('/admin/guardarComprador', ['as' => 'guardarComprador', 'uses' => 'Admin\NegociacionController@guardarComprador']);
+Route::any('/admin/buscarComprador', ['as' => 'buscarComprador', 'uses' => 'Admin\NegociacionController@buscarComprador']);
 /// INFORMES DE GESTION
 Route::get('/admin/pruebaInforme',['as'=>'pruebaInforme','uses'=>'Admin\InformeController@pruebaInforme'] );
 Route::any('/admin/nuevoInforme',['as'=>'nuevoInforme','uses'=>'Admin\InformeController@nuevoInforme'] );

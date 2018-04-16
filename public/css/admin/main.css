@@ -183,7 +183,7 @@ hr {
   color: #8b8b8b;
   background-color: #ededee;
 }
-.btnGeneral, .btnYellow, .btnGray, .btnGrayHight, .btnGraySmall, .btnAcction, .btnInactive, .btnRed {
+.btnGeneral, .btnYellow, .btnGray, .btnGrayHight, .btnGraySmall, .btnAcction, .btnInactive, .btnRed,.btnGreen {
   margin: 20px 0;
   border: none;
   text-transform: uppercase;
@@ -203,16 +203,25 @@ hr {
 .btnYellowEstatus{
   font-size: 1em;
 }
-.btnRed {
-  margin-top: 132px;
+.btnRed,.btnGreen {
   background: #EF5350;
   font-family: 'latoregular';
   color: #fff;
   font-size: 1em;
   height: 60px;
 }
+.btnGreen{
+  background: #00796B;
+  font-family: 'latoregular';
+  color: #fff;
+  font-size: 1em;
+  height: 60px;
+  visibility: hidden;
+}
 .estatusInmueble{
   margin-top: 95px;
+  min-height: 100px;
+  max-height: 100px;
 }
 
 .btnGray, .btnGrayHight, .btnGraySmall {

@@ -82,6 +82,7 @@ $(document).ready(function() {
 
 /////////////////////////// LLENAR CAMPOS DE PASOS DE NEGOCIACION DEL FORMULARIO ///////////////////////////////
 				$('#propiedadGeneral').val(respuesta[7].id)
+				$('#idPropiedadComprador').val(respuesta[7].id)
 				$('#datePropuesta').val(respuesta[1].fechaEstatus);
 				$('#idNegociacion').val(respuesta[6].id)
 				$('#dateGarantia').val(respuesta[2].fechaEstatus);
@@ -135,9 +136,9 @@ $(document).ready(function() {
 
 //////////////////// MOSTRAR LISTA DE ESTATUS DE INMUEBLES  CON ESTATUS ACTUAL ////////////////////////////////////
 
-				$('.estatusInmueble').css('display','block');
+				$('.estatusInmueble').css('visibility','visible');
 				if (respuesta[7].estatus==11) {
-					$('.estatusInmueble').css('display','none');
+					$('.estatusInmueble').css('visibility','hidden');
 				}
 				else {
 					$('.opcion').remove();
@@ -154,6 +155,14 @@ $(document).ready(function() {
 				}
 				var opcion=$("#estatusInmueble option:selected").val();
 				$('#anterior').val(opcion);
+
+//////////////////// MOSTRAR BOTON PARA AGREGAR COMPRADOR  /////////////////////////////////////////////////////
+				if (respuesta[6].estatus==10) {
+					$('.btnGreen').css('visibility','visible');
+				}
+				else {
+					$('.btnGreen').css('visibility','hidden');
+				}
 
 //////////////////// MOSTRAR CAMPOS DE PAGO DE COMISION  /////////////////////////////////////////////////
 				$('.ocultarComision').css('display','block');
@@ -281,8 +290,8 @@ $("#newNegotation").validate({
       processData: false
     })
     .done(function(respuesta){
+			ocultarPreload();
     	if (respuesta) {
-				ocultarPreload();
 				swal({
 					title:'Buen trabajo!!',
 					text:"Datos guardados con exito",
@@ -349,8 +358,8 @@ $("#newPropuesta").validate({
 		      processData: false
 		    })
 		    .done(function(respuesta){
-		    	if (respuesta==1) {
-						ocultarPreload();
+					ocultarPreload();
+					if (respuesta==1) {
 						swal({
 							title:'Buen trabajo!!',
 							text:"Propuesta aprobada guardada con exito",
@@ -429,8 +438,8 @@ $("#newDeposito").validate({
 		      processData: false
 		    })
 		    .done(function(respuesta){
+					ocultarPreload();
 		    	if (respuesta==1) {
-						ocultarPreload();
 						swal({
 							title:'Buen trabajo!!',
 							text:"Deposito en garantia guardado con exito",
@@ -669,6 +678,10 @@ $("#newReporte").validate({
 					ocultarPreload();
 		    	if (respuesta) {
 						//console.log (respuesta);
+						$('#dateReporte').attr('disabled',true);
+						$('#reporteSubmit').attr('disabled',true);
+						$('.estatusInmueble').css('visibility','hidden');
+						$('.btnGreen').css('visibility','visible');
 						swal({
 							title:'Reporte de venta guardado con exito',
 							text:"Negociación Finalizada",
@@ -676,9 +689,8 @@ $("#newReporte").validate({
 							//timer: 2000,
 							button:true,
 						});
-						$('#dateReporte').attr('disabled',true);
-						$('#reporteSubmit').attr('disabled',true);
-						$('.estatusInmueble').css('display','none');
+						//$('#modalAddComprador').modal('show');
+
 						//setTimeout(function(){location.href = "/admin/inmuebles";},2300); // 3000ms = 3
 
 		      }
@@ -789,7 +801,16 @@ $('body').on('click','#cancelNegotiation',function(){
 						button:true
 					});
 				}
-			});
+			}).fail(function(){
+				ocultarPreload();
+		    swal({
+		      title:'Algo sucedio',
+		      text:"Comuniquese con el administrador",
+		      icon:'error',
+		      timer: 2000,
+		      button:false
+		    });
+		  });
 		}
 	});
 });
@@ -830,15 +851,16 @@ $('body').on('change','#estatusInmueble',function(){
 							button:true,
 						});
 				}
-				else {
-					swal({
-						title:'Imposible realizar la acción!!',
-						text:"Comuniquese con el administrador del sistema",
-						icon:'error',
-						button:true
-					});
-				}
-			});
+			}).fail(function(){
+				ocultarPreload();
+		    swal({
+		      title:'Algo sucedio',
+		      text:"Comuniquese con el administrador",
+		      icon:'error',
+		      timer: 2000,
+		      button:false
+		    });
+		  });
 		}
 		else{
 			var anterior=$('#anterior').val();
@@ -847,5 +869,180 @@ $('body').on('change','#estatusInmueble',function(){
 		}
 	});
 });
+////////////////////////////////////////////// ABRIR MODAL DE COMPRADOR DE PROPIEDAD ////////////////////////////////
+	$('body').on('click','#addComprador',function(){
+		$('.limpiarComprador').val('');
+		var validator1 = $( "#formularioComprador" ).validate();
+		$('#cedulaComprador').attr('disabled',false);
+		validator1.resetForm();
+		var idPropiedad=$('#propiedadGeneral').val();
+		url="/admin/compradorCargado";
+		$.ajax({
+			beforeSend:mostrarPreload,
+			url: url,
+			type: "post",
+			dataType: "html",
+			data:{idPropiedad:idPropiedad}
+		})
+		.done(function(respuesta){
+			ocultarPreload();
+			if (respuesta==1) {
+					swal({
+						title:'Comprador Cargado!!',
+						text:"Ya este inmueble tiene cargado el comprador",
+						icon:'error',
+						//timer: 2000,
+						button:true,
+					});
+			}
+			else {
+					$('#modalAddComprador').modal('show');
+			}
+		}).fail(function(){
+			ocultarPreload();
+			swal({
+				title:'Algo sucedio',
+				text:"Comuniquese con el administrador",
+				icon:'error',
+				timer: 2000,
+				button:false
+			});
+		});
+	});
+
+////////////////////////////////////////////// GUARDAR COMPRADOR DEL INMUEBLE ////////////////////////////////////
+	$("#formularioComprador").validate({
+	    onfocusout: false,
+	    rules: {
+	      cedulaComprador: {
+	        required:true
+	      },
+				nombreComprador: {
+	        required:true
+	      },
+				correoComprador: {
+	        required:true
+	      },
+				edad: {
+	        required:true
+	      },
+				sexoComprador: {
+	        required:true
+	      },
+				ocupacion: {
+	        required:true
+	      },
+				grupoFamiliar: {
+	        required:true
+	      }
+	    },
+	  messages: {
+	    cedulaComprador: {
+	      required:"La cédula del comprador es requerida"
+	    },
+			nombreComprador: {
+				required:"Debe indicar el nombre del comprador"
+			},
+			correoComprador: {
+			required:"Debe indicar el correo electrónico del comprador"
+			},
+			edad: {
+			required:"Debe indicar la fecha de nacimiento del comprador"
+			},
+			sexoComprador: {
+			required:"Debe indicar el género del comprador"
+			},
+			ocupacion: {
+				required:"Debe indicar la ocupación del comprador"
+			},
+			grupoFamiliar: {
+				required:"Debe indicar el número de personas que componen el grupo familiar del comprador"
+			}
+	  },
+	  submitHandler: function(form) {
+			var form= new FormData(document.getElementById("formularioComprador"));
+	    url="/admin/guardarComprador";
+	    $.ajax({
+				beforeSend:mostrarPreload(),
+	      url: url,
+	      type: "post",
+	      dataType: "json",
+	      data: form,
+	      cache: false,
+	      contentType: false,
+	      processData: false
+	    })
+	    .done(function(respuesta){
+				ocultarPreload();
+	    	if (respuesta) {
+					//console.log (respuesta);
+					$('#modalAddComprador').modal('hide');
+					swal({
+						title:'Comprador Cargado',
+						text:'EL comprador fue cargado correctamente, para ver el listado de compradores vaya a la ventana COMPRADORES',
+						icon:'success',
+						//timer: 2000,
+						button:true,
+					});
+	      }
+	    })
+			.fail(function() {
+				ocultarPreload();
+				swal({
+					title:'Imposible realizar la acción!!',
+					text:"Comuniquese con el administrador del sistema",
+					icon:'error',
+					button:true
+				});
+			});
+		}
+	});
+	//////////////////////////////////////// BUSCAR EXISTENCIA DEL COMPRADOR  ///////////////////////////////////////////////////////////////////////////
+	  $('body').on('focusout', '#cedulaComprador', function() {
+	    var cedula=$(this).val();
+	    $.ajax({
+	      url: '/admin/buscarComprador',
+	      type: 'post',
+	      context:$(this),
+	      dataType: 'json',
+	      data: {cedula:cedula}
+	    })
+	    .done(function(respuesta) {
+	      console.log(respuesta);
+				if (respuesta[0]==1) {
+					$(this).attr('disabled','disabled');
+					$('#nombreComprador').val(respuesta[1].fullNameComprador);
+					$('#correoComprador').val(respuesta[1].email);
+					$('#edad').val(respuesta[1].edad);
+					if (respuesta[1].sexo==1) {
+						$('#masculino').prop('checked','checked');
+					}
+					else {
+						$('#femenino').prop('checked','checked');
+					}
+					$('#ocupacion').val(respuesta[1].ocupacion);
+					$('#grupoFamiliar').val(respuesta[1].grupoFamilia);
+				}
+				else if (respuesta[0]==0){
+					swal({
+						title:'Comprador no existe!!',
+						text:"La cédula ingresada no coincide con ningun comprador registrado, debe ingresar los datos manualmente",
+						icon:'warning',
+						button:true
+					});
+				}
+	    })
+	    .fail(function() {
+	      swal(
+	        'Imposible Realizar la acción',
+	        'Comuniquese con el administrador del sistema',
+	        'error'
+	      );
+	    });
+	  });
+
+
+
+
 
 });
