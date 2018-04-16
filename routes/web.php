@@ -72,6 +72,14 @@ Route::any('/admin/cambiarEstatusInmueble', ['as' => 'cambiarEstatusInmueble', '
 Route::any('/admin/compradorCargado', ['as' => 'compradorCargado', 'uses' => 'Admin\NegociacionController@compradorCargado']);
 Route::any('/admin/guardarComprador', ['as' => 'guardarComprador', 'uses' => 'Admin\NegociacionController@guardarComprador']);
 Route::any('/admin/buscarComprador', ['as' => 'buscarComprador', 'uses' => 'Admin\NegociacionController@buscarComprador']);
+
+///COMPRADORES
+Route::get('/admin/modificar-comprador/{id}', ['as' => 'modificar-comprador', 'uses' => 'Admin\CompradorController@modificarComprador']);
+Route::get('/admin/compradores', ['as' => 'lista-comprador', 'uses' => 'Admin\CompradorController@listarCompradores']);
+Route::post('/admin/actualizarComprador', ['as' => 'actualizarComprador', 'uses' => 'Admin\CompradorController@actualizarComprador']);
+Route::get('/admin/buscarcomprador',['as'=>'prueba','uses'=>'Admin\CompradorController@searchComprador'] );
+
+
 /// INFORMES DE GESTION
 Route::get('/admin/pruebaInforme',['as'=>'pruebaInforme','uses'=>'Admin\InformeController@pruebaInforme'] );
 Route::any('/admin/nuevoInforme',['as'=>'nuevoInforme','uses'=>'Admin\InformeController@nuevoInforme'] );

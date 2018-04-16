@@ -18,7 +18,7 @@ class AsesorController extends Controller
         $asesores=Agente::where('id',$data)->paginate(20);
       }
       else{
-        $asesores= Agente::paginate(20);
+        $asesores= Agente::orderBy('fullName','asc')->paginate(20);
       }
     return view('admin.lista_agentes',$this->cargarSidebar(),compact('asesores'));
     }

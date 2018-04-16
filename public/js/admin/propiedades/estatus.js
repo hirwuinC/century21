@@ -873,7 +873,7 @@ $('body').on('change','#estatusInmueble',function(){
 	$('body').on('click','#addComprador',function(){
 		$('.limpiarComprador').val('');
 		var validator1 = $( "#formularioComprador" ).validate();
-		$('#cedulaComprador').attr('disabled',false);
+		$('#cedulaComprador').attr('readonly',false);
 		validator1.resetForm();
 		var idPropiedad=$('#propiedadGeneral').val();
 		url="/admin/compradorCargado";
@@ -921,7 +921,8 @@ $('body').on('change','#estatusInmueble',function(){
 	        required:true
 	      },
 				correoComprador: {
-	        required:true
+	        required:true,
+					email:true
 	      },
 				edad: {
 	        required:true
@@ -944,7 +945,8 @@ $('body').on('change','#estatusInmueble',function(){
 				required:"Debe indicar el nombre del comprador"
 			},
 			correoComprador: {
-			required:"Debe indicar el correo electrónico del comprador"
+			required:"Debe indicar el correo electrónico del comprador",
+			email:"El correo debe ser válido"
 			},
 			edad: {
 			required:"Debe indicar la fecha de nacimiento del comprador"
@@ -962,15 +964,15 @@ $('body').on('change','#estatusInmueble',function(){
 	  submitHandler: function(form) {
 			var form= new FormData(document.getElementById("formularioComprador"));
 	    url="/admin/guardarComprador";
-	    $.ajax({
+			$.ajax({
 				beforeSend:mostrarPreload(),
 	      url: url,
 	      type: "post",
-	      dataType: "json",
+	      dataType: "html",
 	      data: form,
-	      cache: false,
-	      contentType: false,
-	      processData: false
+				cache: false,
+				contentType: false,
+				processData: false
 	    })
 	    .done(function(respuesta){
 				ocultarPreload();
@@ -1008,9 +1010,9 @@ $('body').on('change','#estatusInmueble',function(){
 	      data: {cedula:cedula}
 	    })
 	    .done(function(respuesta) {
-	      console.log(respuesta);
+	      //console.log(respuesta);
 				if (respuesta[0]==1) {
-					$(this).attr('disabled','disabled');
+					$(this).attr('readonly',true);
 					$('#nombreComprador').val(respuesta[1].fullNameComprador);
 					$('#correoComprador').val(respuesta[1].email);
 					$('#edad').val(respuesta[1].edad);

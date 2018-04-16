@@ -99,65 +99,71 @@
                 </div>
             </div>
           @endif
-        <h2 class="titleSection">INFORMES</h2>
-        <div class="reports">
-            <div class="row">
-              @if($inmueble->estatus!=11)
-                @if($dia<-4)
-                  <div class="col-xs-9">
-                      <div class="alert alertGreen" role="alert">
-                          <h5>Próximo informe debe ser enviando antes de: <span>{{$fecha}}</span></h5>
-                      </div>
-                  </div>
-                @elseif($dia>-4 && $dia<=0)
-                  <div class="col-xs-9">
-                      <div class="alert alertOrange" role="alert">
-                          <h5>Próximo informe debe ser enviando antes de: <span>{{$fecha}}</span></h5>
-                      </div>
-                  </div>
-                @else
-                <div class="col-xs-9">
-                    <div class="alert alertRed" role="alert">
-                        <h5>Próximo informe debió ser enviando antes de: <span>{{$fecha}}</span></h5>
-                    </div>
-                </div>
-                @endif
-              @else
-                <div class="col-xs-9">
-                    <div class="alert alertGreen" role="alert">
-                        <Center><h5>INMUEBLE VENDIDO</h5></center>
-                    </div>
-                </div>
-              @endif
-                <div class="col-xs-3">
-                    <div class="buttons">
-                        <button type="submit" class="btnYellow noMargin" id="newInforme">NUEVO</button>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12 listReports">
-                  @foreach($informes as $informe)
-                    <div class="alert alertGrayLight" role="alert">
-                        <div class="row">
-                            <div class="col-xs-3"><h5>Informe {{$informe->id}}</h5></div>
-                            <div class="col-xs-3"><h5>{{ date("d-m-Y", strtotime($informe->fechaCreado))}}</h5></div>
-                            <div class="col-xs-6">
-                                <ul>
-                                    <li><a href="/admin/previewInforme/{{$informe->id}}" target="_blank"><i class="fa fa-eye preview" aria-hidden="true"></i></a></li>
-                                    @if($informe->estatusEnviado==0)
-                                      <li><a href=""><i class="fa fa-pencil editInforme" data-id="{{$informe->id}}" aria-hidden="true"></i></a></li>
-                                      <li><button type="button" data-id="{{$informe->id}}" class="btnGraySmall enviarInforme">Enviar</button></li>
-                                    @endif
-                                </ul>
+        @if($usuario->rol_id==1 || $usuario->agente_id==$inmueble->agente_id)
+          @if($inmueble->agente_id!=5)
+              <h2 class="titleSection">INFORMES</h2>
+              <div class="reports">
+                  <div class="row">
+                    @if($inmueble->estatus!=11)
+                      @if($dia<-4)
+                        <div class="col-xs-9">
+                            <div class="alert alertGreen" role="alert">
+                                <h5>Próximo informe debe ser enviando antes de: <span>{{$fecha}}</span></h5>
                             </div>
                         </div>
-                    </div>
-                  @endforeach
-                </div>
-            </div>
-        </div>
-    </div>
+                      @elseif($dia>-4 && $dia<=0)
+                        <div class="col-xs-9">
+                            <div class="alert alertOrange" role="alert">
+                                <h5>Próximo informe debe ser enviando antes de: <span>{{$fecha}}</span></h5>
+                            </div>
+                        </div>
+                      @else
+                      <div class="col-xs-9">
+                          <div class="alert alertRed" role="alert">
+                              <h5>Próximo informe debió ser enviando antes de: <span>{{$fecha}}</span></h5>
+                          </div>
+                      </div>
+                      @endif
+                    @else
+                      <div class="col-xs-9">
+                          <div class="alert alertGreen" role="alert">
+                              <Center><h5>INMUEBLE VENDIDO</h5></center>
+                          </div>
+                      </div>
+                    @endif
+                    @if($inmueble->estatus!=11)
+                      <div class="col-xs-3">
+                          <div class="buttons">
+                              <button type="submit" class="btnYellow noMargin" id="newInforme">NUEVO</button>
+                          </div>
+                      </div>
+                    @endif
+                  </div>
+                  <div class="row">
+                      <div class="col-xs-12 listReports">
+                        @foreach($informes as $informe)
+                          <div class="alert alertGrayLight" role="alert">
+                              <div class="row">
+                                  <div class="col-xs-3"><h5>Informe {{$informe->id}}</h5></div>
+                                  <div class="col-xs-3"><h5>{{ date("d-m-Y", strtotime($informe->fechaCreado))}}</h5></div>
+                                  <div class="col-xs-6">
+                                      <ul>
+                                          <li><a href="/admin/previewInforme/{{$informe->id}}" target="_blank"><i class="fa fa-eye preview" aria-hidden="true"></i></a></li>
+                                          @if($informe->estatusEnviado==0)
+                                            <li><a href=""><i class="fa fa-pencil editInforme" data-id="{{$informe->id}}" aria-hidden="true"></i></a></li>
+                                            <li><button type="button" data-id="{{$informe->id}}" class="btnGraySmall enviarInforme">Enviar</button></li>
+                                          @endif
+                                      </ul>
+                                  </div>
+                              </div>
+                          </div>
+                        @endforeach
+                      </div>
+                  </div>
+              </div>
+            @endif
+        @endif
+
     @include('admin/modals/reporte_modal')
     @include('admin/modals/modificar_reporte_modal')
 @endsection

@@ -318,7 +318,7 @@ class NegociacionController extends Controller{
     $ocupacion=ucfirst(mb_strtolower(Request::get('ocupacion')));
     $grupoFamiliar=Request::get('grupoFamiliar');
 
-    $consulta=Comprador::where('cedula',$cedula)->first();
+    $consulta=Comprador::where('cedula','=',$cedula)->first();
     if (count($consulta)!=0) {
       Comprador::where('id',$consulta->id)->update([
         "fullNameComprador" =>  $nombre,
