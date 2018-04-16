@@ -12,6 +12,8 @@ use App\Models\Propiedad;
 use App\Models\Negociacion;
 use App\Models\NegociacionEstatus;
 use App\Models\Estatus;
+use App\Models\CompradorPropiedades;
+use App\Models\Comprador;
 
 class NegociacionController extends Controller{
   public function llenarModalNegociacion(){
@@ -238,7 +240,7 @@ class NegociacionController extends Controller{
     $nuevoPaso->fechaEstatus=$fechaPaso;
     $nuevoPaso->save();
     $propiedad=Negociacion::where('id',$idNegociacion)->first();
-    Negociacion::where('propiedad_id',$propiedad->propiedad_id)->update([
+    Negociacion::where('id',$idNegociacion)->update([
                 "estatus"         =>  10,
               ]);
     Propiedad::where('id',$propiedad->propiedad_id)->update([
@@ -296,5 +298,72 @@ class NegociacionController extends Controller{
     $respueta=1;
     return $respueta;
   }
+  public function compradorCargado(){
+    $respuesta=0;
+    $idpropiedad=Request::get('idPropiedad');
+    $consulta=CompradorPropiedades::where('propiedad_id',$idpropiedad)->first();
+    if (count($consulta)!=0) {
+      $respuesta=1;
+    }
+    return $respuesta;
+  }
+  public function guardarComprador(){
+    $respuesta=0;
+    $idpropiedad=Request::get('idPropiedadComprador');
+    $cedula=mb_strtolower(Request::get('cedulaComprador'));
+    $nombre=ucwords(mb_strtolower(Request::get('nombreComprador')));
+    $email=mb_strtolower(Request::get('correoComprador'));
+    $edad=Request::get('edad');
+    $sexo=Request::get('sexoComprador');
+    $ocupacion=ucfirst(mb_strtolower(Request::get('ocupacion')));
+    $grupoFamiliar=Request::get('grupoFamiliar');
 
+    $consulta=Comprador::where('cedula',$cedula)->first();
+    if (count($consulta)!=0) {
+      Comprador::where('id',$consulta->id)->update([
+        "fullNameComprador" =>  $nombre,
+        "email"             =>  $email,
+        "edad"              =>  $edad,
+        "sexo"              =>  $sexo,
+        "ocupacion"         =>  $ocupacion,
+        "grupoFamilia"      =>  $grupoFamiliar
+      ]);
+      $guardarCompra=New CompradorPropiedades;
+      $guardarCompra->propiedad_id=$idpropiedad;
+      $guardarCompra->comprador_id=$consulta->id;
+      $guardarCompra->fechaCreado=date('Y-m-d');
+      $guardarCompra->save();
+      $respuesta=1;
+    }
+    else {
+      $comprador=Comprador::create([
+        "cedula"            =>  $cedula,
+        "fullNameComprador" =>  $nombre,
+        "email"             =>  $email,
+        "edad"              =>  $edad,
+        "sexo"              =>  $sexo,
+        "ocupacion"         =>  $ocupacion,
+        "grupoFamilia"      =>  $grupoFamiliar
+      ]);
+      $guardarCompra=New CompradorPropiedades;
+      $guardarCompra->propiedad_id=$idpropiedad;
+      $guardarCompra->comprador_id=$comprador->id;
+      $guardarCompra->fechaCreado=date('Y-m-d');
+      $guardarCompra->save();
+      $respuesta=1;
+    }
+    return $respuesta;
+  }
+  public function buscarComprador(){
+    $valores=array();
+    $respuesta=0;
+    $cedula= mb_strtolower(Request::get('cedula'));
+    $valores=[$respuesta,0];
+    $consulta=Comprador::where('cedula',$cedula)->first();
+    if (count($consulta)!=0) {
+      $respuesta=1;
+      $valores=[$respuesta,$consulta];
+    }
+    return $valores;
+  }
 }

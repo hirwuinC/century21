@@ -65,6 +65,7 @@
         </div>
     </section>
     @include('admin/modals/cambio_estatus')
+    @include('admin/modals/add_comprador')
 @endsection
 
 @section('js')

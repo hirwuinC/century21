@@ -1,4 +1,4 @@
-<div class="modal fade" id="cambioStatus" tabindex="-1" role="dialog" aria-labelledby="myModalStatus">
+<div class="modal fade" id="cambioStatus" tabindex="-1" role="dialog" style="overflow-y: scroll;" aria-labelledby="myModalStatus">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -81,6 +81,11 @@
                           <div class="row">
                               <div class="col-xs-12">
                                   <button type="button" id="cancelNegotiation" class="btnRed">Cancelar Negociación</button>
+                              </div>
+                          </div>
+                          <div class="row">
+                              <div class="col-xs-12">
+                                  <button type="button" id="addComprador" class="btnGreen">Agregar Comprador</button>
                               </div>
                           </div>
                         </div>
