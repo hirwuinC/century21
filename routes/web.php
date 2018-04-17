@@ -29,6 +29,9 @@ Route::any('/admin/login', ['as' => 'login', 'uses' => 'Admin\AdminController@Lo
 Route::any('/admin/ingresar', ['as' => 'login-ingresar', 'uses' => 'Admin\AdminController@ingresar']);
 Route::any('/admin/salir', ['as' => 'login-salir', 'uses' => 'Admin\AdminController@salir']);
 
+// Ajustes de direcciones
+Route::get('/admin/direcciones',['as'=>'direcciones','uses'=>'Admin\DireccionesController@ajusteDirecciones'] );
+Route::post('/admin/guardarCiudad',['as'=>'guardarCiudad','uses'=>'Admin\DireccionesController@guardarCiudad'] );
 
 
 //Asesores

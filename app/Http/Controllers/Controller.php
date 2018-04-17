@@ -28,11 +28,11 @@ class Controller extends BaseController{
   }
 
   public function cargarCiudades($estado){
-    $ciudades=Ciudad::where('estado_id',$estado)->get();
+    $ciudades=Ciudad::where('estado_id',$estado)->orderBy('nombre','asc')->get();
     return compact('ciudades');
   }
   public function cargarUrbanizaciones($ciudad){
-    $urbanizaciones=Urbanizacion::where('ciudad_id',$ciudad)->get();
+    $urbanizaciones=Urbanizacion::where('ciudad_id',$ciudad)->orderBy('nombre','asc')->get();
     return compact('urbanizaciones');
   }
 }

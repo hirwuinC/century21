@@ -34,6 +34,7 @@ class AdminController extends Controller{
         $permisos=DB::table('permisorole')->join('permisos', 'permisorole.permiso_id','permisos.id')
                                           ->select('permisos.*')
                                           ->where('permisorole.role_id',$consulta->rol_id)
+                                          ->orderBy('orden','asc')
                                           ->get();
         $submodulos=DB::table('submodulorole')->join('submodulos', 'submodulorole.submodulo_id', '=', 'submodulos.id')
                                               ->select('submodulos.*')

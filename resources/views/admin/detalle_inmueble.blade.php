@@ -111,30 +111,38 @@
                                 <h5>Próximo informe debe ser enviando antes de: <span>{{$fecha}}</span></h5>
                             </div>
                         </div>
+                        <div class="col-xs-3">
+                            <div class="buttons">
+                                <button type="submit" class="btnYellow noMargin" id="newInforme">NUEVO</button>
+                            </div>
+                        </div>
                       @elseif($dia>-4 && $dia<=0)
                         <div class="col-xs-9">
                             <div class="alert alertOrange" role="alert">
                                 <h5>Próximo informe debe ser enviando antes de: <span>{{$fecha}}</span></h5>
                             </div>
                         </div>
+                        <div class="col-xs-3">
+                            <div class="buttons">
+                                <button type="submit" class="btnYellow noMargin" id="newInforme">NUEVO</button>
+                            </div>
+                        </div>
                       @else
-                      <div class="col-xs-9">
-                          <div class="alert alertRed" role="alert">
-                              <h5>Próximo informe debió ser enviando antes de: <span>{{$fecha}}</span></h5>
-                          </div>
-                      </div>
+                        <div class="col-xs-9">
+                            <div class="alert alertRed" role="alert">
+                                <h5>Próximo informe debió ser enviando antes de: <span>{{$fecha}}</span></h5>
+                            </div>
+                        </div>
+                        <div class="col-xs-3">
+                            <div class="buttons">
+                                <button type="submit" class="btnYellow noMargin" id="newInforme">NUEVO</button>
+                            </div>
+                        </div>
                       @endif
                     @else
-                      <div class="col-xs-9">
+                      <div class="col-xs-12">
                           <div class="alert alertGreen" role="alert">
                               <Center><h5>INMUEBLE VENDIDO</h5></center>
-                          </div>
-                      </div>
-                    @endif
-                    @if($inmueble->estatus!=11)
-                      <div class="col-xs-3">
-                          <div class="buttons">
-                              <button type="submit" class="btnYellow noMargin" id="newInforme">NUEVO</button>
                           </div>
                       </div>
                     @endif

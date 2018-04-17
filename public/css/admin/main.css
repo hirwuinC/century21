@@ -218,6 +218,14 @@ hr {
   height: 60px;
   visibility: hidden;
 }
+.btnGreenAjuste{
+  background: #00796B;
+  font-family: 'latoregular';
+  color: #fff;
+  font-size: 1em;
+  height: 60px;
+  visibility: visible;
+}
 .estatusInmueble{
   margin-top: 95px;
   min-height: 100px;
