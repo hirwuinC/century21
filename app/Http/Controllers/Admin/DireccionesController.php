@@ -10,6 +10,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Estado;
 use App\Models\Ciudad;
 use App\Models\Urbanizacion;
+use App\Models\Proyecto;
+use App\Models\Propiedad;
 
 class DireccionesController extends Controller{
 
@@ -58,10 +60,56 @@ class DireccionesController extends Controller{
   public function borrarCiudad(){
     $estado=Request::get('estado');
     $ciudad=Request::get('ciudad');
-    $consultaCiudad=Propiedad::where('ciudad_id','')
-    //Urbanizacion::where('ciudad_id',$ciudad)->delete();
-    //Ciudad::where('id',$ciudad)->delete();
+    $paraBorrar=array();
+    $noBorrar=array();
+    $consultaCiudadPropiedad=Propiedad::where('ciudad_id',$ciudad)->first();
+    $consultaCiudadProyecto=Proyecto::where('ciudad_id',$ciudad)->first();
+    $consultaUrbanizacion=Urbanizacion::where('ciudad_id',$ciudad)->get();
+    if (count($consultaCiudadPropiedad)==0 && count($consultaCiudadProyecto)==0) {
+      for ($i=0; $i<count($consultaUrbanizacion); $i++) {
+        $urbUsada=Propiedad::where('urbanizacion',$consultaUrbanizacion[$i]->id)->get();
+        if (count($urbUsada)==0) {
+          $paraBorrar[]=$consultaUrbanizacion[$i]->id;
+        }
+        else{
+          $noBorrar[]=$consultaUrbanizacion[$i]->id;
+        }
+      }
+      if (count($noBorrar)==0) {
+        if (count($paraBorrar)!=0 ) {
+          for ($b=0; $b < count($paraBorrar); $b++) {
+            Urbanizacion::where('id',$paraBorrar[$b])->delete();
+          }
+          Ciudad::where('id',$ciudad)->delete();
+          $respuesta=1;
+        }
+        else {
+          Ciudad::where('id',$ciudad)->delete();
+          $respuesta=2;
+        }
+      }
+      else {
+        $respuesta=10;
+      }
+    }
+    else {
+      $respuesta=0;
+    }
     $ciudades=Ciudad::where('estado_id',$estado)->get();
-    return $ciudades;
+    $valores=[$respuesta,$ciudades];
+    return $valores;
+  }
+  public function borrarUrbanizacion(){
+    $respuesta=0;
+    $ciudad=Request::get('ciudad');
+    $urbanizacion=Request::get('urbanizacion');
+    $consultaUrbanizacion=Propiedad::where('urbanizacion',$urbanizacion)->first();
+    if (count($consultaUrbanizacion)==0) {
+      Urbanizacion::where('id',$urbanizacion)->delete();
+      $respuesta=1;
+    }
+    $urbanizaciones=Urbanizacion::where('ciudad_id',$ciudad)->get();
+    $valores=[$respuesta,$urbanizaciones];
+    return $valores;
   }
 }

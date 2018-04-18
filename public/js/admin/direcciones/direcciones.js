@@ -245,8 +245,26 @@ $(document).ready(function() {
             console.log(respuesta);
             var ciudad=$('#cityPropiety option:selected').html();
     				//console.log (respuesta);
-    				if (respuesta) {
-  						swal({
+    				if (respuesta[0]==0) {
+              swal({
+      		      title:'Imposible realizar la acción',
+      		      text:ciudad+" esta siendo utilizada en algun proyecto o propiedad.",
+      		      icon:'error',
+      		      //timer: 2000,
+      		      button:true
+      		    });
+    				}
+            else if (respuesta[0]==10) {
+              swal({
+      		      title:'Imposible realizar la acción',
+      		      text:"Existen urbanizaciones de "+ciudad+" que estan siendo usadas en una o mas propiedades.",
+      		      icon:'error',
+      		      //timer: 2000,
+      		      button:true
+      		    });
+            }
+            else if (respuesta[0]==1) {
+              swal({
   							title:'Buen trabajo!!',
   							text:"La ciudad "+ciudad+" y sus urbanizaciones fueron borradas con exito",
   							icon:'success',
@@ -255,10 +273,24 @@ $(document).ready(function() {
   						});
               $('.opcion').remove();
               $('.opcionUrbanizacion').remove();
-              $.each(respuesta,function(e){
-                $('#cityPropiety').append("<option value="+respuesta[e].id+" class='opcion' >"+respuesta[e].nombre+"</option>");
+              $.each(respuesta[1],function(e){
+                $('#cityPropiety').append("<option value="+respuesta[1][e].id+" class='opcion' >"+respuesta[1][e].nombre+"</option>");
               });
-    				}
+            }
+            else if (respuesta[0]==2) {
+              swal({
+                title:'Buen trabajo!!',
+                text:"La ciudad "+ciudad+" fue borrada con exito",
+                icon:'success',
+                //timer: 2000,
+                button:true,
+              });
+              $('.opcion').remove();
+              $('.opcionUrbanizacion').remove();
+              $.each(respuesta[1],function(e){
+                $('#cityPropiety').append("<option value="+respuesta[1][e].id+" class='opcion' >"+respuesta[1][e].nombre+"</option>");
+              });
+            }
     			}).fail(function(){
     				ocultarPreload();
     		    swal({
@@ -273,6 +305,73 @@ $(document).ready(function() {
     	});
     }
   });
-
+  //////////////////////////////////////// Borrar Ciudad y Urbanizaciones asociadas //////////////////////////////////////
+    $('body').on('click', '#bttnDeleteUrbanizacion', function() {
+      var ciudad=$('#cityPropiety').val();
+      var urbanizacion=$('#urbanizacionPropiety').val();
+      if (urbanizacion=='') {
+        swal(
+          'Imposible Realizar la acción',
+          'Debe seleccionar la urbanizacion que desea borrar',
+          'error'
+        );
+      }
+      else {
+        swal({
+      		title: "Borrar Urbanización",
+      		text: " ¿Seguro que desea borrar la urbanización seleccionada?",
+      		icon: "warning",
+      		buttons: ['No','Sí, Borrar'],
+      		dangerMode:true
+      	})
+      	.then((willDelete) => {
+      		if (willDelete) {
+      			url="/admin/borrarUrbanizacion";
+      			$.ajax({
+              beforeSend:mostrarPreload(),
+      				url: url,
+      				type: "post",
+      				dataType: "json",
+      				data:{ciudad:ciudad,urbanizacion:urbanizacion}
+      			})
+      			.done(function(respuesta){
+              ocultarPreload();
+              var urbanizacion=$('#urbanizacionPropiety option:selected').html();
+      				if (respuesta[0]==0) {
+                swal({
+        		      title:'Imposible realizar la acción',
+        		      text:urbanizacion+" esta siendo utilizada en una o varias propiedades.",
+        		      icon:'error',
+        		      //timer: 2000,
+        		      button:true
+        		    });
+      				}
+              else if (respuesta[0]==1) {
+                swal({
+                  title:'Buen trabajo!!',
+                  text:"La urbanización "+urbanizacion+" fue borrada con exito",
+                  icon:'success',
+                  //timer: 2000,
+                  button:true,
+                });
+                $('.opcionUrbanizacion').remove();
+                $.each(respuesta[1],function(e){
+                  $('#urbanizacionPropiety').append("<option value="+respuesta[1][e].id+" class='opcionUrbanizacion' >"+respuesta[1][e].nombre+"</option>");
+                });
+              }
+      			}).fail(function(){
+      				ocultarPreload();
+      		    swal({
+      		      title:'Algo sucedio',
+      		      text:"Comuniquese con el administrador",
+      		      icon:'error',
+      		      timer: 2000,
+      		      button:false
+      		    });
+      		  });
+      		}
+      	});
+      }
+    });
 
 });

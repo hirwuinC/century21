@@ -42,7 +42,7 @@
       </div>
       <div class="botones" style="padding-top:6px;">
         <div class="col-xs-2">
-            <button type="button" id='buttonReset' class="btnRed">BORRAR URBANIZACION</button>
+            <button type="button" id='bttnDeleteUrbanizacion' class="btnRed">BORRAR URBANIZACION</button>
         </div>
       </div>
   </div>
