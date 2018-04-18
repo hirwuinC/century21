@@ -72,21 +72,23 @@ $(document).ready(function() {
   });
 
 //////////////////////////////////////// Abrir modal nueva urbanización ///////////////////////////////////////////////
-    $('body').on('click', '#bttnNuevaUrbanizacion', function() {
-      var ciudad=$('#cityPropiety').val();
-      if (ciudad=='') {
-        swal(
-          'Imposible Realizar la acción',
-          'Debe seleccionar una ciudad',
-          'error'
-        );
-      }
-      else {
-        //console.log(ciudad);
-        $('#ciudadId').val(ciudad);
-        $('#nuevaUrbanizacion').modal('show');
-      }
-    });
+  $('body').on('click', '#bttnNuevaUrbanizacion', function() {
+    var ciudad=$('#cityPropiety').val();
+    if (ciudad=='') {
+      swal(
+        'Imposible Realizar la acción',
+        'Debe seleccionar una ciudad',
+        'error'
+      );
+    }
+    else {
+      //console.log(ciudad);
+      $('#ciudadId').val(ciudad);
+      var ciudad=$('#cityPropiety option:selected').html();
+      $('#cityTag').html(ciudad);
+      $('#nuevaUrbanizacion').modal('show');
+    }
+  });
 ///////////////////////////////////////// GUARDAR CIUDAD /////////////////////////////////////////////////////////////
   $("#nuevaCiudadForm").validate({
     onfocusout: false,
@@ -127,7 +129,7 @@ $(document).ready(function() {
           $('.limpiarCiudad').val('');
           $('.opcion').remove();
           $.each(respuesta[1],function(e){
-            $('#cityPropiety').append("<option value="+respuesta[1][e].id+" class='opcionUrbanizacion' >"+respuesta[1][e].nombre+"</option>");
+            $('#cityPropiety').append("<option value="+respuesta[1][e].id+" class='opcion' >"+respuesta[1][e].nombre+"</option>");
           });
         }
         else{
@@ -148,5 +150,129 @@ $(document).ready(function() {
       });
     }
   });
+///////////////////////////////////////// GUARDAR URBANIZACION /////////////////////////////////////////////////////////////
+  $("#nuevaUrbanizacionForm").validate({
+    onfocusout: false,
+    rules: {
+      urbanizacion:{
+        required:true
+      }
+    },
+    messages: {
+      urbanizacion:{
+        required:"Debe indicar el nombre de la urbanización"
+      }
+    },
+    submitHandler: function(form) {
+      var form = new FormData(document.getElementById('nuevaUrbanizacionForm'));
+      url="/admin/guardarUrbanizacion";
+      //console.log($('#evento').val());
+      $.ajax({
+          beforeSend:mostrarPreload(),
+          url: url,
+          type: "post",
+          dataType: "json",
+          data: form,
+          cache: false,
+          contentType:false,
+          processData: false
+      })
+      .done(function(respuesta){
+        ocultarPreload();
+        //console.log(res);
+        var ciudad=$('#cityPropiety option:selected').html();
+        if (respuesta[0]==1) {
+          swal(
+            'Buen Trabajo!!',
+            'La urbanización fue cargada correctamente para la ciudad '+ciudad,
+            'success'
+          );
+          $('.limpiarUrbanizacion').val('');
+          $('.opcionUrbanizacion').remove();
+          $.each(respuesta[1],function(e){
+            $('#urbanizacionPropiety').append("<option value="+respuesta[1][e].id+" class='opcionUrbanizacion' >"+respuesta[1][e].nombre+"</option>");
+          });
+        }
+        else{
+          swal(
+            'Imposible Realizar la acción',
+            'Ya existe una ciudad cargada para este estado con ese nombre',
+            'error'
+          );
+        }
+      })
+      .fail(function(){
+        ocultarPreload();
+        swal(
+          'Imposible Realizar la acción',
+          'Comuniquese con el administrador del sistema',
+          'error'
+        );
+      });
+    }
+  });
+//////////////////////////////////////// Borrar Ciudad y Urbanizaciones asociadas //////////////////////////////////////
+  $('body').on('click', '#bttnDeleteCiudad', function() {
+    var ciudad=$('#cityPropiety').val();
+    var estado=$('#estatePropiety').val();
+    if (ciudad=='') {
+      swal(
+        'Imposible Realizar la acción',
+        'Debe seleccionar la ciudad que desea borrar',
+        'error'
+      );
+    }
+    else {
+      swal({
+    		title: "Borrar Ciudad",
+    		text: "Al borrar la ciudad seleccionada se borraran sus Urbanizaciones, ¿Desea Continuar?",
+    		icon: "warning",
+    		buttons: ['No','Sí, Borrar'],
+    		dangerMode:true
+    	})
+    	.then((willDelete) => {
+    		if (willDelete) {
+    			url="/admin/borrarCiudad";
+    			$.ajax({
+            beforeSend:mostrarPreload(),
+    				url: url,
+    				type: "post",
+    				dataType: "json",
+    				data:{ciudad:ciudad,estado:estado}
+    			})
+    			.done(function(respuesta){
+            ocultarPreload();
+            console.log(respuesta);
+            var ciudad=$('#cityPropiety option:selected').html();
+    				//console.log (respuesta);
+    				if (respuesta) {
+  						swal({
+  							title:'Buen trabajo!!',
+  							text:"La ciudad "+ciudad+" y sus urbanizaciones fueron borradas con exito",
+  							icon:'success',
+  							//timer: 2000,
+  							button:true,
+  						});
+              $('.opcion').remove();
+              $('.opcionUrbanizacion').remove();
+              $.each(respuesta,function(e){
+                $('#cityPropiety').append("<option value="+respuesta[e].id+" class='opcion' >"+respuesta[e].nombre+"</option>");
+              });
+    				}
+    			}).fail(function(){
+    				ocultarPreload();
+    		    swal({
+    		      title:'Algo sucedio',
+    		      text:"Comuniquese con el administrador",
+    		      icon:'error',
+    		      timer: 2000,
+    		      button:false
+    		    });
+    		  });
+    		}
+    	});
+    }
+  });
+
 
 });

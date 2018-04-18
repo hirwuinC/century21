@@ -32,7 +32,8 @@ Route::any('/admin/salir', ['as' => 'login-salir', 'uses' => 'Admin\AdminControl
 // Ajustes de direcciones
 Route::get('/admin/direcciones',['as'=>'direcciones','uses'=>'Admin\DireccionesController@ajusteDirecciones'] );
 Route::post('/admin/guardarCiudad',['as'=>'guardarCiudad','uses'=>'Admin\DireccionesController@guardarCiudad'] );
-
+Route::any('/admin/guardarUrbanizacion',['as'=>'guardarUrbanizacion','uses'=>'Admin\DireccionesController@guardarUrbanizacion'] );
+Route::any('/admin/borrarCiudad',['as'=>'borrarCiudad','uses'=>'Admin\DireccionesController@borrarCiudad'] );
 
 //Asesores
 Route::get('/admin/crear-usuario/{id}', ['as' => 'crear-agente', 'uses' => 'Admin\AsesorController@CrearUsuarioAsesor']);

@@ -4,7 +4,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h1 class="titleSection">Nueva Urbanización</h1>
+                <h1 class="titleSection"><span id="cityTag"></span> > Nueva Urbanización</h1>
             </div>
             <div class="modal-body">
                 <form class="form marginForm" id="nuevaUrbanizacionForm">
@@ -16,7 +16,7 @@
                         </div>
                         <div class="col-xs-8">
                             <div class="form-group">
-                                <input type="text" class="form-control limpiar" maxlength="150" name="urbanizacion" id="urbanizacion"></input>
+                                <input type="text" class="form-control limpiarUrbanizacion" maxlength="150" name="urbanizacion" id="urbanizacion"></input>
                                 <input type="hidden" name="ciudadId" id="ciudadId" value="">
                             </div>
                         </div>

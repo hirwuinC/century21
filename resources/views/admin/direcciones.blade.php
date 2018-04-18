@@ -26,7 +26,7 @@
       </div>
       <div class="botones" style="padding-top:6px;">
         <div class="col-xs-2">
-            <button type="button" id='buttonReset' class="btnRed">BORRAR</button>
+            <button type="button" id='bttnDeleteCiudad' class="btnRed">BORRAR CIUDAD</button>
         </div>
         <div class="col-xs-2">
             <button type="button" id="bttnNuevaUrbanizacion" class="btnGreen btnGreenAjuste">Nueva Urbanización</button>
@@ -42,7 +42,7 @@
       </div>
       <div class="botones" style="padding-top:6px;">
         <div class="col-xs-2">
-            <button type="button" id='buttonReset' class="btnRed">BORRAR</button>
+            <button type="button" id='buttonReset' class="btnRed">BORRAR URBANIZACION</button>
         </div>
       </div>
   </div>

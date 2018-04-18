@@ -36,4 +36,32 @@ class DireccionesController extends Controller{
     }
     return $valores;
   }
+  public function guardarUrbanizacion(){
+    $nombreUrbanizacion=ucwords(mb_strtolower(Request::get('urbanizacion')));
+    $ciudad=Request::get('ciudadId');
+    $consulta=Urbanizacion::where('nombre',$nombreUrbanizacion)->where('ciudad_id',$ciudad)->first();
+    if (count($consulta)==0) {
+      $urbanizacion=new Urbanizacion;
+      $urbanizacion->nombre=$nombreUrbanizacion;
+      $urbanizacion->ciudad_id=$ciudad;
+      $urbanizacion->save();
+      $lista=Urbanizacion::where('ciudad_id',$ciudad)->orderBy('nombre','asc')->get();
+      $respuesta=1;
+      $valores=[$respuesta,$lista];
+    }
+    else{
+      $respuesta=0;
+      $valores=[$respuesta,0];
+    }
+    return $valores;
+  }
+  public function borrarCiudad(){
+    $estado=Request::get('estado');
+    $ciudad=Request::get('ciudad');
+    $consultaCiudad=Propiedad::where('ciudad_id','')
+    //Urbanizacion::where('ciudad_id',$ciudad)->delete();
+    //Ciudad::where('id',$ciudad)->delete();
+    $ciudades=Ciudad::where('estado_id',$estado)->get();
+    return $ciudades;
+  }
 }
