@@ -21,7 +21,7 @@ $(document).ready(function() {
 		};
 
 //////////////////////////////////////// ABRIR MODAL PARA GESTION DE NEGOCIACION ///////////////////////////////////////////////
-	$('.cambioEstatus').on('click', function(){
+	$('body').on('click', '.cambioEstatus',function(){
 		var parametro=$(this).parent().find('.inmueble').val();
 		//console.log(parametro);
 	  url="/admin/llenarModalNegociacion";

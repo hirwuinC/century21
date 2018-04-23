@@ -3,7 +3,7 @@
 @section('content')
     <h2 class="titleSection">inmuebles</h2>
     @include('admin/common/search_bar')
-    <section>
+    <section id="padre">
         <div class="row">
             @foreach($inmuebles as $inmueble)
                 @component('admin/partials/inmueble')
@@ -60,10 +60,6 @@
                 @endcomponent
             @endforeach
         </div>
-        <div class="row">
-          <center>{{ $inmuebles->links() }}</center>
-        </div>
-
     </section>
     @include('admin/modals/cambio_estatus')
     @include('admin/modals/add_comprador')
@@ -71,7 +67,7 @@
 
 @section('js')
     <script>
-        $('.detalleAction').on('click', function(){
+        $('body').on('click','.detalleAction', function(){
           var parametro=$(this).parent().find('.id');
           var redirectUrlDetalleInmueble = "/admin/inmueble/"+parametro.val();
             window.location.href = redirectUrlDetalleInmueble;

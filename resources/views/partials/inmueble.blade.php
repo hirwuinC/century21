@@ -1,5 +1,5 @@
 
-<div class="thumbProperty">
+<div class="thumbProperty hijo">
     <div class="contentTop">
         <img src="{{ asset('images/') }}/{{$img}}" alt="">
         <div class="caption">

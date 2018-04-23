@@ -11,7 +11,7 @@
                             <input type="text" class="inputs form-control buscador" id="exampleInputEmail1" placeholder="Código Inmueble">
                         </div>
                     </div>
-                    <form action="/admin/inmuebles" method="get">
+                    <form id="buscadorInmuebleForm">
                         <input type="hidden" name="data" value="1">
                         <div class="col-xs-4">
                             <select class="form-control right " name="asesor" id="asesor">
@@ -48,7 +48,7 @@
                             </select>
                         </div>
                         <div class="col-xs-3 ">
-                            <input type="submit" class="btnYellow" value="Buscar">
+                            <input type="submit" class="btnYellow" id="buscadorInmueble" value="Buscar">
                         </div>
                     </form>
                 </div>

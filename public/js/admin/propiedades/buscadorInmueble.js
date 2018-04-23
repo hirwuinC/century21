@@ -54,6 +54,34 @@ $(document).ready(function() {
 	        }
 	      });
 	    });
+////////////////////////////////////////////// BUSCADOR DE PROPIEDADES  //////////////////////////////////////////////////////////////
+$('body').on('click', '#buscadorInmueble', function(event) {
+	event.preventDefault();
+	var valor=$('#buscadorInmuebleForm').serialize();
+	$.ajax({
+		beforeSend:mostrarPreload(),
+		url: '/admin/buscarInmueble',
+		type: 'post',
+		dataType: 'html',
+		data: valor
+	})
+	.done(function(respuesta) {
+		ocultarPreload();
+	$('#padre').empty();
+	$('#padre').append(respuesta)
+	})
+	.fail(function() {
+		ocultarPreload();
+		swal(
+			'Imposible Realizar la acción',
+			'Comuniquese con el administrador del sistema',
+			'error'
+		);
+		//console.log("error");
+	});
+});
 
-
+////////////////////////////////////////////// Scroll Infinito ///////////////////////////////////////////////////////////////////////
+window.sr = ScrollReveal();
+sr.reveal('.hijo');
 });

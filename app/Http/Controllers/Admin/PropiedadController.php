@@ -23,50 +23,48 @@ use App\Models\NegociacionEstatus;
 class PropiedadController extends Controller{
 
   public function ListaInmuebles(){
-      $data=Request::get('data');
-      $asesor=Request::get('asesor');
-      $estatus=Request::get('estatus');
-      $estado=Request::get('estatePropiety');
-      $ciudad=Request::get('cityPropiety');
-      $urbanizacion=Request::get('namePropiety');
-      /*if (empty($asesor)) {
-        $parametro='is not null';
-      }
-      else{
-        $parametro=$asesor;
-      }*/
-      if ($data) {
-        $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
-                                      ->Join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
-                                      ->Join('agentes','propiedades.agente_id','agentes.id')
-                                      ->Join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
-                                      ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','tipoinmueble.nombre as nombreInmueble','agentes.fullName as nombreAsesor','urbanizaciones.nombre as nombreUrbanizacion')
-                                      ->where('medias.vista',1)
-                                      //->where("propiedades.agente_id",$parametro)
-                                      ->where(function($query, $asesor=5){
-                                          return $query
-                                                    //->whereNotNull('propiedades.agente_id')
-                                                    ->orWhere('propiedades.agente_id',$asesor);
-                                      })
-                                      ->paginate(1);
-
-      }
-      else{
-        $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
-                                      ->Join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
-                                      ->Join('agentes','propiedades.agente_id','agentes.id')
-                                      ->Join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
-                                      ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','tipoinmueble.nombre as nombreInmueble','agentes.fullName as nombreAsesor','urbanizaciones.nombre as nombreUrbanizacion')
-                                      ->where('medias.vista',1)
-                                      ->paginate(3);
-      }
-
+      $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
+                                    ->Join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
+                                    ->Join('agentes','propiedades.agente_id','agentes.id')
+                                    ->Join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
+                                    ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','tipoinmueble.nombre as nombreInmueble','agentes.fullName as nombreAsesor','urbanizaciones.nombre as nombreUrbanizacion')
+                                    ->where('medias.vista',1)
+                                    ->get();
 
       $usuario=Session::get('asesor');
       $asesores=Agente::all();
       $estados=Estado::all();
       $estatus=Estatus::where('familia',1)->get();
       return view('/admin/lista_inmuebles',$this->cargarSidebar(),compact('inmuebles','usuario','asesores','estados','estatus'));
+  }
+  public function buscarInmueble(){
+    $arreglo=array();
+    $consulta=array();
+    $arreglo['propiedades.agente_id']=Request::get('asesor');
+    $arreglo['propiedades.estatus']=Request::get('estatus');
+    $arreglo['propiedades.estado_id']=Request::get('estatePropiety');
+    $arreglo['propiedades.ciudad_id']=Request::get('cityPropiety');
+    $arreglo['propiedades.urbanizacion']=Request::get('namePropiety');
+
+    foreach ($arreglo as $key => $value) {
+      if ($value!='') {
+        $consulta[$key]=$value;
+      }
+    }
+    $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
+                                  ->Join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
+                                  ->Join('agentes','propiedades.agente_id','agentes.id')
+                                  ->Join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
+                                  ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','tipoinmueble.nombre as nombreInmueble','agentes.fullName as nombreAsesor','urbanizaciones.nombre as nombreUrbanizacion')
+                                  ->where('medias.vista',1)
+                                  ->where($consulta)
+                                  ->get();
+
+    $usuario=Session::get('asesor');
+    $asesores=Agente::all();
+    $estados=Estado::all();
+    $estatus=Estatus::where('familia',1)->get();
+    return view('/admin/partials/resultado_propiedades',$this->cargarSidebar(),compact('inmuebles','usuario','asesores','estados','estatus'));
   }
 
   public function CrearInmueble1(){
