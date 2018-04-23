@@ -23,12 +23,12 @@ class CompradorController extends Controller
 
     public function modificarComprador($id){
       $comprador=Comprador::where('id',$id)->first();
-      $propiedades=CompradorPropiedades::join('propiedades','compradorPropiedades.propiedad_id','propiedades.id')
+      $propiedades=CompradorPropiedades::join('propiedades','compradorpropiedades.propiedad_id','propiedades.id')
                                         ->join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
                                         ->join('estados','propiedades.estado_id','estados.id')
                                         ->join('ciudades','propiedades.ciudad_id','ciudades.id')
                                         ->join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
-                                        ->where('compradorPropiedades.comprador_id',$id)
+                                        ->where('compradorpropiedades.comprador_id',$id)
                                         ->select('propiedades.*','tipoinmueble.nombre as nombreTipoInmueble','estados.nombre as nombreEstado','ciudades.nombre as nombreCiudad','urbanizaciones.nombre as nombreUrbanizacion')
                                         ->get();
       return view('admin.modificar_comprador',$this->cargarSidebar(),compact('comprador','propiedades'));

@@ -47,7 +47,6 @@ Route::get('/admin/perfil', ['as' => 'perfil', 'uses' => 'Admin\PerfilController
 Route::any('/admin/actualizarPerfil', ['as' => 'updatePerfil', 'uses' => 'Admin\PerfilController@actualizarPerfil']);
 
 //inmuebles
-Route::get('/admin', ['as' => 'dashboard', 'uses' => 'Admin\PropiedadController@ListaInmuebles']);
 Route::get('/admin/inmuebles', ['as' => 'admin_lista_inmuebles', 'uses' => 'Admin\PropiedadController@ListaInmuebles']);
 Route::get('/admin/inmueble/{id}', ['as' => 'admin_detalle_inmueble', 'uses' => 'Admin\PropiedadController@DetalleInmueble']);
 Route::get('/admin/crear-inmueble-1', ['as' => 'crear-inmueble-1', 'uses' => 'Admin\PropiedadController@CrearInmueble1']);

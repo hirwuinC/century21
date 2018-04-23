@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class CompradorPropiedades extends Model
 {
-    protected $table="compradorPropiedades";
+    protected $table="compradorpropiedades";
     public $timestamps=false;
 }

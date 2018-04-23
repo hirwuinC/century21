@@ -63,6 +63,7 @@
         <div class="row">
           <center>{{ $inmuebles->links() }}</center>
         </div>
+
     </section>
     @include('admin/modals/cambio_estatus')
     @include('admin/modals/add_comprador')
@@ -77,4 +78,5 @@
         })
     </script>
     <script type="text/javascript" src="{{ asset('js/admin/propiedades/estatus.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/admin/propiedades/buscadorInmueble.js') }}"></script>
 @endSection

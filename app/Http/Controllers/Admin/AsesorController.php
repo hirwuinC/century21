@@ -15,7 +15,7 @@ class AsesorController extends Controller
     public function ListarAsesores(){
       $data=\Request::get('data');
       if ($data) {
-        $asesores=Agente::where('id',$data)->paginate(20);
+        $asesores=Agente::where('id',$data)->get();
       }
       else{
         $asesores= Agente::orderBy('fullName','asc')->paginate(20);
