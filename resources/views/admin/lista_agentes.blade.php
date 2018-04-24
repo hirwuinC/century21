@@ -9,7 +9,7 @@
                 <div class="iconInput">
                     <i class="fa fa-search" aria-hidden="true"></i>
                 </div>
-                <input type="search" class="inputs form-control" id="exampleInputSearch" placeholder="Nombre del Asesor">
+                <input type="search" class="inputs form-control" id="exampleInputSearch" placeholder="Nombre / Código Asesor">
                 <input type="hidden" id="valor">
                 <ul class="register-list">
                 </ul>
@@ -21,8 +21,15 @@
             <div class="col-xs-12 listAgents ">
                 @foreach($asesores as $asesor)
                     @component('admin/partials/agente')
+                        @slot('imagen')
+                          <div class="contentAvatar">
+                              <div>
+                                  <span><img class="image" src="{{ asset('/images/asesores')}}/{{$asesor->nombreimagen}}" alt=""></span>
+                              </div>
+                          </div>
+                        @endslot
                         @slot('fullname')
-                            {{ ucwords(strtolower($asesor->fullName))}}
+                            {{$asesor->fullName}}
                         @endslot
                         @slot('asesor_id')
                             {{$asesor->id}}

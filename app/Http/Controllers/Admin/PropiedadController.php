@@ -163,19 +163,20 @@ class PropiedadController extends Controller{
     $inmueble=Session::get($sesiones[$desicion]);
     $extension = mb_strtolower($archivo->getClientOriginalExtension());
     $renombre = uniqid().'.'.$extension;
+    $nombreRuta="/images/inmuebles/".$renombre;
     $path ="images/inmuebles";
     $consulta=Media::where('id',$idImagen)->first();
     if (count($consulta)!=0) {
       Media::where('id',$idImagen)->update([
-        "nombre"        =>  $renombre,
+        "nombre"        =>  $nombreRuta,
         "propiedad_id"  =>  $inmueble
       ]);
-      File::delete(public_path('images/inmuebles/'.$consulta->nombre.''));
+      File::delete(public_path('/images/inmuebles/'.$consulta->nombre.''));
       $archivo->move($path,$renombre);
     }
     else{
       $idImagen=DB::table('medias')->insertGetId([
-                  "nombre"        =>  $renombre,
+                  "nombre"        =>  $nombreRuta,
                   "propiedad_id"  =>  $inmueble
       ]);
       $archivo->move($path,$renombre);
@@ -196,7 +197,7 @@ class PropiedadController extends Controller{
         $respuesta=2;
       }
       else{
-        File::delete(public_path('images/inmuebles/'.$consulta->nombre.''));
+        File::delete(public_path($consulta->nombre));
         Media::destroy($imagen);
         $respuesta=1;
       }

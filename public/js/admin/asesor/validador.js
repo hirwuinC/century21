@@ -1,4 +1,25 @@
 $(document).ready(function(){
+
+	/////////////////////////////////////////MOSTRAR Y OCULTAR PRELOAD ///////////////////////////////////////////////////////
+	  function mostrarPreload(){
+	    var ancho = 0;
+	    var alto = 0;
+	    if (window.innerWidth == undefined) ancho = window.screen.width;
+	    else ancho = window.innerWidth;
+	    if (window.innerHeight == undefined) alto = window.screen.height;
+	    else alto = window.innerHeight;
+	    div = document.createElement("div");
+	    div.id = "WindowLoad"
+	    div.style.width = ancho + "px";
+	    div.style.height = alto + "px";
+	    $("body").append(div);
+	    $('#load').css('display','block');
+	  };
+	  function ocultarPreload(){
+	    $("#WindowLoad").remove();
+	    $('#load').css('display','none');
+	  };
+/////////////////////////////////////////////// Agregar o modificar usuarios /////////////////////////////////////////////////
 	$("#asesorCreate").validate({
 			onfocusout: false,
 			rules: {
@@ -6,9 +27,8 @@ $(document).ready(function(){
 					required:true,
 					minlength: 3
 				},
-				emailUser: {
-					required: true,
-					email: true
+				cedula: {
+					required: true
 				},
 				pass:{
 					required:true,
@@ -41,9 +61,8 @@ $(document).ready(function(){
 				required:"Debe indicar un nombre de usuario",
 				minlength: "EL nombre de usuario debe ser minimo de 3 caracteres"
 			},
-			emailUser: {
-				required: "Debe indicar un correo electronico para el usuario",
-				email: "El correo electronico debe tener un formato como el siguiente minombre@century21caracas.com"
+			cedula: {
+				required: "Debe indicar la cédula del asesor"
 			},
 			pass:{
 				required:"Debe indicar una contraseña de acceso",
@@ -72,17 +91,29 @@ $(document).ready(function(){
 			}
 		},
 		submitHandler: function(form) {
-			var form=$("#asesorCreate").serialize();
+			var form= new FormData(document.getElementById("asesorCreate"));
 			url="/admin/buscaruser";
-			$.post(url,form,function(respuesta){
+			$.ajax({
+				beforeSend: mostrarPreload(),
+				url: url,
+				type: "post",
+				dataType: "html",
+				data: form,
+				cache: false,
+				contentType: false,
+				processData: false
+			})
+			.done(function(respuesta){
+				//console.log(respuesta);
+				ocultarPreload();
 				var mensajes={0:"Error Inesperado, pongase en contacto con el administrador",
 											1:"El rif ya esta registrado para otro usuario",
-											2:"El email ya esta registrado para otro usuario",
-											3:"El email y el rif ya estan registrados para otro usuario",
+											2:"La cédula ya esta registrada para otro usuario",
+											3:"La cédula y el rif ya estan registrados para otro usuario",
 											4:"El nombre ya existe para otro usuario",
-											5:"El nombre y el email ya existen para otro usuario",
+											5:"El nombre y la cédula ya existen para otro usuario",
 											6:"El nombre y el rif ya existen para otro usuario",
-											7:"El nombre, el email y el rif ya existen para otro usuario",
+											7:"El nombre, la cédula y el rif ya existen para otro usuario",
 										 10:"Usuario actualizado",
 										 20:"Nuevo usuario registrado"
 									 };
@@ -100,9 +131,17 @@ $(document).ready(function(){
 					  'error'
 					);
 				}
+			}).fail( function() {
+				ocultarPreload();
+				swal(
+					'Imposible Realizar la acción',
+					'Comuniquese con el administrador del sistema',
+					'error'
+				);
 			});
 		}
 	});
+///////////////////////////////////////////////// Cargar foto en contenedor //////////////////////////////////////////////
 	$('.file-input').change(function(){
     var curElement = $(this).parent().parent().parent().find('.image');
     var reader = new FileReader();
@@ -112,10 +151,12 @@ $(document).ready(function(){
     };
     reader.readAsDataURL(this.files[0]);
 	});
+
+///////////////////////////////////////////////// CAMPOS RESETEADOS  ////////////////////////////////////////////////////
 	$('body').on('click','#buttonReset',function(){
 		$('#checkbox-example-two').attr('checked',false);
 		$('#user').val('');
-		$('#emailUser').val('');
+		$('#cedula').val('');
 		$('#pass').val('');
 		$('#repeatPass').val('');
 		$('#dataEntry').val('');

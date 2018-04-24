@@ -13,7 +13,7 @@ $(document).ready(function(){
             type:"description",
             fields:{
                 fullName:"fullName",
-                description:"cedula"
+                description:"codigo_id"
 
             }
         },

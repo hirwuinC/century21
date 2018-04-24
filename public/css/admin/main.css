@@ -1085,13 +1085,13 @@ textarea:focus {
   width: 25%;
 
 }
-.sidebar-nav .contentAvatar {
+.sidebar-nav .contentAvatar,.contentAvatar {
   display: flex;
   flex-flow: column;
   justify-content: center;
   padding: 10px 0;
 }
-.sidebar-nav .contentAvatar span {
+.sidebar-nav .contentAvatar span, .contentAvatar span{
   display: block;
   height: 60px;
   width: 60px;
@@ -1101,7 +1101,7 @@ textarea:focus {
   border: #f1b311 3px solid;
   margin: 0 20px;
 }
-.sidebar-nav .contentAvatar span img{
+.sidebar-nav .contentAvatar span img,.contentAvatar span img{
   height: 100%;
   width: 100%;
   border-radius: 50%;

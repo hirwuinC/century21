@@ -14,8 +14,7 @@ class Agente extends Model
     }
     public function scopeSearchAsesor($query,$asesor){
     	return $query->where('fullName','like','%'.$asesor.'%')
-    			         ->orwhere('cedula','like','%'.$asesor.'%')
-                   ->orwhere('ref_id','like','%'.$asesor.'%');
+                   ->orwhere('codigo_id','like','%'.$asesor.'%');
     }
 
 

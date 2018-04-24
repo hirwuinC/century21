@@ -5,7 +5,7 @@
                 <li class="headerNav">
                     <div class="contentAvatar">
                         <div>
-                            <span><img class="image" src="{{ asset('/images')}}/{{$userall->nombre_imagen}}" alt=""></span>
+                            <span><img class="image" src="{{ asset('/images/asesores')}}/{{$userall->nombre_imagen}}" alt=""></span>
                             <p>{{$userall->nombre_asesor}}</p>
                         </div>
                     </div>
