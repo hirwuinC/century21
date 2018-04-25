@@ -29,7 +29,8 @@ class PropiedadController extends Controller{
                                     ->Join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
                                     ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','tipoinmueble.nombre as nombreInmueble','agentes.fullName as nombreAsesor','urbanizaciones.nombre as nombreUrbanizacion')
                                     ->where('medias.vista',1)
-                                    ->get();
+                                    ->paginate(50);
+
 
       $usuario=Session::get('asesor');
       $asesores=Agente::all();
@@ -73,8 +74,8 @@ class PropiedadController extends Controller{
     $usuario=Session::get('asesor');
     $datos=Propiedad::where('cargado',0)->where('cargadoPor',$usuario->id)->first();
     if (count($datos)!=0) {
-      $consulta=Ciudad::where('estado_id',$datos->estado_id)->get();
-      $urbanizaciones=Urbanizacion::where('ciudad_id',$datos->ciudad_id)->get();
+      $consulta=Ciudad::where('estado_id',$datos->estado_id)->orderBy('nombre','asc')->get();
+      $urbanizaciones=Urbanizacion::where('ciudad_id',$datos->ciudad_id)->orderBy('nombre','asc')->get();
     }
     $tiposIn=TipoInmueble::all();
     $estados=Estado::all();
@@ -163,12 +164,11 @@ class PropiedadController extends Controller{
     $inmueble=Session::get($sesiones[$desicion]);
     $extension = mb_strtolower($archivo->getClientOriginalExtension());
     $renombre = uniqid().'.'.$extension;
-    $nombreRuta="/images/inmuebles/".$renombre;
     $path ="images/inmuebles";
     $consulta=Media::where('id',$idImagen)->first();
     if (count($consulta)!=0) {
       Media::where('id',$idImagen)->update([
-        "nombre"        =>  $nombreRuta,
+        "nombre"        =>  $renombre,
         "propiedad_id"  =>  $inmueble
       ]);
       File::delete(public_path('/images/inmuebles/'.$consulta->nombre.''));
@@ -176,7 +176,7 @@ class PropiedadController extends Controller{
     }
     else{
       $idImagen=DB::table('medias')->insertGetId([
-                  "nombre"        =>  $nombreRuta,
+                  "nombre"        =>  $renombre,
                   "propiedad_id"  =>  $inmueble
       ]);
       $archivo->move($path,$renombre);
@@ -197,7 +197,7 @@ class PropiedadController extends Controller{
         $respuesta=2;
       }
       else{
-        File::delete(public_path($consulta->nombre));
+        File::delete(public_path('/images/asesores/'.$consulta->nombre));
         Media::destroy($imagen);
         $respuesta=1;
       }
@@ -209,7 +209,8 @@ class PropiedadController extends Controller{
     $inmueble=Session::get('inmueble');
     $imagenes=Media::where('propiedad_id',$inmueble)->get();
     $ultimo=Media::where('propiedad_id',$inmueble)->orderBy('id', 'desc')->first();
-    return view('/admin/crear_inmueble_2',$this->cargarSidebar(),compact('imagenes','ultimo'));
+    $propiedad=Propiedad::find($inmueble);
+    return view('/admin/crear_inmueble_2',$this->cargarSidebar(),compact('imagenes','ultimo','propiedad'));
   }
 
   public function guardarInmueble(){
@@ -321,8 +322,8 @@ class PropiedadController extends Controller{
     $tiposIn=TipoInmueble::all();
     $estados=Estado::all();
     $asesores=Agente::all();
-    $consulta=Ciudad::where('estado_id',$propiedad->estado_id)->get();
-    $urbanizaciones=Urbanizacion::where('ciudad_id',$propiedad->ciudad_id)->get();
+    $consulta=Ciudad::where('estado_id',$propiedad->estado_id)->orderBy('nombre','asc')->get();
+    $urbanizaciones=Urbanizacion::where('ciudad_id',$propiedad->ciudad_id)->orderBy('nombre','asc')->get();
     $estatus=Estatus::where('familia',1)->where('id','<>','11')->get();
     return view('/admin/editar_inmueble_1',$this->cargarSidebar(),compact('tiposIn','estados','asesores','consulta','propiedad','urbanizaciones','estatus'));
   }
@@ -361,7 +362,8 @@ class PropiedadController extends Controller{
     $inmueble=Session::get('inmuebleEdit');
     $imagenes=Media::where('propiedad_id',$inmueble)->get();
     $ultimo=Media::where('propiedad_id',$inmueble)->orderBy('id', 'desc')->first();
-    return view('/admin/editar_inmueble_2',$this->cargarSidebar(),compact('inmueble','imagenes','ultimo'));
+    $propiedad=Propiedad::find($inmueble);
+    return view('/admin/editar_inmueble_2',$this->cargarSidebar(),compact('inmueble','imagenes','ultimo','propiedad'));
   }
   public function prueba(){
         $consulta=uniqid();

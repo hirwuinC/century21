@@ -1,7 +1,7 @@
 <div class="col-sm-4 hijo">
     <div class="thumbProperty">
         <div class="contentTop">
-            <img src="{{ asset('images')}}{{$img}}" alt="">
+            {{$img}}
             <div class="caption">
                 <div class="businessType">
                     <p>{{$type}}</p>

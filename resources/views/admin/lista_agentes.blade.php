@@ -24,7 +24,7 @@
                         @slot('imagen')
                           <div class="contentAvatar">
                               <div>
-                                  <span><img class="image" src="{{ asset('/images/asesores')}}/{{$asesor->nombreimagen}}" alt=""></span>
+                                  <span><img class="image" src="{{ asset('/images/asesores')}}/{{$asesor->nombreimagen}}"></span>
                               </div>
                           </div>
                         @endslot

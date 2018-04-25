@@ -7,11 +7,19 @@
                   @foreach($imagenes as $imagen)
                     @if($imagen->vista==1)
                       <div class="item active inmueble">
-                          <img src="{{ asset('images/inmuebles/'.$imagen->nombre.'')}}" alt="..." class="img-responsive">
+                          @if($inmueble->id_mls==0)
+                            <img src="{{ asset('images/inmuebles')}}/{{$imagen ->nombre}}" alt="" class="img-responsive">
+                          @else
+                            <img src="{{$imagen->nombre}}" alt="" class="img-responsive">
+                          @endif
                       </div>
                     @else
                       <div class="item inmueble">
-                          <img src="{{ asset('images/inmuebles/'.$imagen->nombre.'')}}" alt="..." class="img-responsive">
+                        @if($inmueble->id_mls==0)
+                          <img src="{{ asset('images/inmuebles')}}/{{$imagen ->nombre}}" alt="" class="img-responsive">
+                        @else
+                          <img src="{{$imagen->nombre}}" alt="" class="img-responsive">
+                        @endif
                       </div>
                     @endif
                   @endforeach
@@ -31,11 +39,19 @@
                   @foreach($imagenes as $imagen)
                     @if($imagen->vista==1)
                       <li data-target="#carousel-custom" data-slide-to="{{$contador++}}" class="active">
-                          <img src="{{ asset('images/inmuebles/'.$imagen->nombre.'')}}" alt="..." class="img-responsive">
+                        @if($inmueble->id_mls==0)
+                          <img src="{{ asset('images/inmuebles')}}/{{$imagen ->nombre}}" alt="" class="img-responsive">
+                        @else
+                          <img src="{{$imagen->nombre}}" alt="" class="img-responsive">
+                        @endif
                       </li>
                     @else
                       <li data-target="#carousel-custom" data-slide-to="{{$contador++}}">
-                          <img src="{{ asset('images/inmuebles/'.$imagen->nombre.'')}}" alt="..." class="img-responsive">
+                        @if($inmueble->id_mls==0)
+                          <img src="{{ asset('images/inmuebles')}}/{{$imagen ->nombre}}" alt="" class="img-responsive">
+                        @else
+                          <img src="{{$imagen->nombre}}" alt="" class="img-responsive">
+                        @endif
                       </li>
                     @endif
                   @endforeach

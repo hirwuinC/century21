@@ -5,8 +5,13 @@ li {
 }
 
 a, a:hover, a:focus {
-  text-decoration: none;
-  outline: none;
+  text-decoration: none !important;
+  outline: none !important;
+}
+.priceProject p, .priceProject p:hover {
+  text-decoration: none !important;
+  outline: none !important;
+  color: black;
 }
 
 /*----- END RESET -------*/

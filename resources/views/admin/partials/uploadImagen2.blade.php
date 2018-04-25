@@ -2,7 +2,7 @@
 <div class="col-sm-3 thumbPropiety">
     <div class="thumbProperty">
         <div class="contentTop">
-            <img class="imgInmueble" src="{{ asset('images')}}{{$img}}" alt="">
+            {{$img}}
         </div>
         <div class="contentInfo">
             <div class="buttonsAction">

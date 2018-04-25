@@ -9,7 +9,11 @@
           @foreach($imagenes as $imagen)
             @component('admin/partials/uploadImagen2')
               @slot('img')
-                /inmuebles/{{$imagen->nombre}}
+                @if($propiedad->id_mls==0)
+                  <img src="{{ asset('images/inmuebles')}}/{{$imagen->nombre}}" alt="">
+                @else
+                  <img src="{{$imagen->nombre}}" alt="">
+              @endif
               @endslot
               @slot('contador')
               {{$imagen->id}}

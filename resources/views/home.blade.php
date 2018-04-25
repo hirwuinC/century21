@@ -43,6 +43,7 @@
         </div>
         <div class="row">
             @foreach($inmuebles as $inmueble)
+            <a href="{{ route('detalle_inmueble',$inmueble->id) }}">
                 <div class="col-sm-4">
                     @component('partials/inmueble')
                         @slot('type'){{$inmueble->tipoNegocio}} @endslot
@@ -61,9 +62,16 @@
                         @slot('baños') {{$inmueble->banos}} @endslot
                         @slot('cuartos') {{$inmueble->habitaciones}}@endslot
                         @slot('estacionamientos') {{$inmueble->estacionamientos}} @endslot
-                        @slot('img')/inmuebles/{{$inmueble->nombre_imagen}} @endslot
+                        @slot('img')
+                          @if($inmueble->id_mls==0)
+                            <img src="{{ asset('images/inmuebles')}}/{{$inmueble ->nombre_imagen}}" alt="">
+                          @else
+                            <img src="{{$inmueble->nombre_imagen}}" alt="">
+                          @endif
+                        @endslot
                     @endcomponent
                 </div>
+            </a>
             @endforeach
       </div>
     </div>

@@ -18,7 +18,7 @@ class AsesorController extends Controller
     public function ListarAsesores(){
       $data=\Request::get('data');
       if ($data) {
-        $asesores=Agente::join('imagenes','agentes.imagen_id','imagenes.id')->where('agentes.id',$data)->select('agentes.*','imagenes.src as nombreimagen')->get();
+        $asesores=Agente::join('imagenes','agentes.imagen_id','imagenes.id')->where('agentes.id',$data)->select('agentes.*','imagenes.src as nombreimagen')->paginate(20);
       }
       else{
         $asesores= Agente::join('imagenes','agentes.imagen_id','imagenes.id')->select('agentes.*','imagenes.src as nombreimagen')->orderBy('fullName','asc')->paginate(20);

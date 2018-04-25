@@ -80,6 +80,7 @@
             <section id="featuredProperties">
                 <div class="row">
                     @foreach($destacados as $destacado)
+                      <a href="{{ route('detalle_inmueble',$destacado->id) }}">
                         <div class="col-sm-12">
                           @component('partials/inmueble')
                               @slot('type'){{$destacado->tipoNegocio}} @endslot
@@ -98,9 +99,16 @@
                               @slot('baños') {{$destacado->banos}} @endslot
                               @slot('cuartos') {{$destacado->habitaciones}}@endslot
                               @slot('estacionamientos') {{$destacado->estacionamientos}} @endslot
-                              @slot('img')/inmuebles/{{$destacado->nombre_imagen}} @endslot
+                              @slot('img')
+                                @if($inmueble->id_mls==0)
+                                  <img src="{{ asset('images/inmuebles')}}/{{$destacado->nombre_imagen}}" alt="" >
+                                @else
+                                  <img src="{{$destacado->nombre_imagen}}" alt="" >
+                                @endif
+                              @endslot
                           @endcomponent
                         </div>
+                      </a>
                     @endforeach
                 </div>
             </section>
