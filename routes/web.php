@@ -61,6 +61,7 @@ Route::get('/admin/editar-inmueble2/{id}', ['as' => 'editar-inmueble-2', 'uses' 
 Route::any('/admin/guardarImagen', ['as' => 'guardarImagen', 'uses' => 'Admin\PropiedadController@guardarImagen']);
 Route::any('/admin/borrarImagen', ['as' => 'borrarImagen', 'uses' => 'Admin\PropiedadController@borrarImagen']);
 Route::any('/admin/buscarInmueble', ['as' => 'buscarInmueble', 'uses' => 'Admin\PropiedadController@buscarInmueble']);
+Route::get('/admin/buscarInmuebleCodigo',['as'=>'buscarInmuebleCodigo','uses'=>'Admin\PropiedadController@buscarInmuebleCodigo'] );
 
 /// NEGOCIACIONES
 Route::any('/admin/llenarModalNegociacion', ['as' => 'llenarModalNegociacion', 'uses' => 'Admin\NegociacionController@llenarModalNegociacion']);

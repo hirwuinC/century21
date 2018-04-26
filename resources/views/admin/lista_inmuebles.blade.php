@@ -1,7 +1,7 @@
 @extends('admin/base_admin')
 
 @section('content')
-    <h2 class="titleSection">inmuebles</h2>
+    <h2 class="titleSection">inmuebles <span class="totalizador">{{$inmuebles->total()}}</span></h2>
     @include('admin/common/search_bar')
     <section id="padre">
         <div class="row">

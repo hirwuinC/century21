@@ -55,31 +55,34 @@ $(document).ready(function() {
 	      });
 	    });
 ////////////////////////////////////////////// BUSCADOR DE PROPIEDADES  //////////////////////////////////////////////////////////////
-$('body').on('click', '#buscadorInmueble', function(event) {
-	event.preventDefault();
-	var valor=$('#buscadorInmuebleForm').serialize();
-	$.ajax({
-		beforeSend:mostrarPreload(),
-		url: '/admin/buscarInmueble',
-		type: 'post',
-		dataType: 'html',
-		data: valor
-	})
-	.done(function(respuesta) {
-		ocultarPreload();
-	$('#padre').empty();
-	$('#padre').append(respuesta)
-	})
-	.fail(function() {
-		ocultarPreload();
-		swal(
-			'Imposible Realizar la acción',
-			'Comuniquese con el administrador del sistema',
-			'error'
-		);
-		//console.log("error");
-	});
-});
+var options = {
+
+		url:function(){
+				var textSearch = $('#buscadorPropiedadCodigo').val();
+				return "/admin/buscarInmuebleCodigo?data="+textSearch;
+		},
+		getValue: function (element) {
+			$('#valor').val(element.id);
+			return element.id;
+		},
+		template:{
+				type:"description",
+				fields:{
+						fullName:"id",
+						description:"id_mls"
+
+				}
+		},
+		list: {
+				match: { enabled: false },
+				onChooseEvent: function() {
+					var valor = $('#valor').val();
+					window.location="/admin/inmuebles?data="+valor;
+				},
+
+		},
+}
+$("#buscadorPropiedadCodigo").easyAutocomplete(options);
 
 ////////////////////////////////////////////// Scroll Infinito ///////////////////////////////////////////////////////////////////////
 window.sr = ScrollReveal();

@@ -834,6 +834,17 @@ textarea:focus {
   color: #ffffff;
   text-transform: uppercase;
 }
+.totalizador{
+  position: absolute;
+  top: 5px;
+  right: 30px;
+  padding: 10px 15px;
+  background: #f1b311;
+  margin: 0;
+  font-family: 'latoblack';
+  font-size: 1.2em;
+
+}
 .thumbProperty .contentTop .caption .priceProject {
   position: absolute;
   bottom: 0;
