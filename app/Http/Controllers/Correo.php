@@ -89,7 +89,7 @@ class Correo extends Controller
 
 	    $inicio=3;//limite de mensajes de alerta, para propiedades que estan por vencerse
 
-	    $fechaInicio=Carbon::now();;
+	    $fechaInicio=Carbon::now();
 	    $fechaInicio=$fechaInicio->addDays($inicio);
 	    $fechaInicio=$fechaInicio->toDateString();
 	    $fechaActual=Carbon::now();
@@ -144,16 +144,16 @@ class Correo extends Controller
 	   	 $vencidosAgente=$aux[0];
 	   	 $vencidos=$aux[1];
 	   	 $coloresVencidos=$this->colores($vencidosAgente);
-	   	 /////////////////////////////////////////////////////////////////////////////////////////////////
+	   	 //////////////////////////////////////////////////////////////////////////////////////////////////
 
-	   	 //////////////////Obtener las propiedades por vencerse para un agente///////////////////////////
+	   	 //////////////////Obtener las propiedades por vencerse para un agente////////////////////////////
 	   	 $aux=$this->buscarPropiedad($porVencerse,$agente);
 	   	 $porVencerseAgente=$aux[0];
 	   	 $porVencerse=$aux[1];
 	   	 $coloresPorVencerse=$this->colores($porVencerseAgente);
-	   	 ///////////////////////////////////////////////////////////////////////////////////////////////
+	   	 ////////////////////////////////////////////////////////////////////////////////////////////////
 
-	   	 //////////////////Obtener las propiedades que vencen hoy///////////////////////////
+	   	 //////////////////Obtener las propiedades que vencen hoy///////////////////////////////////////
 	   	 $aux=$this->buscarPropiedad($vencenHoy,$agente);
 	   	 $vencenHoyAgente=$aux[0];
 	   	 $vencenHoy=$aux[1];
@@ -163,9 +163,9 @@ class Correo extends Controller
 
 
 	   	 $registro=[$agente=>['nombre'=>$datosAgente->nombre,'cedula'=>$datosAgente->cedula,'correo'=>$datosAgente->correo,'telefono'=>$datosAgente->telefono,'celular'=>$datosAgente->celular,'vencidos'=>$vencidosAgente,'coloresVencidos'=>$coloresVencidos,'porVencerse'=>$porVencerseAgente,'coloresPorVencerse'=>$coloresPorVencerse,'vencenHoy'=>$vencenHoyAgente,'coloresVencenHoy'=>$coloresVencenHoy]];
-	   	///////////////////Enviar correo al agente de turno //////////////////////////
+	   	///////////////////Enviar correo al agente de turno //////////////////////////////////////////
 
-	   	//////////////////////////////////////////////////////////////////////////////
+	   	/////////////////////////////////////////////////////////////////////////////////////////////
 
 	   	 return view('emails.informeAsesor',['asesor'=>$registro,'agente'=>$agente]);
 	   	 array_push($registrosAgente,$registro);

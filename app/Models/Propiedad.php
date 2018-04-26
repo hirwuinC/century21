@@ -8,6 +8,11 @@ class Propiedad extends Model
 {
     protected $table='propiedades';
     public $timestamps = false;
+    protected $fillable=
+    ['id','id_mls','tipo_inmueble','tipoNegocio','urbanizacion','precio','visible','habitaciones','banos',
+     'estacionamientos','metros_construcccion','metros_terreno','comentario','agente_id','estado_id',
+     'ciudad_id','direccion','oficina_id','posicionMapa','visitas','compradorInteresado','cargado','cargadoPor',
+     'proximoInforme','destacado','estatus','referenciaDolares','fechaCeado','mostrarMapa','porcentajeCaptacion'];
 
     public function agente(){
       return $this->belongsTo('App\Models\Agente');

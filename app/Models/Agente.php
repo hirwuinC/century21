@@ -8,6 +8,7 @@ class Agente extends Model
 {
     protected $table='agentes';
     public $timestamps = false;
+    protected $fillable=['id','fullName','cedula','telefono','celular','email','certified_asesor','codigo_id','imagen_id'];
 
     public function propiedades(){
     	return $this->hasMany('App\Models\Propiedad');
