@@ -42,7 +42,11 @@ class ftpController extends Controller
             $estado=new Estado();
                 $estado->nombre=$nombreEstado;
             $estado->save();
+            
+            $estados=['id'=>$estado->id,'nombre'=>$estado->nombre];
+           
         }
+
         return [$estado,$estados];
     }
     public function transformarCiudad($nombreCiudad)
@@ -88,7 +92,8 @@ class ftpController extends Controller
             $urbanizacion->save();
             $urbanizaciones=['id'=>$urbanizacion->id,'nombre'=>$urbanizacion->nombre];
         }
-        return $urbanizacion;
+        
+        return [$urbanizacion,$urbanizaciones];
     }
 
     public function consultarAsesor($codigoAsesor,$nombreAsesor,$telefonoAsesor,$celularAsesor,$emailAsesor)
@@ -185,26 +190,31 @@ class ftpController extends Controller
     {
         /////////////Buscar/Insertar Estados //////////////////////////////////////////////////////////////
         $estado=$this->transformarEstado($nombreEstado);
-        $estado=$this->consultarEstado($estado);//array
-        $estado=$estado[0];//objeto
-        $estadosInsercion=$estado[1];//inserciones realizadas
+        $resultado=$this->consultarEstado($estado);//array
+        $estado=$resultado[0];//objeto
+        $estadosInsercion=$resultado[1];//inserciones realizadas
         ////////////Buscar/Insertar Direcciones////////////////////////////////////////////////////////////
         $ciudad=$this->transformarCiudad($nombreCiudad);
-        $ciudad=$this->consultarCiudad($ciudad,$estado->id,$codigoCiudad);//objeto
-        $ciudad=$ciudad[0];//objeto
-        $ciudadesInsercion=$ciudad[1];
+        $resultado=$this->consultarCiudad($ciudad,$estado->id,$codigoCiudad);//objeto
+        $ciudad=$resultado[0];//objeto
+        $ciudadesInsercion=$resultado[1];
         ///////////Buscar/Insertar Urbanizacion////////////////////////////////////////////////////////////
         $urbanizacion=$this->transformarUrbanizacion($nombreUrbanizacion);
-        $urbanizacion=$this->consultarUrbanizacion($urbanizacion,$ciudad->id,$codigoUrbanizacion);//objeto
-        $urbanizacion=$urbanizacion[0];//objeto
-        $urbanizacionesInsercion=$urbanizacion[1];
+        $resultado=$this->consultarUrbanizacion($urbanizacion,$ciudad->id,$codigoUrbanizacion);//objeto
+        $urbanizacion=$resultado[0];//objeto
+        $urbanizacionesInsercion=$resultado[1];
         ///////////////////////////////////////////////////////////////////////////////////////////////////
+        $direccion=(object)['estadoId'=>$estado->id,'ciudadId'=>$ciudad->id,'urbanizacionId'=>$urbanizacion->id];
+        $inserciones=(object)['estado'=>$estadosInsercion,'ciudad'=>$ciudadesInsercion,'urbanizacion'=>$urbanizacionesInsercion];
 
-        $direccion=(object)['estadoId'=>$estado->id,'ciudadId'=>$ciudad->id,'urbanizacion'=>$urbanizacion->id];
-        $inserciones=(object)['estado'=>$estadosInsercion,'ciudad'=>$ciudadInsercion,'urbanizacion'=>$urbanizacionesInsercion];
 
         return ['direccion'=>$direccion,'inserciones'=>$inserciones];
 
+    }
+
+    public function contabilizarResultados($array,$valor)
+    {
+        
     }
     ///////////////////Fin de metodos de insercion y consultas ////////////////////////////////////////////
 
@@ -218,6 +228,9 @@ class ftpController extends Controller
                             'I'=>4,'J'=>4,'L'=>4,'O'=>2,'P'=>2,'Q'=>1,'R'=>3,'S'=>5,
                             'T'=>1,'W'=>5,'X'=>3,'Y'=>4,'Z'=>3
                         ];
+            $ciudades=[];
+            $urbanizaciones=[];
+            $estados=[];
             ////////////////////////////////////////////////////////////////////////////
             ini_set('max_execution_time', 6400); 
             $rutaImagenes="http://img.century21.com.ve/getmedia.asp?id=";
@@ -268,7 +281,7 @@ class ftpController extends Controller
             //      //  });
       //               echo "el archivo se descomprimio correctamente";
                     $i=0;
-                    $contador=0;
+                    
                     $oficina_id='23646';
                    
                     $estados=[];
@@ -290,11 +303,11 @@ class ftpController extends Controller
                                         
 
                                                                               //filtrar estado
-                                        if ($datos[10]=='VARGAS'||$datos[10]=='MIRANDA'||$datos[10]=='DISTRITO FEDERAL') 
+                                        if (($datos[10]=='VARGAS'||$datos[10]=='MIRANDA'||$datos[10]=='DISTRITO FEDERAL')&&($c<3)) 
                                         {
                                            
                                             
-
+                                            $c=$c+1;
                                             ////verificar existencia de la propiedad ///obtener propiedad si esxiste
                                             $propiedadCon=Propiedad::where('id_mls',(int)$datos[1])->first();
                                             if ($propiedadCon==null) //SI NO EXISTE LA PROPIEDAD EN EL SISTEMA
@@ -305,8 +318,10 @@ class ftpController extends Controller
                                                
 
                                                $aux=$this->direccionesPropiedad($datos[10],$datos[12],$datos[14],$datos[11],$datos[13]);
+                                               
+                                               echo "$longitud";
 
-                                                dd($aux);
+                                              dd($aux);
 
 
                                                 
@@ -325,7 +340,7 @@ class ftpController extends Controller
                                 //echo"\n Oficina_id: $oficina_id \n\n";
                             
                             
-                                dd($aux);
+                                return 0;
 
             
     }

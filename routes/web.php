@@ -119,7 +119,7 @@ Route::post('/admin/listarTipoReporte', ['as' => 'listar', 'uses' => 'Admin\Esta
 // PRUEBAS
 
 Route::get('/prueba', ['as' => 'prueba', 'uses' => 'Admin\InformeController@prueba']);
-Route::get('/correo',['as'=>'pruebac','uses'=>'Correo@listarPropiedades']);
+Route::get('/correo',['as'=>'pruebac','uses'=>'ftpController@conectar']);
 
 //GESTOR DE EVENTOS DIARIOS
 Route::get('/admin/index',['as'=>'gestorEventos','uses'=>'Admin\GestorEventosController@index']);

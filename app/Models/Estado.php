@@ -9,5 +9,5 @@ class Estado extends Model
     //
     protected $table="estados";
     public $timestamps = false;
-    protected $fillable=['id','nombre','ref_if'];
+    protected $fillable=['id','nombre'];
 }
