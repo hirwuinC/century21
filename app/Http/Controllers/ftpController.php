@@ -214,7 +214,7 @@ class ftpController extends Controller
 
     public function contabilizarResultados($array,$valor)
     {
-        
+
     }
     ///////////////////Fin de metodos de insercion y consultas ////////////////////////////////////////////
 
@@ -319,6 +319,7 @@ class ftpController extends Controller
 
                                                $aux=$this->direccionesPropiedad($datos[10],$datos[12],$datos[14],$datos[11],$datos[13]);
                                                
+                                               $logitudEstados=$aux['inserciones']
                                                echo "$longitud";
 
                                               dd($aux);
