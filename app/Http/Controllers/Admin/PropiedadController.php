@@ -24,28 +24,13 @@ class PropiedadController extends Controller{
 
   public function ListaInmuebles(){
       $arreglo=array();
-      $data=Request::get('data');
-      if ($data) {
-        $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
-                                      ->Join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
-                                      ->Join('agentes','propiedades.agente_id','agentes.id')
-                                      ->Join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
-                                      ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','tipoinmueble.nombre as nombreInmueble','agentes.fullName as nombreAsesor','urbanizaciones.nombre as nombreUrbanizacion')
-                                      ->where('medias.vista',1)
-                                      ->where('propiedades.id',$data)
-                                      ->paginate(50);
-      }
-      else{
-        $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
-                                      ->Join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
-                                      ->Join('agentes','propiedades.agente_id','agentes.id')
-                                      ->Join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
-                                      ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','tipoinmueble.nombre as nombreInmueble','agentes.fullName as nombreAsesor','urbanizaciones.nombre as nombreUrbanizacion')
-                                      ->where('medias.vista',1)
-                                      ->paginate(50);
-      }
-
-
+      $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
+                                    ->Join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
+                                    ->Join('agentes','propiedades.agente_id','agentes.id')
+                                    ->Join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
+                                    ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','tipoinmueble.nombre as nombreInmueble','agentes.fullName as nombreAsesor','urbanizaciones.nombre as nombreUrbanizacion')
+                                    ->where('medias.vista',1)
+                                    ->paginate(50);
 
       $usuario=Session::get('asesor');
       $asesores=Agente::all();
@@ -56,17 +41,25 @@ class PropiedadController extends Controller{
   public function buscarInmueble(){
     $consulta=array();
     $arreglo=array();
+    $contador=Request::get('codigo');
+    if (strlen($contador)==6) {
+      $arreglo['propiedades.id_mls']=Request::get('codigo');
+
+    }
+    else {
+      $arreglo['propiedades.id']=Request::get('codigo');
+    }
     $arreglo['propiedades.agente_id']=Request::get('asesor');
     $arreglo['propiedades.estatus']=Request::get('estatus');
     $arreglo['propiedades.estado_id']=Request::get('estatePropiety');
     $arreglo['propiedades.ciudad_id']=Request::get('cityPropiety');
     $arreglo['propiedades.urbanizacion']=Request::get('namePropiety');
-    //dd($arreglo);
     foreach ($arreglo as $key => $value) {
       if ($value!='') {
         $consulta[$key]=$value;
       }
     }
+    //dd($arreglo);
     $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
                                   ->Join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
                                   ->Join('agentes','propiedades.agente_id','agentes.id')
@@ -75,7 +68,6 @@ class PropiedadController extends Controller{
                                   ->where('medias.vista',1)
                                   ->where($consulta)
                                   ->paginate(50);
-
     $inmuebles->withPath('?asesor='.$arreglo['propiedades.agente_id'].'&estatus='.$arreglo['propiedades.estatus'].'&estatePropiety='.$arreglo['propiedades.estado_id'].'&cityPropiety='.$arreglo['propiedades.ciudad_id'].'&namePropiety='.$arreglo['propiedades.urbanizacion'].'');
     $usuario=Session::get('asesor');
     $asesores=Agente::all();
@@ -106,11 +98,6 @@ class PropiedadController extends Controller{
     return view('/admin/lista_inmuebles',$this->cargarSidebar(),compact('inmuebles','usuario','asesores','estados','estatus','arreglo','ciudades','urbanizaciones'));
   }
 
-  public function buscarInmuebleCodigo(){
-    $var =Request::get('data');
-    $result=Propiedad::searchPropiedad($var)->get();
-    return response()->json($result);
-  }
   public function CrearInmueble1(){
     $datos=[];
     $consulta=[];
