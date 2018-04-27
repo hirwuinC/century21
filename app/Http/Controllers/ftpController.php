@@ -96,19 +96,28 @@ class ftpController extends Controller
         return [$urbanizacion,$urbanizaciones];
     }
 
-    public function consultarAsesor($codigoAsesor,$nombreAsesor,$telefonoAsesor,$celularAsesor,$emailAsesor)
+    public function consultarAsesor($codigoAsesor,$nombreAsesor,$telefonoAsesor,$celularAsesor,$emailAsesor,$inmueblesCaracasId,$oficinaId)
     {
           $asesor=Agente::where('codigo_id',$codigoAsesor)->first();
-          if($asesor==null)
+          $asesores=[];
+          if($asesor==null && $oficinaId==$inmueblesCaracasId)
           {
-            $asesor=new Asesor();
+            $asesor=new Agente();
                  $asesor->fullName=ucwords(mb_strtolower(utf8_encode($nombreAsesor)));
                  $asesor->telefono=(string)$telefonoAsesor;
                  $asesor->celular=(string)$celularAsesor;
                  $asesor->email=(string)$emailAsesor;
                  $asesor->codigo_id=(string)$codigoAsesor;
             $asesor->save();
+            $asesores=['id'=>$asesor->id,'codigoId'=>$asesor->codigo_id,'nombre'=>$asesor->fullName];
           }
+          else if($asesor==null && $oficinaId!=$inmueblesCaracasId)
+          {
+            $asesor=(object)['id'=>5,];
+            $asesores=null;
+          }
+
+          return ['asesor'=>$asesor,'insercion'=>$asesores];
     }
 
     public function insertarPropiedad($datos)
@@ -138,14 +147,16 @@ class ftpController extends Controller
             $propiedad->fechaCreado=Carbon::now();
             $propiedad->proximoInforme=Carbon::now()->addMonth();
         $propiedad->save();
+        $propiedades=['id'=>$propiedad->id,'mls'=>$propiedad->id_mls];
 
-        return $propiedad;
+        return ['propiedad'=>$propiedad,'insercion'=>$propiedades];
     }
 
     //"C:/Users/Jose Tayupo/Desktop/Descargas/Century21/media.csv"
     public function buscarFotos($codigoMls,$rutaImagenes,$fotoPortada)
     {
-         $fotos=[$rutaImagenes.$fotoPortada];//añade al arreglo la foto portada
+         $prefijoImagenes="http://img.century21.com.ve/getmedia.asp?id=";
+         $fotos=[$prefijoImagenes.$fotoPortada];//añade al arreglo la foto portada
          if (($imagenes = fopen($rutaImagenes, "r")) !== FALSE) 
          {
                 while (($imagen = fgetcsv($imagenes, 1000, ",",'"')) !== FALSE) 
@@ -155,7 +166,7 @@ class ftpController extends Controller
                             {
                                 if(count($fotos<8))
                                 {
-                                    array_push($fotos,$rutaImagenes.$imagen[0]);
+                                    array_push($fotos,$prefijoImagenes.$imagen[0]);
                                 }    
                             }
 
@@ -186,6 +197,16 @@ class ftpController extends Controller
 
     }
 
+    public function obtenerOficina($oficinaId,$inmueblesCaracasId)
+    {
+        $oficina_id=$inmueblesCaracasId;
+        if ((string)$oficinaId!=$inmueblesCaracasId) 
+        {
+            $oficina_id=$oficinaId;
+        }
+        return (string)$oficina_id;
+    }
+
     public function direccionesPropiedad($nombreEstado,$nombreCiudad,$nombreUrbanizacion,$codigoCiudad,$codigoUrbanizacion)
     {
         /////////////Buscar/Insertar Estados //////////////////////////////////////////////////////////////
@@ -203,6 +224,7 @@ class ftpController extends Controller
         $resultado=$this->consultarUrbanizacion($urbanizacion,$ciudad->id,$codigoUrbanizacion);//objeto
         $urbanizacion=$resultado[0];//objeto
         $urbanizacionesInsercion=$resultado[1];
+      
         ///////////////////////////////////////////////////////////////////////////////////////////////////
         $direccion=(object)['estadoId'=>$estado->id,'ciudadId'=>$ciudad->id,'urbanizacionId'=>$urbanizacion->id];
         $inserciones=(object)['estado'=>$estadosInsercion,'ciudad'=>$ciudadesInsercion,'urbanizacion'=>$urbanizacionesInsercion];
@@ -212,28 +234,31 @@ class ftpController extends Controller
 
     }
 
-    public function contabilizarResultados($array,$valor)
+    public function contabilizarResultados($arrayGeneral,$arrayInsercion)
     {
-
+        
+        $arrayGeneral=$arrayGeneral;
+        if (count($arrayInsercion)>0) 
+        {
+            array_push($arrayGeneral,$arrayInsercion);
+        }
+        return $arrayGeneral;
     }
     ///////////////////Fin de metodos de insercion y consultas ////////////////////////////////////////////
 
 
     public function conectar()
     {
-           //La letra representa el id de tipo de inmueble que se carga de los datos sincronizados, el valor numerico
-           //representa el id del tipo de inmueble en el sistema de inmueblescaracas...
-           $tipoInmueble=[
-                            'A'=>1,'B'=>2,'C'=>2,'D'=>3,'E'=>1,'F'=>4,'G'=>1,'H'=>1,
-                            'I'=>4,'J'=>4,'L'=>4,'O'=>2,'P'=>2,'Q'=>1,'R'=>3,'S'=>5,
-                            'T'=>1,'W'=>5,'X'=>3,'Y'=>4,'Z'=>3
-                        ];
+                                  
             $ciudades=[];
             $urbanizaciones=[];
             $estados=[];
+            $agentes=[];
+            $propiedades=[];
+            $cantidadImagenes=0;
             ////////////////////////////////////////////////////////////////////////////
-            ini_set('max_execution_time', 6400); 
-            $rutaImagenes="http://img.century21.com.ve/getmedia.asp?id=";
+            ini_set('max_execution_time',12000 ); //tiempo maximo de ejecucion del script
+            
 
 
             $ftp_server="216.155.132.149";
@@ -282,14 +307,14 @@ class ftpController extends Controller
       //               echo "el archivo se descomprimio correctamente";
                     $i=0;
                     
-                    $oficina_id='23646';
+                    $inmueblesCaracasId='23646';
                    
                     $estados=[];
                     $ciudades=[];
                     $urbanizaciones=[];
 
                     $c=0;
-                    if (($gestor = fopen("C:/Users/Jose Tayupo/Desktop/Descargas/Century21/propiedades.csv", "r")) !== FALSE) {
+                    if (($gestor = fopen("C:/Users/usuario/Desktop/Descargas/Century21/propiedades.csv", "r")) !== FALSE) {
                         while (($datos = fgetcsv($gestor, 1000, ",",'"')) !== FALSE) 
                         {
                                    
@@ -298,7 +323,7 @@ class ftpController extends Controller
                                    $longitud=count($datos);
                                  
                                                                                      
-                                   if (($longitud==25||$longitud==26)) 
+                                   if (($longitud==25||$longitud==26)) //cantidad de campos del registro
                                    {
                                         
 
@@ -315,14 +340,54 @@ class ftpController extends Controller
                                                
 
                                                //insertamos/consultamos las direcciones
-                                               
-
                                                $aux=$this->direccionesPropiedad($datos[10],$datos[12],$datos[14],$datos[11],$datos[13]);
-                                               
-                                               $logitudEstados=$aux['inserciones']
-                                               echo "$longitud";
+                                              ///contabilizar estados
+                                               $estados=$this->contabilizarResultados($estados,$aux['inserciones']->estado);
+                                               //obtener id del estado
+                                               $estadoId=$aux['direccion']->estadoId;
 
-                                              dd($aux);
+                                               ///contabilizar ciudades
+                                               $ciudades=$this->contabilizarResultados($ciudades,$aux['inserciones']->ciudad);
+                                               //obtener id de la ciudad
+                                               $ciudadId=$aux['direccion']->ciudadId;
+                                               //contabilizar las urbanizaciones
+                                               $urbanizaciones=$this->contabilizarResultados($urbanizaciones,$aux['inserciones']->urbanizacion);
+                                               //obtener id de la urbanizacion
+                                               $urbanizacionId=$aux['direccion']->urbanizacionId;
+                                               $oficina_id=$this->obtenerOficina($datos[17],$inmueblesCaracasId);
+
+                                               //insertamos/consultamos el asesor
+                                               $aux=$this->consultarAsesor($datos[24],$datos[19],$datos[22],$datos[20],$datos[21],$inmueblesCaracasId,$oficina_id);
+                                               if ($aux['insercion']) 
+                                               {
+                                                    $agentes=$this->contabilizarResultados($agentes,$aux['insercion']);                                              
+                                               }
+                                              
+                                               $agenteId=$aux['asesor']->id;
+                                               //insertamos/ consultamos propiedad
+                                               
+                                               
+                                               $data=
+                                               [
+                                                 'id_mls'=>$datos[1],'idTipoInmueble'=>$datos[0],'tipoNegocio'=>$datos[3],'urbanizacionId'=>$urbanizacionId,
+                                                 'precio'=>$datos[4],'habitaciones'=>$datos[5],'banos'=>$datos[6],'estacionamientos'=>$datos[7],
+                                                 'construccion'=>$datos[8],'terreno'=>$datos[9],'comentario'=>$datos[15],'asesorId'=>$agenteId,
+                                                 'estadoId'=>$estadoId,'ciudadId'=>$ciudadId,'oficina_id'=>$oficina_id
+                                               ];
+                                              $aux=$this->insertarPropiedad($data);
+                                              $propiedadId=$aux['propiedad']->id;
+                                              $propiedadMls=$aux['propiedad']->id_mls;
+                                              $propiedades=$this->contabilizarResultados($propiedades,$aux['insercion']);
+
+                                            //buscamos e insertamos las imagenes correspondientes a la propiedad cargada
+
+                                            $fotos=$this->buscarFotos($propiedadMls,"C:/Users/usuario/Desktop/Descargas/Century21/media.csv",$datos[23]);
+                                            $fotosEn=$this->insertarFotos($fotos,$propiedadId);
+                                            $cantidadImagenes=$cantidadImagenes+count($fotos);
+                                            dd($fotos);
+
+                                            // dd(['estados'=>$estados,'ciudades'=>$ciudades,'urbanizaciones'=>$urbanizaciones,'agentes'=>$agentes,'estadoId'=>$estadoId,'ciudadId'=>$ciudadId,'propiedades'=>$propiedades,'urbanizacion'=>$urbanizacionId,'propiedadId'=>$propiedadId]);
+                                       
 
 
                                                 
