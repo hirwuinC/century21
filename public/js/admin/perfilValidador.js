@@ -1,4 +1,24 @@
 $(document).ready(function(){
+	/////////////////////////////////////////MOSTRAR Y OCULTAR PRELOAD ///////////////////////////////////////////////////////
+	  function mostrarPreload(){
+	    var ancho = 0;
+	    var alto = 0;
+	    if (window.innerWidth == undefined) ancho = window.screen.width;
+	    else ancho = window.innerWidth;
+	    if (window.innerHeight == undefined) alto = window.screen.height;
+	    else alto = window.innerHeight;
+	    div = document.createElement("div");
+	    div.id = "WindowLoad"
+	    div.style.width = ancho + "px";
+	    div.style.height = alto + "px";
+	    $("body").append(div);
+	    $('#load').css('display','block');
+	  };
+	  function ocultarPreload(){
+	    $("#WindowLoad").remove();
+	    $('#load').css('display','none');
+	  };
+///////////////////////////////////////////////////// Modificar Perfil ///////////////////////////////////////////////////////
 	$("#perfilEdit").validate({
 			onfocusout: false,
 			rules: {
@@ -32,13 +52,14 @@ $(document).ready(function(){
 			},
 			addressUser:{
 				required:"Es necesario que indiques tu dirección",
-				minlength:"La direccion debe contener un minimo de 15 caracteres"
+				minlength:"La direccion debe contener un mínimo de 15 caracteres"
 			}
 		},
 		submitHandler: function(form) {
       var formulario = new FormData(document.getElementById('perfilEdit'));
 			url="/admin/actualizarPerfil";
       $.ajax({
+					beforeSend:mostrarPreload(),
           url: url,
           type: "post",
           dataType: "html",
@@ -48,17 +69,27 @@ $(document).ready(function(){
           processData: false
       })
       .done(function(res){
-				console.log(res);
-				/*if (res==1) {
+				//console.log(res);
+				ocultarPreload();
+				if (res==1) {
           swal(
             'Listo!!',
             'Tu usuario ha sido actualizado, los cambios seran aplicados una vez inicies sesión nuevamente',
             'success'
           );
-        }*/
-      });
+        }
+      }).fail( function() {
+				ocultarPreload();
+				swal(
+					'Imposible Realizar la acción',
+					'Comuniquese con el administrador del sistema',
+					'error'
+				);
+			});
     }
 	});
+
+
 	$('.file-input').change(function(){
     var curElement = $(this).parent().parent().parent().find('.image');
     var reader = new FileReader();

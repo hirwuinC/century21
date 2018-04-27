@@ -129,7 +129,7 @@ $("#propietyCreate").validate({
       required:"El precio del inmueble es un campo requerido"
     },
     porcentajeCaptacion:{
-      required:"El porcentaje de descuento es un campo requerido"
+      required:"El porcentaje de captación es un campo requerido"
     },
     refDolares:{
       required:"El monto en dolares es un campo requerido"

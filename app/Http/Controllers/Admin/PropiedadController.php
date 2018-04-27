@@ -30,10 +30,10 @@ class PropiedadController extends Controller{
                                     ->Join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
                                     ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','tipoinmueble.nombre as nombreInmueble','agentes.fullName as nombreAsesor','urbanizaciones.nombre as nombreUrbanizacion')
                                     ->where('medias.vista',1)
-                                    ->paginate(50);
+                                    ->paginate(30);
 
       $usuario=Session::get('asesor');
-      $asesores=Agente::all();
+      $asesores=Agente::orderBy('fullName','asc')->get();
       $estados=Estado::all();
       $estatus=Estatus::where('familia',1)->get();
       return view('/admin/lista_inmuebles',$this->cargarSidebar(),compact('inmuebles','usuario','asesores','estados','estatus','arreglo'));
@@ -67,7 +67,7 @@ class PropiedadController extends Controller{
                                   ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','tipoinmueble.nombre as nombreInmueble','agentes.fullName as nombreAsesor','urbanizaciones.nombre as nombreUrbanizacion')
                                   ->where('medias.vista',1)
                                   ->where($consulta)
-                                  ->paginate(50);
+                                  ->paginate(30);
     $inmuebles->withPath('?asesor='.$arreglo['propiedades.agente_id'].'&estatus='.$arreglo['propiedades.estatus'].'&estatePropiety='.$arreglo['propiedades.estado_id'].'&cityPropiety='.$arreglo['propiedades.ciudad_id'].'&namePropiety='.$arreglo['propiedades.urbanizacion'].'');
     $usuario=Session::get('asesor');
     $asesores=Agente::all();
@@ -109,7 +109,7 @@ class PropiedadController extends Controller{
     }
     $tiposIn=TipoInmueble::all();
     $estados=Estado::all();
-    $asesores=Agente::all();
+    $asesores=Agente::orderBy('fullName','asc')->get();
     return view('/admin/crear_inmueble_1',$this->cargarSidebar(),compact('tiposIn','estados','asesores','datos','consulta','urbanizaciones'));
   }
 
@@ -351,7 +351,7 @@ class PropiedadController extends Controller{
     $propiedad=Propiedad::where('id',$id)->first();
     $tiposIn=TipoInmueble::all();
     $estados=Estado::all();
-    $asesores=Agente::all();
+    $asesores=Agente::orderBy('fullName','asc')->get();
     $consulta=Ciudad::where('estado_id',$propiedad->estado_id)->orderBy('nombre','asc')->get();
     $urbanizaciones=Urbanizacion::where('ciudad_id',$propiedad->ciudad_id)->orderBy('nombre','asc')->get();
     $estatus=Estatus::where('familia',1)->where('id','<>','11')->get();
@@ -361,30 +361,38 @@ class PropiedadController extends Controller{
   public function actualizarInmueble1(){
     sleep(1);
     $id=Request::get('register');
-    Propiedad::where('id',$id)->update([
-      "tipo_inmueble"       =>  (int)Request::get('typePropiety'),
-      "estado_id"           =>  (int)Request::get('estatePropiety'),
-      "ciudad_id"           =>  (int)Request::get('cityPropiety'),
-      "urbanizacion"        =>  (int)Request::get('namePropiety'),
-      "direccion"           =>  ucfirst(mb_strtolower(Request::get('addressPropiety'))),
-      "posicionMapa"        =>  Request::get('positionPropiety'),
-      "mostrarMapa"         =>  (int)Request::get('visibleMapa'),
-      "destacado"           =>  (int)Request::get('destacado'),
-      "visible"             =>  (int)Request::get('visiblePrice'),
-      "precio"              =>  Request::get('pricePropiety'),
-      "porcentajeCaptacion" =>  Request::get('porcentajeCaptacion'),
-      "referenciaDolares"   =>  Request::get('refDolares'),
-      "metros_construccion" =>  Request::get('constructionPropiety'),
-      "metros_terreno"      =>  Request::get('areaPropiety'),
-      "habitaciones"        =>  Request::get('roomPropiety'),
-      "banos"               =>  Request::get('batroomPropiety'),
-      "estacionamientos"    =>  Request::get('parkingPropiety'),
-      "comentario"          =>  ucfirst(mb_strtolower(Request::get('descriptionPropiety'))),
-      "agente_id"           =>  Request::get('asesorPropiety'),
-      "tipoNegocio"         =>  Request::get('typeBussisness'),
-      "estatus"             =>  Request::get('estatusPropiedad')
-    ]);
-    $respuesta=[1,$id];
+    $consulta=Negociacion::where('estatus','<>',9)->where('propiedad_id',$id)->first();
+    if (count($consulta)==0) {
+      Propiedad::where('id',$id)->update([
+        "tipo_inmueble"       =>  (int)Request::get('typePropiety'),
+        "estado_id"           =>  (int)Request::get('estatePropiety'),
+        "ciudad_id"           =>  (int)Request::get('cityPropiety'),
+        "urbanizacion"        =>  (int)Request::get('namePropiety'),
+        "direccion"           =>  ucfirst(mb_strtolower(Request::get('addressPropiety'))),
+        "posicionMapa"        =>  Request::get('positionPropiety'),
+        "mostrarMapa"         =>  (int)Request::get('visibleMapa'),
+        "destacado"           =>  (int)Request::get('destacado'),
+        "visible"             =>  (int)Request::get('visiblePrice'),
+        "precio"              =>  Request::get('pricePropiety'),
+        "porcentajeCaptacion" =>  Request::get('porcentajeCaptacion'),
+        "referenciaDolares"   =>  Request::get('refDolares'),
+        "metros_construccion" =>  Request::get('constructionPropiety'),
+        "metros_terreno"      =>  Request::get('areaPropiety'),
+        "habitaciones"        =>  Request::get('roomPropiety'),
+        "banos"               =>  Request::get('batroomPropiety'),
+        "estacionamientos"    =>  Request::get('parkingPropiety'),
+        "comentario"          =>  ucfirst(mb_strtolower(Request::get('descriptionPropiety'))),
+        "agente_id"           =>  Request::get('asesorPropiety'),
+        "tipoNegocio"         =>  Request::get('typeBussisness'),
+        "estatus"             =>  Request::get('estatusPropiedad')
+      ]);
+      $respuesta=[1,$id];
+    }
+    else{
+      $respuesta=[2,$id];
+    }
+
+
     Session::put('inmuebleEdit',$id);
     return $respuesta;
   }

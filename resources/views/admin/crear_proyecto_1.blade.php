@@ -5,92 +5,30 @@
 <h2 class="titleSection">información básica</h2>
 <form enctype="multipart/form-data" name="proyectCreate" id="proyectCreate" class="agenteForm">
   {{csrf_field()}}
-@if(count($datos)==0)
-    <input type="hidden" id="positionPropiety" name="positionPropiety" value=''>
-    <input type="hidden" name="register" value=''>
-    <div class="row">
-        <div class="col-xs-12">
-            <div class="row">
-                <div class="col-xs-4">
-                  <select name="typeBussisness" id="typeBussisness" >
-                      <option value="" selected >Tipo de Negociación</option>
-                      <option value="alquiler">Alquiler</option>
-                      <option value="venta">Venta</option>
-                  </select>
-                </div>
-                <div class="col-xs-4">
-                    <input type="text" class="inputs inputsLight form-control" name="nameProyect" id="nameProyect" value="" placeholder="Nombre del inmueble">
-                </div>
-                <div class="col-xs-4">
-                    <div class="styled-input-single">
-                      <input type="checkbox" name="destacado" value="1" id="checkbox-example-two" />
-                      <label for="checkbox-example-two">¿Proyecto Destacado?</label>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-6">
-                  <select id="estateProyect" name="estateProyect" >
-                      <option value="" selected >Estado</option>
-                      @foreach($estados as $estado)
-                      <option value="{{$estado->id}}">{{$estado->nombre}}</option>
-                      @endforeach
-                  </select>
-                </div>
-                <div class="col-xs-6">
-                    <select id="cityProyect" name="cityProyect">
-                        <option value="">Ciudad</option>
-                        <option class="opcion" value""> - </option>
-                    </select>
-                </div>
-            </div>
-            <div class="row" style="padding-top:30px">
-                <div class="col-xs-12">
-                    <input type="text" class="inputs inputsLight form-control" name="addressProyect" id="addressProyect" placeholder="Dirección del proyecto (Incluir ubicacion en el mapa)">
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <div id="map" class="googleMap">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12">
-                  <input type="number" min="0" class="inputs inputsLight form-control" name="constructionProyect" id="constructionProyect" placeholder="Construcción (Mtr2)">
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-xs-12">
-                  <label for="fechaEntrega">Fecha estimada de Culminación</label>
-                  <input type="date" class="inputs inputsLight form-control" name="dateEnd" id="dateEnd">
-              </div>
-            </div>
-            <div class="row">
-                <div class="col-xs-12">
-                    <textarea class="inputs inputsLight" id="descriptionProyect" name="descriptionProyect" placeholder="Descripción del proyecto"></textarea>
-                </div>
-            </div>
-@else
 <input type="hidden" id="positionPropiety" name="positionPropiety" value='{{$datos->posicionMapa}}'>
 <input type="hidden" name="register" value='{{$datos->id}}'>
 <div class="row">
     <div class="col-xs-12">
         <div class="row">
             <div class="col-xs-4">
+              <label>Tipo de Negociación</label>
               <select name="typeBussisness" id="typeBussisness">
                   <option value="">Tipo de Negociación</option>
                   @if($datos->tipoNegocio=="alquiler")
                     <option value="alquiler" selected>Alquiler</option>
                     <option value="venta">Venta</option>
-                  @else
+                  @elseif($datos->tipoNegocio=="venta")
                     <option value="alquiler">Alquiler</option>
                     <option value="venta" selected>Venta</option>
+                  @else
+                  <option value="alquiler">Alquiler</option>
+                  <option value="venta">Venta</option>
                   @endif
               </select>
             </div>
             <div class="col-xs-4">
-                <input type="text" class="inputs inputsLight form-control" name="nameProyect" id="nameProyect" value='{{$datos->nombreProyecto}}' placeholder="Nombre del inmueble">
+                <label>Nombre del Proyecto</label>
+                <input type="text" class="inputs inputsLight form-control" name="nameProyect" id="nameProyect" value='{{$datos->nombreProyecto}}' maxlength="50" placeholder="Conjunto/Residencia...">
             </div>
             <div class="col-xs-4">
                 <div class="styled-input-single">
@@ -105,6 +43,7 @@
         </div>
         <div class="row">
             <div class="col-xs-6">
+              <label>Estado</label>
               <select id="estateProyect" name="estateProyect">
                   <option value="" >Estado</option>
                   @foreach($estados as $estado)
@@ -117,6 +56,7 @@
               </select>
             </div>
             <div class="col-xs-6">
+                <label>Ciudad</label>
                 <select id="cityProyect" name="cityProyect">
                     <option value="">Ciudad</option>
                     @foreach($consulta as $ciudad)
@@ -131,7 +71,8 @@
         </div>
         <div class="row" style="padding-top:30px">
             <div class="col-xs-12">
-                <input type="text" class="inputs inputsLight form-control" value='{{$datos->direccionProyecto}}' name="addressProyect" id="addressProyect" placeholder="Dirección del proyecto (Incluir ubicacion en el mapa)">
+                <label>Dirección especifica del Proyecto</label>
+                <input type="text" class="inputs inputsLight form-control" value='{{$datos->direccionProyecto}}' maxlength="250" name="addressProyect" id="addressProyect" placeholder="Dirección del proyecto (Incluir ubicacion en el mapa)">
             </div>
         </div>
         <div class="row">
@@ -142,7 +83,8 @@
         </div>
         <div class="row">
           <div class="col-xs-12">
-              <input type="number" class="inputs inputsLight form-control" value='{{$datos->metrosConstruccion}}' name="constructionProyect" id="constructionProyect" placeholder="Construcción (Mtr2)">
+              <label>Metros de Construcción</label>
+              <input type="number" class="inputs inputsLight form-control" value='{{$datos->metrosConstruccion}}'maxlength="25" name="constructionProyect" id="constructionProyect" placeholder="Construcción (Mtr2)">
           </div>
         </div>
         <div class="row">
@@ -153,21 +95,19 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <textarea class="inputs inputsLight" id="descriptionProyect" name="descriptionProyect" placeholder="Descripción del proyecto">{{$datos->descripcionProyecto}}</textarea>
+                <label for="fechaEntrega">Descripción del Proyecto</label>
+                <textarea class="inputs inputsLight" id="descriptionProyect" name="descriptionProyect" maxlength="600" placeholder="Características a destacar">{{$datos->descripcionProyecto}}</textarea>
             </div>
         </div>
-
-@endif
-            <div class="row">
-              <div class="buttons">
-                  <div class="col-xs-3 right">
-                      <button id="redirectButtomAction" type="submit" class="btnYellow">Siguiente</button>
-                  </div>
+        <div class="row">
+          <div class="buttons">
+              <div class="col-xs-3 right">
+                  <button id="redirectButtomAction" type="submit" class="btnYellow">Siguiente</button>
               </div>
-            </div>
-
+          </div>
         </div>
-    </div>
+      </div>
+  </div>
 </form>
 @endsection
 

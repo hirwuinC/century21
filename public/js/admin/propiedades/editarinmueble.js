@@ -135,7 +135,7 @@ $("#propietyEdit").validate({
       required:"Debe especificar si desea que se muestre o no el precio de venta"
     },
     porcentajeCaptacion:{
-      required:"El porcentaje de descuento es un campo requerido"
+      required:"El porcentaje de captación es un campo requerido"
     },
     refDolares:{
       required:"El monto en dolares es un campo requerido"
@@ -183,7 +183,7 @@ $("#propietyEdit").validate({
     })
     .done(function(respuesta){
       ocultarPreload();
-      if (respuesta) {
+      if (respuesta[0]==1) {
         swal({
           title:'Edición Exitosa!!',
           text:"Los datos fueron actualizados",
@@ -193,12 +193,15 @@ $("#propietyEdit").validate({
         });
         setTimeout(function(){location.href = "/admin/editar-inmueble2/"+respuesta[1];},2300); // 3000ms = 3
       }
-      else {
-        swal(
-          'Algo Sucedio',
-          'Intente guardar el inmueble nuevamente',
-          'error'
-        );
+      else if(respuesta[0]==2){
+        swal({
+          title:'Imposible realizar la acción!!',
+          text:"Los datos de la propiedad no pueden ser modificados ya que esta se encuentra con alguna negociación activa o finalizada.",
+          icon:'warning',
+          timer: 2800,
+          button:false,
+        });
+        setTimeout(function(){location.href = "/admin/editar-inmueble2/"+respuesta[1];},3000);
       }
     }).fail( function() {
       ocultarPreload();

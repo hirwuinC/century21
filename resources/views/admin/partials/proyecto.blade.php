@@ -9,6 +9,9 @@
                 <div class="editProperty">
                   {{$editar}}
                 </div>
+                <div class="deleteProperty">
+                  {{$eliminar}}
+                </div>
             </div>
         </div>
         <div class="contentInfo">

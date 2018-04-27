@@ -64,10 +64,10 @@ class NegociacionController extends Controller{
     else{
       $propiedad=Propiedad::where('id',$idInmueble)->first();
       if ($propiedad->agente_id==5) {
-        $listaAsesores=Agente::where('id','<>',5)->get();
+        $listaAsesores=Agente::where('id','<>',5)->orderBy('fullName','asc')->get();
       }
       else {
-        $listaAsesores=Agente::all();
+        $listaAsesores=Agente::orderBy('fullName','asc')->get();
       }
       $respuesta=2;
       $valores= [ $respuesta,

@@ -21,7 +21,7 @@ class AsesorController extends Controller
         $asesores=Agente::join('imagenes','agentes.imagen_id','imagenes.id')->where('agentes.id',$data)->select('agentes.*','imagenes.src as nombreimagen')->paginate(20);
       }
       else{
-        $asesores= Agente::join('imagenes','agentes.imagen_id','imagenes.id')->select('agentes.*','imagenes.src as nombreimagen')->orderBy('fullName','asc')->paginate(20);
+        $asesores= Agente::join('imagenes','agentes.imagen_id','imagenes.id')->where('agentes.id','<>',5)->select('agentes.*','imagenes.src as nombreimagen')->orderBy('fullName','asc')->paginate(20);
       }
     return view('admin.lista_agentes',$this->cargarSidebar(),compact('asesores'));
     }
