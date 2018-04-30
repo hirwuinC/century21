@@ -934,7 +934,7 @@ textarea:focus {
 
 /*DETAIL PROPERTY*/
 .contentDetail p, .contentAgents p {
-  font-size: 1em;
+  font-size: 1.2em;
   line-height: 20px;
   margin-top: 10px;
   color: #333333;
@@ -1186,7 +1186,7 @@ textarea:focus {
   margin-bottom: 45px;
 }
 .infoDetailProperties .descriptionProperties p {
-  font-size: 1em;
+  font-size: 1.2em;
   font-family: 'latolight';
   color: #242424;
   line-height: 2em;
@@ -1200,6 +1200,14 @@ textarea:focus {
   display: inline-block;
   text-align: center;
   margin-right: 40px;
+  font-size: 1.2em;
+}
+.infoDetailProperties .tipoInmueble{
+  font-size: 1.5em !important;
+}
+.infoDetailProperties .precioTipo{
+  position: absolute;
+  right: 0px;
 }
 .infoDetailProperties .descriptionProperties .characteristicsProperties ul li p {
   padding: 10px 15px;

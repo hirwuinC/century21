@@ -11,6 +11,7 @@
     <div class="col-xs-12">
         <div class="row">
             <div class="col-xs-4">
+              <label>Tipo de Negociación</label>
               <select name="typeBussisness" id="typeBussisness">
                   <option value="">Tipo de Negociación</option>
                   @if($proyecto->tipoNegocio=="alquiler")
@@ -23,7 +24,8 @@
               </select>
             </div>
             <div class="col-xs-4">
-                <input type="text" class="inputs inputsLight form-control" name="nameProyect" id="nameProyect" value='{{$proyecto->nombreProyecto}}' placeholder="Nombre del inmueble">
+                <label>Nombre del Proyecto</label>
+                <input type="text" class="inputs inputsLight form-control" name="nameProyect" id="nameProyect" value='{{$proyecto->nombreProyecto}}' maxlength="50" placeholder="Conjunto/Residencia...">
             </div>
             <div class="col-xs-4">
                 <div class="styled-input-single">
@@ -38,6 +40,7 @@
         </div>
         <div class="row">
             <div class="col-xs-6">
+              <label>Estado</label>
               <select id="estateProyect" name="estateProyect">
                   <option value="" >Estado</option>
                   @foreach($estados as $estado)
@@ -50,6 +53,7 @@
               </select>
             </div>
             <div class="col-xs-6">
+                <label>Ciudad</label>
                 <select id="cityProyect" name="cityProyect">
                     <option value="">Ciudad</option>
                     @foreach($consulta as $ciudad)
@@ -64,7 +68,8 @@
         </div>
         <div class="row" style="padding-top:30px">
             <div class="col-xs-12">
-                <input type="text" class="inputs inputsLight form-control" value='{{$proyecto->direccionProyecto}}' name="addressProyect" id="addressProyect" placeholder="Dirección del proyecto (Incluir ubicacion en el mapa)">
+                <label>Dirección especifica del Proyecto</label>
+                <input type="text" class="inputs inputsLight form-control" maxlength="250" value='{{$proyecto->direccionProyecto}}' name="addressProyect" id="addressProyect" placeholder="Dirección del proyecto (Incluir ubicacion en el mapa)">
             </div>
         </div>
         <div class="row">
@@ -75,7 +80,8 @@
         </div>
         <div class="row">
           <div class="col-xs-12">
-              <input type="number" class="inputs inputsLight form-control" value='{{$proyecto->metrosConstruccion}}' name="constructionProyect" id="constructionProyect" placeholder="Construcción (Mtr2)">
+              <label>Metros de Construcción</label>
+              <input type="number" class="inputs inputsLight form-control" value='{{$proyecto->metrosConstruccion}}' maxlength="25"  name="constructionProyect" id="constructionProyect" placeholder="Construcción (Mtr2)">
           </div>
         </div>
         <div class="row">
@@ -86,7 +92,8 @@
         </div>
         <div class="row">
             <div class="col-xs-12">
-                <textarea class="inputs inputsLight" id="descriptionProyect" name="descriptionProyect" placeholder="Descripción del proyecto">{{$proyecto->descripcionProyecto}}</textarea>
+                <label for="fechaEntrega">Descripción del Proyecto</label>
+                <textarea class="inputs inputsLight" id="descriptionProyect" name="descriptionProyect" maxlength="600" placeholder="Características a destacar">{{$proyecto->descripcionProyecto}}</textarea>
             </div>
         </div>
         <div class="row">

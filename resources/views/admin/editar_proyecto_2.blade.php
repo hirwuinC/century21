@@ -10,6 +10,7 @@
         <div class="col-xs-12">
             <div class="row">
                 <div class="col-xs-6">
+                  <label>Tipo de Inmueble</label>
                   <select name="typeProyect" id="typeProyect" class="inputs">
                       <option value="" selected >Tipo de Inmueble</option>
                       @foreach($inmuebles as $inmueble)
@@ -18,12 +19,14 @@
                   </select>
                 </div>
                 <div class="col-xs-6">
-                    <input type="number" min="0" class="inputs inputsLight form-control" name="quantityProyect" id="quantityProyect" placeholder="Cantidad de viviendas">
+                    <label>Cantidad de Unidades</label>
+                    <input type="number" min="0" class="inputs inputsLight form-control" maxlength="10" name="quantityProyect" id="quantityProyect" placeholder="Apartamentos/Casas/Locales">
                 </div>
             </div>
             <div class="row">
               <div class="col-xs-4">
-                  <input type="number" min="0" class="inputs inputsLight form-control" name="priceProyect" id="priceProyect" placeholder="Precio">
+                  <label>Precio</label>
+                  <input type="number" min="0" class="inputs inputsLight form-control" maxlength="30" name="priceProyect" id="priceProyect" placeholder="Precio">
               </div>
               <div class="col-xs-4">
                   <ul class="viewRadio">
@@ -43,23 +46,28 @@
                   </ul>
               </div>
               <div class="col-xs-4">
-                  <input type="number" min="0" class="inputs inputsLight form-control" id="construction" name="construction" placeholder="Area de Construcción (Mtrs2)">
+                  <label>Metros de Construcción</label>
+                  <input type="number" min="0" class="inputs inputsLight form-control" maxlength="10" id="construction" name="construction" placeholder="(Mtrs2)">
               </div>
             </div>
             <div class="row">
               <div class="col-xs-4">
-                  <input type="number" min="0" class="inputs inputsLight form-control" id="roomProyect"name="roomProyect" placeholder="Habitaciones">
+                  <label>Habitaciones</label>
+                  <input type="number" min="0" class="inputs inputsLight form-control" maxlength="10" id="roomProyect"name="roomProyect" placeholder="Habitaciones">
               </div>
               <div class="col-xs-4">
-                  <input type="number" min="0" class="inputs inputsLight form-control" id="batroomProyect" name="batroomProyect" placeholder="Baños">
+                  <label>Baños</label>
+                  <input type="number" min="0" class="inputs inputsLight form-control" maxlength="10" id="batroomProyect" name="batroomProyect" placeholder="Cantidad">
               </div>
               <div class="col-xs-4">
-                  <input type="number" min="0" class="inputs inputsLight form-control" id="parkingProyect" name="parkingProyect" placeholder="Estacionamiento (Cantidad de Puestos)">
+                  <label>Puestos de Estacionamientos</label>
+                  <input type="number" min="0" class="inputs inputsLight form-control" maxlength="10" id="parkingProyect" name="parkingProyect" placeholder="Estacionamiento (Cantidad de Puestos)">
               </div>
             </div>
             <div class="row">
                 <div class="col-xs-12">
-                    <textarea class="inputs inputsLight" id="descriptionProyect" name="descriptionProyect" placeholder="Descripción de la vivienda"></textarea>
+                    <label>Descripcion del tipo de inmueble</label>
+                    <textarea class="inputs inputsLight" id="descriptionProyect" maxlength="600" name="descriptionProyect" placeholder="Caracteristicas Destacables"></textarea>
                 </div>
             </div>
             <div class="row">

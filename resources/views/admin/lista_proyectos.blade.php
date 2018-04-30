@@ -1,7 +1,7 @@
 @extends('admin/base_admin')
 
 @section('content')
-    <h2 class="titleSection">Proyectos</h2>
+    <h2 class="titleSection">Proyectos <span class="totalizador">{{$proyectos->total()}}</span></h2>
     @include('admin/common/search_bar_proyect')
     <section>
         <div class="row">
@@ -28,7 +28,9 @@
             @endforeach
         </div>
         <div class="row">
-          {{ $proyectos->links() }}
+          <center>
+            {{ $proyectos->links() }}
+          </center>
         </div>
     </section>
 @endsection
@@ -41,4 +43,5 @@
             window.location.href = redirectUrlDetalleInmueble;
         })
     </script>
+    <script type="text/javascript" src="{{ asset('js/admin/proyectos/buscadorProyecto.js') }}"></script>
 @endSection

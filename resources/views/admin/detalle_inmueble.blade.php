@@ -63,7 +63,7 @@
           @if($usuario->rol_id==1)
             <h2 class="titleSection">Ultima negociación</h2>
             <div class="row">
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                     <p><span>Estatus:</span> {{$negociacion->descripcionEstatus}}</p>
                     <p><span>Asesor Captador:</span> {{$negociacion->asesorCaptador}}</p>
                     <p><span>Asesor Cerrador:</span> {{$negociacion->asesorCerrador}}</p>
@@ -78,7 +78,7 @@
                       @endif
                     </p>
                 </div>
-                <div class="col-xs-4">
+                <div class="col-xs-6">
                     <p><span>Comisión Bruta: Bs</span>
                       @if($negociacion->comisionBruta!='')
                         {{number_format($negociacion->comisionBruta, 2, ',', '.')}}
@@ -87,6 +87,8 @@
                     @if($negociacion->asesorCaptador=="Asesor Generico" || $negociacion->asesorCerrador=="Asesor Generico" )
                       <p><span>Operación Compartida:</span> Si</p>
                       <p><span>Comisión por operación Compartida:</span> {{$negociacion->porcentajeCompartido}}%</p>
+                    @elseif($inmueble->agente_id==5)
+                      <p><span>Operación Compartida:</span> Si</p>
                     @else
                       <p><span>Operación Compartida:</span> No</p>
                     @endif

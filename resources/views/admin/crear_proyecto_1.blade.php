@@ -84,7 +84,7 @@
         <div class="row">
           <div class="col-xs-12">
               <label>Metros de Construcción</label>
-              <input type="number" class="inputs inputsLight form-control" value='{{$datos->metrosConstruccion}}'maxlength="25" name="constructionProyect" id="constructionProyect" placeholder="Construcción (Mtr2)">
+              <input type="number" class="inputs inputsLight form-control" value='{{$datos->metrosConstruccion}}' maxlength="25" name="constructionProyect" id="constructionProyect" placeholder="Construcción (Mtr2)">
           </div>
         </div>
         <div class="row">

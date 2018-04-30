@@ -53,13 +53,11 @@
                               <select class="form-control right" name="cityPropiety" id="cityPropiety">
                                   <option value="">Ciudades</option>
                                   @foreach($ciudades as $ciudad)
-                                    @if($arreglo['propiedades.ciudad_id']!='')
                                       @if($ciudad->id==$arreglo['propiedades.ciudad_id'])
                                         <option value="{{$ciudad->id}}" class="opcion" selected>{{$ciudad->nombre}}</option>
                                       @else
                                         <option value="{{$ciudad->id}}" class="opcion">{{$ciudad->nombre}}</option>
                                       @endif
-                                    @endif
                                   @endforeach
                               </select>
                           </div>
@@ -67,7 +65,7 @@
                               <select class="form-control right" name="namePropiety" id="namePropiety">
                                 <option value="">Urbanizaciones</option>
                                 @foreach($urbanizaciones as $urbanizacion)
-                                  @if($arreglo['propiedades.urbanizacion']!='')
+                                  @if($arreglo['propiedades.ciudad_id']!='')
                                     @if($urbanizacion->id==$arreglo['propiedades.urbanizacion'])
                                       <option value="{{$urbanizacion->id}}" class="opcionUrbanizacion" selected>{{$urbanizacion->nombre}}</option>
                                     @else

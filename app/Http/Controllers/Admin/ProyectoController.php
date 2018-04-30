@@ -19,16 +19,67 @@ use App\Models\InmuebleProyecto;
 class ProyectoController extends Controller{
 
   public function ListaProyectos(){
-        $arreglo=array();
+    $data=\Request::get('data');
+    $arreglo=array();
+      if ($data) {
+        $proyectos=DB::table('mediaproyectos')->Join('proyectos','mediaproyectos.proyecto_id','proyectos.id')
+                                           ->select('mediaproyectos.nombre as nombre_imagen','mediaproyectos.proyecto_id','mediaproyectos.id as id_imagen','proyectos.*')
+                                           ->where('mediaproyectos.vista',1)
+                                           ->where('proyectos.id',$data)
+                                           ->paginate(30);
+      }
+      else{
         $proyectos=DB::table('mediaproyectos')->Join('proyectos','mediaproyectos.proyecto_id','proyectos.id')
                                            ->select('mediaproyectos.nombre as nombre_imagen','mediaproyectos.proyecto_id','mediaproyectos.id as id_imagen','proyectos.*')
                                            ->where('mediaproyectos.vista',1)
                                            ->paginate(30);
+      }
+
+
        $usuario=Session::get('asesor');
        $asesores=Agente::orderBy('fullName','asc')->get();
        $estados=Estado::all();
-       $estatus=Estatus::where('familia',1)->get();
-      return view('/admin/lista_proyectos',$this->cargarSidebar(),compact('proyectos','arreglo','asesores','estados','estatus'));
+      return view('/admin/lista_proyectos',$this->cargarSidebar(),compact('proyectos','arreglo','estados','usuario'));
+  }
+
+  public function buscarProyecto(){
+    $consulta=array();
+    $arreglo=array();
+    $arreglo['proyectos.estado_id']=Request::get('estatePropiety');
+    $arreglo['proyectos.ciudad_id']=Request::get('cityPropiety');
+    foreach ($arreglo as $key => $value) {
+      if ($value!='') {
+        $consulta[$key]=$value;
+      }
+    }
+    //dd($arreglo);
+    $proyectos=DB::table('mediaproyectos')->Join('proyectos','mediaproyectos.proyecto_id','proyectos.id')
+                                          ->select('mediaproyectos.nombre as nombre_imagen','mediaproyectos.proyecto_id','mediaproyectos.id as id_imagen','proyectos.*')
+                                          ->where('mediaproyectos.vista',1)
+                                          ->where($consulta)
+                                          ->paginate(30);
+    $proyectos->withPath('?estatePropiety='.$arreglo['proyectos.estado_id'].'&cityPropiety='.$arreglo['proyectos.ciudad_id'].'');
+    $usuario=Session::get('asesor');
+    $estados=Estado::all();
+    if ($arreglo['proyectos.estado_id']!='') {
+      $ciudades=Ciudad::where('estado_id',$arreglo['proyectos.estado_id'])->get();
+    }
+    else {
+      $ciudad=(object)[
+        'id'=>'',
+        'nombre'=>'',
+        'estado_id'=>''
+      ];
+      $ciudades=collect([$ciudad]);
+    }
+    //dd($arreglo);
+    return view('/admin/lista_proyectos',$this->cargarSidebar(),compact('proyectos','usuario','estados','arreglo','ciudades'));
+  }
+
+  public function buscarProyectoCodigo(){
+   $var =\Request::get('data');
+   $result=Proyecto::searchProyecto($var)->get();
+   return response()->json($result);
   }
 
   public function CrearProyecto1(){
@@ -88,7 +139,7 @@ class ProyectoController extends Controller{
         "descripcionProyecto" =>  ucfirst(mb_strtolower(Request::get('descriptionProyect'))),
         "estado_id"           =>  Request::get('estateProyect'),
         "ciudad_id"           =>  Request::get('cityProyect'),
-        "direccionProyecto"   =>  Request::get('addressProyect'),
+        "direccionProyecto"   =>  ucfirst(mb_strtolower(Request::get('addressProyect'))),
         "posicionMapa"        =>  Request::get('positionPropiety'),
         "destacado"           =>  Request::get('destacado'),
         "cargadoPor"          =>  $usuario->id
@@ -301,13 +352,13 @@ class ProyectoController extends Controller{
     $id=Request::get('register');
     Proyecto::where('id',$id)->update([
                 "tipoNegocio"         =>  Request::get('typeBussisness'),
-                "nombreProyecto"      =>  Request::get('nameProyect'),
+                "nombreProyecto"      =>  ucwords(mb_strtolower(Request::get('nameProyect'))),
                 "metrosConstruccion"  =>  Request::get('constructionProyect'),
                 "fechaEntrega"        =>  Request::get('dateEnd'),
-                "descripcionProyecto" =>  Request::get('descriptionProyect'),
+                "descripcionProyecto" =>  ucfirst(mb_strtolower(Request::get('descriptionProyect'))),
                 "estado_id"           =>  Request::get('estateProyect'),
                 "ciudad_id"           =>  Request::get('cityProyect'),
-                "direccionProyecto"   =>  Request::get('addressProyect'),
+                "direccionProyecto"   =>  ucfirst(mb_strtolower(Request::get('addressProyect'))),
                 "posicionMapa"        =>  Request::get('positionPropiety'),
                 "destacado"           =>  Request::get('destacado'),
               ]);

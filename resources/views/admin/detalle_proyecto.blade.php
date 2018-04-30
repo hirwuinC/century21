@@ -4,18 +4,17 @@
     <div class="contentDetail">
         <h2 class="titleSection">Detalle Del Proyecto</h2>
         <div class="row">
-              <div class="col-xs-4">
+              <div class="col-xs-5">
                   <input type="hidden" id="positionPropiety" value="{{$proyecto->posicionMapa}}">
                   <p><span>Código:</span> {{$proyecto->id}}</p>
                   <p><span>Nombre del Proyecto:</span> {{$proyecto->nombreProyecto}}</p>
                   <p><span>Tipo de Negociacion:</span> {{$proyecto->tipoNegocio}}</p>
-                  <p><span>Fecha estimada de Culminación:</span> {{$proyecto->fechaEntrega}}</p>
-                  <p><span>Metros de Construcción:</span> {{$proyecto->metrosConstruccion}} Mts</p>
+                  <p><span>Fecha estimada de Culminación: </span>{{date("d-m-Y", strtotime($proyecto->fechaEntrega))}}</p>
+                  <p><span>Metros de Construcción:</span> {{ number_format($proyecto->metrosConstruccion, 2, ',', '.') }} Mts</p>
               </div>
-              <div class="col-xs-4">
+              <div class="col-xs-3">
                   <p><span>Estado:</span> {{$proyecto->nombre_estado}}</p>
                   <p><span>Ciudad:</span> {{$proyecto->nombre_ciudad}}</p>
-                  <p><span>Urbanización:</span> {{$proyecto->direccionProyecto}}</p>
                   <p><span>Visitas:</span> {{$proyecto->visitas}}</p>
                   <p><span>Compradores Interesados:</span> {{$proyecto->compradorInteresado}}</p>
               </div>
@@ -29,25 +28,32 @@
                   <p>{{$proyecto->descripcionProyecto}}</p>
               </div>
           </div>
-        <h5 class="infoDetailProperties"><strong>INMUEBLES DEL PROYECTO</strong></h5>
-        <div class="infoDetailProperties">
-          <div class="descriptionProperties">
-            @foreach($inmuebles as $inmueble)
-            <hr>
-              <section class="characteristicsProperties">
-                  <ul>
-                      <li><p>BS. {{$inmueble->precio}}</P></li>
-                      <li><i class="fa fa-building-o" aria-hidden="true"></i> {{$inmueble->nombre_tipo}}</li>
-                      <li><i class="fa fa-object-group" aria-hidden="true"></i> {{$inmueble->metrosConstruccion}}</li>
-                      <li><i class="fa fa-bed" aria-hidden="true"></i> {{$inmueble->habitaciones}}</li>
-                      <li><i class="fa fa-bath" aria-hidden="true"></i> {{$inmueble->banos}}</li>
-                      <li><i class="fa fa-car" aria-hidden="true"></i> {{$inmueble->estacionamientos}}</li>
-                  </ul>
-                  <p>{{$inmueble->descripcionInmueble}}</p>
-              </section>
-            @endforeach
-        </div>
-        </div>
+          <h2 class="titleSection">DIRECCION EXACTA</h2>
+          <div class="row">
+              <div class="col-xs-12">
+                  <p>{{$proyecto->direccionProyecto}}</p>
+              </div>
+          </div>
+          <h2 class="titleSection">INMUEBLES ASOCIADOS</h2>
+          <div class="infoDetailProperties">
+            <div class="descriptionProperties">
+              @foreach($inmuebles as $inmueble)
+              <hr>
+                <section class="characteristicsProperties">
+
+                    <ul>
+                        <li title="Tipo de Inmueble" class="tipoInmueble"><i class="fa fa-building-o" aria-hidden="true"></i> {{$inmueble->nombre_tipo}}</li>
+                        <li title="Metros de Construcción"><i class="fa fa-object-group" aria-hidden="true"></i> {{$inmueble->metrosConstruccion}}</li>
+                        <li title="Habitaciones"><i class="fa fa-bed" aria-hidden="true"></i> {{$inmueble->habitaciones}}</li>
+                        <li title="Baños"><i class="fa fa-bath" aria-hidden="true"></i> {{$inmueble->banos}}</li>
+                        <li title="Estacionamientos"><i class="fa fa-car" aria-hidden="true"></i> {{$inmueble->estacionamientos}}</li>
+                        <li title="Precio" class="precioTipo"><p>BS. {{number_format($inmueble->precio, 2, ',', '.')}}</P></li>
+                    </ul>
+                    <p>{{$inmueble->descripcionInmueble}}</p>
+                </section>
+              @endforeach
+            </div>
+          </div>
         <h2 class="titleSection">UBICACIÓN DEL PROYECTO</h2>
         <div class="row">
             <div class="col-xs-12">

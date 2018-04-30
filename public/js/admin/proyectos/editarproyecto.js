@@ -16,6 +16,25 @@ $(document).ready(function() {
       }
     });
   });
+/////////////////////////////////////////MOSTRAR Y OCULTAR PRELOAD ///////////////////////////////////////////////////////
+    function mostrarPreload(){
+      var ancho = 0;
+      var alto = 0;
+      if (window.innerWidth == undefined) ancho = window.screen.width;
+      else ancho = window.innerWidth;
+      if (window.innerHeight == undefined) alto = window.screen.height;
+      else alto = window.innerHeight;
+      div = document.createElement("div");
+      div.id = "WindowLoad"
+      div.style.width = ancho + "px";
+      div.style.height = alto + "px";
+      $("body").append(div);
+      $('#load').css('display','block');
+    };
+    function ocultarPreload(){
+      $("#WindowLoad").remove();
+      $('#load').css('display','none');
+    }
 //////////////////////////////////////// Validador del formulario 1///////////////////////////////////////////////
 
 $("#proyectEdit").validate({
@@ -78,6 +97,7 @@ $("#proyectEdit").validate({
       var form= new FormData(document.getElementById("proyectEdit"));
       url="/admin/actualizarProyecto1";
       $.ajax({
+        beforeSend:mostrarPreload(),
         url: url,
         type: "post",
         dataType: "json",
@@ -87,8 +107,8 @@ $("#proyectEdit").validate({
         processData: false
       })
       .done(function(respuesta){
+        ocultarPreload();
         if (respuesta) {
-          console.log(respuesta)
           swal({
             title:'Buen trabajo!!',
             text:"Datos guardados con exito",
@@ -105,6 +125,13 @@ $("#proyectEdit").validate({
             'error'
           );
         }
+      }).fail( function() {
+        ocultarPreload();
+        swal(
+          'Imposible Realizar la acción',
+          'Comuniquese con el administrador del sistema',
+          'error'
+        );
       });
   }
 });
@@ -173,6 +200,7 @@ $("#proyectEdit2").validate({
     var form= new FormData(document.getElementById("proyectEdit2"));
     url="/admin/cargarInmuebleProyectos";
     $.ajax({
+      beforeSend:mostrarPreload(),
       url: url,
       type: "post",
       dataType: "html",
@@ -182,6 +210,7 @@ $("#proyectEdit2").validate({
       processData: false
     })
     .done(function(respuesta){
+      ocultarPreload();
       if (respuesta==0) {
         swal({
           title:'Imposible realizar la acción!!',
@@ -202,6 +231,13 @@ $("#proyectEdit2").validate({
         $('#listado').empty();
         $('#listado').append(respuesta);
       }
+    }).fail( function() {
+        ocultarPreload();
+        swal(
+          'Imposible Realizar la acción',
+          'Comuniquese con el administrador del sistema',
+          'error'
+        );
     });
   }
 });
@@ -223,12 +259,14 @@ $('body').on('click','.link',function(e){
       var register=$('input[name=register]').val();
       url="/admin/borrarInmuebleProyectos";
       $.ajax({
+        beforeSend: mostrarPreload(),
         url: url,
         type: "post",
         dataType: "html",
         data:{id:id,register:register}
       })
       .done(function(respuesta){
+          ocultarPreload();
           swal({
             title:'Inmueble Borrado',
             text:"El inmueble seleccionado fue borrado con exito",
@@ -240,6 +278,7 @@ $('body').on('click','.link',function(e){
           $('#listado').append(respuesta);
       })
       .fail(function(){
+        ocultarPreload();
         swal({
           title:'Algo sucedio',
           text:"Comuniquese con el administrador",
@@ -257,13 +296,15 @@ $('body').on('click','#nextPict',function(e){
     var proyecto=$('input[name=register]').val();
     url="/admin/evaluarInmueble";
     $.ajax({
+      beforeSend: mostrarPreload(),
       url: url,
       type: "post",
       dataType: "html",
       data:{id:proyecto}
     })
     .done(function(respuesta){
-        console.log(respuesta);
+        ocultarPreload();
+        //console.log(respuesta);
         if (respuesta==1) {
           swal({
             title:'Buen trabajo!!',
@@ -285,6 +326,7 @@ $('body').on('click','#nextPict',function(e){
         }
     })
     .fail(function(){
+      ocultarPreload();
       swal({
         title:'Algo sucedio',
         text:"Comuniquese con el administrador",
@@ -313,7 +355,7 @@ $('body').on('click','#nextPict',function(e){
       $(`<div class='col-sm-3 thumbPropiety'>
           <div class='thumbProperty'>
             <div class='contentTop'>
-              <img class='imgInmueble' src='http://${dominio}/images/img-demo-images.jpg' alt=''>
+              <img class='imgInmueble' src='http://${dominio}/images/img-demo-images.png' alt=''>
             </div>
             <div class='contentInfo'>
               <div class='buttonsAction'>
@@ -333,6 +375,7 @@ $('body').on('click','#nextPict',function(e){
                 <div class='row'>
                   <div class='col-xs-12'>
                     <div class='col-xs-6 col-xs-offset-4' >
+                      <div class="portada">¿Portada?</div>
                       <div class="styled-input-single">
                           <input type="radio" name="fotovisible" value="${contador}" id="radio-example-${contador}"/>
                           <label for="radio-example-${contador}"></label>
@@ -349,6 +392,9 @@ $('body').on('click','#nextPict',function(e){
         $('.addPicCont').css('display','none');
       }
   });
+
+/////////////////////////////////////// BORRAR IMAGENES CARGADAS ////////////////////////////////////////////////
+
   $('body').on('click','.btnBorrar',function(e){
     e.preventDefault();
     var contBtn= $('.btnBorrar').length;
@@ -368,24 +414,44 @@ $('body').on('click','#nextPict',function(e){
       form.append('desicion',1);
       url="/admin/borrarImagenProyecto";
       $.ajax({
+        beforeSend:mostrarPreload(),
         url: url,
         type: "post",
         dataType: "json",
+        context:$(this),
         data: form,
         cache: false,
         contentType: false,
         processData: false
       })
       .done(function(respuesta){
-        console.log(respuesta);
+        ocultarPreload();
+        if (respuesta==2) {
+          swal(
+            'Imposible Realizar la acción',
+            'La foto que esta intentando borrar esta seleccionada como portada del inmueble, seleccione otra como inmueble e intentelo de nuevo',
+            'error'
+          );
+        }
+        else{
+          $(this).parent().parent().parent().parent().parent().parent().parent().remove();
+        }
+      }).fail( function() {
+          ocultarPreload();
+          swal(
+            'Imposible Realizar la acción',
+            'Comuniquese con el administrador del sistema',
+            'error'
+          );
       });
-      $(this).parent().parent().parent().parent().parent().parent().parent().remove();
     }
     var contThumb= $('.thumbPropiety').length;
     if (contThumb<8) {
       $('.addPicCont').css('display','block');
     }
   });
+
+/////////////////////////////////////////// CARGA DE IMAGENES PARA EL PROYECTO ///////////////////////////////////////////////////
   $('body').on('change','.file-input',function(){
     var tamano=this.files[0].size/1024;
     if (tamano<=1024) {
@@ -400,6 +466,7 @@ $('body').on('click','#nextPict',function(e){
       form.append('desicion',1);
       url="/admin/guardarImagenProyecto";
       $.ajax({
+        beforeSend:mostrarPreload(),
         url: url,
         type: "post",
         dataType: "json",
@@ -409,10 +476,18 @@ $('body').on('click','#nextPict',function(e){
         processData: false
       })
       .done(function(respuesta){
+        ocultarPreload();
         var ubicacion=respuesta[0];
         var id=respuesta[1];
         $("#"+ubicacion+"").val(id);
         $("#radio-example-"+valor).val(id);
+      }).fail( function() {
+          ocultarPreload();
+          swal(
+            'Imposible Realizar la acción',
+            'Comuniquese con el administrador del sistema',
+            'error'
+          );
       });
         var curElement = $(this).parent().parent().parent().parent().parent().parent().parent().find('.imgInmueble');
         var reader = new FileReader();
@@ -429,8 +504,9 @@ $('body').on('click','#nextPict',function(e){
         button:true,
       });
     }
-
   });
+///////////////////////////////////// GUARDAR ULTIMO PASO DEL PROYECTO /////////////////////////////////////////////////////////////
+
   $('body').on('submit','#picPropiety',function(e){
     e.preventDefault();
     var marcador=$('input[name=fotovisible]:checked');
@@ -441,6 +517,7 @@ $('body').on('click','#nextPict',function(e){
       form.append('imgSelected',imgSelected);
       url="/admin/guardarProyecto";
       $.ajax({
+        beforeSend:mostrarPreload(),
         url: url,
         type: "post",
         dataType: "json",
@@ -450,6 +527,7 @@ $('body').on('click','#nextPict',function(e){
         processData: false
       })
       .done(function(respuesta){
+        ocultarPreload();
         if (respuesta==1) {
           swal({
             title:'Buen trabajo!!',
@@ -476,6 +554,13 @@ $('body').on('click','#nextPict',function(e){
             button:true
           });
         }
+      }).fail( function() {
+        ocultarPreload();
+        swal(
+          'Imposible Realizar la acción',
+          'Comuniquese con el administrador del sistema',
+          'error'
+        );
       });
     }
     else {
