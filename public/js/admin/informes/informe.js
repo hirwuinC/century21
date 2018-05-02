@@ -23,8 +23,6 @@ $(document).ready(function() {
         $('#contratoExclusiva').val(respuesta[1].fechaExclusiva);
         $('#rotuloComercial').val(respuesta[1].promocionRotulo);
         $('#volanteoDigital').val(respuesta[1].promocionVolanteo);
-        $('#codigoVenezuela').val(respuesta[1].publicacionVenezuela);
-        $('#codigoCaracas').val(respuesta[1].publicacionCaracas);
         $('#codigoTuInmueble').val(respuesta[1].publicacionTuInmueble);
         $('#codigoConLaLlave').val(respuesta[1].publicacionLlave);
         $('#modalReport').modal('show');
@@ -110,12 +108,6 @@ $("#formularioInforme").validate({
       volanteoDigital:{
         required:true
       },
-      codigoVenezuela:{
-        required:true
-      },
-      codigoCaracas:{
-        required:true
-      },
       codigoTuInmueble:{
         required:true
       },
@@ -165,12 +157,6 @@ $("#formularioInforme").validate({
     },
     volanteoDigital:{
       required:"Debe indicar la gestión de este punto"
-    },
-    codigoVenezuela:{
-      required:"Debe indicar el código de la propiedad en este portal"
-    },
-    codigoCaracas:{
-      required:"Debe indicar el código de la propiedad en este portal"
     },
     codigoTuInmueble:{
       required:"Debe indicar el código de la propiedad en este portal"
@@ -260,8 +246,6 @@ $("#formularioInforme").validate({
         $('#contratoExclusivaM').val(respuesta.fechaExclusiva);
         $('#rotuloComercialM').val(respuesta.promocionRotulo);
         $('#volanteoDigitalM').val(respuesta.promocionVolanteo);
-        $('#codigoVenezuelaM').val(respuesta.publicacionVenezuela);
-        $('#codigoCaracasM').val(respuesta.publicacionCaracas);
         $('#codigoTuInmuebleM').val(respuesta.publicacionTuInmueble);
         $('#codigoConLaLlaveM').val(respuesta.publicacionLlave);
         $('#visitasDigitalesM').val(respuesta.visitasDigitalesTotales);
@@ -335,12 +319,6 @@ $("#formularioInforme").validate({
         volanteoDigital:{
           required:true
         },
-        codigoVenezuela:{
-          required:true
-        },
-        codigoCaracas:{
-          required:true
-        },
         codigoTuInmueble:{
           required:true
         },
@@ -391,12 +369,6 @@ $("#formularioInforme").validate({
       volanteoDigital:{
         required:"Debe indicar la gestión de este punto"
       },
-      codigoVenezuela:{
-        required:"Debe indicar el código de la propiedad en este portal"
-      },
-      codigoCaracas:{
-        required:"Debe indicar el código de la propiedad en este portal"
-      },
       codigoTuInmueble:{
         required:"Debe indicar el código de la propiedad en este portal"
       },
@@ -438,7 +410,7 @@ $("#formularioInforme").validate({
         data: form
       })
       .done(function(respuesta){
-        console.log(respuesta);
+        //console.log(respuesta);
         if(respuesta){
           swal({
               title: "Buen Trabajo!!",

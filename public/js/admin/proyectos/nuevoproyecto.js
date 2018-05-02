@@ -440,7 +440,7 @@ $('body').on('click','#nextPict',function(e){
         if (respuesta==2) {
           swal(
             'Imposible Realizar la acción',
-            'La foto que esta intentando borrar esta seleccionada como portada del inmueble, seleccione otra como inmueble e intentelo de nuevo',
+            'La foto que esta intentando borrar esta seleccionada como portada del proyecto, seleccione otra como portada e intentelo de nuevo',
             'error'
           );
         }

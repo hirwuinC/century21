@@ -12,7 +12,7 @@
                 <div class="editProperty">
                   {{$editar}}
                 </div>
-                <div class="deleteProperty">
+                <div class="deleteProperty" data-id="{{$code}}">
                   {{$eliminar}}
                 </div>
             </div>

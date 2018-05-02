@@ -9,7 +9,7 @@
                 <div class="editProperty">
                   {{$editar}}
                 </div>
-                <div class="deleteProperty">
+                <div class="deleteProperty" data-id="{{$id}}">
                   {{$eliminar}}
                 </div>
             </div>

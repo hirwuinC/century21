@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 //use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Agente;
+use App\Models\Propiedad;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Imagen;
@@ -18,10 +19,10 @@ class AsesorController extends Controller
     public function ListarAsesores(){
       $data=\Request::get('data');
       if ($data) {
-        $asesores=Agente::join('imagenes','agentes.imagen_id','imagenes.id')->where('agentes.id',$data)->select('agentes.*','imagenes.src as nombreimagen')->paginate(20);
+        $asesores=Agente::join('imagenes','agentes.imagen_id','imagenes.id')->where('agentes.id',$data)->select('agentes.*','imagenes.src as nombreimagen')->paginate(10);
       }
       else{
-        $asesores= Agente::join('imagenes','agentes.imagen_id','imagenes.id')->where('agentes.id','<>',5)->select('agentes.*','imagenes.src as nombreimagen')->orderBy('fullName','asc')->paginate(20);
+        $asesores= Agente::join('imagenes','agentes.imagen_id','imagenes.id')->where('agentes.id','<>',5)->select('agentes.*','imagenes.src as nombreimagen')->orderBy('fullName','asc')->paginate(10);
       }
     return view('admin.lista_agentes',$this->cargarSidebar(),compact('asesores'));
     }
@@ -186,8 +187,34 @@ class AsesorController extends Controller
     	$result=Agente::searchAsesor($var)->get();
     	return response()->json($result);
     }
-    public function pruebaAsesor(){
-      return $this->prueba();
+    public function borrarAsesor(){
+      $idAsesor=Request::get('id');
+      $consulta=Propiedad::where('agente_id',$idAsesor)->first();
+      if (empty($consulta)) {
+          $asesor=Agente::where('id',$idAsesor)->first();
+          //dd($asesor);
+        ///////////////////////////////  Borrar usuario del Asesor /////////////////////////////////////////
+
+            User::where('agente_id',$idAsesor)->delete();
+
+      ///////////////////////////////////////////////  Borrar Asesor /////////////////////////////////////////////////
+
+          Agente::destroy($idAsesor);
+
+
+      ///////////////////////////////  Borrar foto del asesor /////////////////////////////////////////
+
+          if ($asesor->imagen_id!=1) {
+            $imagen=Imagen::find($asesor->imagen_id);
+            File::delete(public_path('images/asesores/'.$imagen->src.''));
+            Imagen::destroy($imagen->id);
+          }
+          $respuesta=1;
+      }
+      else{
+        $respuesta=2;
+      }
+      return $respuesta;
     }
 
 }

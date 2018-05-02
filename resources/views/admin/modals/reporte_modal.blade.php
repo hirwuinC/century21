@@ -74,22 +74,6 @@
                         <h1 class="titleSection">Publicación en portales de internet</h1>
                         <div class="row marginBottom20">
                             <div class="col-xs-4">
-                                <label>century21venezuela.com</label>
-                            </div>
-                            <div class="col-xs-8">
-                                <input type="text" name="codigoVenezuela" maxlength="50" id="codigoVenezuela" class="form-control limpiar">
-                            </div>
-                        </div>
-                        <div class="row marginBottom20">
-                            <div class="col-xs-4">
-                                <label>century21caracas.com</label>
-                            </div>
-                            <div class="col-xs-8">
-                                <input type="text" name="codigoCaracas" maxlength="50" id="codigoCaracas" class="form-control limpiar">
-                            </div>
-                        </div>
-                        <div class="row marginBottom20">
-                            <div class="col-xs-4">
                                 <label>tuinmueble.com</label>
                             </div>
                             <div class="col-xs-8">

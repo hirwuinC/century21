@@ -19,6 +19,7 @@ use App\Models\Negociacion;
 use App\Models\Informe;
 use App\Models\Media;
 use App\Models\NegociacionEstatus;
+use App\Models\CompradorPropiedades;
 
 class PropiedadController extends Controller{
 
@@ -403,8 +404,34 @@ class PropiedadController extends Controller{
     $propiedad=Propiedad::find($inmueble);
     return view('/admin/editar_inmueble_2',$this->cargarSidebar(),compact('inmueble','imagenes','ultimo','propiedad'));
   }
-  public function prueba(){
-        $consulta=uniqid();
-        return $consulta;
+  public function borrarInmueble(){
+    $idInmueble=Request::get('id');
+///////////////////////////////  Borrar informes del Inmueble /////////////////////////////////////////
+
+    Informe::where('propiedad_id',$idInmueble)->delete();
+
+///////////////////////////////////////////////  Borrar Negociaciones y etapas de negociaciones /////////////////////////////////////////////////
+    $negociaciones=Negociacion::where('propiedad_id',$idInmueble)->get();
+      if (count($negociaciones)!=0) {
+        foreach ($negociaciones as $negociacion) {
+            NegociacionEstatus::where('negociacion_id',$negociacion->id)->delete();
+            Negociacion::destroy($negociacion->id);
+        }
+      }
+///////////////////////////////  Borrar asociacion entre comprador e inmueble /////////////////////////////////////////
+
+    CompradorPropiedades::where('propiedad_id',$idInmueble)->delete();
+    $respuesta=1;
+
+///////////////////////////////  Borrar fotos del inmueble /////////////////////////////////////////
+    $imagenes=Media::where('propiedad_id',$idInmueble)->get();
+    foreach ($imagenes as $imagen) {
+      File::delete(public_path('images/inmuebles/'.$imagen->nombre.''));
+      Media::destroy($imagen->id);
+    }
+///////////////////////////////  Borrar inmueble /////////////////////////////////////////
+    Propiedad::destroy($idInmueble);
+    $respuesta=1;
+    return $respuesta;
   }
 }

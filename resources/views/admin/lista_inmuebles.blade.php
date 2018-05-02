@@ -84,4 +84,5 @@
     </script>
     <script type="text/javascript" src="{{ asset('js/admin/propiedades/estatus.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/admin/propiedades/buscadorInmueble.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/admin/propiedades/eliminarInmueble.js') }}"></script>
 @endSection

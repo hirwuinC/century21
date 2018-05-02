@@ -35,12 +35,14 @@ Route::post('/admin/guardarCiudad',['as'=>'guardarCiudad','uses'=>'Admin\Direcci
 Route::any('/admin/guardarUrbanizacion',['as'=>'guardarUrbanizacion','uses'=>'Admin\DireccionesController@guardarUrbanizacion'] );
 Route::any('/admin/borrarCiudad',['as'=>'borrarCiudad','uses'=>'Admin\DireccionesController@borrarCiudad'] );
 Route::any('/admin/borrarUrbanizacion',['as'=>'borrarUrbanizacion','uses'=>'Admin\DireccionesController@borrarUrbanizacion'] );
+
+
 //Asesores
 Route::get('/admin/crear-usuario/{id}', ['as' => 'crear-agente', 'uses' => 'Admin\AsesorController@CrearUsuarioAsesor']);
 Route::get('/admin/agente', ['as' => 'lista-agente', 'uses' => 'Admin\AsesorController@ListarAsesores']);
 Route::get('/admin/buscarasesor',['as'=>'prueba','uses'=>'Admin\AsesorController@searchAsesor'] );
 Route::any('/admin/buscaruser',['as'=>'buscar_user','uses'=>'Admin\AsesorController@guardarEditarUsuario']);
-Route::get('/admin/prueba',['as'=>'pruebaAsesor','uses'=>'Admin\AsesorController@pruebaAsesor'] );
+Route::any('/admin/borrarAsesor',['as'=>'borrarAsesor','uses'=>'Admin\AsesorController@borrarAsesor'] );
 
 //Perfil
 Route::get('/admin/perfil', ['as' => 'perfil', 'uses' => 'Admin\PerfilController@Perfil']);
@@ -61,6 +63,7 @@ Route::get('/admin/editar-inmueble2/{id}', ['as' => 'editar-inmueble-2', 'uses' 
 Route::any('/admin/guardarImagen', ['as' => 'guardarImagen', 'uses' => 'Admin\PropiedadController@guardarImagen']);
 Route::any('/admin/borrarImagen', ['as' => 'borrarImagen', 'uses' => 'Admin\PropiedadController@borrarImagen']);
 Route::any('/admin/buscarInmueble', ['as' => 'buscarInmueble', 'uses' => 'Admin\PropiedadController@buscarInmueble']);
+Route::any('/admin/borrarInmueble',['as'=>'borrarInmueble','uses'=>'Admin\PropiedadController@borrarInmueble'] );
 
 /// NEGOCIACIONES
 Route::any('/admin/llenarModalNegociacion', ['as' => 'llenarModalNegociacion', 'uses' => 'Admin\NegociacionController@llenarModalNegociacion']);
@@ -112,6 +115,7 @@ Route::any('/admin/actualizarProyecto1', ['as' => 'actualizarProyecto1', 'uses' 
 Route::get('/admin/proyecto/{id}', ['as' => 'admin_detalle_proyecto', 'uses' => 'Admin\ProyectoController@detalleProyecto']);
 Route::any('/admin/buscarProyecto', ['as' => 'buscarProyecto', 'uses' => 'Admin\ProyectoController@buscarProyecto']);
 Route::get('/admin/buscarProyectoCodigo',['as'=>'buscarProyectoCodigo','uses'=>'Admin\ProyectoController@buscarProyectoCodigo'] );
+Route::post('/admin/borrarProyecto',['as'=>'borrarProyecto','uses'=>'Admin\ProyectoController@borrarProyecto'] );
 
 // ESTADISTICAS
 Route::get('/admin/estadisticas', ['as' => 'estadisticas', 'uses' => 'Admin\EstadisticasController@index']);

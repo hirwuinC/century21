@@ -7,7 +7,7 @@
         <div class="col-xs-6">
             <ul style="margin-top:30px;">
                 <li><a href="{{ route('crear-agente',['id'=>$asesor_id]) }}"><i class="fa fa-pencil" aria-hidden="true"></i></a></li>
-                <li><a href=""><i class="fa fa-times redError" aria-hidden="true"></i></a></li>
+                <li><a href=""><i class="fa fa-times redError" data-id="{{$asesor_id}}" aria-hidden="true"></i></a></li>
             </ul>
         </div>
     </div>

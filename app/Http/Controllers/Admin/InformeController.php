@@ -65,9 +65,9 @@ class InformeController extends Controller{
     $datetime1 = date_create($propiedad->fechaCreado);
     $datetime2 = date_create();
     $diaTranscurrido= date_diff($datetime1, $datetime2);
-    $dia=date("j", strtotime($propiedad->fechaCreado));
-    $ano=date("Y", strtotime($propiedad->fechaCreado));
-    $mes=self::traductor(date("n", strtotime($propiedad->fechaCreado)));
+    $dia=date("j", strtotime($consulta->fechaCreado));
+    $ano=date("Y", strtotime($consulta->fechaCreado));
+    $mes=self::traductor(date("n", strtotime($consulta->fechaCreado)));
     Fpdf::SetTextColor(78,84,82);
     Fpdf::AddPage();
     self::Header($dia,$mes,$ano);
@@ -239,13 +239,15 @@ class InformeController extends Controller{
     return Response::json($valores);
   }
   public function guardarInforme(){
+    $idPropiedad=Request::get('idPropietyModal');
+    $consulta=Propiedad::find($idPropiedad);
     $nombreCliente                      = ucwords(mb_strtolower(Request::get('nombreCliente')));
     $correoCliente                      = mb_strtolower(Request::get('correoCliente'));
     $fechaExclusiva                     = Request::get('contratoExclusiva');
     $promocionRotulo                    = ucfirst(mb_strtolower(Request::get('rotuloComercial')));
     $promocionVolanteo                  = ucfirst(mb_strtolower(Request::get('volanteoDigital')));
-    $publicacionVenezuela               = ucfirst(mb_strtolower(Request::get('codigoVenezuela')));
-    $publicacionCaracas                 = ucfirst(mb_strtolower(Request::get('codigoCaracas')));
+    $publicacionVenezuela               = $consulta->id_mls;
+    $publicacionCaracas                 = $consulta->id;
     $publicacionTuInmueble              = ucfirst(mb_strtolower(Request::get('codigoTuInmueble')));
     $publicacionLlave                   = ucfirst(mb_strtolower(Request::get('codigoConLaLlave')));
     $visitasDigitalesTotales            = Request::get('visitasDigitales');
@@ -337,9 +339,9 @@ class InformeController extends Controller{
     $datetime1 = date_create($propiedad->fechaCreado);
     $datetime2 = date_create();
     $diaTranscurrido= date_diff($datetime1, $datetime2);
-    $dia=date("j", strtotime($propiedad->fechaCreado));
-    $ano=date("Y", strtotime($propiedad->fechaCreado));
-    $mes=self::traductor(date("n", strtotime($propiedad->fechaCreado)));
+    $dia=date("j", strtotime($consulta->fechaCreado));
+    $ano=date("Y", strtotime($consulta->fechaCreado));
+    $mes=self::traductor(date("n", strtotime($consulta->fechaCreado)));
     Fpdf::SetTextColor(78,84,82);
     Fpdf::AddPage();
     self::Header($dia,$mes,$ano);
@@ -468,14 +470,16 @@ class InformeController extends Controller{
   }
 
   public function actualizarInforme(){
+    $idPropiedad=Request::get('idPropietyModal');
+    $consulta=Propiedad::find($idPropiedad);
     $idInforme                          = Request::get('idInformeModal');
     $nombreCliente                      = ucwords(mb_strtolower(Request::get('nombreCliente')));
     $correoCliente                      = mb_strtolower(Request::get('correoCliente'));
     $fechaExclusiva                     = Request::get('contratoExclusiva');
     $promocionRotulo                    = ucfirst(mb_strtolower(Request::get('rotuloComercial')));
     $promocionVolanteo                  = ucfirst(mb_strtolower(Request::get('volanteoDigital')));
-    $publicacionVenezuela               = ucfirst(mb_strtolower(Request::get('codigoVenezuela')));
-    $publicacionCaracas                 = ucfirst(mb_strtolower(Request::get('codigoCaracas')));
+    $publicacionVenezuela               = $consulta->id_mls;
+    $publicacionCaracas                 = $consulta->id;
     $publicacionTuInmueble              = ucfirst(mb_strtolower(Request::get('codigoTuInmueble')));
     $publicacionLlave                   = ucfirst(mb_strtolower(Request::get('codigoConLaLlave')));
     $visitasDigitalesTotales            = Request::get('visitasDigitales');

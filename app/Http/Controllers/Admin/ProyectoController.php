@@ -383,7 +383,25 @@ class ProyectoController extends Controller{
     return view('/admin/editar_proyecto_3',$this->cargarSidebar(),compact('imagenes','ultimo'));
 
   }
-  public function prueba(){
-        return Session::get('proyectoEdit');
+  public function borrarProyecto(){
+    $idProyecto=Request::get('id');
+///////////////////////////////  Borrar Imagenes asociadas al proyecto /////////////////////////////////////////
+
+    $imagenes=MediaProyecto::where('proyecto_id',$idProyecto)->get();
+    foreach ($imagenes as $imagen) {
+      File::delete(public_path('images/proyectos/'.$imagen->nombre.''));
+      MediaProyecto::destroy($imagen->id);
+    }
+
+///////////////////////////////  Borrar Inmuebles asociados al proyecto /////////////////////////////////////////
+
+    $inmuebles=InmuebleProyecto::where('proyecto_id',$idProyecto)->get();
+    foreach ($inmuebles as $inmueble) {
+      InmuebleProyecto::destroy($inmueble->id);
+    }
+///////////////////////////////////////////////  Borrar Proyecto /////////////////////////////////////////////////
+    Proyecto::destroy($idProyecto);
+    $respuesta=1;
+    return $respuesta;
   }
 }
