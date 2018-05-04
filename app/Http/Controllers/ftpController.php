@@ -370,7 +370,7 @@ class ftpController extends Controller
                                         
 
                                                                               //filtrar estado
-                                        if (($datos[10]=='VARGAS'||$datos[10]=='MIRANDA'||$datos[10]=='DISTRITO FEDERAL')&&($c<80 ) )
+                                        if (($datos[10]=='VARGAS'||$datos[10]=='MIRANDA'||$datos[10]=='DISTRITO FEDERAL')&&($c<150 ) )
                                         {
                                            
                                             
