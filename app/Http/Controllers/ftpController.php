@@ -279,17 +279,17 @@ class ftpController extends Controller
 
     public function borrarArchivos($directorioSin)
     {
-        $archivos=[$directorioSin.'\Century21\propiedades.csv',
-                   $directorioSin.'\Century21\media.csv',
-                   $directorioSin.'\Century21\ciudades.csv',
-                   $directorioSin.'\Century21\urbanizaciones.csv',
-                   $directorioSin.'\Century21.zip'];
+        $archivos=[$directorioSin.'/Century21/propiedades.csv',
+                   $directorioSin.'/Century21/media.csv',
+                   $directorioSin.'/Century21/ciudades.csv',
+                   $directorioSin.'/Century21/urbanizaciones.csv',
+                   $directorioSin.'/Century21.zip'];
         for ($i=0; $i <count($archivos) ; $i++) 
         { 
             unlink($archivos[$i]);
         }
 
-        rmdir($directorioSin.'\Century21');
+        rmdir($directorioSin.'/Century21');
         return 0;
     }
     ///////////////////Fin de metodos de insercion y consultas ////////////////////////////////////////////
@@ -309,11 +309,11 @@ class ftpController extends Controller
             ini_set('max_execution_time',12000 ); //tiempo maximo de ejecucion del script
             
 
-            $directorioSin=storage_path('app\public\sincronizar');
+            $directorioSin=storage_path('app/public/sincronizar');
             $ftp_server="216.155.132.149";
             $ftp_user="inmueblescaracas";
             $ftp_password="sdkjsa$$";
-            $local_file=$directorioSin.'\Century21.zip';//'C:/Users/Jose Tayupo/Desktop/Descargas/Century21.zip';
+            $local_file=$directorioSin.'/Century21.zip';//'C:/Users/Jose Tayupo/Desktop/Descargas/Century21.zip';
             $ftp_file='/FTP-TXT/Century21.zip';
             $ftp_download=false;
 
@@ -346,7 +346,7 @@ class ftpController extends Controller
               }
             }
                  //echo "Descomprimiendo el archivo: $local_file <br>";
-                 $extract=Zipper::make($local_file)->extractTo($directorioSin.'\Century21');
+                 $extract=Zipper::make($local_file)->extractTo($directorioSin.'/Century21');
                 
                  //echo "el archivo se descomprimio correctamente";
                     $i=0;
@@ -356,7 +356,7 @@ class ftpController extends Controller
                    
 
                     $c=0;
-                    if (($gestor = fopen($directorioSin.'\Century21\propiedades.csv', "r")) !== FALSE) {
+                    if (($gestor = fopen($directorioSin.'/Century21/propiedades.csv', "r")) !== FALSE) {
                         while (($datos = fgetcsv($gestor, 1000, ",",'"')) !== FALSE) 
                         {
                                    
@@ -425,7 +425,7 @@ class ftpController extends Controller
 
                                             //buscamos e insertamos las imagenes correspondientes a la propiedad cargada
 
-                                            $fotos=$this->buscarFotos($propiedadMls,$directorioSin.'\Century21\media.csv',$datos[23]);
+                                            $fotos=$this->buscarFotos($propiedadMls,$directorioSin.'/Century21/media.csv',$datos[23]);
                                             $fotosEn=$this->insertarFotos($fotos,$propiedadId);
                                             $cantidadImagenes=$cantidadImagenes+count($fotos);
                                         
