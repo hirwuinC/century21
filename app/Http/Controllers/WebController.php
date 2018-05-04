@@ -91,7 +91,7 @@ class WebController extends Controller
                                             ->select('mediaproyectos.nombre as nombre_imagen','mediaproyectos.proyecto_id','mediaproyectos.id as id_imagen','proyectos.*','ciudades.nombre as nombre_ciudad')
                                             ->where('mediaproyectos.vista',1)
                                             ->where('destacado',1)
-                                            ->get();
+                                            ->paginate(10);
         return view('lista_proyectos',compact('proyectos'));
     }
 
@@ -106,22 +106,24 @@ class WebController extends Controller
       $contVisita = Propiedad::find($id);
       $contVisita->visitas =$contVisita->visitas+1;
       $contVisita->save();
-      $inmueble=DB::table('propiedades')->join('tipoinmueble','propiedades.tipo_inmueble','=','tipoinmueble.id')
-                                         ->join('agentes','propiedades.agente_id','=','agentes.id')
-                                         ->join('estados','propiedades.estado_id','=','estados.id')
-                                         ->join('ciudades','propiedades.ciudad_id','=','ciudades.id')
-                                         ->select('propiedades.*','agentes.fullname','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoinmueble.*')
+      $inmueble=DB::table('propiedades')->join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
+                                         ->join('urbanizaciones','propiedades.urbanizacion','urbanizaciones.id')
+                                         ->join('estados','propiedades.estado_id','estados.id')
+                                         ->join('ciudades','propiedades.ciudad_id','ciudades.id')
+                                         ->select('propiedades.*','urbanizaciones.nombre as nombre_urbanizacion','estados.nombre as nombre_estado','ciudades.nombre as nombre_ciudad','tipoinmueble.nombre as nombre_tipo')
                                          ->where('propiedades.id',$id)
                                          ->first();
       $imagenes=Media::where('propiedad_id',$id)->get();
-      $destacados=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
-                                     ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*')
+      $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
+                                     ->join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
+                                     ->join('ciudades','propiedades.ciudad_id','ciudades.id')
+                                     ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','ciudades.nombre as nombreCiudad','tipoinmueble.nombre as nombreInmueble')
                                      ->where('medias.vista',1)
                                      ->inRandomOrder()
                                      ->get()
                                      ->take(3);
       //return $destacados;
-      return view('detalle_inmueble',compact('inmueble','imagenes','destacados'));
+      return view('detalle_inmueble',compact('inmueble','imagenes','inmuebles'));
     }
 
     /**
@@ -142,7 +144,23 @@ class WebController extends Controller
      */
     public function contacto()
     {
-        return view('contacto');
+      $proyectos=DB::table('proyectos')->Join('mediaproyectos','proyectos.id','mediaproyectos.proyecto_id')
+                                            ->join('ciudades','proyectos.ciudad_id','ciudades.id')
+                                            ->select('mediaproyectos.nombre as nombre_imagen','mediaproyectos.proyecto_id','mediaproyectos.id as id_imagen','proyectos.*','ciudades.nombre as nombre_ciudad')
+                                            ->where('mediaproyectos.vista',1)
+                                            ->where('destacado',1)
+                                            ->inRandomOrder()
+                                            ->get()
+                                            ->take(3);
+      $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
+                                     ->join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
+                                     ->join('ciudades','propiedades.ciudad_id','ciudades.id')
+                                     ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','ciudades.nombre as nombreCiudad','tipoinmueble.nombre as nombreInmueble')
+                                     ->where('medias.vista',1)
+                                     ->inRandomOrder()
+                                     ->get()
+                                     ->take(3);
+        return view('contacto',compact('proyectos','inmuebles'));
     }
 
 
@@ -153,7 +171,23 @@ class WebController extends Controller
      */
     public function nuestra_historia()
     {
-        return view('nuestra_historia');
+      $proyectos=DB::table('proyectos')->Join('mediaproyectos','proyectos.id','mediaproyectos.proyecto_id')
+                                            ->join('ciudades','proyectos.ciudad_id','ciudades.id')
+                                            ->select('mediaproyectos.nombre as nombre_imagen','mediaproyectos.proyecto_id','mediaproyectos.id as id_imagen','proyectos.*','ciudades.nombre as nombre_ciudad')
+                                            ->where('mediaproyectos.vista',1)
+                                            ->where('destacado',1)
+                                            ->inRandomOrder()
+                                            ->get()
+                                            ->take(3);
+      $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
+                                     ->join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
+                                     ->join('ciudades','propiedades.ciudad_id','ciudades.id')
+                                     ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','ciudades.nombre as nombreCiudad','tipoinmueble.nombre as nombreInmueble')
+                                     ->where('medias.vista',1)
+                                     ->inRandomOrder()
+                                     ->get()
+                                     ->take(3);
+        return view('nuestra_historia',compact('proyectos','inmuebles'));
     }
 
 }

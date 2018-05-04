@@ -8,6 +8,7 @@
         <div class="row">
             @foreach($proyectos as $proyecto)
                 @component('partials/proyecto')
+                    @slot('cantidad') 4 @endslot
                     @slot('title') {{$proyecto->nombreProyecto}} @endslot
                     @slot('zone') {{$proyecto->nombre_ciudad}} @endslot
                     @slot('img') {{$proyecto->nombre_imagen}} @endslot

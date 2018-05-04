@@ -18,7 +18,7 @@
         </div>
         <div class="characteristicsProperty">
             <ul>
-                <li title="Metros de Construcción"><i class="fa fa-object-group"  aria-hidden="true"></i> {{$metros}} Mts</li>
+                <li title="Metros de Construcción" class="metroConstruccion"><i class="fa fa-object-group"  aria-hidden="true"></i> {{$metros}} Mts</li>
                 <li title="Habitaciones" ><i class="fa fa-bed" aria-hidden="true"></i> {{$cuartos}}</li>
                 <li title="Baños" ><i class="fa fa-bath" aria-hidden="true"></i> {{$baños}}</li>
                 <li title="Puestos de Estacionamiento" ><i class="fa fa-car" aria-hidden="true"></i> {{$estacionamientos}}</li>

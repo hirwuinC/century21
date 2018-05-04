@@ -1,4 +1,4 @@
-<div class="col-sm-4">
+<div class="col-sm-{{$cantidad}}">
     <div class="thumbProject">
         <img src="{{asset('images/proyectos')}}/{{$img}}" alt="">
         <div class="caption">

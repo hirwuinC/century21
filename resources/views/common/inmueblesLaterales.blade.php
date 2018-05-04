@@ -1,91 +1,37 @@
 <section id="featuredProperties">
-<div class="row">
-    <div class="col-sm-12">
-        <div class="thumbProperty">
-            <div class="contentTop">
-                <img src="{{ asset('images/') }}/img-demo.jpg" alt="">
-                <div class="caption">
-                    <div class="businessType">
-                        <p>Alquiler</p>
-                    </div>
-                    <div class="priceProject">
-                        <p><span>Bsf.:</span> 100.000.000</p>
-                    </div>
-                </div>
-            </div>
-            <div class="contentInfo">
-                <div class="infoProperty">
-                    <h4><a href="">Residencias Mohecastel</a></h4>
-                    <p><span><i class="fa fa-map-marker" aria-hidden="true"></i></span> Avenida Eugenio Mendoza, La Castellana</p>
-                </div>
-                <div class="characteristicsProperty">
-                    <ul>
-                        <li><i class="fa fa-object-group" aria-hidden="true"></i> 120Mts</li>
-                        <li><i class="fa fa-bed" aria-hidden="true"></i> 3</li>
-                        <li><i class="fa fa-bath" aria-hidden="true"></i> 2</li>
-                        <li><i class="fa fa-car" aria-hidden="true"></i> 1</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12">
-        <div class="thumbProperty">
-            <div class="contentTop">
-                <img src="{{ asset('images/') }}/img-demo.jpg" alt="">
-                <div class="caption">
-                    <div class="businessType">
-                        <p>Alquiler</p>
-                    </div>
-                    <div class="priceProject">
-                        <p><span>Bsf.:</span> 100.000.000</p>
-                    </div>
-                </div>
-            </div>
-            <div class="contentInfo">
-                <div class="infoProperty">
-                    <h4><a href="">Residencias Mohecastel</a></h4>
-                    <p><span><i class="fa fa-map-marker" aria-hidden="true"></i></span> Avenida Eugenio Mendoza, La Castellana</p>
-                </div>
-                <div class="characteristicsProperty">
-                    <ul>
-                        <li><i class="fa fa-object-group" aria-hidden="true"></i> 120Mts</li>
-                        <li><i class="fa fa-bed" aria-hidden="true"></i> 3</li>
-                        <li><i class="fa fa-bath" aria-hidden="true"></i> 2</li>
-                        <li><i class="fa fa-car" aria-hidden="true"></i> 1</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="col-sm-12">
-        <div class="thumbProperty">
-            <div class="contentTop">
-                <img src="{{ asset('images/') }}/img-demo.jpg" alt="">
-                <div class="caption">
-                    <div class="businessType">
-                        <p>Alquiler</p>
-                    </div>
-                    <div class="priceProject">
-                        <p><span>Bsf.:</span> 100.000.000</p>
-                    </div>
-                </div>
-            </div>
-            <div class="contentInfo">
-                <div class="infoProperty">
-                    <h4><a href="">Residencias Mohecastel</a></h4>
-                    <p><span><i class="fa fa-map-marker" aria-hidden="true"></i></span> Avenida Eugenio Mendoza, La Castellana</p>
-                </div>
-                <div class="characteristicsProperty">
-                    <ul>
-                        <li><i class="fa fa-object-group" aria-hidden="true"></i> 120Mts</li>
-                        <li><i class="fa fa-bed" aria-hidden="true"></i> 3</li>
-                        <li><i class="fa fa-bath" aria-hidden="true"></i> 2</li>
-                        <li><i class="fa fa-car" aria-hidden="true"></i> 1</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+    <div class="row">
+      @foreach($inmuebles as $inmueble)
+        <div class="col-sm-12">
+              <a href="{{ route('detalle_inmueble',$inmueble->id) }}">
+                  <div class="col-sm-12">
+                      @component('partials/inmueble')
+                          @slot('type'){{$inmueble->tipoNegocio}} @endslot
+                          @slot('precio')
+                            @if($inmueble->visible==1)
+                              <p><span>Bs. </span>{{number_format($inmueble->precio, 0, '', '.')}}<p>
+                            @else
+                              <p>Consultar Precio<p>
+                            @endif
+                          @endslot
+                          @slot('titulo')
+                            <h4><a href="{{ route('detalle_inmueble',$inmueble->id) }}">{{$inmueble->nombreInmueble}}</a></h4>
+                          @endslot
+                          @slot('direccion'){{$inmueble->nombreCiudad}}@endslot
+                          @slot('metros'){{$inmueble->metros_construccion}}@endslot
+                          @slot('baños') {{$inmueble->banos}} @endslot
+                          @slot('cuartos') {{$inmueble->habitaciones}}@endslot
+                          @slot('estacionamientos') {{$inmueble->estacionamientos}} @endslot
+                          @slot('img')
+                            @if($inmueble->id_mls==0)
+                              <img src="{{ asset('images/inmuebles')}}/{{$inmueble ->nombre_imagen}}" alt="">
+                            @else
+                              <img src="{{$inmueble->nombre_imagen}}" alt="">
+                            @endif
+                          @endslot
+                      @endcomponent
+                  </div>
+              </a>
+          </div>
+        @endforeach
+      </div>
 </section>

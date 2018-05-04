@@ -10,9 +10,12 @@
                 @include('common/galeria')
                 <div class="infoDetailProperties">
                     <input type="hidden" id="positionPropiety"value="{{$inmueble->posicionMapa}}">
-                    <h2>{{$inmueble->urbanizacion}}</h2>
-                    <h3>{{$inmueble->direccion}}</h3>
-                    <p>Propiedad ID: {{$inmueble->id}}</p>
+                    <h2>{{$inmueble->nombre_tipo}}</h2>
+                    <p>{{$inmueble->nombre_estado}}</p>
+                    <p>{{$inmueble->nombre_ciudad}}</p>
+                    <p>{{ucwords(mb_strtolower($inmueble->nombre_urbanizacion))}}</p>
+                    <p>ID: {{ $inmueble->id}}</p>
+                    <p>MLS ID: {{ $inmueble->id_mls}}</p>
                     <hr>
                     <div class="descriptionProperties">
                         <div class="characteristicsProperties">
@@ -20,26 +23,28 @@
                                 @if($inmueble->visible==0)
                                   <li><p>Consultar Precio</li>
                                 @else
-                                  <li><p>Bs. {{$inmueble->precio}}</li>
+                                  <li><p>Bs. {{number_format($inmueble->precio, 0, '', '.')}}</li>
                                 @endif
-                                <li><i class="fa fa-object-group" aria-hidden="true"></i> {{$inmueble->metros_construccion}} <span>Mts</span></li>
-                                <li><i class="fa fa-bed" aria-hidden="true"></i> {{$inmueble->habitaciones}}</li>
-                                <li><i class="fa fa-bath" aria-hidden="true"></i> {{$inmueble->banos}}</li>
-                                <li><i class="fa fa-car" aria-hidden="true"></i> {{$inmueble->estacionamientos}}</li>
+                                <li title="Metros de Construccion" ><i class="fa fa-object-group" aria-hidden="true"></i> {{$inmueble->metros_construccion}} <span>Mts</span></li>
+                                <li title="Habitaciones"><i class="fa fa-bed" aria-hidden="true"></i> {{$inmueble->habitaciones}}</li>
+                                <li title="Baños"><i class="fa fa-bath" aria-hidden="true"></i> {{$inmueble->banos}}</li>
+                                <li title="Estacionamientos"><i class="fa fa-car" aria-hidden="true"></i> {{$inmueble->estacionamientos}}</li>
                             </ul>
                         </div>
                         <p>{{$inmueble->comentario}}</p>
                     </div>
                 </div>
-                <div class="ubicationProperties">
-                    <h1 class="titleSection">Ubicación</h1>
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div id="map" class="googleMap">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                @if($inmueble->mostrarMapa==1)
+                  <div class="ubicationProperties">
+                      <h1 class="titleSection">Ubicación</h1>
+                      <div class="row">
+                          <div class="col-xs-12">
+                              <div id="map" class="googleMap">
+                              </div>
+                          </div>
+                      </div>
+                  </div>
+                @endif
             </section>
         </div>
         <!-- END CONTENT INFO -->
@@ -77,41 +82,7 @@
                 </div>
             </section>
             <!-- FEATURED PROPERTIES -->
-            <section id="featuredProperties">
-                <div class="row">
-                    @foreach($destacados as $destacado)
-                      <a href="{{ route('detalle_inmueble',$destacado->id) }}">
-                        <div class="col-sm-12">
-                          @component('partials/inmueble')
-                              @slot('type'){{$destacado->tipoNegocio}} @endslot
-                              @slot('precio')
-                                @if($destacado->visible==1)
-                                  <p><span>Bsf.:</span>{{$destacado->precio}}<p>
-                                @else
-                                  <p>Consultar Precio<p>
-                                @endif
-                              @endslot
-                              @slot('titulo')
-                                <h4><a href="{{ route('detalle_inmueble',$destacado->id) }}">{{$destacado->urbanizacion}}</a></h4>
-                              @endslot
-                              @slot('direccion'){{$destacado->direccion}}@endslot
-                              @slot('metros'){{$destacado->metros_construccion}}@endslot
-                              @slot('baños') {{$destacado->banos}} @endslot
-                              @slot('cuartos') {{$destacado->habitaciones}}@endslot
-                              @slot('estacionamientos') {{$destacado->estacionamientos}} @endslot
-                              @slot('img')
-                                @if($inmueble->id_mls==0)
-                                  <img src="{{ asset('images/inmuebles')}}/{{$destacado->nombre_imagen}}" alt="" >
-                                @else
-                                  <img src="{{$destacado->nombre_imagen}}" alt="" >
-                                @endif
-                              @endslot
-                          @endcomponent
-                        </div>
-                      </a>
-                    @endforeach
-                </div>
-            </section>
+            @include('common/inmueblesLaterales')
         </div>
         <!-- END CONTENT SIDEBAR -->
     </div>

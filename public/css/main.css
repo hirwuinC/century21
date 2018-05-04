@@ -529,7 +529,7 @@ footer .copyright ul li a {
   font-family: 'latoregular';
 }
 .infoDetailProperties p {
-  font-size: 1em;
+  font-size: 1.2em;
   font-family: 'latolight';
 }
 .infoDetailProperties .descriptionProperties {
@@ -550,6 +550,7 @@ footer .copyright ul li a {
   display: inline-block;
   text-align: center;
   margin-right: 40px;
+  font-size: 1.2em;
 }
 .infoDetailProperties .descriptionProperties .characteristicsProperties ul li p {
   padding: 10px 15px;
@@ -558,6 +559,11 @@ footer .copyright ul li a {
   margin: 0;
   font-family: 'latobold';
   font-size: 1.2em;
+}
+.descriptionProperties p {
+  font-family: 'latobold';
+  font-size: 1.2em !important;
+  text-align: justify;
 }
 
 /*----- GO SLIDER -----*/
@@ -813,10 +819,14 @@ footer .copyright ul li a {
   display: inline-block;
   font-size: 1em;
   font-family: 'latobold';
-  width: 24%;
+  width: 50px;
   text-align: center;
 }
 .thumbProperty .contentInfo .characteristicsProperty ul li i {
+  margin-right: 3px;
+}
+.thumbProperty .contentInfo .characteristicsProperty ul .metroConstruccion{
+  width: 100px !important;
   margin-right: 5px;
 }
 
