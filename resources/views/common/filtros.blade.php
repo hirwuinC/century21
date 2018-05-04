@@ -21,7 +21,25 @@
             </select>
         </div>
         <div class="form-group">
-            <label>Zona de propiedad</label>
+            <label>Estados</label>
+            <select class="form-control js-example-basic-multiple" name="states[]" multiple="multiple">
+                <option value="CA">Caracas</option>
+                <option value="SA">San antonio de los altos</option>
+                <option value="LT">Los teques</option>
+                <option value="GU">Guatire</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Ciudades</label>
+            <select class="form-control js-example-basic-multiple" name="states[]" multiple="multiple">
+                <option value="CA">Caracas</option>
+                <option value="SA">San antonio de los altos</option>
+                <option value="LT">Los teques</option>
+                <option value="GU">Guatire</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Urbanizaciones</label>
             <select class="form-control js-example-basic-multiple" name="states[]" multiple="multiple">
                 <option value="CA">Caracas</option>
                 <option value="SA">San antonio de los altos</option>
@@ -68,6 +86,6 @@
                 <!-- <b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>-->
             </div>
         </div>
-        <button type="button" class="btnYellow">ENVIAR</button>
+        <button type="button" class="btnYellow">BUSCAR</button>
     </form>
 </section>

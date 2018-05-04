@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 use App\Models\Propiedad;
 use App\Models\Media;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Request;
 class WebController extends Controller
 {
 
@@ -29,12 +30,14 @@ class WebController extends Controller
     {
 
       $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
-                                           ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*')
-                                           ->where('medias.vista',1)
-                                           ->where('destacado',1)
-                                           ->inRandomOrder()
-                                           ->get()
-                                           ->take(30);
+                                   ->join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
+                                   ->join('ciudades','propiedades.ciudad_id','ciudades.id')
+                                   ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','ciudades.nombre as nombreCiudad','tipoinmueble.nombre as nombreInmueble')
+                                   ->where('medias.vista',1)
+                                   ->where('destacado',1)
+                                   ->inRandomOrder()
+                                   ->get()
+                                   ->take(30);
 
      $proyectos=DB::table('proyectos')->Join('mediaproyectos','proyectos.id','mediaproyectos.proyecto_id')
                                            ->join('ciudades','proyectos.ciudad_id','ciudades.id')
@@ -55,7 +58,25 @@ class WebController extends Controller
      */
     public function buscador()
     {
-        return view('buscador');
+      $propiedad=Request::get('propiedad');
+      $proyectos=DB::table('proyectos')->Join('mediaproyectos','proyectos.id','mediaproyectos.proyecto_id')
+                                            ->join('ciudades','proyectos.ciudad_id','ciudades.id')
+                                            ->select('mediaproyectos.nombre as nombre_imagen','mediaproyectos.proyecto_id','mediaproyectos.id as id_imagen','proyectos.*','ciudades.nombre as nombre_ciudad')
+                                            ->where('mediaproyectos.vista',1)
+                                            ->where('destacado',1)
+                                            ->inRandomOrder()
+                                            ->get()
+                                            ->take(3);
+      $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
+                                   ->join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
+                                   ->join('ciudades','propiedades.ciudad_id','ciudades.id')
+                                   ->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','ciudades.nombre as nombreCiudad','tipoinmueble.nombre as nombreInmueble')
+                                   ->where('medias.vista',1)
+                                   ->where('destacado',1)
+                                   ->where(['tipo_inmueble'=>$propiedad,'tipoNegocio'=>'venta'])
+                                   ->inRandomOrder()
+                                   ->paginate(10);
+      return view('buscador',compact('proyectos','inmuebles'));
     }
 
     /**
@@ -65,7 +86,13 @@ class WebController extends Controller
      */
     public function lista_proyectos()
     {
-        return view('lista_proyectos');
+      $proyectos=DB::table('proyectos')->Join('mediaproyectos','proyectos.id','mediaproyectos.proyecto_id')
+                                            ->join('ciudades','proyectos.ciudad_id','ciudades.id')
+                                            ->select('mediaproyectos.nombre as nombre_imagen','mediaproyectos.proyecto_id','mediaproyectos.id as id_imagen','proyectos.*','ciudades.nombre as nombre_ciudad')
+                                            ->where('mediaproyectos.vista',1)
+                                            ->where('destacado',1)
+                                            ->get();
+        return view('lista_proyectos',compact('proyectos'));
     }
 
 

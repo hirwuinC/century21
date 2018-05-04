@@ -6,15 +6,17 @@
     <section id="shortcuts">
     <div class="container">
         <div class="row">
-            <div class="col-sm-8">
-                <div class="joinTeam">
-                    <img src="{{asset('images/demo-unete.jpg')}}" alt="">
-                    <div class="caption">
-                        <a href="" data-toggle="modal" data-target="#modaljoinTeam"><p>UNETE A NUESTRO EQUIPO DE ASESORES</p></a>
-                    </div>
-                    @include('modals/modal')
-                </div>
-            </div>
+            <a href="" data-toggle="modal" data-target="#modaljoinTeam">
+              <div class="col-sm-8">
+                  <div class="joinTeam">
+                      <img src="{{asset('images/demo-unete.jpg')}}" alt="">
+                      <div class="caption">
+                          <p>UNETE A NUESTRO EQUIPO DE ASESORES</p></a>
+                      </div>
+                      @include('modals/modal')
+                  </div>
+              </div>
+            </a>
             <div class="col-sm-4">
                 <div class="publishHere">
                     <img src="{{asset('images/demo-public.jpg')}}" alt="">
@@ -49,15 +51,15 @@
                         @slot('type'){{$inmueble->tipoNegocio}} @endslot
                         @slot('precio')
                           @if($inmueble->visible==1)
-                            <p><span>Bsf.:</span>{{$inmueble->precio}}<p>
+                            <p><span>Bs. </span>{{number_format($inmueble->precio, 0, '', '.')}}<p>
                           @else
                             <p>Consultar Precio<p>
                           @endif
                         @endslot
                         @slot('titulo')
-                          <h4><a href="{{ route('detalle_inmueble',$inmueble->id) }}">{{$inmueble->urbanizacion}}</a></h4>
+                          <h4><a href="{{ route('detalle_inmueble',$inmueble->id) }}">{{$inmueble->nombreInmueble}}</a></h4>
                         @endslot
-                        @slot('direccion'){{$inmueble->direccion}}@endslot
+                        @slot('direccion'){{$inmueble->nombreCiudad}}@endslot
                         @slot('metros'){{$inmueble->metros_construccion}}@endslot
                         @slot('baños') {{$inmueble->banos}} @endslot
                         @slot('cuartos') {{$inmueble->habitaciones}}@endslot

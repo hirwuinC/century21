@@ -7,7 +7,7 @@
                     <p>{{$type}}</p>
                 </div>
                 <div class="priceProject">
-                    <p><span>Bsf.:</span> {{$precio}}</p>
+                    <p><span>Bs. </span> {{$precio}}</p>
                 </div>
             </div>
         </div>

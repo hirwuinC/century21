@@ -2,7 +2,7 @@
 
 @section('content')
 
-@include('common/proyectosDestacados')
+<!--@include('common/proyectosDestacados')-->
 
 <div class="container">
     <div class="row">
@@ -21,24 +21,46 @@
                     </div>
                 </div>
                 <div class="row">
-
-                    @for( $i = 0; $i< 10 ; $i++)
+                    @foreach( $inmuebles as $inmueble)
+                      <a href="{{ route('detalle_inmueble',$inmueble->id) }}">
                         <div class="col-sm-6">
                             @component('partials/inmueble')
-                                @slot('type') 
-                                    @if($i % 2) Venta @else Alquiler @endif
+                                @slot('type')
+                                    {{$inmueble->tipoNegocio}}
                                 @endslot
-                                @slot('precio') 100.000.000 @endslot
-                                @slot('titulo') Residencias Mohecastel @endslot
-                                @slot('direccion')  Avenida Eugenio Mendoza, La Castellana @endslot
-                                @slot('metros')  120 @endslot
-                                @slot('baños')  1 @endslot
-                                @slot('cuartos')  2 @endslot
-                                @slot('estacionamientos') 2 @endslot
-                                @slot('img') img-demo.jpg @endslot
+                                @slot('precio')
+                                  @if($inmueble->visible==1)
+                                    <p><span>Bs. </span>{{number_format($inmueble->precio, 0, '', '.')}}<p>
+                                  @else
+                                    <p>Consultar Precio<p>
+                                @endif
+                                @endslot
+                                @slot('titulo')
+                                  <h4><a href="{{ route('detalle_inmueble',$inmueble->id) }}">{{$inmueble->nombreInmueble}}</a></h4>
+                                @endslot
+                                @slot('direccion')
+                                  {{$inmueble->nombreCiudad}}
+                                @endslot
+                                @slot('metros') {{$inmueble->metros_construccion}} @endslot
+                                @slot('baños')  {{$inmueble->banos}}  @endslot
+                                @slot('cuartos')  {{$inmueble->habitaciones}} @endslot
+                                @slot('estacionamientos'){{$inmueble->estacionamientos}} @endslot
+                                @slot('img')
+                                  @if($inmueble->id_mls==0)
+                                    <img src="{{ asset('images/inmuebles')}}/{{$inmueble ->nombre_imagen}}" alt="">
+                                  @else
+                                    <img src="{{$inmueble->nombre_imagen}}" alt="">
+                                  @endif
+                                @endslot
                             @endcomponent
                         </div>
-                    @endfor
+                      </a>
+                    @endforeach
+                </div>
+                <div class="row">
+                  <center>
+                    {{$inmuebles->links()}}
+                  </center>
                 </div>
             </section>
         </div>

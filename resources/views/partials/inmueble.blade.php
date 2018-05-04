@@ -18,10 +18,10 @@
         </div>
         <div class="characteristicsProperty">
             <ul>
-                <li><i class="fa fa-object-group" aria-hidden="true"></i> {{$metros}} Mts</li>
-                <li><i class="fa fa-bed" aria-hidden="true"></i> {{$cuartos}}</li>
-                <li><i class="fa fa-bath" aria-hidden="true"></i> {{$baños}}</li>
-                <li><i class="fa fa-car" aria-hidden="true"></i> {{$estacionamientos}}</li>
+                <li title="Metros de Construcción"><i class="fa fa-object-group"  aria-hidden="true"></i> {{$metros}} Mts</li>
+                <li title="Habitaciones" ><i class="fa fa-bed" aria-hidden="true"></i> {{$cuartos}}</li>
+                <li title="Baños" ><i class="fa fa-bath" aria-hidden="true"></i> {{$baños}}</li>
+                <li title="Puestos de Estacionamiento" ><i class="fa fa-car" aria-hidden="true"></i> {{$estacionamientos}}</li>
             </ul>
         </div>
     </div>
