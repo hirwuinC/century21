@@ -163,6 +163,7 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
         Codedge\Fpdf\FpdfServiceProvider::class,
+        Chumper\Zipper\ZipperServiceProvider::class,
 
         /*
          * Package Service Providers...
@@ -229,7 +230,8 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
         'Form' => 'Collective\Html\FormFacade',
         'Html' => 'Collective\Html\HtmlFacade',
-        'Fpdf' => Codedge\Fpdf\Facades\Fpdf::class
+        'Fpdf' => Codedge\Fpdf\Facades\Fpdf::class,
+        'Zipper' => Chumper\Zipper\Zipper::class
     ],
 
 ];
