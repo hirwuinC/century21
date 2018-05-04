@@ -16,18 +16,18 @@
                 </div>
             </div>
             <div class="modal-body">
-                <form class="form">
+                <form id="uneteEquipo" enctype="multipart/form-data" class="form">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
                                 <label for="name">Nombres</label>
-                                <input type="text" class="form-control" id="name" placeholder="Nombres">
+                                <input type="text" class="form-control limpiar" id="nombreInteresado" name="nombreInteresado" placeholder="Nombres">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
                                 <label for="lastname">Apellidos</label>
-                                <input type="text" class="form-control" id="lastname" placeholder="Apellidos">
+                                <input type="text" class="form-control limpiar" id="apellidoInteresado" name="apellidoInteresado" placeholder="Apellidos">
                             </div>
                         </div>
                     </div>
@@ -35,13 +35,13 @@
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
                                 <label for="email">Correo electrónico</label>
-                                <input type="text" class="form-control" id="email" placeholder="ejemplo@ejemplo.com">
+                                <input type="text" class="form-control limpiar" id="emailInteresado"  name="emailInteresado" placeholder="ejemplo@ejemplo.com">
                             </div>
                         </div>
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
                                 <label for="phone">teléfono</label>
-                                <input type="text" class="form-control" id="phone" placeholder="+58 999 9999999">
+                                <input type="text" class="form-control limpiar" id="phoneInteresado" name="phoneInteresado" placeholder="+58 999 9999999">
                             </div>
                         </div>
                     </div>
@@ -49,7 +49,7 @@
                         <div class="col-xs-12 col-sm-6">
                             <div class="form-group">
                                 <label>adjunta tu CV</label>
-                                <input type="file" id="adjuntar-cv">
+                                <input type="file" class="limpiar" id="adjuntarCv" name="adjuntarCv">
                             </div>
                         </div>
                     </div>
@@ -57,16 +57,16 @@
                         <div class="col-xs-12">
                             <div class="form-group">
                                 <label>comentarios</label>
-                                <textarea class="form-control"></textarea>
+                                <textarea class="form-control limpiar" id="comentario" name="comentario"></textarea>
                             </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <div class="col-xs-12 col-sm-8 col-sm-offset-2">
+                            <button type="submit" class="btnYellow">ENVIAR</button>
+                        </div>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <div class="col-xs-12 col-sm-8 col-sm-offset-2">
-                    <button type="button" class="btnYellow">ENVIAR</button>
-                </div>
             </div>
         </div>
     </div>

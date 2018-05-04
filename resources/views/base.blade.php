@@ -121,6 +121,9 @@
             @yield('content')
 		</div>
 		<!-- END GENERAL WRAPPER -->
+		<div class="load" id="load">
+        <hr/><hr/><hr/><hr/>
+    </div>
 		<!-- FOOTER -->
 		<footer>
 			<div id="footer">
@@ -167,7 +170,9 @@
 		<!--JAVASCRIPTS / JQUERY-->
 
 		<script type="text/javascript" src="{{ asset('js/jquery-3.1.1.min.js') }}"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
 		<script type="text/javascript" src="{{ asset('js/bootstrap.min.js') }}"></script>
+		<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 		<script type="text/javascript" src="{{ asset('js/waterwheelCarousel.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('js/search.js') }}"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>

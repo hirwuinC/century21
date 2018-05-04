@@ -7,6 +7,8 @@ use App\Models\Propiedad;
 use App\Models\Media;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Request;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\File;
 class WebController extends Controller
 {
 
@@ -188,6 +190,43 @@ class WebController extends Controller
                                      ->get()
                                      ->take(3);
         return view('nuestra_historia',compact('proyectos','inmuebles'));
+    }
+
+    public function correo($archivo,$correoCliente,$nombreCliente){
+      $enviado=0;
+      $ruta=public_path('curriculum').$archivo;
+      Mail::send('emails.informe',['name'=>'Vincen Santaella'],function($message)use($ruta,$correoCliente,$nombreCliente){
+        $message->to($correoCliente,$nombreCliente)
+                ->subject('Informe de gestión de inmueble')
+                ->attach($ruta);
+      });
+      $enviado=1;
+      return $enviado;
+    }
+
+    public function enviarCurriculum(){
+      $file = Request::file('adjuntarCv');
+      $nombres = ucfirst(mb_strtolower(Request::get('nombreInteresado')));
+      $apellidos = ucfirst(mb_strtolower(Request::get('apellidoInteresado')));
+      $email = mb_strtolower(Request::get('emailInteresado'));
+      $telefono =Request::get('phoneInteresado');
+      $comentario= ucfirst(mb_strtolower(Request::get('comentario')));
+      if($file) {
+        $extension = strtolower($file->getClientOriginalExtension());
+        $fileRename = uniqid().'.'.$extension;
+        $path = "curriculum";
+        $file->move($path,$fileRename);
+        }
+      $ruta=public_path('curriculum/').$fileRename;
+      //dd($ruta);
+      Mail::send('emails.interesado',['nombres'=>$nombres,'apellidos'=>$apellidos,'email'=>$email,'telefono'=>$telefono,'comentario'=>$comentario],function($message)use($ruta){
+        $message->to('vinrast@gmail.com','Vincen Santaella')
+                ->subject('Nuevo Interesado en pertenecer al equipo de trabajo')
+                ->attach($ruta);
+      });
+        File::delete(public_path('curriculum/'.$fileRename));
+      $respuesta=1;
+      return $respuesta;
     }
 
 }

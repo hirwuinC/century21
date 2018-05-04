@@ -16,6 +16,7 @@ Auth::routes();
 // Cliente
 Route::get('/pdf', ['as' => 'pdf', 'uses' => 'Controller@pruebaPDF']);
 Route::get('/', ['as' => 'home', 'uses' => 'WebController@index']);
+Route::any('/enviarCurriculum', ['as' => 'enviarCurriculum', 'uses' => 'WebController@enviarCurriculum']);
 Route::get('/buscador', ['as' => 'buscador', 'uses' => 'WebController@buscador']);
 Route::get('/proyectos', ['as' => 'proyectos', 'uses' => 'WebController@lista_proyectos']);
 Route::get('/contacto', ['as' => 'contacto', 'uses' => 'WebController@contacto']);

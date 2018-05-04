@@ -6,6 +6,13 @@
     <section id="shortcuts">
     <div class="container">
         <div class="row">
+          <div class="col-sm-12 ">
+            <div class="banner">
+                <img src="{{asset('images/separador_century.png')}}" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="row">
             <a href="" data-toggle="modal" data-target="#modaljoinTeam">
               <div class="col-sm-8">
                   <div class="joinTeam">
@@ -78,4 +85,7 @@
       </div>
     </div>
     </section>
+@endsection
+@section('js')
+  <script type="text/javascript" src="{{ asset('js/home.js') }}"></script>
 @endsection

@@ -829,5 +829,98 @@ footer .copyright ul li a {
   width: 100px !important;
   margin-right: 5px;
 }
+.banner img{
+  max-width: 100% !important;
+  margin-bottom: 20px;
+}
+.error{
+  color: red;
+  text-transform: lowercase !important;
+}
+.error::first-letter{
+  text-transform: uppercase !important;
+}
+
 
 /*----- END SECTION FEATURED PROPERTIES -----*/
+
+/* PRELOAD */
+.load{
+  position:fixed;
+  display: none;
+  top:50%;
+  left:50%;
+  z-index: 3250;
+  transform:translate(-50%, -50%);
+  /*change these sizes to fit into your project*/
+  width:100px;
+  height:100px;
+}
+.load hr{
+  border:0;
+  margin:0;
+  width:40%;
+  height:40%;
+  position:absolute;
+  border-radius:50%;
+  animation:spin 2s ease infinite
+}
+
+.load :first-child{
+  background:#19A68C;
+  animation-delay:-1.5s
+}
+.load :nth-child(2){
+  background:#F63D3A;
+  animation-delay:-1s
+}
+.load :nth-child(3){
+  background:#FDA543;
+  animation-delay:-0.5s
+}
+.load :last-child{
+  background:#193B48
+}
+
+@keyframes spin{
+  0%,100%{transform:translate(0)}
+  25%{transform:translate(160%)}
+  50%{transform:translate(160%, 160%)}
+  75%{transform:translate(0, 160%)}
+}
+
+/* DIV BLOQUEA PANTALLA*/
+
+#WindowLoad{
+    position:fixed;
+    top:0px;
+    left:0px;
+    z-index:3200;
+    filter:alpha(opacity=65);
+   -moz-opacity:65;
+    opacity:0.65;
+    background:#000;
+}
+/* ---------------- PAGINADOR ------------*/
+.pagination {
+  margin: 60px 0;
+  text-align: center;
+}
+.pagination li{
+  font-family: 'latobold';
+}
+.pagination li.active span {
+  background-color: #f1b311;
+  border-color: #f1b311;
+  color: #333333;
+}
+.pagination li span,.pagination li a{
+  border-radius: 50% !important;
+  margin: 0 5px;
+  color: #f1b311;
+}
+.pagination li span:hover, .pagination li span:focus,.pagination li a:hover,.pagination li a:focus {
+  color: #333333;
+  background-color: #f1b311 !important;
+  border-color: #f1b311 !important;
+}
