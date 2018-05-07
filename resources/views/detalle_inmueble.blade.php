@@ -55,28 +55,30 @@
                 <div class="row">
                     <div class="col-sm-12">
                         <h3>CONTACTA A NUESTROS ASESORES</h3>
-                        <form action="">
+                        <form id="compradorInteresado" enctype="multipart/form-data" class="form">
+                            <input type="hidden" name="registro" value="{{$inmueble->id}}">
+                            <input type="hidden" name="mls" value="{{$inmueble->id_mls}}">
                             <div class="form-group">
                                 <label for="name">Nombres</label>
-                                <input type="text" class="form-control" id="name" placeholder="Nombres">
+                                <input type="text" class="form-control limpiar" id="nombreInteresado" name="nombreInteresado" placeholder="Nombres">
                             </div>
                             <div class="form-group">
                                 <label for="lastname">Apellidos</label>
-                                <input type="text" class="form-control" id="lastname" placeholder="Apellidos">
+                                <input type="text" class="form-control limpiar" id="apellidoInteresado" name="apellidoInteresado" placeholder="Apellidos">
                             </div>
                             <div class="form-group">
                                 <label for="phone">teléfono</label>
-                                <input type="text" class="form-control" id="phone" placeholder="+58 999 9999999">
+                                <input type="text" class="form-control limpiar" id="phoneInteresado" name="phoneInteresado" placeholder="+58 999 9999999">
                             </div>
                             <div class="form-group">
                                 <label for="email">Correo electrónico</label>
-                                <input type="text" class="form-control" id="email" placeholder="ejemplo@ejemplo.com">
+                                <input type="text" class="form-control limpiar" id="emailInteresado"  name="emailInteresado" placeholder="ejemplo@ejemplo.com">
                             </div>
                             <div class="form-group">
                                 <label>comentarios</label>
-                                <textarea class="form-control"></textarea>
+                                <textarea class="form-control" id="comentario" name="comentario">Me gustaría obtener información de la propiedad #{{$inmueble->id}}</textarea>
                             </div>
-                            <button type="button" class="btnGray">ENVIAR</button>
+                            <button type="submit" class="btnGray">ENVIAR</button>
                         </form>
                     </div>
                 </div>
@@ -113,7 +115,7 @@
     });
   }
 </script>
-<script type="text/javascript" src="{{ asset('js/admin/propiedades/detalleinmueble.js') }}"></script>
+<script type="text/javascript" src="{{ asset('js/detalleinmueble.js') }}"></script>
 <script async defer
   src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCG6RQhkoAPuKs-2VSCbNisZ0NQt5Qf3Co&callback=initMap">
 </script>

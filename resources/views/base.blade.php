@@ -38,17 +38,17 @@
 								<div class="infoContact">
 									<div class="row">
 										<div class="col-xs-12 col-sm-3">
-											<p><a href="mailto:info@century21.com"><span><i class="fa fa-envelope" aria-hidden="true"></i></span> info@century21.com</a></p>
+											<p><a href="mailto:info@century21caracas.com"><span><i class="fa fa-envelope" aria-hidden="true"></i></span> info@century21caracas.com</a></p>
 										</div>
 										<div class="col-xs-12 col-sm-3">
 											<ul>
-												<li><a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-												<li><a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-												<li><a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+												<li><a href="https://www.facebook.com/c21inmueblescaracas/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+												<li><a href="https://twitter.com/inmccsc21" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+												<li><a href="https://www.instagram.com/c21inmueblescaracas/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
 											</ul>
 										</div>
 										<div class="col-xs-12 col-sm-4">
-											<p><span><i class="fa fa-phone" aria-hidden="true"></i></span> 0424 2977598 / 0212 8723956</p>
+											<p><span><i class="fa fa-phone" aria-hidden="true"></i></span>  0212-9853222 / 0424-2717436 </p>
 										</div>
 										<div class="col-xs-12 col-sm-2">
 											<p class="accesslogin"><a href="{{route('login')}}"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a></p>
@@ -134,15 +134,15 @@
 							</div>
 						<div class="col-xs-12 col-sm-4 contactFooter">
 								<h6 class="titleSectionFooter">Contáctanos</h6>
-								<p><span><i class="fa fa-phone" aria-hidden="true"></i></span> 0424 2977598 / 0212 8723956</p>
-								<p><a href="mailto:info@century21.com"><span><i class="fa fa-envelope" aria-hidden="true"></i></span> info@century21.com</a></p>
+								<p><span><i class="fa fa-phone" aria-hidden="true"></i></span>  0212-9853222 / 0424-2717436 </p>
+								<p><a href="mailto:info@century21caracas.com"><span><i class="fa fa-envelope" aria-hidden="true"></i></span> info@century21caracas.com</a></p>
 							</div>
 						<div class="col-xs-12 col-sm-4 socialFooter">
 								<h6 class="titleSectionFooter">Síguenos</h6>
 								<ul>
-									<li><a href=""><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
-									<li><a href=""><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
-									<li><a href=""><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
+									<li><a href="https://www.facebook.com/c21inmueblescaracas/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
+									<li><a href="https://twitter.com/inmccsc21" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
+									<li><a href="https://www.instagram.com/c21inmueblescaracas/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
 								</ul>
 							</div>
 					</div>
@@ -156,11 +156,11 @@
 						</div>
 						<div class="hidden-xs hidden-sm col-md-7">
 							<ul>
-								<li><a href="">inicio</a></li>
-								<li><a href="">nuestra historia</a></li>
-								<li><a href="">proyectos</a></li>
+								<li><a href="{{ route('home') }}" class="active">inicio</a></li>
+								<li><a href="{{ route('nuestra_historia') }}">nuestra historia</a></li>
+								<li><a href="{{ route('proyectos') }}">proyectos</a></li>
 								<li><a href="">blog</a></li>
-								<li><a href="">contacto</a></li>
+								<li><a href="{{ route('contacto') }}">contacto</a></li>
 							</ul>
 						</div>
 					</div>

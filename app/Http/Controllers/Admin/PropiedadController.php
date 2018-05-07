@@ -397,6 +397,7 @@ class PropiedadController extends Controller{
     Session::put('inmuebleEdit',$id);
     return $respuesta;
   }
+
   public function mostrarEditarInmueble2(){
     $inmueble=Session::get('inmuebleEdit');
     $imagenes=Media::where('propiedad_id',$inmueble)->get();
@@ -404,6 +405,7 @@ class PropiedadController extends Controller{
     $propiedad=Propiedad::find($inmueble);
     return view('/admin/editar_inmueble_2',$this->cargarSidebar(),compact('inmueble','imagenes','ultimo','propiedad'));
   }
+
   public function borrarInmueble(){
     $idInmueble=Request::get('id');
 ///////////////////////////////  Borrar informes del Inmueble /////////////////////////////////////////

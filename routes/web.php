@@ -24,6 +24,9 @@ Route::get('/contacto', ['as' => 'contacto', 'uses' => 'WebController@contacto']
 Route::get('/nuestra-historia', ['as' => 'nuestra_historia', 'uses' => 'WebController@nuestra_historia']);
 Route::get('/inmueble/{id}', ['as' => 'detalle_inmueble', 'uses' => 'WebController@detalle_inmueble']);
 Route::get('/proyecto/{id}', ['as' => 'detalle_proyecto', 'uses' => 'WebController@detalle_proyecto']);
+Route::any('/interesadoPublicar', ['as' => 'interesadoPublicar', 'uses' => 'WebController@interesadoPublicar']);
+Route::any('/compradorInteresado', ['as' => 'compradorInteresado', 'uses' => 'WebController@compradorInteresado']);
+Route::any('/compradorInteresadoProyecto', ['as' => 'compradorInteresadoProyecto', 'uses' => 'WebController@compradorInteresadoProyecto']);
 
                                         //ADMIN
 // LOGIN

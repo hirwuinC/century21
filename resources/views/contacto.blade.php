@@ -48,7 +48,7 @@
                 </form>
                 <div class="ubicationProperties">
                   <h1 class="titleSection">OFICINA</h1>
-                  <p><span>Direccion: </span>Altamira Sur con Av José Félix Sosa , Edificio Terepaima Piso 2 Oficina 203. Frente al la Torre Británica (Edificio Duncan de Altamira), Caracas 1060</p>
+                  <p><span>Direccion: </span>Urbanización San Luis del Cafetal, Torre Mayupan, Piso 7, Oficina 702. Caracas, Municipio Baruta, Estado Miranda. Código postal 1060.</p>
                     <div class="row">
                         <div class="col-xs-12">
                             <div id="map" class="googleMap">
@@ -69,7 +69,7 @@
 <script>
 //////////////////////////////////////// Funcionalidad del mapa ////////////////////////////////////////////////////
   function initMap() {
-    var oficina = {lat: 10.4745107, lng: -66.8626197};
+    var oficina = {lat: 10.4684443, lng: -66.8460197};
     var ubicacion = oficina;
     var map = new google.maps.Map(document.getElementById('map'), {
       zoom: 15,
