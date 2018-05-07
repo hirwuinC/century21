@@ -19,7 +19,7 @@ $(document).ready(function(){
 	    $('#load').css('display','none');
 	  };
 ///////////////////////////////////////////////////// cargar interesado publicar inmueble ///////////////////////////////////////////////////////
-	$("#uneteEquipo").validate({
+	$("#contactanos").validate({
 			onfocusout: false,
 			rules: {
 				nombreInteresado:{
@@ -33,9 +33,6 @@ $(document).ready(function(){
 					email:true
 				},
 				phoneInteresado:{
-					required:true
-				},
-				adjuntarCv:{
 					required:true
 				}
 			},
@@ -52,31 +49,25 @@ $(document).ready(function(){
 			},
 			phoneInteresado:{
 				required:"Debe indicar un teléfono de contacto"
-			},
-			adjuntarCv:{
-				required:"Debe adjuntar su hoja de vida"
 			}
 		},
 		submitHandler: function(form) {
-      var formulario = new FormData(document.getElementById('uneteEquipo'));
-			url="/enviarCurriculum";
+      var formulario = $('#contactanos').serialize();
+			url="/nuevoContacto";
       $.ajax({
 					beforeSend:mostrarPreload(),
           url: url,
           type: "post",
-          dataType: "html",
+          dataType: "json",
           data: formulario,
-          cache: false,
-          contentType: false,
-          processData: false
       })
       .done(function(res){
 				//console.log(res);
 				ocultarPreload();
 				if (res==1) {
           swal(
-            'Gracias por tu interes de pertenecer a nuestro equipo!!',
-            'Hemos recibido tus datos, en caso de calificar a alguna vacante nos comunicaremos contigo ',
+            'Gracias por Contactarnos!!',
+            'Hemos recibido sus datos, a la brevedad posible nos estaremos comunicando con usted',
             'success'
           );
 					$('.limpiar').val('');

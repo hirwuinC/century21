@@ -218,13 +218,30 @@ class WebController extends Controller
         $file->move($path,$fileRename);
         }
       $ruta=public_path('curriculum/').$fileRename;
+      $texto='Se ha comunicado con nosotros un nuevo interesado en pertenecer a nuestro equipo de trabajo, adjunto se encuentra su hoja de vida y a continuación sus datos:';
       //dd($ruta);
-      Mail::send('emails.interesado',['nombres'=>$nombres,'apellidos'=>$apellidos,'email'=>$email,'telefono'=>$telefono,'comentario'=>$comentario],function($message)use($ruta){
+      Mail::send('emails.nuevoInteresado',['nombres'=>$nombres,'apellidos'=>$apellidos,'email'=>$email,'telefono'=>$telefono,'comentario'=>$comentario,'texto'=>$texto],function($message)use($ruta){
         $message->to('vinrast@gmail.com','Vincen Santaella')
                 ->subject('Nuevo Interesado en pertenecer al equipo de trabajo')
                 ->attach($ruta);
       });
         File::delete(public_path('curriculum/'.$fileRename));
+      $respuesta=1;
+      return $respuesta;
+    }
+
+    public function nuevoContacto(){
+      $nombres = ucfirst(mb_strtolower(Request::get('nombreInteresado')));
+      $apellidos = ucfirst(mb_strtolower(Request::get('apellidoInteresado')));
+      $email = mb_strtolower(Request::get('emailInteresado'));
+      $telefono =Request::get('phoneInteresado');
+      $comentario= ucfirst(mb_strtolower(Request::get('comentario')));
+      $texto='Un nuevo interesado en nuestros servicios se ha comunicado con nosotros, a continuación sus datos:';
+      //dd($ruta);
+      Mail::send('emails.nuevoInteresado',['nombres'=>$nombres,'apellidos'=>$apellidos,'email'=>$email,'telefono'=>$telefono,'comentario'=>$comentario,'texto'=>$texto],function($message){
+        $message->to('vinrast@gmail.com','Vincen Santaella')
+                ->subject('Nuevo Contacto!!');
+      });
       $respuesta=1;
       return $respuesta;
     }
