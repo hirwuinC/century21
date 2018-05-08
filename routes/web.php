@@ -27,7 +27,9 @@ Route::get('/proyecto/{id}', ['as' => 'detalle_proyecto', 'uses' => 'WebControll
 Route::any('/interesadoPublicar', ['as' => 'interesadoPublicar', 'uses' => 'WebController@interesadoPublicar']);
 Route::any('/compradorInteresado', ['as' => 'compradorInteresado', 'uses' => 'WebController@compradorInteresado']);
 Route::any('/compradorInteresadoProyecto', ['as' => 'compradorInteresadoProyecto', 'uses' => 'WebController@compradorInteresadoProyecto']);
-
+Route::any('/buscarInmueblesPublico', ['as' => 'buscarInmueblesPublico', 'uses' => 'WebController@buscarInmueblesPublico']);
+Route::any('/listarCiudadesPublico', ['as' => 'listarCiudadesPublico', 'uses' => 'WebController@listarCiudadesPublico']);
+Route::any('/listarUrbanizacionesPublico', ['as' => 'listarUrbanizacionesPublico', 'uses' => 'WebController@listarUrbanizacionesPublico']);
                                         //ADMIN
 // LOGIN
 Route::any('/admin/login', ['as' => 'login', 'uses' => 'Admin\AdminController@Login']);

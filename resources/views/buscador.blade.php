@@ -2,7 +2,6 @@
 
 @section('content')
 
-<!--@include('common/proyectosDestacados')-->
 
 <div class="container">
     <div class="row">
@@ -87,4 +86,5 @@
             $('select[name=propiedad]').val(p2).trigger("change");
         });
     </script>
+    <script type="text/javascript" src="{{ asset('js/buscadorInmueblePublico.js') }}"></script>
 @endsection

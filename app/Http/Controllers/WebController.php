@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 //use Illuminate\Http\Request;
 use App\Models\Propiedad;
 use App\Models\Proyecto;
+use App\Models\Estado;
+use App\Models\Ciudad;
+use App\Models\Urbanizacion;
 use App\Models\InmuebleProyecto;
 use App\Models\MediaProyecto;
 use App\Models\TipoInmueble;
@@ -67,14 +70,7 @@ class WebController extends Controller
     public function buscador()
     {
       $propiedad=Request::get('propiedad');
-      $proyectos=DB::table('proyectos')->Join('mediaproyectos','proyectos.id','mediaproyectos.proyecto_id')
-                                            ->join('ciudades','proyectos.ciudad_id','ciudades.id')
-                                            ->select('mediaproyectos.nombre as nombre_imagen','mediaproyectos.proyecto_id','mediaproyectos.id as id_imagen','proyectos.*','ciudades.nombre as nombre_ciudad')
-                                            ->where('mediaproyectos.vista',1)
-                                            ->where('destacado',1)
-                                            ->inRandomOrder()
-                                            ->get()
-                                            ->take(3);
+
       $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
                                    ->join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
                                    ->join('ciudades','propiedades.ciudad_id','ciudades.id')
@@ -85,7 +81,10 @@ class WebController extends Controller
                                    ->where(['tipo_inmueble'=>$propiedad,'tipoNegocio'=>'venta'])
                                    ->inRandomOrder()
                                    ->paginate(10);
-      return view('buscador',compact('proyectos','inmuebles'));
+      $inmuebles->withPath('?type=venta&propiedad='.$propiedad);
+      $tipos=TipoInmueble::all();
+      $estados=Estado::all();
+      return view('buscador',compact('proyectos','inmuebles','estados','tipos'));
     }
 
     /**
@@ -335,4 +334,62 @@ class WebController extends Controller
       return $respuesta;
     }
 
+    public function listarCiudadesPublico(){
+      $estados=Request::get('estado');
+      for ($i=0; $i <count($estados) ; $i++) {
+        $ciudades[]=Ciudad::where('estado_id',$estados[$i])->orderBy('nombre','asc')->get();
+      }
+      return compact('ciudades');
+    }
+    public function listarUrbanizacionesPublico(){
+      $ciudades=Request::get('ciudad');
+      for ($i=0; $i <count($ciudades) ; $i++) {
+        $urbanizaciones[]=Urbanizacion::where('ciudad_id',$ciudades[$i])->orderBy('nombre','asc')->get();
+      }
+      return compact('urbanizaciones');
+    }
+
+
+    public function buscarInmueblesPublico(){
+       $codigo=Request::get('codigo');
+       $arreglo1=[];
+       $consulta=[];
+    	 $tipo=explode(",",Request::get('tipo'));
+    	 $tipoNegocio=explode(",",Request::get('tipoNegocio'));
+    	 $arreglo['estado_id']=explode(",",Request::get('estados'));
+    	 $arreglo['ciudad_id']=explode(",",Request::get('ciudades'));
+    	 $arreglo['urbanizacion']=explode(",",Request::get('urbanizaciones'));
+    	 $arreglo['habitaciones']=explode(",",Request::get('habitaciones'));
+    	 $arreglo['banos']=explode(",",Request::get('banos'));
+       $arreglo['estacionamientos']=explode(",",Request::get('estacionamientos'));
+    	 $precioMin=Request::get('precioMin');
+    	 $precioMax=Request::get('precioMax');
+       foreach ($tipo as $key => $value) {
+           if ($tipo[$key]!='') {
+             $arreglo1[]=$value;
+         }
+       }
+       //foreach($)
+       //dd($arreglo1);
+       $inmuebles=Media::Join('propiedades','medias.propiedad_id','propiedades.id')
+                                    ->join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
+                                    ->join('ciudades','propiedades.ciudad_id','ciudades.id')
+                                    ->newQuery();
+       $inmuebles->whereIn('tipo_inmueble',$arreglo1);
+       $prueba=$inmuebles->paginate(10);
+       dd($prueba);
+                                    //->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','ciudades.nombre as nombreCiudad','tipoinmueble.nombre as nombreInmueble')
+                                    /*->where('medias.vista',1)
+                                    ->where('propiedades.estatus',1)
+                                    ->whereIn(['tipo_inmueble'=>[1,2,3],'tipoNegocio'=>['venta']])
+                                    //->where(['tipo_inmueble'=>$propiedad,'tipoNegocio'=>'venta'])
+                                    //->inRandomOrder()
+                                    ->paginate(10);*/
+
+                                    //$consulta=Propiedad::whereIn('tipo_inmueble', $tipo)->paginate(10);
+                                   dd($inmuebles);
+        $tipos=TipoInmueble::all();
+        $estados=Estado::all();
+        return view('buscador',compact('inmuebles','estados','tipos'));
+    }
 }
