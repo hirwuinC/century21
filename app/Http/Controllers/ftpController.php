@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use Response;
 use Zipper;
 use Excel;
+use DB;
+use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
 use App\Models\Estado;
 use App\Models\Ciudad;
@@ -292,6 +294,118 @@ class ftpController extends Controller
         rmdir($directorioSin.'/Century21');
         return 0;
     }
+
+    public function detectarCambios($directorioSin,$inmueblesCaracasId)
+    {
+
+        $listaCambios=[];
+        
+        
+        ///traer todas las propiedades que fueron sincroniadas, es decir que tienen codigo mls
+        $propiedades=DB::table('propiedades')->select('id_mls as mls','tipoNegocio as negocio','precio as precio','agente_id as agente','oficina_id as oficina')->where('id_mls','<>',0)->get();
+        
+        if ($propiedades) 
+        {
+                    
+                $archivo=[];//se debe cargar maximo la misma cantidad de propiedades
+                 //recorrer archivo
+                 if (($gestor = fopen($directorioSin.'/Century21/propiedades.csv', "r")) !== FALSE) 
+                 {
+                                while (($datos = fgetcsv($gestor, 1000, ",",'"')) !== FALSE) 
+                                {
+                               
+                                     $longitud=count($datos);
+                                                                                             
+                                     if (($longitud==25||$longitud==26)) //cantidad de campos del registro
+                                        {
+                                            if (($datos[10]=='VARGAS'||$datos[10]=='MIRANDA'||$datos[10]=='DISTRITO FEDERAL'))
+                                                {
+                                                    //crear el arreglo
+                                                    $archivo[(string)$datos[1]]=['negocio'=>ucwords(mb_strtolower(utf8_encode($datos[3]))),'precio'=>(integer)$datos[4],'agente'=>(string)$datos[24],'oficina'=>ucwords(mb_strtolower(utf8_encode($datos[17]))),'oficina_id'=>(string)$datos[16]];
+                                                }
+                                        }
+                                }
+                }
+                
+
+                        //recorrer array de propiedades
+                foreach ($propiedades as $propiedad) 
+                {
+                    
+                    $aux=[];
+                    $clave=array_key_exists($propiedad->mls,$archivo);
+                    if ($clave==false) 
+                    {
+                       $listaCambios[$propiedad->mls]=['Eliminado'=>'No existe en el sistema de casa matriz'];
+                    }
+                    else if ($clave==true) 
+                    {
+                        if ($propiedad->negocio!=$archivo[$propiedad->mls]['negocio']) 
+                        {
+                            $aux['Cambio tipo negocio']='De: '.$propiedad->negocio.' -> '.$archivo[$propiedad->mls]['negocio'];
+                        }
+                        if ($propiedad->precio!=$archivo[$propiedad->mls]['precio']) 
+                        {
+                            $aux['Cambio de precio']='De: '.$propiedad->precio.' -> '.$archivo[$propiedad->mls]['precio'];
+                        }
+                        $agente=DB::table('agentes')->where('id',$propiedad->agente)->first();
+                        if ($inmueblesCaracasId==(string)$archivo[$propiedad->mls]['oficina_id']) 
+                        {
+                           if ($agente->codigo_id!=$archivo[$propiedad->mls]['agente']) 
+                           {
+                              
+                              $aux['Cambio de agente']='De: '.$agente->codigo_id.' -> '.$archivo[$propiedad->mls]['agente'].' - '.$archivo[$propiedad->mls]['oficina'];
+                           }
+                           
+                        }
+
+                        if(count($aux)>0)
+                        {
+                            $listaCambios[$propiedad->mls]=$aux;
+                        }
+                    }
+                }
+
+        }
+
+        return $listaCambios;
+    }
+
+     public function conectarDescargar($ftp_server,$ftp_user, $ftp_password,$local_file, $ftp_file)
+    {
+        $ftp_connect=ftp_connect($ftp_server);
+        $retorno=false;
+        if ($ftp_connect) 
+        {
+             $ftp_login=ftp_login($ftp_connect, $ftp_user, $ftp_password);
+             if ($ftp_login) 
+             {
+                 ftp_pasv($ftp_connect, true);
+                 $ftp_download=ftp_get($ftp_connect, $local_file, $ftp_file, FTP_BINARY);
+                 if ($ftp_download) 
+                 {
+                     $retorno=1;//descarga completa
+                     ftp_close($ftp_connect);
+                 }
+                 else
+                  {
+                    $retorno=4;//fallo al descargar
+                  }
+             }
+             else
+            {
+                $retorno=3;//fallo al loguear
+            }
+            
+        }
+        else
+        {
+            $retorno=2;//Fallo al establecer cpnexion al servidor
+        }
+
+        
+        return $retorno;
+    }
     ///////////////////Fin de metodos de insercion y consultas ////////////////////////////////////////////
 
 
@@ -305,6 +419,8 @@ class ftpController extends Controller
             $agentes=[];
             $propiedades=[];
             $cantidadImagenes=0;
+            $horaSinc=Carbon::now();
+            $modificaciones=[];
             ////////////////////////////////////////////////////////////////////////////
             ini_set('max_execution_time',12000 ); //tiempo maximo de ejecucion del script
             
@@ -317,46 +433,15 @@ class ftpController extends Controller
             $ftp_file='/FTP-TXT/Century21.zip';
             $ftp_download=false;
 
-            ///////// Conectarme al ftp //////////////
-            $ftp_connect = ftp_connect($ftp_server);// or die("No se pudo conectar a $ftp_server"); 
-            //dd($ftp_connect);
-            if($ftp_connect)
+            
+            $descarga=$this->conectarDescargar($ftp_server,$ftp_user, $ftp_password,$local_file, $ftp_file);
+            if ($descarga==1) 
             {
-             // echo "Conexion Establecida a: $ftp_server <br>";
-
-             $ftp_login=ftp_login($ftp_connect, $ftp_user, $ftp_password) or die("No se pudo realizar la coneccion usado las credenciales indicadas");
-             if($ftp_login)
-             {
-                 // echo "Usted esta conectado con el usuario: $ftp_user <br>";
-                 // echo "Iniciando descarga del archivo.....<br>";
-                 ftp_pasv($ftp_connect, true);
-                 $ftp_download=ftp_get($ftp_connect, $local_file, $ftp_file, FTP_BINARY) or die("no se pudo realizar la descarga");
-
-                 if($ftp_connect)
-                 {
-                     //dd($ftp_download);
-                     //echo "La descarga del archivo: $ftp_file , se hizo correctamente <br>";
-                 }
-                 else
-                 {
-                    // echo $ftp_download;
-                 }
-                 ftp_close($ftp_connect);
-                 //echo "Conexion FTP cerrada <br>";
-              }
-            }
-                 //echo "Descomprimiendo el archivo: $local_file <br>";
                  $extract=Zipper::make($local_file)->extractTo($directorioSin.'/Century21');
-                
-                 //echo "el archivo se descomprimio correctamente";
-                    $i=0;
-                    
-                    $inmueblesCaracasId='23646';
-                   
-                   
+                 $inmueblesCaracasId='23646';
+                 $modificaciones=$this->detectarCambios($directorioSin,$inmueblesCaracasId);
 
-                    $c=0;
-                    if (($gestor = fopen($directorioSin.'/Century21/propiedades.csv', "r")) !== FALSE) {
+                  if (($gestor = fopen($directorioSin.'/Century21/propiedades.csv', "r")) !== FALSE) {
                         while (($datos = fgetcsv($gestor, 1000, ",",'"')) !== FALSE) 
                         {
                                    
@@ -370,7 +455,7 @@ class ftpController extends Controller
                                         
 
                                                                               //filtrar estado
-                                        if (($datos[10]=='VARGAS'||$datos[10]=='MIRANDA'||$datos[10]=='DISTRITO FEDERAL')&&($c<150 ) )
+                                        if (($datos[10]=='VARGAS'||$datos[10]=='MIRANDA'||$datos[10]=='DISTRITO FEDERAL')&&($c<1000) )
                                         {
                                            
                                             
@@ -441,21 +526,39 @@ class ftpController extends Controller
 
 
                                   
-                                        
+                                      $i=$i+1;  
                                     }//fin del while del archivo
                                 }//fin del if del archivo
+
+
+
+            }
+          
+                
+                                       
+                    
+                   
+                   
+                   
                                
                                 //echo"\n Oficina_id: $oficina_id \n\n";
                             
-                     $this->borrarArchivos($directorioSin);       
+                    // $this->borrarArchivos($directorioSin);       
                      $longitud=[];
                      $longitud['estados']=count($estados);$longitud['ciudades']=count($ciudades);$longitud['urbanizaciones']=count($urbanizaciones);$longitud['agentes']=count($agentes);$longitud['propiedades']=count($propiedades);$longitud['imagenes']=$cantidadImagenes;
                      $agentes=$this->cargarColores($agentes);
                      $propiedades=$this->cargarColores($propiedades);
                      $cambios=array_sum($longitud);
+                     $horaFin=Carbon::now();
+
+                    $correo='josetayupo@gmail.com';
+                    Mail::send('emails.informeSincronizacion',['cambios'=>$cambios,'longitud'=>$longitud,'agentes'=>$agentes,'propiedades'=>$propiedades,'tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString(),'modificaciones'=>$modificaciones,'descarga'=>$descarga],function($message)use($correo)
+                         {
+                                $message->to($correo)->subject('Resultados de sincronizacion');
+                        });
                      
                              
-                                return view('emails.informeSincronizacion',['cambios'=>$cambios,'longitud'=>$longitud,'agentes'=>$agentes,'propiedades'=>$propiedades]);
+                    // return view('emails.informeSincronizacion',['cambios'=>$cambios,'longitud'=>$longitud,'agentes'=>$agentes,'propiedades'=>$propiedades,'tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString(),'modificaciones'=>$modificaciones]);
 
             
     }

@@ -12,7 +12,9 @@ class Kernel extends ConsoleKernel
      *
      * @var array
      */
-    protected $commands = ['App\Console\Commands\correoGestionInformes'
+    protected $commands = [
+                            'App\Console\Commands\correoGestionInformes',
+                            'App\Console\Commands\sincronizar'
         //
     ];
 
