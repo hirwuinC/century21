@@ -351,33 +351,147 @@ class WebController extends Controller
 
 
     public function buscarInmueblesPublico(){
+       $arregloTipo=[];
+       $arregloTipoNegocio=[];
+       $arregloEstados=[];
+       $arregloCiudades=[];
+       $arregloUrbanizaciones=[];
+       $arregloHabitaciones=[];
+       $arregloBanos=[];
+       $arregloEstacionamientos=[];
        $codigo=Request::get('codigo');
-       $arreglo1=[];
-       $consulta=[];
-    	 $tipo=explode(",",Request::get('tipo'));
-    	 $tipoNegocio=explode(",",Request::get('tipoNegocio'));
-    	 $arreglo['estado_id']=explode(",",Request::get('estados'));
-    	 $arreglo['ciudad_id']=explode(",",Request::get('ciudades'));
-    	 $arreglo['urbanizacion']=explode(",",Request::get('urbanizaciones'));
-    	 $arreglo['habitaciones']=explode(",",Request::get('habitaciones'));
-    	 $arreglo['banos']=explode(",",Request::get('banos'));
-       $arreglo['estacionamientos']=explode(",",Request::get('estacionamientos'));
+       $a=Request::get('tipo');
+       $b=Request::get('tipoNegocio');
+       $c=Request::get('estados');
+       $d=Request::get('ciudades');
+       $e=Request::get('urbanizaciones');
+       $f=Request::get('habitaciones');
+       $g=Request::get('banos');
+       $h=Request::get('estacionamientos');
+    	 $tipo=explode(",",$a);
+    	 $tipoNegocio=explode(",",$b);
+    	 $estados=explode(",",$c);
+    	 $ciudades=explode(",",$d);
+    	 $urbanizaciones=explode(",",$e);
+    	 $habitaciones=explode(",",$f);
+    	 $banos=explode(",",$g);
+       $estacionamientos=explode(",",$h);
     	 $precioMin=Request::get('precioMin');
     	 $precioMax=Request::get('precioMax');
+
        foreach ($tipo as $key => $value) {
-           if ($tipo[$key]!='') {
-             $arreglo1[]=$value;
+         if ($tipo[$key]!='') {
+           $arregloTipo[]=(int)$value;
          }
        }
-       //foreach($)
-       //dd($arreglo1);
+       foreach ($tipoNegocio as $key => $value) {
+         if ($tipoNegocio[$key]!='') {
+           $arregloTipoNegocio[]=(int)$value;
+         }
+       }
+       foreach ($estados as $key => $value) {
+           if ($estados[$key]!='') {
+             $arregloEstados[]=(int)$value;
+         }
+       }
+       foreach ($ciudades as $key => $value) {
+         if ($ciudades[$key]!='') {
+           $arregloCiudades[]=(int)$value;
+         }
+       }
+       foreach ($urbanizaciones as $key => $value) {
+         if ($urbanizaciones[$key]!='') {
+           $arregloUrbanizaciones[]=(int)$value;
+         }
+       }
+       foreach ($habitaciones as $key => $value) {
+         if ($habitaciones[$key]!='') {
+           if ($habitaciones[$key]!='4') {
+              $arregloHabitaciones[]=(int)$value;
+           }
+           else{
+             $contHabitaciones=(int)$habitaciones[$key];
+           }
+         }
+       }
+       foreach ($banos as $key => $value) {
+         if ($banos[$key]!='') {
+           if ($banos[$key]!='3') {
+              $arregloBanos[]=(int)$value;
+           }
+           else{
+             $contBanos=(int)$banos[$key];
+           }
+         }
+       }
+       foreach ($estacionamientos as $key => $value) {
+         if ($estacionamientos[$key]!='') {
+           if ($estacionamientos[$key]!='3') {
+              $arregloEstacionamientos[]=(int)$value;
+           }
+           else{
+             $contEstacionamientos=(int)$estacionamientos[$key];
+           }
+         }
+       }
+
+
        $inmuebles=Media::Join('propiedades','medias.propiedad_id','propiedades.id')
                                     ->join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
                                     ->join('ciudades','propiedades.ciudad_id','ciudades.id')
                                     ->newQuery();
-       $inmuebles->whereIn('tipo_inmueble',$arreglo1);
-       $prueba=$inmuebles->paginate(10);
-       dd($prueba);
+       $inmuebles->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','ciudades.nombre as nombreCiudad','tipoinmueble.nombre as nombreInmueble');
+       $inmuebles->where('medias.vista',1);
+       $inmuebles->where('propiedades.estatus',1);
+       if ($codigo!='') {
+         $inmuebles->where('propiedades.id',$codigo);
+       }
+       if (count($arregloTipo)!=0) {
+         $inmuebles->whereIn('tipo_inmueble',$arregloTipo);
+       }
+       if (count($arregloTipoNegocio)!=0) {
+         $inmuebles->whereIn('tipoNegocio',$arregloTipoNegocio);
+       }
+       if (count($arregloEstados)!=0) {
+         $inmuebles->whereIn('propiedades.estado_id',$arregloEstados);
+       }
+       if (count($arregloCiudades)!=0) {
+         $inmuebles->whereIn('propiedades.ciudad_id',$arregloCiudades);
+       }
+       if (count($arregloUrbanizaciones)!=0) {
+         $inmuebles->whereIn('propiedades.urbanizacion',$arregloUrbanizaciones);
+       }
+       if (count($arregloHabitaciones)!=0) {
+         $inmuebles->whereIn('habitaciones',$arregloHabitaciones);
+       }
+       if (isset($contHabitaciones)) {
+         $inmuebles->where('habitaciones','>=',$contHabitaciones);
+       }
+       if (count($arregloBanos)!=0) {
+         $inmuebles->whereIn('banos',$arregloBanos);
+       }
+       if (isset($contBanos)) {
+         $inmuebles->where('banos','>=',$contBanos);
+       }
+       if (count($arregloEstacionamientos)!=0) {
+         $inmuebles->whereIn('estacionamientos',$arregloEstacionamientos);
+       }
+       if (isset($contEstacionamientos)) {
+         $inmuebles->where('estacionamientos','>=',$contEstacionemientos);
+       }
+       if ($precioMin!='' && $precioMax!='') {
+         $inmuebles->whereBetween('propiedades.precio', [$precioMin,$precioMax]);
+       }
+       elseif ($precioMax=='' && $precioMin!='') {
+         $inmuebles->where('propiedades.precio','>=',$precioMin);
+       }
+       elseif ($precioMax!='' && $precioMin=='') {
+         $inmuebles->where('propiedades.precio','<=',$precioMax);
+       }
+       $inmuebles=$inmuebles->paginate(50);
+       //dd($inmuebles);
+       $inmuebles->setPath('?codigo='.$codigo.'&tipo='.$a.'&tipoNegocio='.$b.'&estados='.$c.'&ciudades='.$d.'&urbanizaciones='.$e.'&habitaciones='.$f.'&banos='.$g.'&estacionamientos='.$h.'&precioMin='.$precioMin.'&precioMax='.$precioMax);
+       //dd($prueba);
                                     //->select('medias.nombre as nombre_imagen','medias.propiedad_id','medias.id as id_imagen','propiedades.*','ciudades.nombre as nombreCiudad','tipoinmueble.nombre as nombreInmueble')
                                     /*->where('medias.vista',1)
                                     ->where('propiedades.estatus',1)
@@ -386,8 +500,8 @@ class WebController extends Controller
                                     //->inRandomOrder()
                                     ->paginate(10);*/
 
-                                    //$consulta=Propiedad::whereIn('tipo_inmueble', $tipo)->paginate(10);
-                                   dd($inmuebles);
+                                    //$inmuebles=Propiedad::whereIn('tipo_inmueble', $tipo)->paginate(10);
+                                  // dd($inmuebles);
         $tipos=TipoInmueble::all();
         $estados=Estado::all();
         return view('buscador',compact('inmuebles','estados','tipos'));

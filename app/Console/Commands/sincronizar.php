@@ -565,9 +565,9 @@ class sincronizar extends Command
                                 }//fin del if del archivo
 
 
-                                $this->borrarArchivos($directorioSin);
+                              //  $this->borrarArchivos($directorioSin);
                       }
-          
+
 
 
 

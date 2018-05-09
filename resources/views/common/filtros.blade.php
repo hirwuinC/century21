@@ -6,7 +6,7 @@
             <div class="rangePrice">
                 <div class="row">
                     <div class="col-xs-12">
-                        <input type="text" class="form-control" id="codigo" name="codigo" placeholder="Código del inmueble">
+                        <input type="int" class="form-control" id="codigo" name="codigo" placeholder="Código del inmueble">
                     </div>
                 </div>
             </div>
@@ -46,27 +46,27 @@
         </div>
         <div class="form-group">
             <label>Habitaciones</label>
-            <select class="form-control js-example-basic-multiple select-2" name="habitaciones[]" id="habitaciones" multiple="multiple">
-                <option value="1">1H</option>
-                <option value="2">2H</option>
-                <option value="3">3H</option>
-                <option value="4">4H +</option>
+              <select class="form-control js-example-basic-multiple select-2" name="habitaciones[]" id="habitaciones" multiple="multiple">
+                <option class="menorH" value="1">1H</option>
+                <option class="menorH" value="2">2H</option>
+                <option class="menorH" value="3">3H</option>
+                <option class="mayorH" value="4">4H +</option>
             </select>
         </div>
         <div class="form-group">
             <label>Baños</label>
             <select class="form-control js-example-basic-multiple select-2" name="banos[]" id="banos" multiple="multiple">
-                <option value="1">1B</option>
-                <option value="2">2B</option>
-                <option value="3">3B +</option>
+                <option class="menorB" value="1">1B</option>
+                <option class="menorB" value="2">2B</option>
+                <option class="mayorB" value="3">3B +</option>
             </select>
         </div>
         <div class="form-group selector">
             <label>Estacionamiento</label>
             <select class="form-control js-example-basic-multiple select-2" name="estacionamientos[]" id="estacionamientos" multiple="multiple">
-                <option value="1">1E</option>
-                <option value="2">2E</option>
-                <option value="3">3E +</option>
+                <option class="menorE" value="1">1E</option>
+                <option class="menorE" value="2">2E</option>
+                <option class="mayorE" value="3">3E +</option>
             </select>
         </div>
         <div class="form-group range">
@@ -74,10 +74,10 @@
             <div class="rangePrice">
                 <div class="row">
                     <div class="col-xs-6">
-                        <input type="text" class="form-control" id="precioMin" name="precioMin" placeholder="Mínimo">
+                        <input type="int" class="form-control" id="precioMin" name="precioMin" placeholder="Mínimo">
                     </div>
                     <div class="col-xs-6">
-                        <input type="text" class="form-control" id="precioMax" name="precioMax" placeholder="Máximo">
+                        <input type="int" class="form-control" id="precioMax" name="precioMax" placeholder="Máximo">
                     </div>
                 </div>
                 <!-- <b>€ 10</b> <input id="ex2" type="text" class="span2" value="" data-slider-min="10" data-slider-max="1000" data-slider-step="5" data-slider-value="[250,450]"/> <b>€ 1000</b>-->

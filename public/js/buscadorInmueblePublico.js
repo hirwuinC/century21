@@ -77,6 +77,57 @@ $('body').on('click', '#buscar', function(event) {
 	var host=location.host;
 	location.href='http://'+host+'/buscarInmueblesPublico?codigo='+codigo+'&tipo='+tipo+'&tipoNegocio='+tipoNegocio+'&estados='+estados+'&ciudades='+ciudades+'&urbanizaciones='+urbanizaciones+'&habitaciones='+habitaciones+'&banos='+banos+'&estacionamientos='+estacionamientos+'&precioMin='+precioMin+'&precioMax='+precioMax;
 });
+
+//////////////////////////////////////// Select Habitaciones ///////////////////////////////////////////////
+	$('body').on('change','#habitaciones',function(){
+		var prueba=$("#habitaciones option:selected").last().attr('class');
+		var longitud=$("#habitaciones option:selected");
+			if(prueba=='mayorH'){
+				if (longitud.length!=1) {
+					$(".menorH").remove();
+					$('#habitaciones').prepend("<option value='3' class='menorH'>3H</option>");
+					$('#habitaciones').prepend("<option value='2' class='menorH'>2H</option>");
+					$('#habitaciones').prepend("<option value='1' class='menorH'>1H</option>");
+				}
+			}
+			else if(prueba=='menorH'){
+				$(".mayorH").remove();
+				$('#habitaciones').append("<option value='4' class='mayorH'>4H+</option>");
+			}
+	});
+	//////////////////////////////////////// Select Baños ///////////////////////////////////////////////
+		$('body').on('change','#banos',function(){
+			var prueba=$("#banos option:selected").last().attr('class');
+			var longitud=$("#banos option:selected");
+				if(prueba=='mayorB'){
+					if (longitud.length!=1) {
+						$(".menorB").remove();
+						$('#banos').prepend("<option value='2' class='menorB'>2B</option>");
+						$('#banos').prepend("<option value='1' class='menorB'>1B</option>");
+					}
+				}
+				else if(prueba=='menorB'){
+					$(".mayorB").remove();
+					$('#banos').append("<option value='3' class='mayorB'>3B +</option>");
+				}
+		});
+	//////////////////////////////////////// Select Estacionamientos ///////////////////////////////////////////////
+			$('body').on('change','#estacionamientos',function(){
+				var prueba=$("#estacionamientos option:selected").last().attr('class');
+				var longitud=$("#estacionamientos option:selected");
+				console.log(prueba);
+					if(prueba=='mayorE'){
+						if (longitud.length!=1) {
+							$(".menorE").remove();
+							$('#estacionamientos').prepend("<option value='2' class='menorE'>2E</option>");
+							$('#estacionamientos').prepend("<option value='1' class='menorE'>1E</option>");
+						}
+					}
+					else if(prueba=='menorE'){
+						$(".mayorE").remove();
+						$('#estacionamientos').append("<option value='3' class='mayorE'>3E +</option>");
+					}
+			});
 ////////////////////////////////////////////// Scroll Infinito ///////////////////////////////////////////////////////////////////////
 window.sr = ScrollReveal();
 sr.reveal('.hijo');
