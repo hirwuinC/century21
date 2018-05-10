@@ -563,7 +563,7 @@ class ftpController extends Controller
                              $propiedades=$this->cargarColores($propiedades);
                              $cambios=array_sum($longitud);
                              $horaFin=Carbon::now();
-                             $this->borrarArchivos($directorioSin); 
+                             //$this->borrarArchivos($directorioSin); 
 
                             $correo='josetayupo@gmail.com';
                             Mail::send('emails.informeSincronizacion',['cambios'=>$cambios,'longitud'=>$longitud,'agentes'=>$agentes,'propiedades'=>$propiedades,'tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString(),'modificaciones'=>$modificaciones,'descarga'=>$descarga],function($message)use($correo)

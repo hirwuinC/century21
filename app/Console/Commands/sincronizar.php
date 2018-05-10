@@ -494,11 +494,11 @@ class sincronizar extends Command
                                                 
 
                                                                                       //filtrar estado
-                                                if (($datos[10]=='VARGAS'||$datos[10]=='MIRANDA'||$datos[10]=='DISTRITO FEDERAL')&&($c<50) )
+                                                if (($datos[10]=='VARGAS'||$datos[10]=='MIRANDA'||$datos[10]=='DISTRITO FEDERAL') )
                                                 {
                                                    
                                                     
-                                                    $c=$c+1;
+                                                    
                                                     ////verificar existencia de la propiedad ///obtener propiedad si esxiste
                                                     $propiedadCon=Propiedad::where('id_mls',(int)$datos[1])->first();
                                                     if ($propiedadCon==null) //SI NO EXISTE LA PROPIEDAD EN EL SISTEMA
@@ -569,7 +569,7 @@ class sincronizar extends Command
                                             }//fin del while del archivo
                                         }//fin del if del archivo
 
-                                         $this->borrarArchivos($directorioSin); 
+                                         //$this->borrarArchivos($directorioSin); 
 
                        }
           
