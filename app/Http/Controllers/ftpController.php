@@ -286,12 +286,23 @@ class ftpController extends Controller
                    $directorioSin.'/Century21/ciudades.csv',
                    $directorioSin.'/Century21/urbanizaciones.csv',
                    $directorioSin.'/Century21.zip'];
+                   
         for ($i=0; $i <count($archivos) ; $i++) 
         { 
-            unlink($archivos[$i]);
+            if (file_exists($archivos[$i])) 
+            {
+                
+                unlink($archivos[$i]);
+            }
+            
         }
 
-        rmdir($directorioSin.'/Century21');
+           if (file_exists($directorioSin.'/Century21'))
+            {
+                
+                rmdir($directorioSin.'/Century21');
+            }
+
         return 0;
     }
 
@@ -373,35 +384,39 @@ class ftpController extends Controller
 
      public function conectarDescargar($ftp_server,$ftp_user, $ftp_password,$local_file, $ftp_file)
     {
-        $ftp_connect=ftp_connect($ftp_server);
-        $retorno=false;
-        if ($ftp_connect) 
-        {
-             $ftp_login=ftp_login($ftp_connect, $ftp_user, $ftp_password);
-             if ($ftp_login) 
-             {
-                 ftp_pasv($ftp_connect, true);
-                 $ftp_download=ftp_get($ftp_connect, $local_file, $ftp_file, FTP_BINARY);
-                 if ($ftp_download) 
-                 {
-                     $retorno=1;//descarga completa
-                     ftp_close($ftp_connect);
-                 }
-                 else
-                  {
-                    $retorno=4;//fallo al descargar
-                  }
-             }
-             else
-            {
-                $retorno=3;//fallo al loguear
-            }
-            
-        }
-        else
-        {
-            $retorno=2;//Fallo al establecer cpnexion al servidor
-        }
+        
+        
+                $retorno=false;
+                $ftp_connect=ftp_connect($ftp_server);
+                if ($ftp_connect) 
+                {
+                     $ftp_login=ftp_login($ftp_connect, $ftp_user, $ftp_password);
+                     if ($ftp_login) 
+                     {
+                         ftp_pasv($ftp_connect, true);
+                         
+                         $ftp_download=ftp_get($ftp_connect, $local_file, $ftp_file, FTP_BINARY);
+                         if ($ftp_download) 
+                         {
+                             $retorno=1;//descarga completa
+                             ftp_close($ftp_connect);
+                         }
+                         else
+                          {
+                            $retorno=4;//fallo al descargar
+                          }
+                     }
+                     else
+                    {
+                        $retorno=3;//fallo al loguear
+                    }
+                    
+                }
+                else
+                {
+                    $retorno=2;//Fallo al establecer cpnexion al servidor
+                }
+           
 
         
         return $retorno;
@@ -421,6 +436,7 @@ class ftpController extends Controller
             $cantidadImagenes=0;
             $horaSinc=Carbon::now();
             $modificaciones=[];
+            $exception=true;
             ////////////////////////////////////////////////////////////////////////////
             ini_set('max_execution_time',12000 ); //tiempo maximo de ejecucion del script
             
@@ -432,133 +448,147 @@ class ftpController extends Controller
             $local_file=$directorioSin.'/Century21.zip';//'C:/Users/Jose Tayupo/Desktop/Descargas/Century21.zip';
             $ftp_file='/FTP-TXT/Century21.zip';
             $ftp_download=false;
+            $c=0;
 
             
-            $descarga=$this->conectarDescargar($ftp_server,$ftp_user, $ftp_password,$local_file, $ftp_file);
-            if ($descarga==1) 
-            {
-                 $extract=Zipper::make($local_file)->extractTo($directorioSin.'/Century21');
-                 $inmueblesCaracasId='23646';
-                 $modificaciones=$this->detectarCambios($directorioSin,$inmueblesCaracasId);
+            try{
+                 $descarga=$this->conectarDescargar($ftp_server,$ftp_user, $ftp_password,$local_file, $ftp_file);
+                 if ($descarga==1) 
+                 {
+                         $exception=false;
+                         $extract=Zipper::make($local_file)->extractTo($directorioSin.'/Century21/');
+                         $inmueblesCaracasId='23646';
+                         $modificaciones=$this->detectarCambios($directorioSin,$inmueblesCaracasId);
 
-                  if (($gestor = fopen($directorioSin.'/Century21/propiedades.csv', "r")) !== FALSE) {
-                        while (($datos = fgetcsv($gestor, 1000, ",",'"')) !== FALSE) 
-                        {
-                                   
-                                  
-                                  
-                                   $longitud=count($datos);
-                                 
-                                                                                     
-                                   if (($longitud==25||$longitud==26)) //cantidad de campos del registro
-                                   {
-                                        
-
-                                                                              //filtrar estado
-                                        if (($datos[10]=='VARGAS'||$datos[10]=='MIRANDA'||$datos[10]=='DISTRITO FEDERAL')&&($c<1000) )
-                                        {
+                          if (($gestor = fopen($directorioSin.'/Century21/propiedades.csv', "r")) !== FALSE) {
+                                while (($datos = fgetcsv($gestor, 1000, ",",'"')) !== FALSE) 
+                                {
                                            
-                                            
-                                            $c=$c+1;
-                                            ////verificar existencia de la propiedad ///obtener propiedad si esxiste
-                                            $propiedadCon=Propiedad::where('id_mls',(int)$datos[1])->first();
-                                            if ($propiedadCon==null) //SI NO EXISTE LA PROPIEDAD EN EL SISTEMA
-                                            {
-                                               
-
-                                               //insertamos/consultamos las direcciones
-                                               $aux=$this->direccionesPropiedad($datos[10],$datos[12],$datos[14],$datos[11],$datos[13]);
-                                              ///contabilizar estados
-                                               $estados=$this->contabilizarResultados($estados,$aux['inserciones']->estado);
-                                               //obtener id del estado
-                                               $estadoId=$aux['direccion']->estadoId;
-
-                                               ///contabilizar ciudades
-                                               $ciudades=$this->contabilizarResultados($ciudades,$aux['inserciones']->ciudad);
-                                               //obtener id de la ciudad
-                                               $ciudadId=$aux['direccion']->ciudadId;
-                                               //contabilizar las urbanizaciones
-                                               $urbanizaciones=$this->contabilizarResultados($urbanizaciones,$aux['inserciones']->urbanizacion);
-                                               //obtener id de la urbanizacion
-                                               $urbanizacionId=$aux['direccion']->urbanizacionId;
-                                               $oficina_id=$this->obtenerOficina($datos[16],$inmueblesCaracasId);
-                                               
-
-                                               //insertamos/consultamos el asesor
-                                               $aux=$this->consultarAsesor($datos[24],$datos[19],$datos[22],$datos[20],$datos[21],$inmueblesCaracasId,$oficina_id);
-                                            
-                                               if ($aux['insercion']) 
-                                               {
-                                                    $agentes=$this->contabilizarResultados($agentes,$aux['insercion']);                                              
-                                               }
-                                              
-                                               $agenteId=$aux['asesor']->id;
-                                               //insertamos/ consultamos propiedad
-                                               
-                                               
-                                               $data=
-                                               [
-                                                 'id_mls'=>$datos[1],'idTipoInmueble'=>$datos[0],'tipoNegocio'=>$datos[3],'urbanizacionId'=>$urbanizacionId,
-                                                 'precio'=>$datos[4],'habitaciones'=>$datos[5],'banos'=>$datos[6],'estacionamientos'=>$datos[7],
-                                                 'construccion'=>$datos[8],'terreno'=>$datos[9],'comentario'=>$datos[15],'asesorId'=>$agenteId,
-                                                 'estadoId'=>$estadoId,'ciudadId'=>$ciudadId,'oficina_id'=>$oficina_id
-                                               ];
-                                              $aux=$this->insertarPropiedad($data,$datos[19],$inmueblesCaracasId);
-                                              $propiedadId=$aux['propiedad']->id;
-                                              $propiedadMls=$aux['propiedad']->id_mls;
-                                              $propiedades=$this->contabilizarResultados($propiedades,$aux['insercion']);
-
-                                            //buscamos e insertamos las imagenes correspondientes a la propiedad cargada
-
-                                            $fotos=$this->buscarFotos($propiedadMls,$directorioSin.'/Century21/media.csv',$datos[23]);
-                                            $fotosEn=$this->insertarFotos($fotos,$propiedadId);
-                                            $cantidadImagenes=$cantidadImagenes+count($fotos);
-                                        
-                                       
-
-
+                                          
+                                          
+                                           $longitud=count($datos);
+                                         
+                                                                                             
+                                           if (($longitud==25||$longitud==26)) //cantidad de campos del registro
+                                           {
                                                 
-                                            }//filtro propiedades
-                                                                                
-                                        }//filtro por estado
-                                   }//filtro longitud
-                                   
+
+                                                                                      //filtrar estado
+                                                if (($datos[10]=='VARGAS'||$datos[10]=='MIRANDA'||$datos[10]=='DISTRITO FEDERAL')&&($c<50) )
+                                                {
+                                                   
+                                                    
+                                                    $c=$c+1;
+                                                    ////verificar existencia de la propiedad ///obtener propiedad si esxiste
+                                                    $propiedadCon=Propiedad::where('id_mls',(int)$datos[1])->first();
+                                                    if ($propiedadCon==null) //SI NO EXISTE LA PROPIEDAD EN EL SISTEMA
+                                                    {
+                                                       
+
+                                                       //insertamos/consultamos las direcciones
+                                                       $aux=$this->direccionesPropiedad($datos[10],$datos[12],$datos[14],$datos[11],$datos[13]);
+                                                      ///contabilizar estados
+                                                       $estados=$this->contabilizarResultados($estados,$aux['inserciones']->estado);
+                                                       //obtener id del estado
+                                                       $estadoId=$aux['direccion']->estadoId;
+
+                                                       ///contabilizar ciudades
+                                                       $ciudades=$this->contabilizarResultados($ciudades,$aux['inserciones']->ciudad);
+                                                       //obtener id de la ciudad
+                                                       $ciudadId=$aux['direccion']->ciudadId;
+                                                       //contabilizar las urbanizaciones
+                                                       $urbanizaciones=$this->contabilizarResultados($urbanizaciones,$aux['inserciones']->urbanizacion);
+                                                       //obtener id de la urbanizacion
+                                                       $urbanizacionId=$aux['direccion']->urbanizacionId;
+                                                       $oficina_id=$this->obtenerOficina($datos[16],$inmueblesCaracasId);
+                                                       
+
+                                                       //insertamos/consultamos el asesor
+                                                       $aux=$this->consultarAsesor($datos[24],$datos[19],$datos[22],$datos[20],$datos[21],$inmueblesCaracasId,$oficina_id);
+                                                    
+                                                       if ($aux['insercion']) 
+                                                       {
+                                                            $agentes=$this->contabilizarResultados($agentes,$aux['insercion']);                                              
+                                                       }
+                                                      
+                                                       $agenteId=$aux['asesor']->id;
+                                                       //insertamos/ consultamos propiedad
+                                                       
+                                                       
+                                                       $data=
+                                                       [
+                                                         'id_mls'=>$datos[1],'idTipoInmueble'=>$datos[0],'tipoNegocio'=>$datos[3],'urbanizacionId'=>$urbanizacionId,
+                                                         'precio'=>$datos[4],'habitaciones'=>$datos[5],'banos'=>$datos[6],'estacionamientos'=>$datos[7],
+                                                         'construccion'=>$datos[8],'terreno'=>$datos[9],'comentario'=>$datos[15],'asesorId'=>$agenteId,
+                                                         'estadoId'=>$estadoId,'ciudadId'=>$ciudadId,'oficina_id'=>$oficina_id
+                                                       ];
+                                                      $aux=$this->insertarPropiedad($data,$datos[19],$inmueblesCaracasId);
+                                                      $propiedadId=$aux['propiedad']->id;
+                                                      $propiedadMls=$aux['propiedad']->id_mls;
+                                                      $propiedades=$this->contabilizarResultados($propiedades,$aux['insercion']);
+
+                                                    //buscamos e insertamos las imagenes correspondientes a la propiedad cargada
+
+                                                    $fotos=$this->buscarFotos($propiedadMls,$directorioSin.'/Century21/media.csv',$datos[23]);
+                                                    $fotosEn=$this->insertarFotos($fotos,$propiedadId);
+                                                    $cantidadImagenes=$cantidadImagenes+count($fotos);
+                                                
+                                               
 
 
-                                  
-                                      $i=$i+1;  
-                                    }//fin del while del archivo
-                                }//fin del if del archivo
+                                                        
+                                                    }//filtro propiedades
+                                                                                        
+                                                }//filtro por estado
+                                           }//filtro longitud
+                                           
 
 
+                                          
+                                               
+                                            }//fin del while del archivo
+                                        }//fin del if del archivo
+                                        
+                                        
 
-            }
+                       }
           
-                
                                        
-                    
-                   
-                   
-                   
-                               
-                                //echo"\n Oficina_id: $oficina_id \n\n";
-                            
-                    // $this->borrarArchivos($directorioSin);       
-                     $longitud=[];
-                     $longitud['estados']=count($estados);$longitud['ciudades']=count($ciudades);$longitud['urbanizaciones']=count($urbanizaciones);$longitud['agentes']=count($agentes);$longitud['propiedades']=count($propiedades);$longitud['imagenes']=$cantidadImagenes;
-                     $agentes=$this->cargarColores($agentes);
-                     $propiedades=$this->cargarColores($propiedades);
-                     $cambios=array_sum($longitud);
-                     $horaFin=Carbon::now();
+                                      
+                                    
+                                  
+                             $longitud=[];
+                             $longitud['estados']=count($estados);$longitud['ciudades']=count($ciudades);$longitud['urbanizaciones']=count($urbanizaciones);$longitud['agentes']=count($agentes);$longitud['propiedades']=count($propiedades);$longitud['imagenes']=$cantidadImagenes;
+                             $agentes=$this->cargarColores($agentes);
+                             $propiedades=$this->cargarColores($propiedades);
+                             $cambios=array_sum($longitud);
+                             $horaFin=Carbon::now();
+                             $this->borrarArchivos($directorioSin); 
 
-                    $correo='josetayupo@gmail.com';
-                    Mail::send('emails.informeSincronizacion',['cambios'=>$cambios,'longitud'=>$longitud,'agentes'=>$agentes,'propiedades'=>$propiedades,'tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString(),'modificaciones'=>$modificaciones,'descarga'=>$descarga],function($message)use($correo)
-                         {
-                                $message->to($correo)->subject('Resultados de sincronizacion');
-                        });
+                            $correo='josetayupo@gmail.com';
+                            Mail::send('emails.informeSincronizacion',['cambios'=>$cambios,'longitud'=>$longitud,'agentes'=>$agentes,'propiedades'=>$propiedades,'tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString(),'modificaciones'=>$modificaciones,'descarga'=>$descarga],function($message)use($correo)
+                                 {
+                                        $message->to($correo)->subject('Resultados de sincronizacion');
+                                });
+                       }
+                   finally
+                      {
+                            if ($exception) 
+                            {
+                                # code...
+                                   $horaFin=Carbon::now();
+                                    $correo='josetayupo@gmail.com';
+                                    Mail::send('emails.informeError',['tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString()],
+                                        function($message)use($correo)
+                                     {
+                                            $message->to($correo)->subject('Sincronizacion Fallida');
+                                    });
+                            }
+                      }
+                               
                      
                              
-                    // return view('emails.informeSincronizacion',['cambios'=>$cambios,'longitud'=>$longitud,'agentes'=>$agentes,'propiedades'=>$propiedades,'tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString(),'modificaciones'=>$modificaciones]);
+           
 
             
     }
