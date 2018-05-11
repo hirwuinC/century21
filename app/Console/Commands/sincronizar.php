@@ -584,7 +584,7 @@ class sincronizar extends Command
                              $cambios=array_sum($longitud);
                              $horaFin=Carbon::now();
 
-                            $correo='josetayupo@gmail.com';
+                            $correo='vinrast@gmail.com';
                             Mail::send('emails.informeSincronizacion',['cambios'=>$cambios,'longitud'=>$longitud,'agentes'=>$agentes,'propiedades'=>$propiedades,'tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString(),'modificaciones'=>$modificaciones,'descarga'=>$descarga],function($message)use($correo)
                                  {
                                         $message->to($correo)->subject('Resultados de sincronizacion');
@@ -596,7 +596,7 @@ class sincronizar extends Command
                             {
                                 # code...
                                    $horaFin=Carbon::now();
-                                    $correo='josetayupo@gmail.com';
+                                    $correo='vinrast@gmail.com';
                                     Mail::send('emails.informeError',['tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString()],
                                         function($message)use($correo)
                                      {

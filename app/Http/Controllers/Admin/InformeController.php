@@ -611,10 +611,7 @@ class InformeController extends Controller{
     return $enviado;
   }
   public function prueba(){
-    $datetime1 = date_create("2018-04-1");
-    $datetime2 = date_create();
-    $diaTranscurrido= date_diff($datetime1, $datetime2);
-    $dia=$diaTranscurrido->format('%R%a días');
+    phpinfo();
 
   }
 

@@ -781,6 +781,7 @@ textarea:focus {
 .thumbProperty .contentTop {
   overflow: hidden;
   position: relative;
+  min-height: 150px !important;
 }
 .thumbProperty .contentTop img {
   width: 100%;

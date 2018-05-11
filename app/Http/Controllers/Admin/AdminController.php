@@ -28,7 +28,7 @@ class AdminController extends Controller{
                                   ->where('users.name',$usuario)
                                   ->first();
     $respuesta=[0];
-    if(count($consulta)!=0){
+    if(!empty($consulta)){
       $password=Crypt::decryptstring($consulta->password);
       if ($pass == $password) {
         $permisos=DB::table('permisorole')->join('permisos', 'permisorole.permiso_id','permisos.id')
