@@ -15,15 +15,24 @@
             <label>tipo de propiedad</label>
             <select class="form-control js-example-basic-multiple select-2" name="tipo[]" id="tipo" multiple="multiple">
               @foreach($tipos as $tipo)
-                <option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
+                  @if(in_array($tipo->id, $propiedad))
+                   <option value="{{$tipo->id}}" selected>{{$tipo->nombre}}</option>
+                  @else
+                   <option value="{{$tipo->id}}">{{$tipo->nombre}}</option>
+                  @endif
               @endforeach
             </select>
         </div>
         <div class="form-group">
             <label>tipo de negociación</label>
             <select class="form-control select-2" name="tipoNegocio[]" id="tipoNegocio" multiple="multiple">
-                <option value="venta">Venta</option>
-                <option value="alquiler">Alquiler</option>
+                @foreach($modeloNegocio as $key=>$value)
+                    @if(in_array($modeloNegocio[$key], $tipoNegocio))
+                     <option value="{{$modeloNegocio[$key]}}" selected>{{$modeloNegocio[$key]}}</option>
+                    @else
+                     <option value="{{$modeloNegocio[$key]}}">{{$modeloNegocio[$key]}}</option>
+                    @endif
+                @endforeach
             </select>
         </div>
         <div class="form-group">

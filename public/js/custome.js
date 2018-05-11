@@ -62,7 +62,7 @@ $(document).ready(function () {
             $('#callback-output').prepend('movedFromCenter: ' + $item.attr('id') + '<br/>');
         },
         clickedCenter: function ($item) {
-            window.location.href = baseUrl+'/buscador?type=venta&propiedad='+$item[0].dataset.type+'';
+            window.location.href = baseUrl+'/buscador?type=Venta&propiedad='+$item[0].dataset.type+'';
             $('#callback-output').prepend('clickedCenter: ' + $item.attr('id') + '<br/>');
         }
     });

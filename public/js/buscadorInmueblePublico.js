@@ -115,7 +115,7 @@ $('body').on('click', '#buscar', function(event) {
 			$('body').on('change','#estacionamientos',function(){
 				var prueba=$("#estacionamientos option:selected").last().attr('class');
 				var longitud=$("#estacionamientos option:selected");
-				console.log(prueba);
+				//console.log(prueba);
 					if(prueba=='mayorE'){
 						if (longitud.length!=1) {
 							$(".menorE").remove();

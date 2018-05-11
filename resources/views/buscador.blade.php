@@ -16,7 +16,7 @@
             <section id="featuredProperties">
                 <div class="row">
                     <div class="col-xs-12">
-                        <h1 class="titleSection">Inmuebles destacados</h1>
+                        <h1 class="titleSection">Inmuebles destacados</h1><span class="totalizador">{{$inmuebles->total()}}</span></h2>
                     </div>
                 </div>
                 <div class="row">
@@ -76,14 +76,6 @@
             $('.select-2').select2({
                 placeholder: 'Seleccionar',
             });
-
-            var url = new URL(window.location.href);
-            var p1 = JSON.parse(url.searchParams.get("type")).split(',');
-            console.log(p1);
-            $('select[name=tipo]').val(p1).trigger("change");
-
-            var p2 = JSON.parse(url.searchParams.get("propiedad")).split(',');
-            $('select[name=propiedad]').val(p2).trigger("change");
         });
     </script>
     <script type="text/javascript" src="{{ asset('js/buscadorInmueblePublico.js') }}"></script>

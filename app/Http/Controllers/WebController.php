@@ -69,8 +69,10 @@ class WebController extends Controller
      */
     public function buscador()
     {
-      $propiedad=Request::get('propiedad');
-
+      $a=Request::get('propiedad');
+      $modeloNegocio=["Venta","Alquiler"];
+      $propiedad[]=$a;
+      $tipoNegocio[]="Venta";
       $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
                                    ->join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
                                    ->join('ciudades','propiedades.ciudad_id','ciudades.id')
@@ -78,13 +80,14 @@ class WebController extends Controller
                                    ->where('medias.vista',1)
                                    ->where('destacado',1)
                                    ->where('propiedades.estatus',1)
-                                   ->where(['tipo_inmueble'=>$propiedad,'tipoNegocio'=>'venta'])
+                                   ->where(['tipo_inmueble'=>$a,'tipoNegocio'=>'Venta'])
                                    ->inRandomOrder()
-                                   ->paginate(10);
-      $inmuebles->withPath('?type=venta&propiedad='.$propiedad);
+                                   ->paginate(30);
+      $inmuebles->withPath('?type=Venta&propiedad='.$a);
       $tipos=TipoInmueble::all();
       $estados=Estado::all();
-      return view('buscador',compact('proyectos','inmuebles','estados','tipos'));
+      //dd($tipos);
+      return view('buscador',compact('proyectos','inmuebles','estados','tipos','propiedad','modeloNegocio','tipoNegocio'));
     }
 
     /**
@@ -351,6 +354,7 @@ class WebController extends Controller
 
 
     public function buscarInmueblesPublico(){
+       $modeloNegocio=["Venta","Alquiler"];
        $arregloTipo=[];
        $arregloTipoNegocio=[];
        $arregloEstados=[];
@@ -359,6 +363,16 @@ class WebController extends Controller
        $arregloHabitaciones=[];
        $arregloBanos=[];
        $arregloEstacionamientos=[];
+       $ciudadPorEstado=(object)[
+         "id"=>"",
+         "nombre"=>"",
+         "estado_id"=>""
+       ];
+       $urbanizacionPorCiudad=(object)[
+         "id"=>"",
+         "nombre"=>"",
+         "ciudad_id"=>""
+       ];
        $codigo=Request::get('codigo');
        $a=Request::get('tipo');
        $b=Request::get('tipoNegocio');
@@ -368,7 +382,7 @@ class WebController extends Controller
        $f=Request::get('habitaciones');
        $g=Request::get('banos');
        $h=Request::get('estacionamientos');
-    	 $tipo=explode(",",$a);
+    	 $tipoP=explode(",",$a);
     	 $tipoNegocio=explode(",",$b);
     	 $estados=explode(",",$c);
     	 $ciudades=explode(",",$d);
@@ -379,14 +393,14 @@ class WebController extends Controller
     	 $precioMin=Request::get('precioMin');
     	 $precioMax=Request::get('precioMax');
 
-       foreach ($tipo as $key => $value) {
-         if ($tipo[$key]!='') {
+       foreach ($tipoP as $key => $value) {
+         if ($tipoP[$key]!='') {
            $arregloTipo[]=(int)$value;
          }
        }
        foreach ($tipoNegocio as $key => $value) {
          if ($tipoNegocio[$key]!='') {
-           $arregloTipoNegocio[]=(int)$value;
+           $arregloTipoNegocio[]=$value;
          }
        }
        foreach ($estados as $key => $value) {
@@ -477,7 +491,7 @@ class WebController extends Controller
          $inmuebles->whereIn('estacionamientos',$arregloEstacionamientos);
        }
        if (isset($contEstacionamientos)) {
-         $inmuebles->where('estacionamientos','>=',$contEstacionemientos);
+         $inmuebles->where('estacionamientos','>=',$contEstacionamientos);
        }
        if ($precioMin!='' && $precioMax!='') {
          $inmuebles->whereBetween('propiedades.precio', [$precioMin,$precioMax]);
@@ -488,7 +502,7 @@ class WebController extends Controller
        elseif ($precioMax!='' && $precioMin=='') {
          $inmuebles->where('propiedades.precio','<=',$precioMax);
        }
-       $inmuebles=$inmuebles->paginate(50);
+       $inmuebles=$inmuebles->paginate(30);
        //dd($inmuebles);
        $inmuebles->setPath('?codigo='.$codigo.'&tipo='.$a.'&tipoNegocio='.$b.'&estados='.$c.'&ciudades='.$d.'&urbanizaciones='.$e.'&habitaciones='.$f.'&banos='.$g.'&estacionamientos='.$h.'&precioMin='.$precioMin.'&precioMax='.$precioMax);
        //dd($prueba);
@@ -503,7 +517,14 @@ class WebController extends Controller
                                     //$inmuebles=Propiedad::whereIn('tipo_inmueble', $tipo)->paginate(10);
                                   // dd($inmuebles);
         $tipos=TipoInmueble::all();
-        $estados=Estado::all();
-        return view('buscador',compact('inmuebles','estados','tipos'));
+        $estadosLista=Estado::all();
+        if(!empty($estados)){
+          $ciudadPorEstado=Ciudad::whereIn('estado_id',$estados)->get();
+        }
+        if(!empty($ciudades)){
+          $urbanizacionPorCiudad=Urbanizacion::whereIn('ciudad_id',$ciudades)->get();
+        }
+        //dd($ciudadPorEstado);
+        return view('buscador2',compact('inmuebles','tipos','tipoP','tipoNegocio',"modeloNegocio","estadosLista","estados","ciudadPorEstado","ciudades","urbanizacionPorCiudad","urbanizaciones","habitaciones","banos","estacionamientos","precioMin","precioMax"));
     }
 }

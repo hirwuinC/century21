@@ -98,7 +98,7 @@
 							<img src="{{ asset('images/slide1.jpg')}}" alt="...">
 						</div>
 						<div class="item">
-							<img src="{{ asset('images/slide1.jpg')}}" alt="...">
+							<img src="{{ asset('images/slide2.png')}}" alt="...">
 						</div>
 						<div class="item">
 							<img src="{{ asset('images/slide1.jpg')}}" alt="...">
@@ -176,6 +176,7 @@
 		<script type="text/javascript" src="{{ asset('js/waterwheelCarousel.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('js/search.js') }}"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
+		<script src="https://unpkg.com/scrollreveal/dist/scrollreveal.min.js"></script>
 		<script type="text/javascript">
 			var baseUrl = "{{ route('home') }}"
 		</script>
