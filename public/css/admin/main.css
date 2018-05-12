@@ -1312,6 +1312,10 @@ textarea:focus {
   bottom: 40px;
 }
 /*------------------ GESTOR DE EVENTOS (CALENDARIO)----------------------*/
+#error{
+  margin-top: 10px; 
+  font-size: 1.2em;
+}
 .cabeceraGestor {
   margin-top: 20px;
   font-family: latobold;

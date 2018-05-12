@@ -9,6 +9,7 @@ use App\Models\Propiedad;
 use App\Models\User;
 use App\Models\Role;
 use App\Models\Imagen;
+use App\Models\Calendario;
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\Facades\DB;
@@ -193,6 +194,10 @@ class AsesorController extends Controller
       if (empty($consulta)) {
           $asesor=Agente::where('id',$idAsesor)->first();
           //dd($asesor);
+         ///////////////////////////////  Borrar eventos creados por el asesor /////////////////////////////////////////
+
+            Calendario::where('creador',$idAsesor)->delete();
+
         ///////////////////////////////  Borrar usuario del Asesor /////////////////////////////////////////
 
             User::where('agente_id',$idAsesor)->delete();

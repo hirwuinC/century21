@@ -37,4 +37,10 @@ $(document).ready(function(){
 	    }
 	  });
 	})
+
+/////////////////////////////// mantener link del sidebar activo ////////////////////////////////////
+    var page = location.pathname;
+    //alert(page)
+    $('.sidebar-nav .navbar ul li a[href="' + page + '"]').parent().addClass('active');
+
 });

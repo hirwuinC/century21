@@ -2,19 +2,27 @@
 
 @section('content')
 <div class="padreCalendario">
-  <div class="row ">
-      <div class="col-xs-10 col-xs-offset-1 cabeceraGestor">
-        <div class="col-xs-1 flechaIzquierda">
-          <a class="arrow arrow-left" title="Mes Anterior" href=""></a>
-        </div>
-        <div class="col-xs-10 mes">
-          <span>{{$mes}}-{{$year}}</span>
-          <input type="hidden" id="fechaCompleta" value="{{date('Y-m-d')}}">
-        </div>
-        <div class="col-xs-1 flechaDerecha">
-          <a class="arrow arrow-right" title="Próximo Mes" href=""></a>
+  @if (Session::has('status'))
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1" id="error">
+        <div class="alert alert-danger" role="alert">Usted no tiene acceso a la ruta solicitada!!</div>
         </div>
       </div>
+    </div>
+  @endif
+  <div class="row ">
+    <div class="col-xs-10 col-xs-offset-1 cabeceraGestor">
+      <div class="col-xs-1 flechaIzquierda">
+        <a class="arrow arrow-left" title="Mes Anterior" href=""></a>
+      </div>
+      <div class="col-xs-10 mes">
+        <span>{{$mes}}-{{$year}}</span>
+        <input type="hidden" id="fechaCompleta" value="{{date('Y-m-d')}}">
+      </div>
+      <div class="col-xs-1 flechaDerecha">
+        <a class="arrow arrow-right" title="Próximo Mes" href=""></a>
+      </div>
+    </div>
   </div>
   <div class="row">
     <div class="col-xs-10 col-xs-offset-1 contDias">

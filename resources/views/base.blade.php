@@ -67,11 +67,11 @@
 										</div>
 										<div class="navbar-collapse collapse" id="nav-collapse" aria-expanded="false">
 											<ul>
-												<li><a href="{{ route('home') }}" class="active">inicio</a></li>
-												<li><a href="{{ route('nuestra_historia') }}">nuestra historia</a></li>
-												<li><a href="{{ route('proyectos') }}">proyectos</a></li>
+												<li><a href="{{ route('home') }}/" data-id="1">inicio</a></li>
+												<li><a href="{{ route('nuestra_historia') }}" data-id="2">nuestra historia</a></li>
+												<li><a href="{{ route('proyectos') }}" data-id="3">proyectos</a></li>
 												<li><a href="">blog</a></li>
-												<li><a href="{{ route('contacto') }}">contacto</a></li>
+												<li><a href="{{ route('contacto') }}" data-id="4">contacto</a></li>
 											</ul>
 										</div>
 									</div>

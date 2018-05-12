@@ -83,6 +83,7 @@ class GestorEventosController extends Controller{
       return $arreglo;
     }
     public function index(){
+      //dd(Session::get('asesor'));
       $month=date("m");
       $year=date("Y");
       $primerDia=self::primerDia(date('m'),date('Y'));
