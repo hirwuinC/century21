@@ -17,7 +17,7 @@
 
 							</br>
 									<ul>
-										<li style="text-align: left;"><strong>Es posible que el servidor de casa matriz no se encuentre disponible.</strong></li></br>
+										<li style="text-align: left;"><strong>Es posible que el servidor de casa matriz no se encuentre disponible o que se presentaran problemas de coneccion.</strong></li></br>
 										<li style="text-align: left;"><strong>En caso de que se encuentre disponible el servidor, es probable que las credenciales de acceso utilizadas sean invalidas.</strong></li></br>
 										<li style="text-align: left;"><strong>En caso de no presentarse ninguno de los 2 casos anteriores, es probable que el archivo de sincronizacion al cual se intento acceder no existe. </strong></li>
 									</ul>

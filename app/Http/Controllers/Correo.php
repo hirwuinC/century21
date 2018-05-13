@@ -37,8 +37,7 @@ class Correo extends Controller
 
 	public function consultarAgente($agente){
 		$consulta=DB::table('agentes')
-						->join('users','agentes.id','=','users.agente_id')
-						->select('agentes.fullName AS nombre','agentes.cedula AS cedula','users.email AS correo','agentes.telefono AS telefono','agentes.celular AS celular')
+						->select('agentes.fullName AS nombre','agentes.codigo_id AS codigo','agentes.email AS correo','agentes.telefono AS telefono','agentes.celular AS celular')
 						->where('agentes.id',$agente)
 						->first();
 		return $consulta;
@@ -50,7 +49,8 @@ class Correo extends Controller
 		$consulta=DB::table('propiedades')
 	    							->join('estados','propiedades.estado_id','=','estados.id')
 	    							->join('ciudades','propiedades.ciudad_id','=','ciudades.id')
-	    							->select('propiedades.urbanizacion AS urbanizacion','propiedades.direccion AS direccion',
+	    							->join('urbanizaciones','propiedades.urbanizacion','=','urbanizaciones.id')
+	    							->select('urbanizaciones.nombre AS urbanizacion','propiedades.direccion AS direccion',
 	    									 'propiedades.tipoNegocio AS negocio','propiedades.proximoInforme AS proximoInforme','propiedades.agente_id
 	    									 AS agente','estados.nombre AS estado','ciudades.nombre AS ciudad','propiedades.id AS id','propiedades.id_mls AS mls')
 	    							->where('propiedades.estatus','<>',$statusVendido)->where('propiedades.agente_id','<>',$asesorGenerico)->get();
@@ -162,13 +162,13 @@ class Correo extends Controller
 	   	 $datosAgente=$this->consultarAgente($agente);
 
 
-	   	 $registro=[$agente=>['nombre'=>$datosAgente->nombre,'cedula'=>$datosAgente->cedula,'correo'=>$datosAgente->correo,'telefono'=>$datosAgente->telefono,'celular'=>$datosAgente->celular,'vencidos'=>$vencidosAgente,'coloresVencidos'=>$coloresVencidos,'porVencerse'=>$porVencerseAgente,'coloresPorVencerse'=>$coloresPorVencerse,'vencenHoy'=>$vencenHoyAgente,'coloresVencenHoy'=>$coloresVencenHoy]];
+	   	 $registro=[$agente=>['nombre'=>$datosAgente->nombre,'codigo'=>$datosAgente->codigo,'correo'=>$datosAgente->correo,'telefono'=>$datosAgente->telefono,'celular'=>$datosAgente->celular,'vencidos'=>$vencidosAgente,'coloresVencidos'=>$coloresVencidos,'porVencerse'=>$porVencerseAgente,'coloresPorVencerse'=>$coloresPorVencerse,'vencenHoy'=>$vencenHoyAgente,'coloresVencenHoy'=>$coloresVencenHoy]];
 	   	///////////////////Enviar correo al agente de turno //////////////////////////////////////////
 
 	   	/////////////////////////////////////////////////////////////////////////////////////////////
 
-	   	 return view('emails.informeAsesor',['asesor'=>$registro,'agente'=>$agente]);
-	   	 array_push($registrosAgente,$registro);
+	   	 //return view('emails.informeAsesor',['asesor'=>$registro,'agente'=>$agente]);
+	     array_push($registrosAgente,$registro);
 
 
 	   }

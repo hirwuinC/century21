@@ -6,7 +6,6 @@ use Illuminate\Console\Command;
 use Illuminate\Http\Request;
 use Response;
 use Zipper;
-use Excel;
 use DB;
 use Illuminate\Support\Facades\Mail;
 use Carbon\Carbon;
@@ -16,7 +15,6 @@ use App\Models\Urbanizacion;
 use App\Models\Agente;
 use App\Models\Propiedad;
 use App\Models\Media;
-use Anchu\Ftp\Facades\FTP;
 
 class sincronizar extends Command
 {
@@ -178,6 +176,7 @@ class sincronizar extends Command
             $propiedad->posicionMapa='[{"lat":10.47716930106114,"lng":-66.85339290098875}]';
             $propiedad->fechaCreado=Carbon::now();
             $propiedad->proximoInforme=Carbon::now()->addMonth();
+            $propiedad->visible=0;
         $propiedad->save();
         if ((string)$datos['oficina_id']!=(string)$inmueblesCaracasId)
         {
@@ -316,12 +315,23 @@ class sincronizar extends Command
                    $directorioSin.'/Century21/ciudades.csv',
                    $directorioSin.'/Century21/urbanizaciones.csv',
                    $directorioSin.'/Century21.zip'];
+                   
         for ($i=0; $i <count($archivos) ; $i++) 
         { 
-            unlink($archivos[$i]);
+            if (file_exists($archivos[$i])) 
+            {
+                
+                unlink($archivos[$i]);
+            }
+            
         }
 
-        rmdir($directorioSin.'/Century21');
+           if (file_exists($directorioSin.'/Century21'))
+            {
+                
+                rmdir($directorioSin.'/Century21');
+            }
+
         return 0;
     }
 
@@ -329,23 +339,24 @@ class sincronizar extends Command
     {
 
         $listaCambios=[];
-
-
+        $countCambios=['Precio'=>0,'Negocio'=>0,'Agente'=>0,'Eliminados'=>0];
+        
+        
         ///traer todas las propiedades que fueron sincroniadas, es decir que tienen codigo mls
         $propiedades=DB::table('propiedades')->select('id_mls as mls','tipoNegocio as negocio','precio as precio','agente_id as agente','oficina_id as oficina')->where('id_mls','<>',0)->get();
-
-        if ($propiedades)
+        
+        if ($propiedades) 
         {
-
+                    
                 $archivo=[];//se debe cargar maximo la misma cantidad de propiedades
                  //recorrer archivo
-                 if (($gestor = fopen($directorioSin.'/Century21/propiedades.csv', "r")) !== FALSE)
+                 if (($gestor = fopen($directorioSin.'/Century21/propiedades.csv', "r")) !== FALSE) 
                  {
-                                while (($datos = fgetcsv($gestor, 1000, ",",'"')) !== FALSE)
+                                while (($datos = fgetcsv($gestor, 1000, ",",'"')) !== FALSE) 
                                 {
-
+                               
                                      $longitud=count($datos);
-
+                                                                                             
                                      if (($longitud==25||$longitud==26)) //cantidad de campos del registro
                                         {
                                             if (($datos[10]=='VARGAS'||$datos[10]=='MIRANDA'||$datos[10]=='DISTRITO FEDERAL'))
@@ -356,37 +367,41 @@ class sincronizar extends Command
                                         }
                                 }
                 }
-
+                              fclose($gestor);                
 
                         //recorrer array de propiedades
-                foreach ($propiedades as $propiedad)
+                foreach ($propiedades as $propiedad) 
                 {
-
+                    
                     $aux=[];
                     $clave=array_key_exists($propiedad->mls,$archivo);
-                    if ($clave==false)
+                    if ($clave==false) 
                     {
+                       $countCambios['Eliminados']+=1;
                        $listaCambios[$propiedad->mls]=['Eliminado'=>'No existe en el sistema de casa matriz'];
                     }
-                    else if ($clave==true)
+                    else if ($clave==true) 
                     {
-                        if ($propiedad->negocio!=$archivo[$propiedad->mls]['negocio'])
+                        if ($propiedad->negocio!=$archivo[$propiedad->mls]['negocio']) 
                         {
+                            $countCambios['Negocio']+=1;
                             $aux['Cambio tipo negocio']='De: '.$propiedad->negocio.' -> '.$archivo[$propiedad->mls]['negocio'];
                         }
-                        if ($propiedad->precio!=$archivo[$propiedad->mls]['precio'])
+                        if ($propiedad->precio!=$archivo[$propiedad->mls]['precio']) 
                         {
+                            $countCambios['Precio']+=1;
                             $aux['Cambio de precio']='De: '.$propiedad->precio.' -> '.$archivo[$propiedad->mls]['precio'];
                         }
                         $agente=DB::table('agentes')->where('id',$propiedad->agente)->first();
-                        if ($inmueblesCaracasId==(string)$archivo[$propiedad->mls]['oficina_id'])
+                        if ($inmueblesCaracasId==(string)$archivo[$propiedad->mls]['oficina_id']) 
                         {
-                           if ($agente->codigo_id!=$archivo[$propiedad->mls]['agente'])
+                           if ($agente->codigo_id!=$archivo[$propiedad->mls]['agente']) 
                            {
-
+                              
+                              $countCambios['Agente']+=1;
                               $aux['Cambio de agente']='De: '.$agente->codigo_id.' -> '.$archivo[$propiedad->mls]['agente'].' - '.$archivo[$propiedad->mls]['oficina'];
                            }
-
+                           
                         }
 
                         if(count($aux)>0)
@@ -398,7 +413,7 @@ class sincronizar extends Command
 
         }
 
-        return $listaCambios;
+        return [$listaCambios,$countCambios];
     }
 
      public function conectarDescargar($ftp_server,$ftp_user, $ftp_password,$local_file, $ftp_file)
@@ -447,7 +462,6 @@ class sincronizar extends Command
     public function handle()
     {
 
-             
             $ciudades=[];   
             $urbanizaciones=[];
             $estados=[];
@@ -455,7 +469,7 @@ class sincronizar extends Command
             $propiedades=[];
             $cantidadImagenes=0;
             $horaSinc=Carbon::now();
-            $modificaciones=[];
+            $cambios=[];
             $exception=true;
             ////////////////////////////////////////////////////////////////////////////
             ini_set('max_execution_time',12000 ); //tiempo maximo de ejecucion del script
@@ -468,17 +482,20 @@ class sincronizar extends Command
             $local_file=$directorioSin.'/Century21.zip';//'C:/Users/Jose Tayupo/Desktop/Descargas/Century21.zip';
             $ftp_file='/FTP-TXT/Century21.zip';
             $ftp_download=false;
-            $c=0;
-
+           
             
+                        
             try{
                  $descarga=$this->conectarDescargar($ftp_server,$ftp_user, $ftp_password,$local_file, $ftp_file);
                  if ($descarga==1) 
                  {
                          $exception=false;
                          $extract=Zipper::make($local_file)->extractTo($directorioSin.'/Century21/');
+                         Zipper::close($extract);
                          $inmueblesCaracasId='23646';
-                         $modificaciones=$this->detectarCambios($directorioSin,$inmueblesCaracasId);
+                         $aux=$this->detectarCambios($directorioSin,$inmueblesCaracasId);
+                         $modificaciones=$aux[0];//lista de cambios por codigo mls
+                         $cantidades=$aux[1];//cantidad de cambios registrada
 
                           if (($gestor = fopen($directorioSin.'/Century21/propiedades.csv', "r")) !== FALSE) {
                                 while (($datos = fgetcsv($gestor, 1000, ",",'"')) !== FALSE) 
@@ -494,7 +511,7 @@ class sincronizar extends Command
                                                 
 
                                                                                       //filtrar estado
-                                                if (($datos[10]=='VARGAS'||$datos[10]=='MIRANDA'||$datos[10]=='DISTRITO FEDERAL') )
+                                                if (($datos[10]=='VARGAS'||$datos[10]=='MIRANDA'||$datos[10]=='DISTRITO FEDERAL'))
                                                 {
                                                    
                                                     
@@ -568,35 +585,37 @@ class sincronizar extends Command
                                                
                                             }//fin del while del archivo
                                         }//fin del if del archivo
-
-                                         //$this->borrarArchivos($directorioSin); 
-
+                                        
+                                     
+                        fclose($gestor);
                        }
           
                                        
                                       
                                     
-                                 
+                                  
                              $longitud=[];
                              $longitud['estados']=count($estados);$longitud['ciudades']=count($ciudades);$longitud['urbanizaciones']=count($urbanizaciones);$longitud['agentes']=count($agentes);$longitud['propiedades']=count($propiedades);$longitud['imagenes']=$cantidadImagenes;
                              $agentes=$this->cargarColores($agentes);
                              $propiedades=$this->cargarColores($propiedades);
                              $cambios=array_sum($longitud);
                              $horaFin=Carbon::now();
+                             $this->borrarArchivos($directorioSin); 
 
-                            $correo='vinrast@gmail.com';
-                            Mail::send('emails.informeSincronizacion',['cambios'=>$cambios,'longitud'=>$longitud,'agentes'=>$agentes,'propiedades'=>$propiedades,'tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString(),'modificaciones'=>$modificaciones,'descarga'=>$descarga],function($message)use($correo)
+                            $correo='josetayupo@gmail.com';
+                            Mail::send('emails.informeSincronizacion',['cambios'=>$cambios,'longitud'=>$longitud,'agentes'=>$agentes,'propiedades'=>$propiedades,'tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString(),'modificaciones'=>$modificaciones,'descarga'=>$descarga,'cantidades'=>$cantidades],function($message)use($correo)
                                  {
                                         $message->to($correo)->subject('Resultados de sincronizacion');
                                 });
+                        
                        }
                    finally
                       {
                             if ($exception) 
                             {
-                                # code...
-                                   $horaFin=Carbon::now();
-                                    $correo='vinrast@gmail.com';
+                                
+                                    $horaFin=Carbon::now();
+                                    $correo='josetayupo@gmail.com';
                                     Mail::send('emails.informeError',['tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString()],
                                         function($message)use($correo)
                                      {
@@ -604,6 +623,10 @@ class sincronizar extends Command
                                     });
                             }
                       }
+                               
+                     
+        
+           return 0;               
 
     }
 }
