@@ -27,7 +27,7 @@
             <div class="row">
               <div class="col-xs-12">
                   <label for="">Correo Electrónico</label>
-                  <input type="text" class="inputs inputsLight form-control" name="emailUser" value="{{ $asesor->email }}" disabled="disabled" placeholder="Correo">
+                  <input type="text" class="inputs inputsLight form-control" name="emailUser" value="{{ $asesor->email }}" placeholder="Correo">
               </div>
             </div>
             <div class="row">

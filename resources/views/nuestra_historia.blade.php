@@ -12,8 +12,28 @@
                   <iframe  src="https://www.youtube.com/embed/u3DEiLfCZrc?rel=0&amp;showinfo=0" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
               </div>
               <h1 class="titleSection" >Nos debemos a nuestros clientes</h1>
-              <div class="col-xs-12 col-sm-12 video hijo">
-                <img src="{{asset('images/mision.png')}}" alt="">
+              <div class="col-xs-12 col-sm-12 esquema hijo">
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                  <div class="col-xs-12">
+                      <p class="contenido1">Nuestra Misión es ayudar a los clientes a que hagan <strong>excelentes negocios inmobiliarios.</strong></p>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                  <div class="col-xs-5 contllave">
+                    <span class="llave">{</span>
+                  </div>
+                  <div class="col-xs-7">
+                      <p class="contenido">Para lograr esta misión asumimos los retos de brindar a los clientes <strong>un servicio inmobiliario extraordinario.</strong></p>
+                  </div>
+                </div>
+                <div class="col-xs-12 col-sm-12 col-md-4">
+                  <div class="col-xs-5 contllave">
+                    <span class="llave">{</span>
+                  </div>
+                  <div class="col-xs-7">
+                      <p class="contenido">De esta manera buscamos que los clientes se conviertan en <strong>clientes de por vida.</strong></p>
+                  </div>
+                </div>
               </div>
               <h1 class="titleSection">Brindar un servicio extraordinario significa</h1>
                 <div class="col-xs-12 col-sm-12 video">

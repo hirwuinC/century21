@@ -56,8 +56,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'josetayupo@gmail.com'),
-        'name' => env('MAIL_FROM_NAME', 'Jose Tayupo'),
+        'address' => env('MAIL_FROM_ADDRESS', 'gerencia@century21caracas.com'),
+        'name' => env('MAIL_FROM_NAME', 'Gerencia C21 Inmuebles Caracas'),
     ],
 
     /*

@@ -30,6 +30,7 @@ class PerfilController extends Controller{
 
   public function actualizarPerfil(){
     $file = Request::file('image');
+    $email=mb_strtolower(Request::get('emailUser'));
     $password = Crypt::encryptString(Request::get('pass'));
     $address = ucfirst(mb_strtolower(Request::get('addressUser')));
     $fechaNac = Request::get('dateBirth');
@@ -51,11 +52,12 @@ class PerfilController extends Controller{
         Agente::where('id',$asesorId)->update(['imagen_id' => $imagen]);
       }
     }
-    User::where('agente_id',$userId)->update([
+    User::where('id',$userId)->update([
                                                 'password'=> $password,
                                                 'address_user'=> $address,
                                                 'date_birth' => $fechaNac,
                                               ]);
+    Agente::where('id',$asesorId)->update(['email' => $email]);
     $respuesta=1;
     return $respuesta;
   }

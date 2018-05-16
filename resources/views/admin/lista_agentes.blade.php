@@ -48,5 +48,5 @@
 @endSection
 
 @section('js')
-    <script type="text/javascript" src="{{ asset('js/admin/search.js') }}""></script>
+    <script type="text/javascript" src="{{ asset('js/admin/search.js') }}"></script>
 @endSection

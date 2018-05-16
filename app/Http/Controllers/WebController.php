@@ -307,10 +307,15 @@ class WebController extends Controller
       $contVisita = Propiedad::find($registro);
       $contVisita->compradorInteresado = $contVisita->compradorInteresado+1;
       $contVisita->save();
+      $correoAsesor=Propiedad::join('agentes','propiedades.agente_id','agentes.id')
+                               ->where('propiedades.id',$registro)
+                               ->select('agentes.email')
+                               ->first();
+      $correoAsesor=(string)$correoAsesor->email;
       $texto='Un nuevo interesado en la propiedad id #'.$registro.', código mls #'.$mls.', se ha comunicado con nosotros, a continuación sus datos:';
       //dd($ruta);
-      Mail::send('emails.nuevoInteresado',['nombres'=>$nombres,'apellidos'=>$apellidos,'email'=>$email,'telefono'=>$telefono,'comentario'=>$comentario,'texto'=>$texto],function($message)use($registro){
-        $message->to('gerencia@century21caracas.com','Iraida Caballero')
+      Mail::send('emails.nuevoInteresado',['nombres'=>$nombres,'apellidos'=>$apellidos,'email'=>$email,'telefono'=>$telefono,'comentario'=>$comentario,'texto'=>$texto],function($message)use($registro,$correoAsesor){
+        $message->to(['gerencia@century21caracas.com',$correoAsesor])
                 ->subject('Nuevo interesado en el inmueble id #'.$registro.'!!');
       });
       $respuesta=1;

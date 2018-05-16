@@ -39,7 +39,7 @@ class DireccionesController extends Controller{
     return $valores;
   }
   public function guardarUrbanizacion(){
-    $nombreUrbanizacion=ucwords(mb_strtolower(Request::get('urbanizacion')));
+    $nombreUrbanizacion=mb_strtoupper(Request::get('urbanizacion'));
     $ciudad=Request::get('ciudadId');
     $consulta=Urbanizacion::where('nombre',$nombreUrbanizacion)->where('ciudad_id',$ciudad)->first();
     if (count($consulta)==0) {

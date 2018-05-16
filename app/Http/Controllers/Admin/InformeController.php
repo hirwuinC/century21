@@ -582,10 +582,10 @@ class InformeController extends Controller{
     $respuesta=1;
     return $respuesta;
   }
-  public function correo($idInforme,$correoCliente,$nombreCliente){
+  public function correo($idInforme,$correoCliente,$nombreCliente,$nombreAsesor){
     $enviado=0;
     $ruta=storage_path('app/public/informes')."/InformeCliente".$idInforme.".pdf";
-    Mail::send('emails.informe',['name'=>'Vincen Santaella'],function($message)use($ruta,$correoCliente,$nombreCliente){
+    Mail::send('emails.informe',['name'=>$nombreAsesor],function($message)use($ruta,$correoCliente,$nombreCliente){
       $message->to($correoCliente,$nombreCliente)
               ->subject('Informe de gestión de inmueble')
               ->attach($ruta);
@@ -596,11 +596,16 @@ class InformeController extends Controller{
 
   public function enviarCorreo(){
     $idInforme=Request::get('id');
-    $informe=Informe::where('id',$idInforme)->first();
+    $informe=Informe::join('propiedades','informes.propiedad_id','propiedades.id')
+                    ->join('agentes','propiedades.agente_id','agentes.id')
+                    ->where('informes.id',$idInforme)
+                    ->select('informes.*','agentes.fullName')
+                    ->first();
     $correo=(string)$informe->correoCliente;
     $nombre=(string)$informe->nombre_Cliente;
+    $nombreAsesor=(string)$informe->fullName;
     self::informe($idInforme);
-    $enviado=self::correo($idInforme,$correo,$nombre);
+    $enviado=self::correo($idInforme,$correo,$nombre,$nombreAsesor);
     $informeEnviado=Informe::find($idInforme);
     $informeEnviado->estatusEnviado=1;
     $informeEnviado->fechaEnviado=date('Y-m-d');
@@ -608,6 +613,7 @@ class InformeController extends Controller{
     $propiedad=Propiedad::find($informe->propiedad_id);
     $propiedad->proximoInforme=date('Y-m-d', strtotime('+1 month'));
     $propiedad->save();
+    File::delete(storage_path('app/public/informes')."/InformeCliente".$idInforme.".pdf");
     return $enviado;
   }
   public function prueba(){

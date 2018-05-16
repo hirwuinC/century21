@@ -56,6 +56,7 @@ class AsesorController extends Controller
 
     public function guardarEditarUsuario(){
       $file = Request::file('image');
+      $email = mb_strtolower(Request::get('emailUser'));
       $usuario = mb_strtolower(Request::get('user'));
       $cedula = ucfirst(Request::get('cedula'));
       $password = Crypt::encryptString(\Request::get('pass'));
@@ -101,6 +102,7 @@ class AsesorController extends Controller
                                                       'rol_id' => $rol,
                                                       'certified_asesor'=>$certificado
                                                     ]);
+          Agente::where('id',$asesorId)->update(['email' => $email]);
 
           $respuesta = 10;// Actualizacion Exitosa
         }
@@ -154,6 +156,7 @@ class AsesorController extends Controller
         $objuser->certified_asesor = $certificado;
         $objuser->save();
         $respuesta=20; // Guardado exitoso del usuario
+        Agente::where('id',$asesorId)->update(['email' => $email]);
       }
       else{
         if (count($cNombre)==0) {
@@ -184,8 +187,9 @@ class AsesorController extends Controller
       return $respuesta;
     }
    	public function searchAsesor(){
-    	$var =\Request::get('data');
+    	$var =Request::get('data');
     	$result=Agente::searchAsesor($var)->get();
+      //dd($result);
     	return response()->json($result);
     }
     public function borrarAsesor(){

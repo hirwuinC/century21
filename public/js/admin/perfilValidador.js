@@ -22,6 +22,10 @@ $(document).ready(function(){
 	$("#perfilEdit").validate({
 			onfocusout: false,
 			rules: {
+				emailUser:{
+					required:true,
+					email:true
+				},
 				pass:{
 					required:true,
 					minlength: 6
@@ -39,6 +43,10 @@ $(document).ready(function(){
 				}
 			},
 		messages: {
+			emailUser:{
+				required:"Debe indicar un correo Electrónico",
+				email:"El correo debe tener un formato válido"
+			},
 			pass:{
 				required:"Debe indicar una contraseña de acceso",
 				minlength: "La contraseña debe tener un minimo de 6 caracteres"

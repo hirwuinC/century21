@@ -16,7 +16,7 @@
             <a href="" data-toggle="modal" data-target="#modaljoinTeam">
               <div class="col-sm-8">
                   <div class="joinTeam">
-                      <img src="{{asset('images/demo-unete.jpg')}}" alt="">
+                      <img src="{{asset('images/demo-unete.png')}}" alt="">
                       <div class="caption">
                           <p>UNETE A NUESTRO EQUIPO DE ASESORES</p></a>
                       </div>

@@ -70,7 +70,7 @@
 												<li><a href="{{ route('home') }}/" data-id="1">inicio</a></li>
 												<li><a href="{{ route('nuestra_historia') }}" data-id="2">nuestra historia</a></li>
 												<li><a href="{{ route('proyectos') }}" data-id="3">proyectos</a></li>
-												<li><a href="">blog</a></li>
+												<li><a href="http://blog.century21caracas.com/">blog</a></li>
 												<li><a href="{{ route('contacto') }}" data-id="4">contacto</a></li>
 											</ul>
 										</div>
@@ -95,13 +95,13 @@
 					<!-- Wrapper for slides -->
 					<div class="carousel-inner" role="listbox">
 						<div class="item active">
-							<img src="{{ asset('images/slide1.jpg')}}" alt="...">
+							<img src="{{ asset('images/slide1.png')}}" alt="...">
 						</div>
 						<div class="item">
 							<img src="{{ asset('images/slide2.png')}}" alt="...">
 						</div>
 						<div class="item">
-							<img src="{{ asset('images/slide1.jpg')}}" alt="...">
+							<img src="{{ asset('images/slide3.png')}}" alt="...">
 						</div>
 					</div>
 
@@ -159,7 +159,7 @@
 								<li><a href="{{ route('home') }}" class="active">inicio</a></li>
 								<li><a href="{{ route('nuestra_historia') }}">nuestra historia</a></li>
 								<li><a href="{{ route('proyectos') }}">proyectos</a></li>
-								<li><a href="">blog</a></li>
+								<li><a href="http://blog.century21caracas.com/">blog</a></li>
 								<li><a href="{{ route('contacto') }}">contacto</a></li>
 							</ul>
 						</div>

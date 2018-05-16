@@ -23,6 +23,10 @@ $(document).ready(function(){
 	$("#asesorCreate").validate({
 			onfocusout: false,
 			rules: {
+				emailUser:{
+					required:true,
+					email:true
+				},
 				user: {
 					required:true,
 					minlength: 3
@@ -57,9 +61,13 @@ $(document).ready(function(){
 				}
 			},
 		messages: {
+			emailUser:{
+				required:"Debe indicar un correo Electrónico",
+				email:"El correo debe tener un formato válido"
+			},
 			user: {
 				required:"Debe indicar un nombre de usuario",
-				minlength: "EL nombre de usuario debe ser minimo de 3 caracteres"
+				minlength: "EL nombre de usuario debe ser mínimo de 3 caracteres"
 			},
 			cedula: {
 				required: "Debe indicar la cédula del asesor"
