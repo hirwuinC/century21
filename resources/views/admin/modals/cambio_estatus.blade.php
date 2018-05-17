@@ -34,7 +34,7 @@
                             <div class="row marginBottom20"  id="comisionCompartida">
                                 <div class="col-xs-12">
                                     <label for="">Porcentaje de comisión correspondiente por la operación compartida</label>
-                                    <input type="number" min="0" max="100" name="comisionCompartida" id="comisionCompartidaInput" class="form-control" placeholder="% de comisión compartida" value="">
+                                    <input type="number" min="1" max="100" name="comisionCompartida" id="comisionCompartidaInput" class="form-control" placeholder="% de comisión compartida" value="">
                                 </div>
                             </div>
                             <div class="row marginBottom20" id="personaComparte">
@@ -46,13 +46,13 @@
                             <div class="row marginBottom20">
                                 <div class="col-xs-12">
                                     <label for="">Monto final de la negociación</label>
-                                    <input type="number" id="montoFinal" name="montoFinal" class="form-control" placeholder="Monto en Bs.">
+                                    <input type="number" id="montoFinal" min="1" name="montoFinal" class="form-control" placeholder="Monto en Bs.">
                                 </div>
                             </div>
                             <div class="row marginBottom20">
                                 <div class="col-xs-12">
                                     <label for="">Porcentaje de comisión de Cierre</label>
-                                    <input type="number" min="0" max="100" id="comisionCierre" name="comisionCierre" class="form-control" placeholder="% de comisión de cierre">
+                                    <input type="number" min="1" max="100" id="comisionCierre" name="comisionCierre" class="form-control" placeholder="% de comisión de cierre">
                                 </div>
                             </div>
                             <div class="row">

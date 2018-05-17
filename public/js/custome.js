@@ -87,7 +87,7 @@ $(document).ready(function () {
     var page = window.location;
     var prueba=location.pathname.split('/');
 
-    var data= new Array();;
+    var data= new Array();
     var data={'buscador':1,'':1,'inmueble':1,'buscarInmueblesPublico':1,'nuestra-historia':2,'proyectos':3,'proyecto':3,'contacto':4};
     $('#nav-collapse ul li a[data-id="'+data[prueba[1]]+'"]').addClass('active');
     console.log(data[prueba[1]]);

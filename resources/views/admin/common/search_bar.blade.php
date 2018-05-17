@@ -53,11 +53,13 @@
                               <select class="form-control right" name="cityPropiety" id="cityPropiety">
                                   <option value="">Ciudades</option>
                                   @foreach($ciudades as $ciudad)
+                                    @if($arreglo['propiedades.estado_id']!='')
                                       @if($ciudad->id==$arreglo['propiedades.ciudad_id'])
                                         <option value="{{$ciudad->id}}" class="opcion" selected>{{$ciudad->nombre}}</option>
                                       @else
                                         <option value="{{$ciudad->id}}" class="opcion">{{$ciudad->nombre}}</option>
                                       @endif
+                                    @endif
                                   @endforeach
                               </select>
                           </div>

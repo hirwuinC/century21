@@ -85,7 +85,12 @@ class WebController extends Controller
                                    ->paginate(30);
       $inmuebles->withPath('?type=Venta&propiedad='.$a);
       $tipos=TipoInmueble::all();
-      $estados=Estado::all();
+      $estados=Estado::join('propiedades','estados.id','propiedades.estado_id')
+                      ->select('estados.*')
+                      ->whereNotNull('propiedades.estado_id')
+                      ->distinct()
+                      ->orderBy('estados.nombre','asc')
+                      ->get();
       //dd($tipos);
       return view('buscador',compact('proyectos','inmuebles','estados','tipos','propiedad','modeloNegocio','tipoNegocio'));
     }
@@ -522,7 +527,12 @@ class WebController extends Controller
                                     //$inmuebles=Propiedad::whereIn('tipo_inmueble', $tipo)->paginate(10);
                                   // dd($inmuebles);
         $tipos=TipoInmueble::all();
-        $estadosLista=Estado::all();
+        $estadosLista=Estado::join('propiedades','estados.id','propiedades.estado_id')
+                        ->select('estados.*')
+                        ->whereNotNull('propiedades.estado_id')
+                        ->distinct()
+                        ->orderBy('estados.nombre','asc')
+                        ->get();
         if(!empty($estados)){
           $ciudadPorEstado=Ciudad::whereIn('estado_id',$estados)->get();
         }

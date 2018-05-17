@@ -35,7 +35,12 @@ class PropiedadController extends Controller{
 
       $usuario=Session::get('asesor');
       $asesores=Agente::orderBy('fullName','asc')->get();
-      $estados=Estado::all();
+      $estados=Estado::join('propiedades','estados.id','propiedades.estado_id')
+                    ->select('estados.*')
+                    ->whereNotNull('propiedades.estado_id')
+                    ->distinct()
+                    ->orderBy('estados.nombre','asc')
+                    ->get();
       $estatus=Estatus::where('familia',1)->get();
       return view('/admin/lista_inmuebles',$this->cargarSidebar(),compact('inmuebles','usuario','asesores','estados','estatus','arreglo'));
   }
@@ -72,7 +77,12 @@ class PropiedadController extends Controller{
     $inmuebles->withPath('?asesor='.$arreglo['propiedades.agente_id'].'&estatus='.$arreglo['propiedades.estatus'].'&estatePropiety='.$arreglo['propiedades.estado_id'].'&cityPropiety='.$arreglo['propiedades.ciudad_id'].'&namePropiety='.$arreglo['propiedades.urbanizacion'].'');
     $usuario=Session::get('asesor');
     $asesores=Agente::all();
-    $estados=Estado::all();
+    $estados=Estado::join('propiedades','estados.id','propiedades.estado_id')
+                  ->select('estados.*')
+                  ->whereNotNull('propiedades.estado_id')
+                  ->distinct()
+                  ->orderBy('estados.nombre','asc')
+                  ->get();
     if ($arreglo['propiedades.estado_id']!='') {
       $ciudades=Ciudad::where('estado_id',$arreglo['propiedades.estado_id'])->get();
     }
@@ -109,7 +119,7 @@ class PropiedadController extends Controller{
       $urbanizaciones=Urbanizacion::where('ciudad_id',$datos->ciudad_id)->orderBy('nombre','asc')->get();
     }
     $tiposIn=TipoInmueble::all();
-    $estados=Estado::all();
+    $estados=Estado::orderBy('nombre','asc')->get();
     $asesores=Agente::orderBy('fullName','asc')->get();
     return view('/admin/crear_inmueble_1',$this->cargarSidebar(),compact('tiposIn','estados','asesores','datos','consulta','urbanizaciones'));
   }

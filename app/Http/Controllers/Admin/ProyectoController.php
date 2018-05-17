@@ -38,7 +38,12 @@ class ProyectoController extends Controller{
 
        $usuario=Session::get('asesor');
        $asesores=Agente::orderBy('fullName','asc')->get();
-       $estados=Estado::all();
+       $estados=Estado::join('proyectos','estados.id','proyectos.estado_id')
+                     ->select('estados.*')
+                     ->whereNotNull('proyectos.estado_id')
+                     ->distinct()
+                     ->orderBy('estados.nombre','asc')
+                     ->get();
       return view('/admin/lista_proyectos',$this->cargarSidebar(),compact('proyectos','arreglo','estados','usuario'));
   }
 
@@ -60,7 +65,12 @@ class ProyectoController extends Controller{
                                           ->paginate(30);
     $proyectos->withPath('?estatePropiety='.$arreglo['proyectos.estado_id'].'&cityPropiety='.$arreglo['proyectos.ciudad_id'].'');
     $usuario=Session::get('asesor');
-    $estados=Estado::all();
+    $estados=Estado::join('proyectos','estados.id','proyectos.estado_id')
+                  ->select('estados.*')
+                  ->whereNotNull('proyectos.estado_id')
+                  ->distinct()
+                  ->orderBy('estados.nombre','asc')
+                  ->get();
     if ($arreglo['proyectos.estado_id']!='') {
       $ciudades=Ciudad::where('estado_id',$arreglo['proyectos.estado_id'])->get();
     }

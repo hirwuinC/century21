@@ -13,7 +13,7 @@
 
                 @foreach($permisos as $permiso)
                   <li class="links">
-                    <a href="{{$permiso->url}}" data-toggle="{{$permiso->id_input}}" data-target="{{$permiso->target}}" data-parent="#sidenav01" class="{{$permiso->class_input}}">
+                    <a href="{{$permiso->url}}" data-id="{{$permiso->id}}" data-toggle="{{$permiso->id_input}}" data-target="{{$permiso->target}}" data-parent="#sidenav01" class="{{$permiso->class_input}}">
                         {{$permiso->nombre}} <span class="{{$permiso->url}}"></span>
                     </a>
                     <div class="{{$permiso->id_input}}" id="{{$permiso->padre}}" style="height: 0px;">

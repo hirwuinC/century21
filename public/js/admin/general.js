@@ -37,10 +37,32 @@ $(document).ready(function(){
 	    }
 	  });
 	})
+	/////////////////////////////// mantener link del sidebar activo ////////////////////////////////////
+	    var page = window.location;
+	    var prueba=location.pathname.split('/');
 
-/////////////////////////////// mantener link del sidebar activo ////////////////////////////////////
-    var page = location.pathname;
-    //alert(page)
-    $('.sidebar-nav .navbar ul li a[href="' + page + '"]').parent().addClass('active');
+	    var data= new Array();
+	   	var data={'index':1,
+			'perfil':2,
+			'inmuebles':3,
+			'inmueble':3,
+			'buscarInmueble':3,
+			'crear-inmueble-1':3,
+			'crear-inmueble-2':3,
+			'crear-proyectos-1':6,
+			'crear-proyectos-2':6,
+			'crear-proyectos-3':6,
+			'proyectos':6,
+			'proyecto':6,
+			'buscarProyecto':6,
+			'agente':10,
+			'crear-usuario':10,
+			'compradores':9,
+			'modificar-comprador':9,
+			'estadisticas':12,
+			'direcciones':15
+			};
+	   $('.links a[data-id="'+data[prueba[2]]+'"]').addClass('active');
+	    //console.log(data[prueba[2]]);
 
-});
+	});

@@ -16,7 +16,7 @@ use App\Models\Propiedad;
 class DireccionesController extends Controller{
 
   public function ajusteDirecciones(){
-    $estados=Estado::all();
+    $estados=Estado::orderBy('nombre','asc')->get();
     return view('admin.direcciones',$this->cargarsidebar(),compact('estados'));
   }
   public function guardarCiudad(){
