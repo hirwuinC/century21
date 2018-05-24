@@ -193,7 +193,7 @@ class sincronizar extends Command
         return ['propiedad'=>$propiedad,'insercion'=>$propiedades];
     }
 
-    //"C:/Users/Jose Tayupo/Desktop/Descargas/Century21/media.csv"
+    
     public function buscarFotos($codigoMls,$rutaImagenes,$fotoPortada)
     {
          $prefijoImagenes="http://img.century21.com.ve/getmedia.asp?id=";
@@ -462,6 +462,7 @@ class sincronizar extends Command
     public function handle()
     {
 
+       
             $ciudades=[];   
             $urbanizaciones=[];
             $estados=[];
@@ -472,16 +473,17 @@ class sincronizar extends Command
             $cambios=[];
             $exception=true;
             ////////////////////////////////////////////////////////////////////////////
-            ini_set('max_execution_time',12000 ); //tiempo maximo de ejecucion del script
+            ini_set('max_execution_time',24000 ); //tiempo maximo de ejecucion del script seis horas aproximadamente
             
 
             $directorioSin=storage_path('app/public/sincronizar');
             $ftp_server="216.155.132.149";
             $ftp_user="inmueblescaracas";
             $ftp_password="sdkjsa$$";
-            $local_file=$directorioSin.'/Century21.zip';//'C:/Users/Jose Tayupo/Desktop/Descargas/Century21.zip';
+            $local_file=$directorioSin.'/Century21.zip';
             $ftp_file='/FTP-TXT/Century21.zip';
             $ftp_download=false;
+            
            
             
                         
@@ -497,6 +499,7 @@ class sincronizar extends Command
                          $modificaciones=$aux[0];//lista de cambios por codigo mls
                          $cantidades=$aux[1];//cantidad de cambios registrada
 
+                         
                           if (($gestor = fopen($directorioSin.'/Century21/propiedades.csv', "r")) !== FALSE) {
                                 while (($datos = fgetcsv($gestor, 1000, ",",'"')) !== FALSE) 
                                 {
@@ -515,7 +518,7 @@ class sincronizar extends Command
                                                 {
                                                    
                                                     
-                                                    
+                                                   
                                                     ////verificar existencia de la propiedad ///obtener propiedad si esxiste
                                                     $propiedadCon=Propiedad::where('id_mls',(int)$datos[1])->first();
                                                     if ($propiedadCon==null) //SI NO EXISTE LA PROPIEDAD EN EL SISTEMA
