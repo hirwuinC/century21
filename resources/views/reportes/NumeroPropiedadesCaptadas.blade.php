@@ -17,15 +17,15 @@
 	 <label style="margin-left: 65%;font-family: verdana;font-weight:bold;font-size: 15px;">Fecha:&nbsp;{{$fecha}}</label>
 	<br>
 	<table   style="width: 100%;border:solid 2px;font-family: verdana;font-size: medium;">
-			<tr style="width: 100%;text-align: center;font-weight: bold;font-style: italic;"  >
-				 <td colspan="3" style="border:solid 2px;">##### Total General: ({{$total}}) #####</td>
+			<tr style="width: 100%;text-align: left;font-weight: bold;font-style: italic;"  >
+				 <td colspan="3" style="border:solid 2px;">## Total General: ({{$total}}) </td>
 			</tr>
-			<tr style="width: 100%;text-align: center;font-weight: bold;font-style: italic;"  >
-				 <td colspan="3" style="border:solid 2px;">##### Total Inmuebles Caracas: ({{$totalOficina}}) #####</td>
+			<tr style="width: 100%;text-align: left;font-weight: bold;font-style: italic;"  >
+				 <td colspan="3" style="border:solid 2px;">## Total Inmuebles Caracas: ({{$totalOficina}}) </td>
 			</tr>
 			@foreach($cantidades as $key =>$value)
-				<tr style="width: 100%;text-align: center;font-weight: bold;font-style: italic;"  >
-					 <td colspan="3" style="border:solid 2px;">#####  {{$key." ".$value}} #####</td>
+				<tr style="width: 100%;text-align: left;font-weight: bold;font-style: italic;"  >
+					 <td colspan="3" style="border:solid 2px;">##  {{$key." ".$value}} </td>
 				</tr>
 			@endforeach
 							

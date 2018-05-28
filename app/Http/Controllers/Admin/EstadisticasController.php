@@ -193,7 +193,7 @@ class EstadisticasController extends Controller
     	$propiedadesNoGenSis=Propiedad::where('fechaCreado','>=',$fechaInicio)->where('fechaCreado','<=',$fechaFin)->where('id_mls','=',0)->where('agente_id','<>',5)->get();
 
     	$cantidades['Sincronizadas, propias']=count($propiedadesInCss);
-    	$cantidades['Sincroniadas, otras']=count($propiedadesTot);
+    	$cantidades['Sincronizadas, otras']=count($propiedadesTot);
     	$cantidades['Cargadas, otras']=count($propiedadesNoGenSis);
     	$cantidades['Cargadas, propias']=count($propiedadesGenSis);
     	$totalOficina=$cantidades['Sincronizadas, propias']+$cantidades['Cargadas, propias'];
@@ -204,6 +204,364 @@ class EstadisticasController extends Controller
 
 
     }
+
+
+    //////////Inicio reporte //////////////////////////////////////
+    
+    public function captadasAsesorFiltro($fechaI="2018-05-20",$fechaF="2018-05-21",$check=0)
+    {
+        //los muestra todos incluso los que no tienen nada
+        $agentes=agente::all();
+        $agentesReto=[];
+
+        foreach ($agentes as $agente) 
+        {
+            $propiedades=count(Propiedad::where('agente_id',$agente->id)->where('fechaCreado','>=',$fechaI)->where('fechaCreado','<=',$fechaF)->get());
+
+            if ($check==0) 
+            {
+                $agentesReto[$agente->fullName.' / '.$agente->codigo_id]=$propiedades;
+            }
+            else
+            {
+                if ($propiedades>0) 
+                {
+                     $agentesReto[$agente->fullName.' / '.$agente->codigo_id]=$propiedades;
+                }
+            }
+
+            
+        }
+        arsort($agentesReto);
+
+        return $agentesReto;
+    }
+
+    public function CaptadasCiudadFiltro($fechaI="2018-05-20",$fechaF="2018-05-21",$check)
+    {
+        $ciudades=Ciudad::all();
+        $ciudadesReto=[];
+        $retorno=[];
+        $ciudadesGen=[];
+        $oficina_id=23646;
+
+        foreach ($ciudades as $ciudad)
+        {
+            $propiedades=count(Propiedad::where('ciudad_id',$ciudad->id)->where('fechaCreado','>=',$fechaI)->where('fechaCreado','<=',$fechaF)->where('oficina_id','=',$oficina_id)->get());
+
+            $propiedadesGen=count(Propiedad::where('ciudad_id',$ciudad->id)->where('fechaCreado','>=',$fechaI)->where('fechaCreado','<=',$fechaF)->get());
+
+            if ($check==0) 
+            {
+                $ciudadesReto[$ciudad->nombre.' / '.$ciudad->codigo_id]=$propiedades;
+                $ciudadesGen[$ciudad->nombre.' / '.$ciudad->codigo_id]=$propiedadesGen;
+            }
+            else
+            {
+                if ($propiedades>0) 
+                {
+                     $ciudadesReto[$ciudad->nombre.' / '.$ciudad->codigo_id]=$propiedades;
+                     $ciudadesGen[$ciudad->nombre.' / '.$ciudad->codigo_id]=$propiedadesGen;
+                }
+            }
+
+            
+
+        }
+        arsort($ciudadesReto);
+
+        foreach ($ciudadesReto as $key =>$value) 
+        {
+            $retorno[$key]=$value.' | '.$ciudadesGen[$key];
+        }
+
+        return $retorno;
+    }
+
+    public function CaptadasPrecioFiltro($fechaI="2018-05-20",$fechaF="2018-05-21",$precioI,$precioF)
+    {
+
+        $oficina_id=23646;
+        $propiedadesGen=count(Propiedad::where('fechaCreado','>=',$fechaI)->where('fechaCreado','<=',$fechaF)->where('precio','>=',$precioI)->where('precio','<=',$precioF)->get());
+
+        $propiedadesImbCss=count(Propiedad::where('fechaCreado','>=',$fechaI)->where('fechaCreado','<=',$fechaF)->where('precio','>=',$precioI)->where('precio','<=',$precioF)->where('oficina_id','=',$oficina_id)->get());
+
+
+        return (string) $propiedadesImbCss.' Inmuebles caracas | '.$propiedadesGen.' General';
+    }
+
+    public function propiedadesCaptadasFiltro($fechaI="2018-05-20",$fechaF="2018-05-21",$tipoR=1,$precioI=0,$precioF=1000000000,$check=0)
+    {
+        
+        $titulos=['por asesores','por ciudades',''];
+        $retorno=[];
+        
+        if ($tipoR==0) 
+        {
+            $retorno=$this->captadasAsesorFiltro($fechaI,$fechaF,$check);
+        }
+        else if ($tipoR==1) 
+        {
+            $retorno=$this->CaptadasCiudadFiltro($fechaI,$fechaF,$check);
+        }
+        else if ($tipoR==2) 
+        {
+            $retorno=$this->CaptadasPrecioFiltro($fechaI,$fechaF,$precioI,$precioF);
+            $titulos[2]='por precios entre: '.$precioI.' $ y : '.$precioF;
+        }
+        
+        
+        $fecha=Carbon::now();
+        
+        return view('reportes.NumeroPropiedadesCaptadasFiltro',['cantidades'=>$retorno,'titulo'=>'Reporte de propiedades captadas '.$titulos[$tipoR].' , entre '.$fechaI.' y '.$fechaF,'fecha'=>$fecha->toDateTimeString(),'tipo'=>$tipoR]);
+
+
+    }
+      ////////////////////////////////////////////////////////////////////////////Fin reporte///////////
+
+
+    /////Inicio reporte////////////////////////////////////////////////////////////////////////////
+    
+    public function visitasAsesor($check=0)
+    {
+        $agentes=agente::where('id','<>',5)->get();
+        $visitasAsesor=[];
+
+        
+
+        foreach ($agentes as $agente) 
+        {
+            $propiedades=(integer) DB::table('propiedades')->where('agente_id', '=' ,$agente->id)->sum('visitas'); 
+            if ($check==0) 
+            {
+                $visitasAsesor[$agente->fullName." / ".$agente->codigo_id]=$propiedades;
+            }
+            else if ($check==1 && $propiedades>0) 
+            {
+                $visitasAsesor[$agente->fullName." / ".$agente->codigo_id]=$propiedades;
+            }
+            
+        }
+
+        arsort($visitasAsesor);
+        return $visitasAsesor;
+    }
+
+
+    public function visitasTipoInmueble($check=0)
+    {
+        $tipoInmueble=DB::table('tipoinmueble')->get();
+        $visitasTipoInmueble=[];
+
+        foreach ($tipoInmueble as $tipoIn) 
+        {
+            $propiedades=DB::table('propiedades')->where('tipo_inmueble',$tipoIn->id)->where('agente_id','<>',5)->sum('visitas'); 
+                       
+            if ($check==0) 
+            {
+                $visitasTipoInmueble[$tipoIn->nombre]=$propiedades;
+            }
+            else 
+            {
+                if ($propiedades>0) 
+                {
+                    $visitasTipoInmueble[$tipoIn->nombre]=$propiedades;
+                }
+                
+            }
+        }
+
+        arsort($visitasTipoInmueble);
+        return $visitasTipoInmueble;
+    }
+
+
+    public function visitasPropiedad($check=0)
+    {
+        $propiedades=Propiedad::where('agente_id','<>',5)->get();
+        $visitasPropiedad=[];
+
+        foreach ($propiedades as $propiedad) 
+        {
+            $cantidad=(integer) DB::table('propiedades')->where('id', '=' ,$propiedad->id)->sum('visitas'); 
+
+            if ($check==0) 
+            {
+                $visitasPropiedad[$propiedad->id_mls]=$cantidad;
+            }
+            else if ($check==1 && $cantidad>0) 
+            {
+                $visitasPropiedad[$propiedad->id_mls]=$cantidad;
+            }
+        }
+        arsort($visitasPropiedad);
+        return $visitasPropiedad;
+    }
+
+    public function visitasFiltro($check=1,$tipoR=2)//0 visitas por asesor, 1 propiedad , 2 por tipo inmueble
+    {
+        $titulos=['Nro. de visitas en el portal por asesor','Nro. de visitas en el portal por propiedad','Nro. de visitas en el portal por tipo de inmueble'];
+
+        if ($tipoR==0) 
+        {
+            $retorno=$this->visitasAsesor($check);
+        }
+        else if ($tipoR==1) 
+        {
+            $retorno=$this->visitasPropiedad($check);
+        }
+        else if ($tipoR==2) 
+        {
+            $retorno=$this->visitasTipoInmueble($check);
+        }
+
+
+         $fecha=Carbon::now();
+        
+        return view('reportes.VisitasFiltro',['cantidades'=>$retorno,'titulo'=>$titulos[$tipoR],'fecha'=>$fecha->toDateTimeString(),'tipo'=>$tipoR]);
+        
+    }
+
+   ////////fin reporte///////////////////////////////////
+
+//////////inicio reporte///////////////////////////////////////////////////
+
+public function promedioPrecioAsesor($check)
+{
+    $asesores=agente::all();
+    $promedioAsesor=[];
+
+    foreach ($asesores as $asesor) 
+    {
+        $promedioVenta=(integer)DB::table('propiedades')->where('agente_id',$asesor->id)->where('tipoNegocio','Venta')->avg('precio');
+        $promedioAlquiler=(integer)DB::table('propiedades')->where('agente_id',$asesor->id)->where('tipoNegocio','Alquiler')->avg('precio');
+
+        if ($check==0) 
+        {
+            $promedioAsesor[$asesor->fullName." / ".$asesor->codigo_id]=$promedioVenta.' / '.$promedioAlquiler;
+        }
+        else
+        {
+            if ($promedioVenta>0 || $promedioAlquiler>0) 
+            {
+                $promedioAsesor[$asesor->fullName." / ".$asesor->codigo_id]=$promedioVenta.' / '.$promedioAlquiler;
+            }
+        }
+        
+    }
+
+    return $promedioAsesor;
+}  
+
+
+function promedioPrecioTipoInmueble($check)
+{
+    $tipoInmueble=DB::table('tipoinmueble')->get();
+    $promedioTipo=[];
+
+    foreach ($tipoInmueble as $tipoIn) 
+    {
+        $promedioInmCssV=(integer)DB::table('propiedades')->where('tipo_inmueble',$tipoIn->id)->where('agente_id','<>',5)->where('tipoNegocio','Venta')->avg('precio');
+
+        $promedioInmCssA=(integer)DB::table('propiedades')->where('tipo_inmueble',$tipoIn->id)->where('agente_id','<>',5)->where('tipoNegocio','Alquiler')->avg('precio');
+
+        $promedioGenV=(integer)DB::table('propiedades')->where('tipo_inmueble',$tipoIn->id)->where('tipoNegocio','Venta')->avg('precio');
+
+         $promedioGenA=(integer)DB::table('propiedades')->where('tipo_inmueble',$tipoIn->id)->where('tipoNegocio','Alquiler')->avg('precio');
+
+         if ($check==0)
+         {
+             $promedioTipo[$tipoIn->nombre]=$promedioInmCssV.'  Bs.  |  '.$promedioGenV."  Bs. / ".$promedioInmCssA.' Bs. |  '.$promedioGenA.' Bs. ';
+         }
+         else
+        {
+            if (($promedioInmCssV>0 ||  $promedioGenV>0) || ($promedioInmCssA>0 || $promedioGenA>0))
+            {
+                $promedioTipo[$tipoIn->nombre]=$promedioInmCssV.'  Bs.  |  '.$promedioGenV."  Bs.  / ".$promedioInmCssA.' Bs. |  '.$promedioGenA.' Bs. ';
+            }
+        }
+
+        
+    }
+
+    return $promedioTipo;
+}
+
+public function promedioPrecioFiltro($tipoR=0,$check=0)//0 por asesor , 1 por tipo de inmueble
+{
+    
+    $titulos=['Precio promedio por asesor','Precio Promedio por tipo de inmueble'];
+
+    $promedioGenVen=(integer)DB::table('propiedades')->where('tipoNegocio','Venta')->avg('precio');
+    $promedioGenAlq=(integer)DB::table('propiedades')->where('tipoNegocio','Alquiler')->avg('precio');
+
+    if ($tipoR==0) 
+    {
+        $retorno=$this->promedioPrecioAsesor($check);
+    }
+    else if ($tipoR==1) 
+    {
+        $retorno=$this->promedioPrecioTipoInmueble($check);
+    }
+
+    $fecha=Carbon::now();
+        
+    return view('reportes.PrecioPromedioFiltro',['cantidades'=>$retorno,'titulo'=>$titulos[$tipoR],'fecha'=>$fecha->toDateTimeString(),'tipo'=>$tipoR,'promedioV'=>$promedioGenVen,'promedioA'=>$promedioGenAlq]);
+
+}
+//////////fin reporte /////////////////////////////////////////////////////
+
+/////////Inicio de reporte ////////////////////////////////////////////////
+public function listaInmuebles($check=0)//si se muestra el asesor generico o no
+{
+    $propiedadesAgente=[];
+
+    if ($check==0) 
+    {
+        $asesores=agente::all();
+    }
+    else
+    {
+        $asesores=agente::where('id','<>',5)->get();
+    }
+
+    foreach ($asesores as $asesor) 
+    {
+            $propiedades=DB::table('propiedades')->join('tipoinmueble','propiedades.tipo_inmueble','=','tipoinmueble.id')->select('propiedades.id_mls AS mls','propiedades.fechaCreado AS fecha','tipoinmueble.nombre AS tipo_inmueble','propiedades.id AS propiedad_id','propiedades.tipoNegocio AS tipo_negocio')->where(['propiedades.agente_id'=>$asesor->id])->get();
+        
+                if (count($propiedades)>0) 
+                {
+                    $propiedadesAgente['# '.$asesor->fullName.' - '.$asesor->codigo_id]=$propiedades;
+                }
+    }
+
+
+    return $propiedadesAgente;
+
+
+}
+
+public function tiempoOfertaPublica($check=1)//cargar los inmuebles y mostrar la fecha de creacion el check indica si se muestran todos o solo los de inmuebles caracas
+{
+    $retorno=$this->listaInmuebles($check);
+
+    $fecha=Carbon::now();
+        
+    return view('reportes.TiempoOfertaPublica',['cantidades'=>$retorno,'titulo'=>'Lista de propiedades por asesor, con su fecha de creacion en el sistema','fecha'=>$fecha->toDateTimeString()]);
+
+
+}
+
+////////Fin reporte///////////////////////////////////////////////////////// 
+
+////////Inicio de reporte /////////////////////////////////////////////////////
+
+
+///////Fin de reporte /////////////////////////////////////////////////////////////
+
+
+
+////////reportes asesores//////////////////////////////////////////////////////////////////
 
 
 }
