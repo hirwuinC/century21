@@ -102,6 +102,18 @@ Route::group(['middleware' => 'administrador'], function () {
 	// ESTADISTICAS
 	Route::get('/admin/estadisticas', ['as' => 'estadisticas', 'uses' => 'Admin\EstadisticasController@index']);
 	Route::post('/admin/listarTipoReporte', ['as' => 'listar', 'uses' => 'Admin\EstadisticasController@tipoReporte']);
+	Route::get('/admin/distribucionUs', ['as' => 'disU', 'uses' => 'Admin\EstadisticasController@distribucionAsesor']);
+	Route::get('/admin/distribucionCiu', ['as' => 'disCiu', 'uses' => 'Admin\EstadisticasController@distribucionCiudad']);
+	Route::get('/admin/distribucionTipInm', ['as' => 'disTip', 'uses' => 'Admin\EstadisticasController@distribucionTipoInmueble']);
+	Route::get('/admin/visitasProp/{check}', ['as' => 'viProp', 'uses' => 'Admin\EstadisticasController@visitasPropiedad']);
+
+	Route::get('/admin/visitasAsesor/{check}', ['as' => 'viAse', 'uses' => 'Admin\EstadisticasController@visitasAsesor']);
+
+	Route::get('/admin/visitasTipoInm/{check}', ['as' => 'viTipIm', 'uses' => 'Admin\EstadisticasController@visitasTipoInmueble']);
+
+	Route::get('/admin/fechaCrea/{check}', ['as' => 'fechaC', 'uses' => 'Admin\EstadisticasController@tiempoOfertaPublica']);
+
+
 
 		/// NEGOCIACIONES
 	Route::any('/admin/llenarModalNegociacion', ['as' => 'llenarModalNegociacion', 'uses' => 'Admin\NegociacionController@llenarModalNegociacion']);

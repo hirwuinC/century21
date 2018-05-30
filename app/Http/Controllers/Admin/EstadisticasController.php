@@ -51,6 +51,7 @@ class EstadisticasController extends Controller
     	$cantidades=['Activos'=>0,'Inactivos'=>0,'Vendidos'=>0];
     	$status=['Activo'=>1,'Inactivo'=>2,'Vendido'=>11];
     	$agentes=[];
+       
 
     	////cantidades totales del sistema
     	$cantidades['Activos']=count(Propiedad::where('estatus',$status['Activo'])->get());
@@ -68,14 +69,16 @@ class EstadisticasController extends Controller
 
     		$total=array_sum($aux);
 
-    		if ($total>0) //si se encontraron propiedades para el asesor de turno
-    		{
-    			if ($asesor->id==5) {$codigo=' Cod. : NA';}
-    			else
-    			{$codigo=' Cod. : '.$asesor->codigo_id;}
+    		
+                if ($total>0) 
+                {
+                    if ($asesor->id==5) {$codigo=' Cod. : NA';}
+                    else
+                    {$codigo=' Cod. : '.$asesor->codigo_id;}
 
-    			$agentes[$asesor->fullName.' - '.$codigo.' , Total:  '.$total]=$aux;
-    		}
+                    $agentes[$asesor->fullName.' - '.$codigo.' , Total:  '.$total]=$aux;
+                }
+           
 
     	}
 
@@ -322,10 +325,12 @@ class EstadisticasController extends Controller
 
     /////Inicio reporte////////////////////////////////////////////////////////////////////////////
     
-    public function visitasAsesor($check=0)
+    public function visitasAsesor($check)
     {
         $agentes=agente::where('id','<>',5)->get();
         $visitasAsesor=[];
+        $titulos=['Nro. de visitas en el portal por asesor','Nro. de visitas en el portal por propiedad','Nro. de visitas en el portal por tipo de inmueble'];
+        $tipoR=0;
 
         
 
@@ -344,7 +349,9 @@ class EstadisticasController extends Controller
         }
 
         arsort($visitasAsesor);
-        return $visitasAsesor;
+       $fecha=Carbon::now();
+        return view('reportes.VisitasFiltro',['cantidades'=>$visitasAsesor,'titulo'=>$titulos[$tipoR],'fecha'=>$fecha->toDateTimeString(),'tipo'=>$tipoR]);$fecha=Carbon::now();
+        
     }
 
 
@@ -352,6 +359,8 @@ class EstadisticasController extends Controller
     {
         $tipoInmueble=DB::table('tipoinmueble')->get();
         $visitasTipoInmueble=[];
+        $titulos=['Nro. de visitas en el portal por asesor','Nro. de visitas en el portal por propiedad','Nro. de visitas en el portal por tipo de inmueble'];
+        $tipoR=2;
 
         foreach ($tipoInmueble as $tipoIn) 
         {
@@ -372,12 +381,17 @@ class EstadisticasController extends Controller
         }
 
         arsort($visitasTipoInmueble);
-        return $visitasTipoInmueble;
+        $fecha=Carbon::now();
+        return view('reportes.VisitasFiltro',['cantidades'=>$visitasTipoInmueble,'titulo'=>$titulos[$tipoR],'fecha'=>$fecha->toDateTimeString(),'tipo'=>$tipoR]);$fecha=Carbon::now();
+
     }
 
 
     public function visitasPropiedad($check=0)
     {
+        $titulos=['Nro. de visitas en el portal por asesor','Nro. de visitas en el portal por propiedad','Nro. de visitas en el portal por tipo de inmueble'];
+        $tipoR=1;
+
         $propiedades=Propiedad::where('agente_id','<>',5)->get();
         $visitasPropiedad=[];
 
@@ -395,10 +409,11 @@ class EstadisticasController extends Controller
             }
         }
         arsort($visitasPropiedad);
-        return $visitasPropiedad;
+           $fecha=Carbon::now();
+        return view('reportes.VisitasFiltro',['cantidades'=>$visitasPropiedad,'titulo'=>$titulos[$tipoR],'fecha'=>$fecha->toDateTimeString(),'tipo'=>$tipoR]);
     }
 
-    public function visitasFiltro($check=1,$tipoR=2)//0 visitas por asesor, 1 propiedad , 2 por tipo inmueble
+    public function visitasFiltro($filtro)//0 visitas por asesor, 1 propiedad , 2 por tipo inmueble $check=1,$tipoR=2
     {
         $titulos=['Nro. de visitas en el portal por asesor','Nro. de visitas en el portal por propiedad','Nro. de visitas en el portal por tipo de inmueble'];
 
