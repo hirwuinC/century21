@@ -84,7 +84,7 @@ Route::group(['middleware' => 'administrador'], function () {
 
 		// PRUEBAS
 	Route::get('/prueba', ['as' => 'prueba', 'uses' => 'Admin\InformeController@prueba']);
-	Route::get('/correo',['as'=>'pruebac','uses'=>'ftpController@conectar']);
+	Route::get('/correo',['as'=>'pruebac','uses'=>'Admin\EstadisticasController@propiedadesCaptadasFiltro']);
 	// Ajustes de direcciones
 	Route::get('/admin/direcciones',['as'=>'direcciones','uses'=>'Admin\DireccionesController@ajusteDirecciones'] );
 	Route::post('/admin/guardarCiudad',['as'=>'guardarCiudad','uses'=>'Admin\DireccionesController@guardarCiudad'] );
@@ -102,16 +102,19 @@ Route::group(['middleware' => 'administrador'], function () {
 	// ESTADISTICAS
 	Route::get('/admin/estadisticas', ['as' => 'estadisticas', 'uses' => 'Admin\EstadisticasController@index']);
 	Route::post('/admin/listarTipoReporte', ['as' => 'listar', 'uses' => 'Admin\EstadisticasController@tipoReporte']);
-	Route::get('/admin/distribucionUs', ['as' => 'disU', 'uses' => 'Admin\EstadisticasController@distribucionAsesor']);
-	Route::get('/admin/distribucionCiu', ['as' => 'disCiu', 'uses' => 'Admin\EstadisticasController@distribucionCiudad']);
-	Route::get('/admin/distribucionTipInm', ['as' => 'disTip', 'uses' => 'Admin\EstadisticasController@distribucionTipoInmueble']);
+	Route::get('/admin/distribucionUs/{check}', ['as' => 'disU', 'uses' => 'Admin\EstadisticasController@distribucionAsesor']);
+	Route::get('/admin/distribucionCiu/{check}', ['as' => 'disCiu', 'uses' => 'Admin\EstadisticasController@distribucionCiudad']);
+	Route::get('/admin/distribucionTipInm/{check}', ['as' => 'disTip', 'uses' => 'Admin\EstadisticasController@distribucionTipoInmueble']);
 	Route::get('/admin/visitasProp/{check}', ['as' => 'viProp', 'uses' => 'Admin\EstadisticasController@visitasPropiedad']);
-
 	Route::get('/admin/visitasAsesor/{check}', ['as' => 'viAse', 'uses' => 'Admin\EstadisticasController@visitasAsesor']);
-
 	Route::get('/admin/visitasTipoInm/{check}', ['as' => 'viTipIm', 'uses' => 'Admin\EstadisticasController@visitasTipoInmueble']);
-
 	Route::get('/admin/fechaCrea/{check}', ['as' => 'fechaC', 'uses' => 'Admin\EstadisticasController@tiempoOfertaPublica']);
+	Route::get('/admin/captadasAsesor/{fechaI}/{fechaF}/{check}', ['as' => 'capFilas', 'uses' => 'Admin\EstadisticasController@captadasAsesorFiltro']);
+	Route::get('/admin/captadasCiudad/{fechaI}/{fechaF}/{check}', ['as' => 'capFilCiu', 'uses' => 'Admin\EstadisticasController@CaptadasCiudadFiltro']);
+	Route::get('/admin/captadasPrecio/{fechaI}/{fechaF}/{precioI}/{precioF}', ['as' => 'capFilPre', 'uses' => 'Admin\EstadisticasController@CaptadasPrecioFiltro']);
+	Route::get('/admin/promedioAsesor/{check}', ['as' => 'promedioAs', 'uses' => 'Admin\EstadisticasController@promedioPrecioAsesor']);
+	Route::get('/admin/promedioTipoInmueble/{check}', ['as' => 'promedioTipo', 'uses' => 'Admin\EstadisticasController@promedioPrecioTipoInmueble']);
+	Route::get('/admin/propiedadesCaptadas/{fechaI}/{fechaF}', ['as' => 'captadasFecha', 'uses' => 'Admin\EstadisticasController@propiedadesCaptadas']);
 
 
 

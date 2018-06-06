@@ -18,7 +18,7 @@
 	<br>
 	<table   style="width: 100%;border:solid 2px;font-family: verdana;font-size: medium;">
 			<tr style="width: 100%;text-align: center;font-weight: bold;font-style: italic;"  >
-				 <td colspan="3" style="border:solid 2px;">## Totales </td>
+				 <td colspan="3" style="border:solid 2px;">Totales </td>
 			</tr>
 			<tr style="width: 100%;text-align: center;">
 				<td style="border:solid 2px;">Activos:&nbsp;&nbsp; {{$cantidades['Activos']}}</td>
@@ -27,10 +27,13 @@
 			</tr>
 			@if(count($asesores)>0)
 			    <tr style="width: 100%;text-align: center;font-weight: bold;font-style: italic;">
-			    	<td colspan="3" style="border:solid 2px;">## Totales por asesor </td>
+			    	<td colspan="3" style="border:solid 2px;"> Totales por asesor </td>
 			    </tr>
 			    @foreach($asesores as $clave =>$valor)
-			    	<tr><td colspan="3" style="border:solid 2px;font-weight: bold;">##&nbsp; {{$clave}}&nbsp;</td></tr>
+			    @php
+					 $total_ = explode(":",$clave)
+				@endphp
+			    	<tr><td colspan="3" style="border:solid 2px;font-weight: bold;">@if($total_[2]>0) ## &nbsp;@endif {{$clave}}&nbsp;</td></tr>
 			    	<tr style="width: 100%;text-align: center;">
 			    		<td style="border:solid 2px;">Activos:&nbsp;&nbsp; {{$valor['Activos']}} </td>
 			    		<td style="border:solid 2px;">Inactivos:&nbsp;&nbsp; {{$valor['Inactivos']}}</td>

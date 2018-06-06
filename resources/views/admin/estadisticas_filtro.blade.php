@@ -8,16 +8,24 @@
     <ul class="viewRadio viewRadioEstadistica">
         <li>
             <div class="styled-input-single">
-                <input type="radio" name="fecha" value="1" checked="checked" id="radio-example-one"/>
-                <label for="radio-example-one">Rango</label>
+
+                <input type="checkbox" name="checkFecha"   id="checkFecha" readonly />
+                <label for="radio-example-one">Rango de fecha</label>
             </div>
         </li>
         <li>
             <div class="styled-input-single">
-                 <input type="checkbox" name="mostrar_" value="1"  id="mostrar_" />
+                <input type="checkbox" name="checkPrecio"   id="checkPrecio" readonly />
+                <label for="mostrar_precio">Rango de precio</label>
+            </div>
+        </li>
+          <li>
+            <div class="styled-input-single">
+                 <input type="checkbox" name="mostrar_"   id="mostrar_" />
                 <label for="mostrar_">Mostrar todo</label>
             </div>
         </li>
+
 
 
         <!-- <li>
@@ -42,13 +50,24 @@
     <label for="">Hasta</label>
     <input type="date" class="inputs inputsLight form-control" id="fechaF_" name="fechaF_" placeholder="Hasta">
   </div>
+  <div class="col-xs-4">
+    <br>
+    <br>
+    
+    <input type="number" class="inputs inputsLight form-control" id="precioI_" name="precioI_" placeholder="Precio inicial">
+  </div>
+  <div class="col-xs-4">
+    <br>
+    <br>
+    <input type="number" class="inputs inputsLight form-control" id="precioF_" name="precioF_" placeholder="Precio final">
+  </div>
 
 </div>
 <h2 class="titleSection">constructor de reporte</h2>
 <div class="row contPadre">
     <div class="col-xs-3">
       <select  class="inputs inputsLight form-control" id="elemento">
-          <option value="" selected >- Elemento a analizar -</option>
+          <option value="0" selected >- Elemento a analizar -</option>
           @foreach ($reportes as $reporte)
           <option value="{{$reporte->id}}">{{$reporte->descripcionReporte}}</option>
           @endforeach
@@ -56,7 +75,7 @@
     </div>
     <div class="col-xs-3">
       <select  class="inputs inputsLight form-control" id="tipoReporte">
-          <option value="" data-name="" selected > - Tipo de reporte - </option>
+          <option value="0" data-name="" selected > - Tipo de reporte - </option>
       </select>
     </div>
    

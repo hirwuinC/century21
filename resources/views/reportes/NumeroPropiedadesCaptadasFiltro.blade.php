@@ -7,14 +7,14 @@
 <body>
 	<table style="width: 100%;border:solid 2px;font-family: verdana;font-style: italic;font-size: 20px;font-weight: bold;">
 		    <tr style="width: 100%" >
-		   		<td style="width: 70%;text-align: center;border:solid 2px">{{$titulo}}</td>
+		   		<td style="width: 70%;text-align: center;border:solid 2px">{{$titulo}}</br>{{$rango}}</td>
 		   		<td style="width: 30%;text-align: left;border:solid 2px">
 					<IMG SRC="/images/logo-header.png" WIDTH=250 HEIGHT=80 BORDER=0 ALT="Un beb&eacute;" ALIGN="RIGHT"> 
 		   			  
 		   	</tr>
 	</table>
 	 
-	 <label style="margin-left: 65%;font-family: verdana;font-weight:bold;font-size: 15px;">Fecha:&nbsp;{{$fecha}}</label>
+	 <label style="margin-left: 70%;font-family: verdana;font-weight:bold;font-size: 15px;">Fecha:&nbsp;{{$fecha}}</label>
 	<br>
 	<table   style="width: 100%;border:solid 2px;font-family: verdana;font-size: medium;">
 			@if($tipo==0 || $tipo==1)

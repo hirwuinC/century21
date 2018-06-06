@@ -7,7 +7,7 @@
 <body>
 	<table style="width: 100%;border:solid 2px;font-family: verdana;font-style: italic;font-size: 20px;font-weight: bold;">
 		    <tr style="width: 100%" >
-		   		<td style="width: 70%;text-align: center;border:solid 2px">{{$titulo}}</td>
+		   		<td style="width: 70%;text-align: center;border:solid 2px">{{$titulo}}<br> Desde: {{$fechaIT}} &nbsp;&nbsp;&nbsp;Hasta: {{$fechaFT}}</td>
 		   		<td style="width: 30%;text-align: left;border:solid 2px">
 					<IMG SRC="/images/logo-header.png" WIDTH=250 HEIGHT=80 BORDER=0 ALT="Un beb&eacute;" ALIGN="RIGHT"> 
 		   			  
@@ -18,14 +18,14 @@
 	<br>
 	<table   style="width: 100%;border:solid 2px;font-family: verdana;font-size: medium;">
 			<tr style="width: 100%;text-align: left;font-weight: bold;font-style: italic;"  >
-				 <td colspan="3" style="border:solid 2px;">## Total General: ({{$total}}) </td>
+				 <td colspan="3" style="border:solid 2px;">Total General: ({{$total}}) </td>
 			</tr>
 			<tr style="width: 100%;text-align: left;font-weight: bold;font-style: italic;"  >
-				 <td colspan="3" style="border:solid 2px;">## Total Inmuebles Caracas: ({{$totalOficina}}) </td>
+				 <td colspan="3" style="border:solid 2px;">Total Inmuebles Caracas: ({{$totalOficina}}) </td>
 			</tr>
 			@foreach($cantidades as $key =>$value)
 				<tr style="width: 100%;text-align: left;font-weight: bold;font-style: italic;"  >
-					 <td colspan="3" style="border:solid 2px;">##  {{$key." ".$value}} </td>
+					 <td colspan="3" style="border:solid 2px;">{{$key." ".$value}} </td>
 				</tr>
 			@endforeach
 							

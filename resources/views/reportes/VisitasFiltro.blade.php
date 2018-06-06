@@ -32,7 +32,7 @@
 								$asesor = explode("/",$key)
 						@endphp
 						<tr style="width: 100%;text-align: left;font-style: italic;"  >
-				                <td style="border:solid 2px;text-align: left;">{{$asesor[0]}}</td>
+				                <td style="border:solid 2px;text-align: left;">{{$asesor[0]}}@if($value>0)&nbsp;&nbsp;## @endif</td>
 				                <td style="border:solid 2px;text-align: center;">{{$asesor[1]}}</td>
 				                <td style="border:solid 2px;text-align: center;">{{$value}}</td>
 						</tr>

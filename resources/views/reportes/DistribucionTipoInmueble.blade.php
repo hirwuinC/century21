@@ -18,7 +18,7 @@
 	<br>
 	<table   style="width: 100%;border:solid 2px;font-family: verdana;font-size: medium;">
 			<tr style="width: 100%;text-align: center;font-weight: bold;font-style: italic;"  >
-				 <td colspan="3" style="border:solid 2px;">## Total general: ({{$cantidades['Activos']+$cantidades['Inactivos']+$cantidades['Vendidos']}}) </td>
+				 <td colspan="3" style="border:solid 2px;"> Total general: ({{$cantidades['Activos']+$cantidades['Inactivos']+$cantidades['Vendidos']}}) </td>
 			</tr>
 			<tr style="width: 100%;text-align: center;">
 				<td style="border:solid 2px;">Activos:&nbsp;&nbsp; {{$cantidades['Activos']}}</td>
@@ -27,7 +27,7 @@
 			</tr>
 			@if(count($inmueblesTipos)>0)
 			    <tr style="width: 100%;text-align: center;font-weight: bold;font-style: italic;">
-			    	<td colspan="3" style="border:solid 2px;">## Total inmuebles caracas:({{array_sum($totalOficina)}}) </td>
+			    	<td colspan="3" style="border:solid 2px;"> Total inmuebles caracas:({{array_sum($totalOficina)}}) </td>
 			    </tr>
 			    <tr style="width: 100%;text-align: center;">
 					<td style="border:solid 2px;">Activos:&nbsp;&nbsp; {{$totalOficina['Activos']}}</td>
@@ -35,7 +35,10 @@
 					<td style="border:solid 2px;">Vendidos: &nbsp;&nbsp;{{$totalOficina['Vendidos']}}</td>
 				</tr>
 			    @foreach($inmueblesTipos as $clave =>$valor)
-			    	<tr><td colspan="3" style="border:solid 2px;font-weight: bold;">##&nbsp; {{$clave}}&nbsp;</td></tr>
+			    	 @php
+					 	$total_ = explode(":",$clave)
+				 	 @endphp
+			    	<tr><td colspan="3" style="border:solid 2px;font-weight: bold;">@if($total_[1]>0) ## &nbsp;@endif {{$clave}}&nbsp;</td></tr>
 			    	<tr style="width: 100%;text-align: center;">
 			    		<td style="border:solid 2px;">Activos:&nbsp;&nbsp; {{$valor['Activos']}} </td>
 			    		<td style="border:solid 2px;">Inactivos:&nbsp;&nbsp; {{$valor['Inactivos']}}</td>
