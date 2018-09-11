@@ -5,7 +5,7 @@
     <div class="row">
         <!-- GO CONTENT INFO -->
         <div class="col-xs-12 col-sm-8">
-            <h1 class="titleSection">Contactanos</h1>
+            <h1 class="titleSection">Contáctanos</h1>
             <section class="detailProperties">
                 <form id="contactanos" class="contactForm">
                     <div class="row">
@@ -48,7 +48,7 @@
                 </form>
                 <div class="ubicationProperties">
                   <h1 class="titleSection">OFICINA</h1>
-                  <p><span>Direccion: </span>Urbanización San Luis del Cafetal, Torre Mayupan, Piso 7, Oficina 702. Caracas, Municipio Baruta, Estado Miranda. Código postal 1060.</p>
+                  <p><span>Dirección: </span>Urbanización San Luis del Cafetal, Torre Mayupan, Piso 7, Oficina 702. Caracas, Municipio Baruta, Estado Miranda. Código postal 1060.</p>
                     <div class="row">
                         <div class="col-xs-12">
                             <div id="map" class="googleMap">

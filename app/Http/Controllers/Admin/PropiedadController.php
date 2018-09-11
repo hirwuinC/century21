@@ -202,30 +202,35 @@ class PropiedadController extends Controller{
     $archivo= Request::file('file');
     $ubicacion=Request::get('register');
     $idImagen=Request::get('valor');
+    $dominio=Request::get('dominio');
     $inmueble=Session::get($sesiones[$desicion]);
     $extension = mb_strtolower($archivo->getClientOriginalExtension());
     $renombre = uniqid().'.'.$extension;
     $path ="images/inmuebles";
+    $rutaImagenBD=$dominio.$path.'/'.$renombre;
+    //dd($rutaImagenBD);
     $consulta=Media::where('id',$idImagen)->first();
     if (count($consulta)!=0) {
       Media::where('id',$idImagen)->update([
-        "nombre"        =>  $renombre,
-        "propiedad_id"  =>  $inmueble
+        "nombre"        =>  $rutaImagenBD,
+        "propiedad_id"  =>  $inmueble,
+        "alias"         =>  $renombre
       ]);
-      File::delete(public_path('/images/inmuebles/'.$consulta->nombre.''));
+      File::delete(public_path('/images/inmuebles/'.$consulta->alias));
       $archivo->move($path,$renombre);
     }
     else{
       $idImagen=DB::table('medias')->insertGetId([
-                  "nombre"        =>  $renombre,
-                  "propiedad_id"  =>  $inmueble
+                  "nombre"        =>  $rutaImagenBD,
+                  "propiedad_id"  =>  $inmueble,
+                  "alias"         =>  $renombre
       ]);
       $archivo->move($path,$renombre);
     }
     $datos=[$ubicacion,$idImagen];
     return $datos;
   }
-
+  
   public function borrarImagen(){
     $sesiones=['inmueble','inmuebleEdit'];
     $desicion=Request::get('desicion');
@@ -238,7 +243,7 @@ class PropiedadController extends Controller{
         $respuesta=2;
       }
       else{
-        File::delete(public_path('/images/asesores/'.$consulta->nombre));
+        File::delete(public_path('/images/inmuebles/'.$consulta->alias));
         Media::destroy($imagen);
         $respuesta=1;
       }
@@ -262,54 +267,92 @@ class PropiedadController extends Controller{
     $seleccionado=Request::get('imgSelected');
     $marcado=Media::where('propiedad_id',$inmueble)->where('vista',1)->first();
     $ultimo=Media::where('propiedad_id',$inmueble)->first();
-
-    if (count($ultimo)!=0) {
-      if (count($marcado)!=0) {
-        if ($marcado->id!=$seleccionado) {
-          $img=Media::find($marcado->id);
-          $img->vista=0;
-          $img->save();
-          $imgNew=Media::find($seleccionado);
-          $imgNew->vista=1;
-          $imgNew->save();
-          Propiedad::where('id',$inmueble)->update([
-            'cargado'=>1,
-            'fechaCreado'=>date('Y-m-d')
-          ]);
-          Session::forget($sesiones[$desicion]);
-          $respuesta=1;
+    if ($desicion==0) {
+      if (count($ultimo)!=0) {
+        if (count($marcado)!=0) {
+          if ($marcado->id!=$seleccionado) {
+            $img=Media::find($marcado->id);
+            $img->vista=0;
+            $img->save();
+            $imgNew=Media::find($seleccionado);
+            $imgNew->vista=1;
+            $imgNew->save();
+            Propiedad::where('id',$inmueble)->update([
+              'cargado'=>1,
+              'fechaCreado'=>date('Y-m-d')
+            ]);
+            Session::forget($sesiones[$desicion]);
+            $respuesta=1;
+          }
+          else{
+            $imgNew=Media::find($seleccionado);
+            $imgNew->vista=1;
+            $imgNew->save();
+            Propiedad::where('id',$inmueble)->update([
+              'cargado'=>1,
+              'fechaCreado'=>date('Y-m-d')
+            ]);
+            Session::forget($sesiones[$desicion]);
+            $respuesta=1;
+          }
         }
-        else{
-          $imgNew=Media::find($seleccionado);
-          $imgNew->vista=1;
-          $imgNew->save();
-          Propiedad::where('id',$inmueble)->update([
-            'cargado'=>1,
-            'fechaCreado'=>date('Y-m-d')
-          ]);
-          Session::forget($sesiones[$desicion]);
-          $respuesta=1;
+        else {
+          $consulta=Media::where('id',$seleccionado)->first();
+          if (count($consulta)!=0) {
+            $imgNew=Media::find($seleccionado);
+            $imgNew->vista=1;
+            $imgNew->save();
+            Propiedad::where('id',$inmueble)->update([
+              'cargado'=>1,
+              'fechaCreado'=>date('Y-m-d')
+            ]);
+            Session::forget($sesiones[$desicion]);
+            $respuesta=1;
+          }
+          else{
+            $respuesta=2;//El elemento marcado no tiene imagen asociada
+          }
         }
-      }
-      else {
-        $consulta=Media::where('id',$seleccionado)->first();
-        if (count($consulta)!=0) {
-          $imgNew=Media::find($seleccionado);
-          $imgNew->vista=1;
-          $imgNew->save();
-          Propiedad::where('id',$inmueble)->update([
-            'cargado'=>1,
-            'fechaCreado'=>date('Y-m-d')
-          ]);
-          Session::forget($sesiones[$desicion]);
-          $respuesta=1;
-        }
-        else{
-          $respuesta=2;//El elemento marcado no tiene imagen asociada
-        }
-
       }
     }
+    else{
+      if (count($ultimo)!=0) {
+        if (count($marcado)!=0) {
+          if ($marcado->id!=$seleccionado) {
+            $img=Media::find($marcado->id);
+            $img->vista=0;
+            $img->save();
+            $imgNew=Media::find($seleccionado);
+            $imgNew->vista=1;
+            $imgNew->save();
+            Session::forget($sesiones[$desicion]);
+            $respuesta=1;
+          }
+          else{
+            $imgNew=Media::find($seleccionado);
+            $imgNew->vista=1;
+            $imgNew->save();
+            Session::forget($sesiones[$desicion]);
+            $respuesta=1;
+          }
+        }
+        else {
+          $consulta=Media::where('id',$seleccionado)->first();
+          if (count($consulta)!=0) {
+            $imgNew=Media::find($seleccionado);
+            $imgNew->vista=1;
+            $imgNew->save();
+
+            Session::forget($sesiones[$desicion]);
+            $respuesta=1;
+          }
+          else{
+            $respuesta=2;//El elemento marcado no tiene imagen asociada
+          }
+        }
+      }
+    }
+    
     return $respuesta;
   }
 
@@ -438,7 +481,7 @@ class PropiedadController extends Controller{
 ///////////////////////////////  Borrar fotos del inmueble /////////////////////////////////////////
     $imagenes=Media::where('propiedad_id',$idInmueble)->get();
     foreach ($imagenes as $imagen) {
-      File::delete(public_path('images/inmuebles/'.$imagen->nombre.''));
+      File::delete(public_path('images/inmuebles/'.$imagen->alias.''));
       Media::destroy($imagen->id);
     }
 ///////////////////////////////  Borrar inmueble /////////////////////////////////////////

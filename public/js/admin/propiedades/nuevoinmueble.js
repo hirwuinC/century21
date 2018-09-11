@@ -217,23 +217,21 @@ $("#propietyCreate").validate({
   }
 });
 ///////////////////////////////////////////// CARGA DE CONTENEDORES DE IMAGENES PARA EL INMUEBLE //////////////////////////////
-  var cont= $('.thumbPropiety').length;
-  if (cont>7) {
-    $('.addPicCont').css('display','none');
-  }
+
   var inicio= $('#last').val();
   let contador = 1;
   if (inicio!='') {
     contador=inicio;
   }
   $('body').on('click','#addPic',function(e){
+    var protocolo = window.location.protocol;
     var dominio=window.location.host;
       contador++;
       e.preventDefault()
       $(`<div class='col-sm-3 thumbPropiety'>
           <div class='thumbProperty'>
             <div class='contentTop'>
-              <img class='imgInmueble' src='http://${dominio}/images/img-demo-images.png' alt=''>
+              <img class='imgInmueble' src='${protocolo}//${dominio}/images/img-demo-images.png' alt=''>
             </div>
             <div class='contentInfo'>
               <div class='buttonsAction'>
@@ -324,7 +322,7 @@ $("#propietyCreate").validate({
       });
     }
     var contThumb= $('.thumbPropiety').length;
-    if (contThumb<8) {
+    if (contThumb<9) {
       $('.addPicCont').css('display','block');
     }
   });
@@ -333,6 +331,10 @@ $("#propietyCreate").validate({
 
   $('body').on('change','.file-input',function(){
     var tamano=this.files[0].size/1024;
+    var protocolo = window.location.protocol;
+    var servidor = window.location.host;
+    var dominio = protocolo+'//'+servidor+'/';
+    //alert(dominio);
     if (tamano<=1024) {
       var form= new FormData();
       var file= this.files[0];
@@ -343,6 +345,7 @@ $("#propietyCreate").validate({
       form.append('register',id);
       form.append('valor',valor);
       form.append('desicion',0);
+      form.append('dominio',dominio);
       url="/admin/guardarImagen";
       $.ajax({
         beforeSend:mostrarPreload(),

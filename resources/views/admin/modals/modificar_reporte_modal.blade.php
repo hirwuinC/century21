@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h1 class="titleSection">Información Básica</h1>
             </div>
-            <div class="modal-body">
+            <div class="modal-body modal-b">
                 <form class="form marginForm" id="formularioInformeM">
                   <input type="hidden" name="idPropietyModal" id="idPropietyModalM" value="">
                   <input type="hidden" name="idInformeModal" id="idInformeModalM" value="">

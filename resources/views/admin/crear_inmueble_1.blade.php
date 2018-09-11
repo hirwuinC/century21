@@ -141,7 +141,7 @@
             <div class="row">
                 <div class="col-xs-12">
                     <label for="">Comentarios sobre el inmueble</label>
-                    <textarea class="inputs inputsLight" maxlength="600" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble"></textarea>
+                    <textarea class="inputs inputsLight" maxlength="3000" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble"></textarea>
                 </div>
             </div>
             <div class="row">
@@ -158,8 +158,8 @@
                   <label for="">Tipo de Negociación</label>
                   <select name="typeBussisness" id="typeBussisness">
                       <option value="" selected >Seleccione una opción</option>
-                      <option value="alquiler">Alquiler</option>
-                      <option value="venta">Venta</option>
+                      <option value="Alquiler">Alquiler</option>
+                      <option value="Venta">Venta</option>
                   </select>
                 </div>
             </div>
@@ -353,7 +353,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <label for="">Caracteristicas de la Propiedad</label>
-                <textarea class="inputs inputsLight"  maxlength="600" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble">{{$datos->comentario}}</textarea>
+                <textarea class="inputs inputsLight"  maxlength="3000" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble">{{$datos->comentario}}</textarea>
             </div>
         </div>
         <div class="row">

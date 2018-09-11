@@ -194,7 +194,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <label for="">Descripcion del Inmueble</label>
-                <textarea class="inputs inputsLight" maxlength="600" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble">{{$propiedad->comentario}}</textarea>
+                <textarea class="inputs inputsLight" maxlength="3000" id="descriptionPropiety" name="descriptionPropiety" placeholder="Descripción del inmueble">{{$propiedad->comentario}}</textarea>
             </div>
         </div>
         <div class="row">
@@ -215,12 +215,12 @@
               <label for="">Tipo de Negociación</label>
               <select name="typeBussisness" id="typeBussisness">
                   <option value="">Tipo de Negociación</option>
-                  @if($propiedad->tipoNegocio=="alquiler")
-                    <option value="alquiler" selected>Alquiler</option>
-                    <option value="venta">Venta</option>
+                  @if($propiedad->tipoNegocio=="Alquiler")
+                    <option value="Alquiler" selected>Alquiler</option>
+                    <option value="Venta">Venta</option>
                   @else
-                    <option value="alquiler">Alquiler</option>
-                    <option value="venta" selected>Venta</option>
+                    <option value="Alquiler">Alquiler</option>
+                    <option value="Venta" selected>Venta</option>
                   @endif
               </select>
             </div>

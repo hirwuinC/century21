@@ -7,7 +7,7 @@
                 <h1 class="titleSection">Eventos del Día  <span id="fechaMostrar"></span></h1>
                 <input type="hidden" id="contador" value="">
             </div>
-            <div class="modal-body" id="padreHistorial">
+            <div class="modal-body modal-b" id="padreHistorial">
             </div>
         </div>
     </div>

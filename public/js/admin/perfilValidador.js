@@ -99,13 +99,25 @@ $(document).ready(function(){
 
 
 	$('.file-input').change(function(){
-    var curElement = $(this).parent().parent().parent().find('.image');
-    var reader = new FileReader();
+		var tamano=this.files[0].size/1024;
+		if (tamano<=1024) {
+			var curElement = $(this).parent().parent().parent().find('.image');
+		    var reader = new FileReader();
 
-    reader.onload = function (e) {
-        curElement.attr('src', e.target.result);
-    };
-    reader.readAsDataURL(this.files[0]);
+		    reader.onload = function (e) {
+		        curElement.attr('src', e.target.result);
+		    };
+		    reader.readAsDataURL(this.files[0]);
+		}
+		else{
+			swal({
+		        title:'Error al cargar Imagen!!!',
+		        text:"La imagen es demasiado pesada, debe pesar menos de 1mb",
+		        icon:'error',
+		        button:true,
+		    });
+		}
+    
 	});
 
 	$('body').on('click','#buttonReset',function(){

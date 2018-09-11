@@ -15,7 +15,7 @@
                     </div>
                 </div>
             </div>
-            <div class="modal-body">
+            <div class="modal-body modal-b">
                 <form id="nuevoVendedor" enctype="multipart/form-data" class="form">
                     <div class="row">
                         <div class="col-xs-12 col-sm-6">

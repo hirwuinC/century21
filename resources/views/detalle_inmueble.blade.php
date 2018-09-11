@@ -89,8 +89,6 @@
         <!-- END CONTENT SIDEBAR -->
     </div>
 </div>
-
-
 @endsection
 @section('js')
 <script>

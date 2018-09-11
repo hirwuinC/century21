@@ -49,12 +49,12 @@ $(document).ready(function() {
 	        type:'post',
 	        success:function(respuesta){
 	          //console.log(respuesta);
-	          $('.opcionUrbanizacion').remove();
-	          $.each(respuesta.urbanizaciones,function(a){
-							$.each(respuesta.urbanizaciones[a],function(e) {
-	            $('#urbanizaciones').append("<option value="+respuesta.urbanizaciones[a][e].id+" class='opcionUrbanizacion' >"+respuesta.urbanizaciones[a][e].nombre+"</option>");
-	          	});
-						});
+				$('.opcionUrbanizacion').remove();
+				$.each(respuesta.urbanizaciones,function(a){
+					$.each(respuesta.urbanizaciones[a],function(e) {
+	            		$('#urbanizaciones').append("<option value="+respuesta.urbanizaciones[a][e].id+" class='opcionUrbanizacion' >"+respuesta.urbanizaciones[a][e].nombre+"</option>");
+	          		});
+				});
 	        }
 	      });
 	    });

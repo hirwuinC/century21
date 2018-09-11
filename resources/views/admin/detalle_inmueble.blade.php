@@ -40,11 +40,7 @@
                   <p><span>Compradores Interesados:</span> {{$inmueble->compradorInteresado}}</p>
               </div>
               <div class="col-xs-4 cont-imagen">
-                @if($inmueble->id_mls==0)
-                  <img src="{{ asset('images/inmuebles')}}/{{$imagen->nombre}}" alt="">
-                @else
                   <img src="{{$imagen->nombre}}" alt="">
-                @endif
               </div>
           </div>
           <h2 class="titleSection">DESCRIPCIÓN DEL INMUEBLE</h2>

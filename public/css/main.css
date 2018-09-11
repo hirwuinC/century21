@@ -68,12 +68,16 @@ hr {
   margin: 20px 0;
   border: none;
   padding: 10px 0;
-  background: #f0b310;
+  background: #beaf87;
   font-family: 'latobold';
-  color: #474747;
+  color: #fff;
   text-transform: uppercase;
   font-size: 1.12em;
   width: 100%;
+}
+
+.btnYellow:hover {
+  color: #333;
 }
 
 .btnGray {
@@ -176,11 +180,12 @@ hr {
 /*----- GO HEADER -----*/
 header {
   min-height: 105px;
-  background: rgba(255, 255, 255, 0.6);
+  background: #333;
   position: absolute;
   width: 100%;
   z-index: 1001;
   top: 0;
+  border-top: solid 25px #beaf87;
 }
 header .logoHeader {
   padding-top: 10px;
@@ -202,10 +207,10 @@ header .infoContact p span {
   margin-right: 5px;
 }
 header .infoContact p a {
-  color: #333333;
+  color: #beaf87;
 }
 header .infoContact p a:hover {
-  color: #737373;
+  color: #fff;
 }
 header .infoContact ul {
   padding: 0;
@@ -217,12 +222,12 @@ header .infoContact ul li {
   margin-right: 10px;
 }
 header .infoContact ul li a {
-  color: #b28500;
+  color: #beaf87;
   font-size: 1.2em;
   display: inline-flex;
   width: 28px;
   height: 28px;
-  border: #b28500 2px solid;
+  border: #beaf87 2px solid;
   border-radius: 50%;
   justify-content: center;
   flex-flow: column;
@@ -230,11 +235,11 @@ header .infoContact ul li a {
   vertical-align: middle;
 }
 header .infoContact ul li a:hover {
-  color: #f8d988;
-  border: #f8d988 2px solid;
+  color: #fff;
+  border: #fff 2px solid;
 }
 header #nav {
-  border-top: #717a81 1px solid;
+  border-top: #beaf87 2px solid;
 }
 header #nav ul {
   margin: 0;
@@ -246,21 +251,31 @@ header #nav ul li {
 }
 header #nav ul li a {
   text-transform: uppercase;
-  color: #121212;
+  color: #fff;
   font-family: 'latoregular';
   font-size: 1.3em;
   display: block;
   padding: 20px 30px;
 }
 header #nav ul li a:hover, header #nav ul li a.active {
-  border-bottom: #333333 3px solid;
+  border-bottom: #beaf87 3px solid;
+  color: #beaf87;
 }
+
+.img-header{
+  width: 100%;
+}
+
+.phonecontact {
+  color: #fff;
+}
+
 
 /*----- END HEADER -----*/
 /*----- GO FOOTER -----*/
 footer #footer {
   min-height: 105px;
-  background: #333333;
+  background: #333;
 }
 footer #footer .logoFooter {
   padding-top: 10px;
@@ -271,7 +286,7 @@ footer #footer .titleSectionFooter {
   text-transform: uppercase;
   font-family: 'latobold';
   padding-bottom: 10px;
-  border-bottom: #717a81 1px solid;
+  border-bottom: #beaf87 1px solid;
 }
 footer #footer .contactFooter {
   color: #ffffff;
@@ -284,10 +299,10 @@ footer #footer .contactFooter p span {
   margin-right: 5px;
 }
 footer #footer .contactFooter p a {
-  color: #f0b310;
+  color: #beaf87;
 }
 footer #footer .contactFooter p a:hover {
-  color: #f8d988;
+  color: #fff;
 }
 footer #footer .socialFooter ul {
   padding: 0;
@@ -298,12 +313,12 @@ footer #footer .socialFooter ul li {
   margin-right: 10px;
 }
 footer #footer .socialFooter ul li a {
-  color: #f0b310;
+  color: #beaf87;
   font-size: 1.2em;
   display: inline-flex;
   width: 30px;
   height: 30px;
-  border: #f0b310 2px solid;
+  border: #beaf87 2px solid;
   border-radius: 50%;
   justify-content: center;
   flex-flow: column;
@@ -311,17 +326,17 @@ footer #footer .socialFooter ul li a {
   vertical-align: sub;
 }
 footer #footer .socialFooter ul li a:hover {
-  color: #f8d988;
-  border: #f8d988 2px solid;
+  color: #fff;
+  border: #fff 2px solid;
 }
 footer .copyright {
   height: 40px;
-  background: #111111;
+  background: #beaf87;
 }
 footer .copyright p {
   margin: 10px 0;
   padding: 0;
-  color: #eeeeee;
+  color: #333;
   font-size: 1em;
   font-family: 'latolight';
 }
@@ -339,7 +354,17 @@ footer .copyright ul li {
   padding: 10px 0;
 }
 footer .copyright ul li a {
-  color: #eeeeee;
+  color: #333;
+  font-weight: bold;
+}
+footer .copyright ul li a:hover {
+  color: #fff;
+  font-weight: bold;
+}
+
+.img-foo{
+  width: 80%;
+  float: right;
 }
 
 /*----- END FOOTER -----*/
@@ -352,7 +377,7 @@ footer .copyright ul li a {
 .filterForm h3 {
   text-transform: uppercase;
   font-size: 1.25em;
-  color: #f0b310;
+  color: #beaf87;
   font-family: 'latobold';
   text-align: center;
   padding-bottom: 15px;
@@ -420,7 +445,7 @@ footer .copyright ul li a {
   background: rgba(255, 255, 255, 0.8) !important;
 }
 .select2-results .select2-results__option--highlighted[aria-selected] {
-  background: #f0b310 !important;
+  background: #beaf87 !important;
 }
 
 /*----- FORM CONTACT ADVISER -----*/
@@ -553,7 +578,7 @@ footer .copyright ul li a {
 }
 .infoDetailProperties .descriptionProperties .characteristicsProperties ul li p {
   padding: 10px 15px;
-  background: #f0b310;
+  background: #beaf87;
   display: block;
   margin: 0;
   font-family: 'latobold';
@@ -768,7 +793,7 @@ footer .copyright ul li a {
   font-family: 'latobold';
   font-size: 1em;
   text-align: center;
-  color: #ffffff;
+  color: #fff;
   text-transform: uppercase;
 }
 .thumbProperty .contentTop .caption .priceProject {
@@ -776,12 +801,17 @@ footer .copyright ul li a {
   bottom: 0;
   right: 0;
   padding: 10px 15px;
-  background: #f0b310;
+  background: #beaf87;
 }
 .thumbProperty .contentTop .caption .priceProject p {
   margin: 0;
   font-family: 'latobold';
   font-size: 1.2em;
+  color: #fff;
+}
+
+.thumbProperty .contentTop .caption .priceProject p:hover {
+  color: #000;
 }
 .thumbProperty .contentTop .caption .priceProject p span {
   font-family: 'latoblack';
@@ -909,19 +939,19 @@ footer .copyright ul li a {
   font-family: 'latobold';
 }
 .pagination li.active span {
-  background-color: #f1b311;
-  border-color: #f1b311;
+  background-color: #beaf87;
+  border-color: #beaf87;
   color: #333333;
 }
 .pagination li span,.pagination li a{
   border-radius: 50% !important;
   margin: 0 5px;
-  color: #f1b311;
+  color: #beaf87;
 }
 .pagination li span:hover, .pagination li span:focus,.pagination li a:hover,.pagination li a:focus {
   color: #333333;
-  background-color: #f1b311 !important;
-  border-color: #f1b311 !important;
+  background-color: #beaf87 !important;
+  border-color: #beaf87 !important;
 }
 iframe{
 width: 100%;
@@ -938,17 +968,26 @@ padding: 0;
   top: -17px;
   right: 15px;
   padding: 10px 15px;
-  background: #f1b311;
+  background: #beaf87;
   margin: 0;
   font-family: 'latoblack';
   font-size: 1.2em;
 
 }
 .contenido,.contenido1{
-  margin-top: 45px;
+  margin-top: 30px;
   text-align: justify;
-  font-size: 15px !important;
+  font-size: 17px !important;
   font-family: 'latolight';
+
+}
+.cn600{
+  font-weight: bold;
+  color: #676767
+}
+.stronger{
+  font-weight: bold;
+  color: black;
 }
 .llave{
   margin: 0 !important;
@@ -961,7 +1000,7 @@ padding: 0;
   line-height: 18em;
 }
 .contenido1{
-  margin-top: 100px;
+  margin-top: 80px;
 }
 
 .hijo ul{
@@ -989,4 +1028,9 @@ padding: 0;
   content: "•  ";
   color: #beae89;
   font-size: 30px;
+}
+
+.slogan{
+  font-size: 50px;
+  padding: 20px 20px 20px 20px;
 }

@@ -284,49 +284,90 @@ class ProyectoController extends Controller{
     $seleccionado=Request::get('imgSelected');
     $marcado=MediaProyecto::where('proyecto_id',$inmueble)->where('vista',1)->first();
     $ultimo=MediaProyecto::where('proyecto_id',$inmueble)->first();
-
-    if (count($ultimo)!=0) {
-      if (count($marcado)!=0) {
-        if ($marcado->id!=$seleccionado) {
-          $img=MediaProyecto::find($marcado->id);
-          $img->vista=0;
-          $img->save();
-          $imgNew=MediaProyecto::find($seleccionado);
-          $imgNew->vista=1;
-          $imgNew->save();
-          Proyecto::where('id',$inmueble)->update([
-            'cargado'=>1
-          ]);
-          Session::forget($sesiones[$desicion]);
-          $respuesta=1;
+    if ($desicion==0) {
+      if (count($ultimo)!=0) {
+        if (count($marcado)!=0) {
+          if ($marcado->id!=$seleccionado) {
+            $img=MediaProyecto::find($marcado->id);
+            $img->vista=0;
+            $img->save();
+            $imgNew=MediaProyecto::find($seleccionado);
+            $imgNew->vista=1;
+            $imgNew->save();
+            Proyecto::where('id',$inmueble)->update([
+              'cargado'=>1,
+              'fechaCreado'=>date('Y-m-d')
+            ]);
+            Session::forget($sesiones[$desicion]);
+            $respuesta=1;
+          }
+          else{
+            $imgNew=MediaProyecto::find($seleccionado);
+            $imgNew->vista=1;
+            $imgNew->save();
+            Proyecto::where('id',$inmueble)->update([
+              'cargado'=>1,
+              'fechaCreado'=>date('Y-m-d')
+            ]);
+            Session::forget($sesiones[$desicion]);
+            $respuesta=1;
+          }
         }
-        else{
-          $imgNew=MediaProyecto::find($seleccionado);
-          $imgNew->vista=1;
-          $imgNew->save();
-          Proyecto::where('id',$inmueble)->update([
-            'cargado'=>1
-          ]);
-          Session::forget($sesiones[$desicion]);
-          $respuesta=1;
+        else {
+          $consulta=MediaProyecto::where('id',$seleccionado)->first();
+          if (count($consulta)!=0) {
+            $imgNew=MediaProyecto::find($seleccionado);
+            $imgNew->vista=1;
+            $imgNew->save();
+            Proyecto::where('id',$inmueble)->update([
+              'cargado'=>1,
+              'fechaCreado'=>date('Y-m-d')
+            ]);
+            Session::forget($sesiones[$desicion]);
+            $respuesta=1;
+          }
+          else{
+            $respuesta=2;//El elemento marcado no tiene imagen asociada
+          }
+
         }
       }
-      else {
-        $consulta=MediaProyecto::where('id',$seleccionado)->first();
-        if (count($consulta)!=0) {
-          $imgNew=MediaProyecto::find($seleccionado);
-          $imgNew->vista=1;
-          $imgNew->save();
-          Proyecto::where('id',$inmueble)->update([
-            'cargado'=>1
-          ]);
-          Session::forget($sesiones[$desicion]);
-          $respuesta=1;
+    }
+    else{
+      if (count($ultimo)!=0) {
+        if (count($marcado)!=0) {
+          if ($marcado->id!=$seleccionado) {
+            $img=MediaProyecto::find($marcado->id);
+            $img->vista=0;
+            $img->save();
+            $imgNew=MediaProyecto::find($seleccionado);
+            $imgNew->vista=1;
+            $imgNew->save();
+            Session::forget($sesiones[$desicion]);
+            $respuesta=1;
+          }
+          else{
+            $imgNew=MediaProyecto::find($seleccionado);
+            $imgNew->vista=1;
+            $imgNew->save();
+            Session::forget($sesiones[$desicion]);
+            $respuesta=1;
+          }
         }
-        else{
-          $respuesta=2;//El elemento marcado no tiene imagen asociada
-        }
+        else {
+          $consulta=MediaProyecto::where('id',$seleccionado)->first();
+          if (count($consulta)!=0) {
+            $imgNew=MediaProyecto::find($seleccionado);
+            $imgNew->vista=1;
+            $imgNew->save();
+            Session::forget($sesiones[$desicion]);
+            $respuesta=1;
+          }
+          else{
+            $respuesta=2;//El elemento marcado no tiene imagen asociada
+          }
 
+        }
       }
     }
     return $respuesta;

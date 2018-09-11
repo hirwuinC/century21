@@ -9,7 +9,7 @@
           @foreach($imagenes as $imagen)
             @component('admin/partials/uploadImagen2')
               @slot('img')
-                <img src="{{ asset('images/proyectos')}}/{{$imagen->nombre}}" alt="">
+                <img class='imgInmueble' src="{{ asset('images/proyectos')}}/{{$imagen->nombre}}" alt="">
               @endslot
               @slot('contador')
               {{$imagen->id}}

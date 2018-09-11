@@ -177,6 +177,7 @@ class sincronizar extends Command
             $propiedad->fechaCreado=Carbon::now();
             $propiedad->proximoInforme=Carbon::now()->addMonth();
             $propiedad->visible=0;
+            $propiedad->cargado=1;
         $propiedad->save();
         if ((string)$datos['oficina_id']!=(string)$inmueblesCaracasId)
         {
@@ -212,6 +213,7 @@ class sincronizar extends Command
                             }
 
                     }//while imagenes
+                    fclose($imagenes); 
         }//if imagenes
 
         return $fotos;
@@ -605,7 +607,14 @@ class sincronizar extends Command
                              $horaFin=Carbon::now();
                              $this->borrarArchivos($directorioSin); 
 
-                            $correo='josetayupo@gmail.com';
+                            $correo='gerencia@century21caracas.com';
+                            Mail::send('emails.informeSincronizacion',['cambios'=>$cambios,'longitud'=>$longitud,'agentes'=>$agentes,'propiedades'=>$propiedades,'tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString(),'modificaciones'=>$modificaciones,'descarga'=>$descarga,'cantidades'=>$cantidades],function($message)use($correo)
+                                 {
+                                        $message->to($correo)->subject('Resultados de sincronizacion');
+                                });
+                                
+                            
+                            $correo='vinrast@gmail.com';    
                             Mail::send('emails.informeSincronizacion',['cambios'=>$cambios,'longitud'=>$longitud,'agentes'=>$agentes,'propiedades'=>$propiedades,'tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString(),'modificaciones'=>$modificaciones,'descarga'=>$descarga,'cantidades'=>$cantidades],function($message)use($correo)
                                  {
                                         $message->to($correo)->subject('Resultados de sincronizacion');
@@ -618,7 +627,14 @@ class sincronizar extends Command
                             {
                                 
                                     $horaFin=Carbon::now();
-                                    $correo='josetayupo@gmail.com';
+                                    $correo='gerencia@century21caracas.com';
+                                    Mail::send('emails.informeError',['tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString()],
+                                        function($message)use($correo)
+                                     {
+                                            $message->to($correo)->subject('Sincronizacion Fallida');
+                                    });
+                                    
+                                    $correo='vinrast@gmail.com';
                                     Mail::send('emails.informeError',['tiempoIn'=>$horaSinc->toDateTimeString(),'tiempoFin'=>$horaFin->toDateTimeString()],
                                         function($message)use($correo)
                                      {

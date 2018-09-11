@@ -214,23 +214,21 @@ $("#propietyEdit").validate({
   }
 });
 ///////////////////////////////////////////// CARGA DE IMAGENES PARA EL INMUEBLE //////////////////////////////
-var cont= $('.thumbPropiety').length;
-if (cont>7) {
-  $('.addPicCont').css('display','none');
-}
+
 var inicio= $('#last').val();
 let contador = 1;
 if (inicio!='') {
   contador=inicio;
 }
 $('body').on('click','#addPic',function(e){
+  var protocolo = window.location.protocol;
   var dominio=window.location.host;
     contador++;
     e.preventDefault()
     $(`<div class='col-sm-3 thumbPropiety'>
         <div class='thumbProperty'>
           <div class='contentTop'>
-            <img class='imgInmueble' src='http://${dominio}/images/img-demo-images.png' alt=''>
+            <img class='imgInmueble' src='${protocolo}//${dominio}/images/img-demo-images.png' alt=''>
           </div>
           <div class='contentInfo'>
             <div class='buttonsAction'>
@@ -267,6 +265,7 @@ $('body').on('click','#addPic',function(e){
       $('.addPicCont').css('display','none');
     }
 });
+
 $('body').on('click','.btnBorrar',function(e){
   e.preventDefault();
   var contBtn= $('.btnBorrar').length;
@@ -319,7 +318,7 @@ $('body').on('click','.btnBorrar',function(e){
     });
   }
   var contThumb= $('.thumbPropiety').length;
-  if (contThumb<8) {
+  if (contThumb<9) {
     $('.addPicCont').css('display','block');
   }
 });
@@ -327,6 +326,9 @@ $('body').on('click','.btnBorrar',function(e){
 
 $('body').on('change','.file-input',function(){
   var tamano=this.files[0].size/1024;
+  var protocolo = window.location.protocol;
+  var servidor = window.location.host;
+  var dominio = protocolo+'//'+servidor+'/';
   if (tamano<=1024) {
     var form= new FormData();
     var file= this.files[0];
@@ -338,6 +340,7 @@ $('body').on('change','.file-input',function(){
     form.append('register',id);
     form.append('valor',valor);
     form.append('desicion',1);
+    form.append('dominio',dominio);
     url="/admin/guardarImagen";
     $.ajax({
       beforeSend:mostrarPreload(),
@@ -382,6 +385,7 @@ $('body').on('change','.file-input',function(){
   }
 
 });
+
 $('body').on('submit','#picPropiety',function(e){
   e.preventDefault();
   var marcador=$('input[name=fotovisible]:checked');

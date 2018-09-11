@@ -35,7 +35,7 @@
                                   </a>-->
                                   <!-- Indicators -->
                                   <ol class="carousel-indicators visible-sm-block hidden-xs-block visible-md-block visible-lg-block">
-                                    <input type="hidden" value="{{$contador=0}}">
+                                    <input type="hidden" value="{{$contador=-1}}">
                                     @foreach($imagenes as $imagen)
                                       @if($imagen->vista==1)
                                         <li data-target="#carousel-custom" data-slide-to="{{$contador++}}" class="active">

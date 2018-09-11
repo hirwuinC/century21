@@ -35,11 +35,7 @@
                       {{$inmueble->nombreAsesor}}
                     @endslot
                     @slot('img')
-                      @if($inmueble->id_mls==0)
-                        <img src="{{ asset('images/inmuebles')}}/{{$inmueble->nombre_imagen}}" alt="">
-                      @else
                         <img src="{{$inmueble->nombre_imagen}}" alt="">
-                      @endif
                     @endslot
                     @slot('editar')
                       @if($usuario->rol_id==1)

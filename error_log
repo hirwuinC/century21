@@ -1,0 +1,547 @@
+[03-Jul-2018 21:16:04 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 21:16:05 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 21:16:05 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 21:16:06 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 21:16:07 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 21:16:08 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 21:16:09 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 21:16:10 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 21:16:11 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 21:16:11 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 21:29:24 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 21:35:55 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 21:36:05 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 21:41:53 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 22:23:19 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 22:33:59 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 22:41:20 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 22:46:52 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[03-Jul-2018 23:38:25 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 00:45:19 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 00:47:12 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 00:47:18 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 00:47:26 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 00:53:32 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 00:55:33 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 00:58:54 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 01:04:03 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 01:04:17 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 01:04:26 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 01:04:56 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 01:05:13 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 01:05:25 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 01:05:28 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 01:05:38 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 01:23:18 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 01:27:53 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 01:37:52 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 02:41:29 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 03:18:07 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 03:57:15 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 04:18:15 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos('application/x-w...', '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos('application/x-w...', '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains('application/x-w...', Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\ in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 04:18:15 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos('application/x-w...', '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos('application/x-w...', '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains('application/x-w...', Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\ in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 05:13:03 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 06:17:27 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 06:18:03 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 06:18:47 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 06:19:41 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 06:21:03 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 07:13:14 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 07:47:25 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 07:47:37 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 08:34:10 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 08:34:18 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 08:34:21 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 08:41:45 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 08:51:12 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 08:51:16 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 09:03:49 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 09:44:26 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 10:14:28 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490
+[04-Jul-2018 10:14:28 America/Caracas] PHP Fatal error:  Uncaught Error: Call to undefined function Symfony\Polyfill\Mbstring\iconv_strpos() in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php:490
+Stack trace:
+#0 /home/centuryc/test/vendor/symfony/polyfill-mbstring/bootstrap.php(34): Symfony\Polyfill\Mbstring\Mbstring::mb_strpos(NULL, '/json', 0, 'UTF-8')
+#1 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Support/Str.php(94): mb_strpos(NULL, '/json')
+#2 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Concerns/InteractsWithContentTypes.php(34): Illuminate\Support\Str::contains(NULL, Array)
+#3 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(333): Illuminate\Http\Request->isJson()
+#4 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(361): Illuminate\Http\Request->getInputSource()
+#5 /home/centuryc/test/vendor/laravel/framework/src/Illuminate/Http/Request.php(59): Illuminate\Http\Request::createFromBase(Object(Illuminate\Http\Request))
+#6 /home/centuryc/public_html/ind in /home/centuryc/test/vendor/symfony/polyfill-mbstring/Mbstring.php on line 490

@@ -5,14 +5,14 @@
 <!--<![endif]-->
 <head>
     <meta charset="utf-8">
-    <title>Century 21 Venezuela</title>
+    <title>Century 21 Inmuebles Caracas</title>
     <meta name="description" content="century21">
     <meta name="author" content="rjps.designer@gmail.com">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Favicon -->
-    <link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('images/fav-icon.png') }}" />
 
     <link href="{{ asset('css/admin/bootstrap.css') }}" rel="stylesheet" type="text/css">
     <link href="{{ asset('css/easy-autocomplete.min.css') }}" rel="stylesheet" type="text/css">
@@ -31,7 +31,9 @@
             <div class="col-xs-12">
                 <div class="row">
                     <div class="col-xs-12 logoHeader">
-                        <img src="{{ asset('images/logo-footer.png')}}" alt="">
+                        <a href="{{ route('home') }}/">
+                            <img title="Salir a la pagina publica" data-toggle="tooltip" data-placement="top" src="{{ asset('images/logo-central.png')}}" alt="">
+                        </a>
                     </div>
                 </div>
             </div>

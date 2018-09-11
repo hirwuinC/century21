@@ -159,10 +159,12 @@ class WebController extends Controller
                                       ->first();
 
       $imagenes=MediaProyecto::where('proyecto_id',$id)->get();
-      $inmueblesProyectos=InmuebleProyecto::join('tipoinmuebleproyectos','inmuebleProyectos.tipoinmueble_id','tipoinmuebleproyectos.id')
+
+      $inmueblesProyectos=InmuebleProyecto::join('tipoinmuebleproyectos','inmuebleproyectos.tipoinmueble_id','tipoinmuebleproyectos.id')
                                   ->where('proyecto_id',$id)
                                   ->select('inmuebleproyectos.*','tipoinmuebleproyectos.nombre')
                                   ->get();
+
       $proyectos=DB::table('proyectos')->Join('mediaproyectos','proyectos.id','mediaproyectos.proyecto_id')
                                             ->join('ciudades','proyectos.ciudad_id','ciudades.id')
                                             ->select('mediaproyectos.nombre as nombre_imagen','mediaproyectos.proyecto_id','mediaproyectos.id as id_imagen','proyectos.*','ciudades.nombre as nombre_ciudad')
@@ -171,6 +173,7 @@ class WebController extends Controller
                                             ->inRandomOrder()
                                             ->get()
                                             ->take(3);
+
       $inmuebles=DB::table('medias')->Join('propiedades','medias.propiedad_id','propiedades.id')
                                      ->join('tipoinmueble','propiedades.tipo_inmueble','tipoinmueble.id')
                                      ->join('ciudades','propiedades.ciudad_id','ciudades.id')

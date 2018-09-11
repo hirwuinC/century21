@@ -5,14 +5,14 @@
 <!--<![endif]-->
 	<head>
 		<meta charset="utf-8">
-		<title>Century 21 Venezuela</title>
+		<title>Century 21 Inmuebles Caracas</title>
 		<meta name="description" content="century21">
 		<meta name="author" content="rjps.designer@gmail.com">
 
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- Favicon -->
-		<link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}" />
+		<link rel="icon" type="image/png" href="{{ asset('images/fav-icon.png') }}" />
 
 		<!-- CSS -->
 		<link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet" type="text/css">
@@ -32,15 +32,15 @@
 					<div class="col-xs-12">
 						<div class="row">
 							<div class="col-xs-12 col-sm-2 logoHeader">
-								<img src="{{ asset('images/logo-header.png')}}" alt="">
+								<img class="img-header" src="{{ asset('images/new-logo-header.png')}}" alt="">
 							</div>
 							<div class="col-xs-12 col-sm-10">
 								<div class="infoContact">
 									<div class="row">
 										<div class="col-xs-12 col-sm-3">
-											<p><a href="mailto:info@century21caracas.com"><span><i class="fa fa-envelope" aria-hidden="true"></i></span> info@century21caracas.com</a></p>
+											<p><a href="mailto:info@century21caracas.com"><span ><i class="fa fa-envelope" aria-hidden="true"></i></span> info@century21caracas.com</a></p>
 										</div>
-										<div class="col-xs-12 col-sm-3">
+										<div class="col-xs-12 col-sm-4">
 											<ul>
 												<li><a href="https://www.facebook.com/c21inmueblescaracas/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 												<li><a href="https://twitter.com/inmccsc21" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
@@ -48,9 +48,9 @@
 											</ul>
 										</div>
 										<div class="col-xs-12 col-sm-4">
-											<p><span><i class="fa fa-phone" aria-hidden="true"></i></span>  0212-9853222 / 0424-2717436 </p>
+											<p class="phonecontact"><span><i class="fa fa-phone" aria-hidden="true"></i></span>  0212-9853222 / 0424-2717436 </p>
 										</div>
-										<div class="col-xs-12 col-sm-2">
+										<div class="col-xs-12 col-sm-1">
 											<p class="accesslogin"><a href="{{route('login')}}"><i class="fa fa-user-circle-o" aria-hidden="true"></i></a></p>
 										</div>
 									</div>
@@ -82,7 +82,7 @@
 				</div>
 			</div>
 		</header>
-		<div id="slider">
+		<div id="slider" style="margin-top: 7%">
 			<div class="content-fluid">
 				<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
 					<!-- Indicators -->
@@ -129,21 +129,21 @@
 			<div id="footer">
 				<div class="container">
 					<div class="row">
-						<div class="col-xs-12 col-sm-4 logoFooter">
-								<img src="{{ asset('images/logo-footer.png')}}" alt="">
-							</div>
-						<div class="col-xs-12 col-sm-4 contactFooter">
+							<div class="col-xs-12 col-sm-5 contactFooter">
 								<h6 class="titleSectionFooter">Contáctanos</h6>
 								<p><span><i class="fa fa-phone" aria-hidden="true"></i></span>  0212-9853222 / 0424-2717436 </p>
 								<p><a href="mailto:info@century21caracas.com"><span><i class="fa fa-envelope" aria-hidden="true"></i></span> info@century21caracas.com</a></p>
 							</div>
-						<div class="col-xs-12 col-sm-4 socialFooter">
+							<div class="col-xs-12 col-sm-5 socialFooter">
 								<h6 class="titleSectionFooter">Síguenos</h6>
 								<ul>
 									<li><a href="https://www.facebook.com/c21inmueblescaracas/" target="_blank"><i class="fa fa-facebook" aria-hidden="true"></i></a></li>
 									<li><a href="https://twitter.com/inmccsc21" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i></a></li>
 									<li><a href="https://www.instagram.com/c21inmueblescaracas/" target="_blank"><i class="fa fa-instagram" aria-hidden="true"></i></a></li>
 								</ul>
+							</div>
+							<div class="col-xs-12 col-sm-2 logoFooter">
+								<img class="img-foo" src="{{ asset('images/logo-lateral.png')}}" alt="">
 							</div>
 					</div>
 				</div>

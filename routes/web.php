@@ -29,7 +29,10 @@ Route::any('/compradorInteresadoProyecto', ['as' => 'compradorInteresadoProyecto
 Route::any('/buscarInmueblesPublico', ['as' => 'buscarInmueblesPublico', 'uses' => 'WebController@buscarInmueblesPublico']);
 Route::any('/listarCiudadesPublico', ['as' => 'listarCiudadesPublico', 'uses' => 'WebController@listarCiudadesPublico']);
 Route::any('/listarUrbanizacionesPublico', ['as' => 'listarUrbanizacionesPublico', 'uses' => 'WebController@listarUrbanizacionesPublico']);
-
+Route::get('/clear-cache', function() {
+    $exitCode = Artisan::call('cache:clear');
+    // return what you want
+});
 
 
                                         //ADMIN
@@ -102,19 +105,27 @@ Route::group(['middleware' => 'administrador'], function () {
 	// ESTADISTICAS
 	Route::get('/admin/estadisticas', ['as' => 'estadisticas', 'uses' => 'Admin\EstadisticasController@index']);
 	Route::post('/admin/listarTipoReporte', ['as' => 'listar', 'uses' => 'Admin\EstadisticasController@tipoReporte']);
-	Route::get('/admin/distribucionUs/{check}', ['as' => 'disU', 'uses' => 'Admin\EstadisticasController@distribucionAsesor']);
-	Route::get('/admin/distribucionCiu/{check}', ['as' => 'disCiu', 'uses' => 'Admin\EstadisticasController@distribucionCiudad']);
-	Route::get('/admin/distribucionTipInm/{check}', ['as' => 'disTip', 'uses' => 'Admin\EstadisticasController@distribucionTipoInmueble']);
-	Route::get('/admin/visitasProp/{check}', ['as' => 'viProp', 'uses' => 'Admin\EstadisticasController@visitasPropiedad']);
-	Route::get('/admin/visitasAsesor/{check}', ['as' => 'viAse', 'uses' => 'Admin\EstadisticasController@visitasAsesor']);
-	Route::get('/admin/visitasTipoInm/{check}', ['as' => 'viTipIm', 'uses' => 'Admin\EstadisticasController@visitasTipoInmueble']);
-	Route::get('/admin/fechaCrea/{check}', ['as' => 'fechaC', 'uses' => 'Admin\EstadisticasController@tiempoOfertaPublica']);
-	Route::get('/admin/captadasAsesor/{fechaI}/{fechaF}/{check}', ['as' => 'capFilas', 'uses' => 'Admin\EstadisticasController@captadasAsesorFiltro']);
-	Route::get('/admin/captadasCiudad/{fechaI}/{fechaF}/{check}', ['as' => 'capFilCiu', 'uses' => 'Admin\EstadisticasController@CaptadasCiudadFiltro']);
-	Route::get('/admin/captadasPrecio/{fechaI}/{fechaF}/{precioI}/{precioF}', ['as' => 'capFilPre', 'uses' => 'Admin\EstadisticasController@CaptadasPrecioFiltro']);
-	Route::get('/admin/promedioAsesor/{check}', ['as' => 'promedioAs', 'uses' => 'Admin\EstadisticasController@promedioPrecioAsesor']);
-	Route::get('/admin/promedioTipoInmueble/{check}', ['as' => 'promedioTipo', 'uses' => 'Admin\EstadisticasController@promedioPrecioTipoInmueble']);
-	Route::get('/admin/propiedadesCaptadas/{fechaI}/{fechaF}', ['as' => 'captadasFecha', 'uses' => 'Admin\EstadisticasController@propiedadesCaptadas']);
+	Route::post('/admin/listarAsesores', ['as' => 'listarAsesores', 'uses' => 'Admin\EstadisticasController@listarAsesores']);
+	Route::post('/admin/listarCiudadesReportes', ['as' => 'listarCiudadesReportes', 'uses' => 'Admin\EstadisticasController@listarCiudades']);
+	Route::post('/admin/listarUrbanizacionesReportes', ['as' => 'listarUrbanizacionesReportes', 'uses' => 'Admin\EstadisticasController@listarUrbanizaciones']);
+	Route::any('/admin/distribucionAsesor/{fechaI}/{fechaF}/{data}', ['as' => 'disU', 'uses' => 'Admin\EstadisticasController@distribucionAsesor']);
+	Route::any('/admin/distribucionUbicacion/{fechaI}/{fechaF}/{estados}/{ciudades}/{urbanizaciones}', ['as' => 'disUbi', 'uses' => 'Admin\EstadisticasController@distribucionUbicacion']);
+	Route::get('/admin/distribucionTipInmAsesor/{fechaI}/{fechaF}/{data}', ['as' => 'disTip', 'uses' => 'Admin\EstadisticasController@distribucionAsesorTipoInmueble']);
+	Route::get('/admin/distribucionTipInmUbicacion/{fechaI}/{fechaF}/{estados}/{ciudades}/{urbanizaciones}', ['as' => 'disTip', 'uses' => 'Admin\EstadisticasController@distribucionUbicacionTipoInmueble']);
+	Route::get('/admin/captadasAsesor/{fechaI}/{fechaF}/{precioI}-{precioF}/{asesores}', ['as' => 'capFilas', 'uses' => 'Admin\EstadisticasController@captadasAsesorFiltro']);
+	Route::get('/admin/captadasUbicacion/{fechaI}/{fechaF}/{precioI}-{precioF}/{estados}/{ciudades}/{urbanizaciones}', ['as' => 'captadasUbicacion', 'uses' => 'Admin\EstadisticasController@captadasUbicacion']);
+	Route::get('/admin/vendidasAsesor/{fechaI}/{fechaF}/{precioI}-{precioF}/{asesores}', ['as' => 'vendidasAsesor', 'uses' => 'Admin\EstadisticasController@vendidasAsesorFiltro']);
+	Route::get('/admin/vendidasUbicacion/{fechaI}/{fechaF}/{precioI}-{precioF}/{estados}/{ciudades}/{urbanizaciones}', ['as' => 'vendidasUbicacion', 'uses' => 'Admin\EstadisticasController@vendidasUbicacion']);
+	Route::get('/admin/distribucionTipoNegocio/{fechaI}/{fechaF}/{data}', ['as' => 'tipoNegocio', 'uses' => 'Admin\EstadisticasController@distribucionTipoNegocio']);
+	Route::get('/admin/ventasTipoIntermediacion/{fechaI}/{fechaF}/{data}', ['as' => 'ventasTipoIntermediacion', 'uses' => 'Admin\EstadisticasController@ventasTipoIntermediacion']);
+	Route::get('/admin/reporteGeneralVentas/{fechaI}/{fechaF}', ['as' => 'reporteGeneralVentas', 'uses' => 'Admin\EstadisticasController@reporteGeneralVentas']);
+	Route::get('/admin/ventasTipoInmuebleAsesor/{fechaI}/{fechaF}/{data}', ['as' => 'ventasTipoInmuebleAsesor', 'uses' => 'Admin\EstadisticasController@ventasTipoInmuebleAsesor']);
+	Route::get('/admin/ventasTipoInmuebleUbicacion/{fechaI}/{fechaF}/{estados}/{ciudades}/{urbanizaciones}', ['as' => 'ventasTipoInmuebleUbicacion', 'uses' => 'Admin\EstadisticasController@ventasTipoInmuebleUbicacion']);
+	Route::get('/admin/ventasTipoNegocioAsesor/{fechaI}/{fechaF}/{data}', ['as' => 'ventasTipoNegocioAsesor', 'uses' => 'Admin\EstadisticasController@ventasTipoNegocioAsesor']);
+	Route::get('/admin/ventasTipoNegocioUbicacion/{fechaI}/{fechaF}/{estados}/{ciudades}/{urbanizaciones}', ['as' => 'ventasTipoInmuebleUbicacion', 'uses' => 'Admin\EstadisticasController@ventasTipoNegocioUbicacion']);
+	Route::get('/admin/rendimientoAsesor/{fechaI}/{fechaF}/{data}', ['as' => 'rendimientoAsesor', 'uses' => 'Admin\EstadisticasController@rendimientoAsesor']);
+	Route::get('/admin/negociacionesGeneral/{fechaI}/{fechaF}/{data}', ['as' => 'negociacionesGeneral', 'uses' => 'Admin\EstadisticasController@negociacionesGeneral']);
+	
 
 
 

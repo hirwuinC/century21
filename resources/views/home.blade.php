@@ -8,7 +8,8 @@
         <div class="row">
           <div class="col-sm-12 ">
             <div class="banner">
-                <img src="{{asset('images/separador_century.png')}}" alt="">
+                <!-- <img src="{{asset('images/separador_century.png')}}" alt=""> -->
+                <center><h1 class="slogan"><b>¡¡Comprometidos con lo extraordinario!!</b></h1>
             </div>
           </div>
         </div>
@@ -72,11 +73,7 @@
                         @slot('cuartos') {{$inmueble->habitaciones}}@endslot
                         @slot('estacionamientos') {{$inmueble->estacionamientos}} @endslot
                         @slot('img')
-                          @if($inmueble->id_mls==0)
-                            <img src="{{ asset('images/inmuebles')}}/{{$inmueble ->nombre_imagen}}" alt="">
-                          @else
                             <img src="{{$inmueble->nombre_imagen}}" alt="">
-                          @endif
                         @endslot
                     @endcomponent
                 </div>

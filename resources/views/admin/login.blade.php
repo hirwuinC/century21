@@ -11,7 +11,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 		<!-- Favicon -->
-		<link rel="icon" type="image/png" href="{{ asset('images/favicon.png') }}" />
+		<link rel="icon" type="image/png" href="{{ asset('images/fav-icon.png') }}" />
 
         <link href="{{ asset('css/admin/bootstrap.css') }}" rel="stylesheet" type="text/css">
 		<link href="{{ asset('css/font-face.css') }}" rel="stylesheet" type="text/css">
@@ -23,13 +23,13 @@
 		<header>
 			<div class="container">
 				<div class="row">
-					<div class="col-xs-12">
-						<div class="row">
-							<div class="col-xs-12 logoHeader">
-								<img src="{{ asset('images/logo-footer.png')}}" alt="">
-							</div>
+					<center>
+						<div class="col-xs-12 logoHeader">
+							<a href="{{ route('home') }}/">
+							<img title="Ir a la pagina publica" data-toggle="tooltip" data-placement="top" src="{{ asset('images/logo-central.png')}}" alt="">
+							</a>
 						</div>
-					</div>
+					</center>
 				</div>
 			</div>
 		</header>
@@ -55,7 +55,7 @@
 									</div>
 									<input type="password" class="inputs form-control" name="password" placeholder="Password">
 								</div>
-								<button type="submit" id="submitLogin" class="btnYellow">Submit</button>
+								<button type="submit" id="submitLogin" class="btnYellow">Entrar</button>
 							</form>
 						</div>
 					</div>

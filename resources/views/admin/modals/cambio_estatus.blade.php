@@ -6,7 +6,7 @@
                 <h1 class="titleSection">Cambio de estatus</h1>
                 <input type="hidden" id="propiedadGeneral" value="">
             </div>
-            <div class="modal-body">
+            <div class="modal-body modal-b">
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs marginForm" role="tablist">
                     <li role="presentation"><a href="#home" id="tabNewNegotiation" aria-controls="home" role="tab" data-toggle="tab">NUEVA NEGOCIACIÓN</a></li>

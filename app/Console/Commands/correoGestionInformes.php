@@ -204,7 +204,14 @@ class correoGestionInformes extends Command
 
 
        }
-        $correo='josetayupo@gmail.com';
+       
+        $correo='gerencia@century21caracas.com';
+         Mail::send('emails.informeAdministrador',['registros'=>$registrosAgente],function($message)use($correo)
+         {
+                $message->to($correo)->subject('Lista por asesor, con los informes pendientes por enviar');
+        });
+        
+        $correo='vinrast@gmail.com';
          Mail::send('emails.informeAdministrador',['registros'=>$registrosAgente],function($message)use($correo)
          {
                 $message->to($correo)->subject('Lista por asesor, con los informes pendientes por enviar');

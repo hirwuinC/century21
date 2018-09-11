@@ -1,4 +1,5 @@
 $(document).ready(function(){
+	$('[data-toggle="tooltip"]').tooltip();
 	$("#login-form").validate({
 			onfocusout: false,
 			rules: {

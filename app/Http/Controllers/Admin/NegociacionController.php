@@ -234,10 +234,14 @@ class NegociacionController extends Controller{
   public function guardarReporte(){
     $fechaPaso=Request::get('dateReporte');
     $idNegociacion=Request::get('idNegociacionReporte');
+    $consultarPagoComision=NegociacionEstatus::where('negociacion_id',$idNegociacion)->where('comisionPagada',1)->first();
     $nuevoPaso=new NegociacionEstatus;
     $nuevoPaso->negociacion_id=$idNegociacion;
     $nuevoPaso->estatus_id=7;
     $nuevoPaso->fechaEstatus=$fechaPaso;
+    if (count($consultarPagoComision)==0) {
+      $nuevoPaso->comisionPagada=1;
+    }
     $nuevoPaso->save();
     $propiedad=Negociacion::where('id',$idNegociacion)->first();
     Negociacion::where('id',$idNegociacion)->update([

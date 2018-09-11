@@ -6,7 +6,7 @@
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                 <h1 class="titleSection"><span id="estadoTag"></span> > Nueva Ciudad </h1>
             </div>
-            <div class="modal-body">
+            <div class="modal-body modal-b">
                 <form class="form marginForm" id="nuevaCiudadForm">
                     <div class="row">
                         <div class="col-xs-1 col-xs-offset-1">

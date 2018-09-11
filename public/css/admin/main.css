@@ -13,8 +13,8 @@ a, a:hover, a:focus {
 /*----- GO HEADER -----*/
 header {
   height: 130px;
-  background: #000000;
-  border-bottom: #f1b311 7px solid;
+  background: #333;
+  border-bottom: #beaf87 7px solid;
   width: 100%;
   text-align: center;
   display: flex;
@@ -23,6 +23,11 @@ header {
   position: fixed;
   top: 0;
   z-index: 9999999;
+}
+
+
+.img-header{
+  width: 100%;
 }
 
 /*----- END HEADER -----*/
@@ -158,7 +163,7 @@ hr {
   vertical-align: middle;
 }
 .circleYellow {
-  background-color: #f1b311;
+  background-color: #beaf87;
 }
 .circleGreen {
   background-color: #00a651;
@@ -194,11 +199,16 @@ hr {
 }
 
 .btnYellow {
-  background: #f1b311;
+  background: #beaf87;
   font-family: 'latoregular';
-  color: #333333;
+  color: #fff;
   font-size: 1.5em;
   height: 60px;
+}
+
+.btnYellow:hover {
+  background: #beaf87;
+  color: #333;
 }
 .btnYellowEstatus{
   font-size: 1em;
@@ -350,7 +360,7 @@ hr {
   color: #333333;
 }
 .modal-dialog .nav-tabs li.active a {
-  background-color: #f1b311;
+  background-color: #beaf87;
   border: 0;
   color: #333333;
 }
@@ -441,6 +451,8 @@ hr {
 .inputsLight, .modal-dialog .modal-content .form input, .modal-dialog .modal-content .form textarea, .modal-dialog .newNegotation input, #login input, .contentAgents input {
   background: #cccccc;
   color: #333333;
+  font-size: 19px;
+  font-weight: 900;
 }
 .inputsDark, .alertSearch input {
   background: #333333;
@@ -512,7 +524,7 @@ textarea:focus {
   height: 20px;
   margin: -10px 0 0;
   opacity: 0;
-  background: #f1b311;
+  background: #beaf87;
   transform: translate3d(-40px, 0, 0) scale(0.5);
   transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
 }
@@ -558,7 +570,7 @@ textarea:focus {
   height: 20px;
   margin: -10px 0 0;
   opacity: 0;
-  background: #f1b311;
+  background: #beaf87;
   transform: translate3d(-40px, 0, 0) scale(0.5);
   transition: opacity 0.25s ease-in-out, transform 0.25s ease-in-out;
 }
@@ -696,7 +708,7 @@ textarea:focus {
   box-shadow: none;
 }
 .alertSearch .btnYellow {
-  background-color: #fcaf37;
+  background-color: #beaf87;
   color: #000;
   margin: 0px 0;
   border: none;
@@ -840,7 +852,7 @@ textarea:focus {
   top: 5px;
   right: 30px;
   padding: 10px 15px;
-  background: #f1b311;
+  background: #beaf87;
   margin: 0;
   font-family: 'latoblack';
   font-size: 1.2em;
@@ -851,7 +863,7 @@ textarea:focus {
   bottom: 0;
   right: 0;
   padding: 10px 15px;
-  background: #f1b311;
+  background: #beaf87;
 }
 .thumbProperty .contentTop .caption .priceProject p {
   margin: 0;
@@ -1080,7 +1092,7 @@ textarea:focus {
 
 .navbar-default::-webkit-scrollbar-thumb
 {
-	background-color: #F90;
+	background-color: #beaf87;
 	background-image: -webkit-linear-gradient(90deg,
                     rgba(255, 255, 255, .2) 25%,
 									  transparent 25%,
@@ -1110,7 +1122,7 @@ textarea:focus {
   background: #ffffff;
   border-radius: 50%;
   float: left;
-  border: #f1b311 3px solid;
+  border: #beaf87 3px solid;
   margin: 0 20px;
 }
 .sidebar-nav .contentAvatar span img,.contentAvatar span img{
@@ -1144,7 +1156,7 @@ textarea:focus {
   color: #cccccc;
 }
 .sidebar-nav .navbar ul li a.active {
-  background: #f1b311;
+  background: #beaf87;
   color: #333333;
 }
 .sidebar-nav .navbar ul li a {
@@ -1152,8 +1164,8 @@ textarea:focus {
   color: #cccccc;
 }
 .sidebar-nav .navbar ul li a:hover, .sidebar-nav .navbar ul li a:focus {
-  background: #f1b311;
-  color: #333333;
+  background: #beaf87;
+  color: #fff;
 }
 .sidebar-nav .navbar ul li a .caret {
   margin-top: 8px;
@@ -1290,19 +1302,19 @@ textarea:focus {
   font-family: 'latobold';
 }
 .pagination li.active span {
-  background-color: #f1b311;
-  border-color: #f1b311;
+  background-color: #beaf87;
+  border-color: #beaf87;
   color: #333333;
 }
 .pagination li span,.pagination li a{
   border-radius: 50% !important;
   margin: 0 5px;
-  color: #f1b311;
+  color: #beaf87;
 }
 .pagination li span:hover, .pagination li span:focus,.pagination li a:hover,.pagination li a:focus {
   color: #333333;
-  background-color: #f1b311 !important;
-  border-color: #f1b311 !important;
+  background-color: #beaf87 !important;
+  border-color: #beaf87 !important;
 }
 /*--------------MARCADOR DE FOTO DE PORTADA --------------*/
 .portada{
@@ -1322,9 +1334,9 @@ textarea:focus {
   font-size:3em;
   border-radius: 5px 5px 0 0;
   color:#fff;
-  background-color:#00BCD4;
+  background-color:#beaf87;
   border: solid 1px;
-  border-color: #CFD8DC !important;
+  border-color: #beaf87 !important;
 }
 .flechaIzquierda{
   left: -15px;
@@ -1348,26 +1360,31 @@ textarea:focus {
 .arrow:hover {
   box-shadow: 2px -2px 0 2px inset;
   -webkit-box-shadow: 4px -4px  inset;
+   color: #333;
 }
 .arrow-right {
-  transform:rotate(225deg)
+  transform:rotate(225deg);
+  color: #fff;
 
 }
 .arrow-left {
-  transform:rotate(45deg)
+  transform:rotate(45deg);
+  color: #fff;
 }
+
+
 
 .contDias{
   padding: 0;
 }
 .dias{
-  background-color: #ECEFF1;
+  background-color: #beaf87;
   border: solid 1px;
-  border-color: #CFD8DC !important;
+  border-color: #beaf87 !important;
 }
 .celdaDia{
   padding: 10px;
-  border-radius: 3px;
+  border-radius: 0px;
   font-family: latobold;
   font-size: 1.4em;
   width:150px;
@@ -1375,9 +1392,9 @@ textarea:focus {
 }
 .rowDia{
   border-color: #CFD8DC;
-  border: solid 1px;
+  border: solid 1px ;
   padding: 10px;
-  color: #B0BEC5;
+  color: #beaf87;
   border-radius: 3px;
   font-family: latobold;
   font-size:3em;
