@@ -212,7 +212,7 @@ class ProyectoController extends Controller{
   public function evaluarInmueble(){
     $respuesta=0;
     $inmuebles=InmuebleProyecto::where('proyecto_id',Request::get('id'))->first();
-    if (count($inmuebles)!=0){
+    if ($inmuebles){
       $respuesta=1;
     }
     return $respuesta;
